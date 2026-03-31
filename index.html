@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="si">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>Loan Management System | ණය කළමනාකරණය</title>
+  <!-- Google Fonts for clean typography with Sinhala & Tamil support -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&family=Noto+Sans+Sinhala:wght@400;500;600;700&family=Noto+Sans+Tamil:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Firebase SDKs (modular) -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+    import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+    import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-storage.js";
+    
+    // ======================= FIREBASE CONFIGURATION =======================
+    // REPLACE WITH YOUR OWN FIREBASE PROJECT CREDENTIALS
+    const firebaseConfig = {
+      apiKey: "YOUR_API_KEY",
+      authDomain: "YOUR_PROJECT.firebaseapp.com",
+      projectId: "YOUR_PROJECT_ID",
+      storageBucket: "YOUR_PROJECT.appspot.com",
+      messagingSenderId: "YOUR_SENDER_ID",
+      appId: "YOUR_APP_ID"
+    };
+    
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+    const storage = getStorage(app);
+    
+    // Make them globally accessible for non-module scripts (since we are in module but we can attach to window)
+    window.db = db;
+    window.storage = storage;
+    window.addDoc = addDoc;
+    window.collection = collection;
+    window.serverTimestamp = serverTimestamp;
+    window.ref = ref;
+    window.uploadBytes = uploadBytes;
+    window.getDownloadURL = getDownloadURL;
+    
+    console.log("Firebase initialized (check config)");
+  </script>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: linear-gradient(145deg, #f0f5fa 0%, #e9eef3 100%);
+      font-family: 'Inter', 'Noto Sans Sinhala', 'Noto Sans Tamil', sans-serif;
+      min-height: 100vh;
+      padding: 2rem 1.5rem;
+      color: #1e2a3e;
+    }
+
+    /* Main container */
+    .app-container {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    /* Language bar */
+    .lang-bar {
+      display: flex;
+      justify-content: flex-end;
+      gap: 1rem;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .lang-btn {
+      background: white;
+      border: none;
+      padding: 0.6rem 1.4rem;
+      border-radius: 60px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      cursor: pointer;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+      transition: all 0.2s ease;
+      font-family: inherit;
+      color: #1e466e;
+      border: 1px solid #cddfe7;
+    }
+
+    .lang-btn.active {
+      background: #0a4b7a;
+      color: white;
+      border-color: #0a4b7a;
+      box-shadow: 0 4px 10px rgba(10,75,122,0.2);
+    }
+
+    .lang-btn:hover {
+      transform: translateY(-2px);
+      background: #eef2f7;
+    }
+
+    /* Cards */
+    .card {
+      background: rgba(255,255,255,0.97);
+      border-radius: 32px;
+      box-shadow: 0 20px 35px -12px rgba(0,0,0,0.1);
+      padding: 2rem 2rem 2.5rem;
+      transition: all 0.2s;
+      backdrop-filter: blur(0px);
+      border: 1px solid rgba(255,255,255,0.5);
+    }
+
+    /* Main menu buttons */
+    .menu-buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 1.8rem;
+      margin-top: 1rem;
+    }
+
+    .primary-btn, .secondary-btn {
+      border: none;
+      padding: 1.2rem 1.5rem;
+      font-size: 1.5rem;
+      font-weight: 700;
+      border-radius: 60px;
+      cursor: pointer;
+      transition: 0.2s;
+      font-family: inherit;
+      letter-spacing: 0.5px;
+    }
+
+    .primary-btn {
+      background: #0f5b8c;
+      color: white;
+      box-shadow: 0 8px 18px rgba(15,91,140,0.25);
+    }
+
+    .primary-btn:hover {
+      background: #0a466b;
+      transform: scale(1.02);
+    }
+
+    .secondary-btn {
+      background: #eef2f7;
+      color: #1e466e;
+      border: 1px solid #cbdde6;
+    }
+
+    .secondary-btn:hover {
+      background: #e2e9f0;
+      transform: scale(1.01);
+    }
+
+    /* Form styling */
+    .form-group {
+      margin-bottom: 1.6rem;
+    }
+
+    label {
+      font-weight: 600;
+      display: block;
+      margin-bottom: 0.5rem;
+      font-size: 0.95rem;
+      color: #1f3b4c;
+    }
+
+    .required-star {
+      color: #d14545;
+      margin-left: 3px;
+    }
+
+    input, textarea, .file-input-label {
+      width: 100%;
+      padding: 0.9rem 1rem;
+      border: 1.5px solid #dce5ec;
+      border-radius: 20px;
+      font-size: 1rem;
+      font-family: inherit;
+      transition: 0.2s;
+      background: #fff;
+    }
+
+    input:focus, textarea:focus {
+      outline: none;
+      border-color: #0f5b8c;
+      box-shadow: 0 0 0 3px rgba(15,91,140,0.15);
+    }
+
+    .double-photo-group {
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+    .double-photo-group .form-group {
+      flex: 1;
+      min-width: 200px;
+    }
+
+    .checkbox-wrapper {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 1rem 0;
+      background: #f8fafd;
+      padding: 0.8rem 1rem;
+      border-radius: 28px;
+    }
+
+    .checkbox-wrapper input {
+      width: 22px;
+      height: 22px;
+      margin: 0;
+      accent-color: #0f5b8c;
+    }
+
+    .guarantor-section {
+      background: #f9fbfe;
+      padding: 1.2rem 1.5rem;
+      border-radius: 28px;
+      margin-top: 0.5rem;
+      margin-bottom: 1rem;
+      border-left: 4px solid #0f5b8c;
+    }
+
+    .photo-preview {
+      margin-top: 10px;
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .preview-img {
+      width: 80px;
+      height: 80px;
+      object-fit: cover;
+      border-radius: 16px;
+      border: 1px solid #cddfe7;
+      background: #f5f7fa;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    }
+
+    .error-text {
+      color: #c7362b;
+      font-size: 0.8rem;
+      margin-top: 5px;
+      font-weight: 500;
+    }
+
+    .submit-btn {
+      background: #1f7b5a;
+      color: white;
+      border: none;
+      padding: 1rem 1.8rem;
+      font-size: 1.2rem;
+      font-weight: 700;
+      border-radius: 50px;
+      width: 100%;
+      cursor: pointer;
+      margin-top: 0.8rem;
+      transition: 0.2s;
+    }
+
+    .submit-btn:disabled {
+      background: #a0b8c4;
+      cursor: not-allowed;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: none;
+      border: none;
+      color: #0f5b8c;
+      font-weight: 600;
+      cursor: pointer;
+      margin-bottom: 1.5rem;
+      font-size: 0.95rem;
+    }
+
+    .success-message {
+      background: #dcfce7;
+      padding: 1rem;
+      border-radius: 24px;
+      color: #15803d;
+      margin-top: 1.2rem;
+      text-align: center;
+      font-weight: 500;
+    }
+
+    hr {
+      margin: 1.2rem 0;
+      border-color: #e2edf2;
+    }
+
+    .spinner {
+      border: 3px solid rgba(255,255,255,0.3);
+      border-radius: 50%;
+      border-top: 3px solid white;
+      width: 22px;
+      height: 22px;
+      animation: spin 0.8s linear infinite;
+      display: inline-block;
+      margin-right: 8px;
+    }
+
+    @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+    @media (max-width: 600px) {
+      body { padding: 1rem; }
+      .card { padding: 1.5rem; }
+      .primary-btn, .secondary-btn { font-size: 1.2rem; }
+      .double-photo-group { flex-direction: column; gap: 0; }
+    }
+  </style>
+</head>
+<body>
+<div class="app-container">
+  <!-- Language Switcher -->
+  <div class="lang-bar">
+    <button class="lang-btn" data-lang="si">🇱🇰 සිංහල</button>
+    <button class="lang-btn" data-lang="ta">🇱🇰 தமிழ்</button>
+    <button class="lang-btn" data-lang="en">🇬🇧 English</button>
+  </div>
+
+  <!-- MAIN MENU SECTION -->
+  <div id="mainMenu" class="card" style="display: block;">
+    <h2 id="mainTitle" style="font-size: 1.8rem; margin-bottom: 1rem; text-align: center;">🏦 ණය කළමනාකරණය</h2>
+    <div class="menu-buttons">
+      <button id="loanApplyBtn" class="primary-btn">📄 ණය අයදුම් කිරීම</button>
+      <button id="loanPayBtn" class="secondary-btn">💳 ණය ගෙවීම</button>
+    </div>
+  </div>
+
+  <!-- LOAN APPLICATION FORM (hidden initially) -->
+  <div id="applicationForm" class="card" style="display: none;">
+    <button id="backToMenuFromApply" class="back-link">← <span data-i18n="back_btn">ආපසු මෙනුවට</span></button>
+    <h3 id="formTitle" style="font-size: 1.6rem; margin-bottom: 1rem;">📋 ණය අයදුම්පත</h3>
+    
+    <form id="loanAppForm">
+      <!-- Applicant details -->
+      <div class="form-group">
+        <label><span data-i18n="full_name_label">සම්පූර්ණ නම</span><span class="required-star">*</span></label>
+        <input type="text" id="fullName" placeholder="උදා: අමරසිංහ මහේෂ්" autocomplete="name">
+      </div>
+      <div class="form-group">
+        <label><span data-i18n="address_label">ලිපිනය</span><span class="required-star">*</span></label>
+        <textarea id="address" rows="2" placeholder="නිවස් අංකය, වීදිය, නගරය"></textarea>
+      </div>
+      <div class="form-group">
+        <label><span data-i18n="nic_label">NIC අංකය</span><span class="required-star">*</span></label>
+        <input type="text" id="nicNumber" placeholder="1995XXXXX  හෝ  XXXXXXXXXV">
+      </div>
+
+      <!-- NIC Photos: Front and Back -->
+      <div class="double-photo-group">
+        <div class="form-group">
+          <label><span data-i18n="nic_front_label">NIC එකේ ඉදිරිපස ඡායාරූපය</span><span class="required-star">*</span></label>
+          <input type="file" id="nicFrontPhoto" accept="image/*">
+          <div id="nicFrontPreview" class="photo-preview"></div>
+          <div id="nicFrontError" class="error-text"></div>
+        </div>
+        <div class="form-group">
+          <label><span data-i18n="nic_back_label">NIC එකේ පසුපස ඡායාරූපය</span><span class="required-star">*</span></label>
+          <input type="file" id="nicBackPhoto" accept="image/*">
+          <div id="nicBackPreview" class="photo-preview"></div>
+          <div id="nicBackError" class="error-text"></div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label><span data-i18n="phone_label">දුරකතන අංකය</span><span class="required-star">*</span></label>
+        <input type="tel" id="applicantPhone" placeholder="071 234 5678">
+      </div>
+
+      <div class="form-group">
+        <label><span data-i18n="loan_amount_label">ණය මුදල (රු.)</span><span class="required-star">*</span></label>
+        <input type="number" id="loanAmount" step="1000" min="1000" placeholder="50000">
+      </div>
+
+      <!-- Guarantor checkbox -->
+      <div class="checkbox-wrapper">
+        <input type="checkbox" id="hasGuarantorCheck">
+        <label for="hasGuarantorCheck" style="margin:0; font-weight:500;" data-i18n="guarantor_check_label">ටික් කරන්න ඇප කරුවන් සිටීද</label>
+      </div>
+
+      <!-- Guarantor dynamic section -->
+      <div id="guarantorSection" style="display: none;">
+        <div class="guarantor-section">
+          <h4 data-i18n="guarantor_details_title" style="margin-bottom: 1rem;">📌 ඇපකරු විස්තර</h4>
+          <div class="form-group">
+            <label><span data-i18n="guarantor_name_label">නම</span><span class="required-star">*</span></label>
+            <input type="text" id="guarantorName" placeholder="ඇපකරුගේ සම්පූර්ණ නම">
+          </div>
+          <div class="form-group">
+            <label><span data-i18n="guarantor_id_label">ID අංකය</span><span class="required-star">*</span></label>
+            <input type="text" id="guarantorIdNumber" placeholder="ජාතික හැඳුනුම්පත් අංකය">
+          </div>
+          <div class="form-group">
+            <label><span data-i18n="guarantor_photo_label">ID එකේ ඡායාරූපය (2MB max)</span><span class="required-star">*</span></label>
+            <input type="file" id="guarantorPhoto" accept="image/*">
+            <div id="guarantorPreview" class="photo-preview"></div>
+            <div id="guarantorPhotoError" class="error-text"></div>
+          </div>
+          <div class="form-group">
+            <label><span data-i18n="guarantor_phone_label">දුරකතන අංකය</span><span class="required-star">*</span></label>
+            <input type="tel" id="guarantorPhone" placeholder="071 234 5678">
+          </div>
+        </div>
+      </div>
+
+      <button type="submit" id="submitApplicationBtn" class="submit-btn"><span data-i18n="submit_btn_text">Submit කරන්න</span></button>
+      <div id="formFeedback" style="margin-top: 1rem;"></div>
+    </form>
+  </div>
+
+  <!-- LOAN REPAYMENT PANEL (Placeholder) -->
+  <div id="repaymentPanel" class="card" style="display: none;">
+    <button id="backToMenuFromPay" class="back-link">← <span data-i18n="back_btn">ආපසු මෙනුවට</span></button>
+    <h3 id="repaymentTitle" style="font-size: 1.6rem; margin-bottom: 0.5rem;">💰 ණය ගෙවීම</h3>
+    <p id="repaymentMessage" style="margin: 1.5rem 0; line-height: 1.5; background: #f0f7fa; padding: 1rem; border-radius: 24px;">මෙම සේවාව ඉක්මනින් ලබා ගත හැක. කරුණාකර අපගේ ශාඛාව අමතන්න 0112 345 678.</p>
+    <div style="text-align: center; margin-top: 1rem;">
+      <button id="backFromRepayBtn" class="secondary-btn" style="padding: 0.8rem 2rem;">🏠 ප්‍රධාන මෙනුවට</button>
+    </div>
+  </div>
+</div>
+
+<script type="module">
+  // ---------- TRANSLATION DICTIONARY (Sinhala, Tamil, English) ----------
+  const translations = {
+    si: {
+      back_btn: "ආපසු මෙනුවට",
+      full_name_label: "සම්පූර්ණ නම",
+      address_label: "ලිපිනය",
+      nic_label: "NIC අංකය",
+      nic_front_label: "NIC ඉදිරිපස ඡායාරූපය",
+      nic_back_label: "NIC පසුපස ඡායාරූපය",
+      phone_label: "දුරකතන අංකය",
+      loan_amount_label: "ණය මුදල (රු.)",
+      guarantor_check_label: "ටික් කරන්න ඇප කරුවන් සිටීද",
+      guarantor_details_title: "📌 ඇපකරු විස්තර",
+      guarantor_name_label: "නම",
+      guarantor_id_label: "ID අංකය",
+      guarantor_photo_label: "ID එකේ ඡායාරූපය (2MB max)",
+      guarantor_phone_label: "දුරකතන අංකය",
+      submit_btn_text: "අයදුම්පත ඉදිරිපත් කරන්න",
+      required_fields_error: "සියලුම අත්‍යවශ්‍ය ක්ෂේත්‍ර පුරවන්න",
+      nic_required: "NIC අංකය අවශ්‍යයි",
+      nic_front_required: "NIC ඉදිරිපස ඡායාරූපය අවශ්‍යයි",
+      nic_back_required: "NIC පසුපස ඡායාරූපය අවශ්‍යයි",
+      loan_amount_required: "ණය මුදල අවශ්‍යයි",
+      guarantor_id_required: "ඇපකරුගේ ID අංකය අවශ්‍යයි",
+      guarantor_photo_required: "ඇපකරුගේ ID ඡායාරූපය අවශ්‍යයි",
+      guarantor_name_required: "ඇපකරුගේ නම අවශ්‍යයි",
+      guarantor_phone_required: "ඇපකරුගේ දුරකතන අංකය අවශ්‍යයි",
+      applicant_phone_required: "අයදුම්කරුගේ දුරකතන අංකය අවශ්‍යයි",
+      file_size_exceed: "ගොනුව 2MB ට වඩා විශාලයි",
+      address_required: "ලිපිනය අවශ්‍යයි",
+      fullname_required: "සම්පූර්ණ නම අවශ්‍යයි",
+      success_msg: "✅ ඔබගේ ණය අයදුම්පත සාර්ථකව ලැබුණි! අපි ඉක්මනින් සම්බන්ධ වන්නෙමු.",
+      submitting: "සම්ප්‍රේෂණය වෙමින්...",
+      repayment_placeholder: "මෙම සේවාව ඉක්මනින් ලබා ගත හැක. කරුණාකර අපගේ ශාඛාව අමතන්න 0112 345 678."
+    },
+    ta: {
+      back_btn: "முதன்மை பக்கத்திற்கு",
+      full_name_label: "முழு பெயர்",
+      address_label: "முகவரி",
+      nic_label: "தேசிய அடையாள அட்டை எண்",
+      nic_front_label: "தேசிய அடையாள அட்டை முன்புறம்",
+      nic_back_label: "தேசிய அடையாள அட்டை பின்புறம்",
+      phone_label: "தொலைபேசி எண்",
+      loan_amount_label: "கடன் தொகை (ரூ.)",
+      guarantor_check_label: "பிணையாளர் உள்ளாரா? (டிக் செய்க)",
+      guarantor_details_title: "📌 பிணையாளர் விவரங்கள்",
+      guarantor_name_label: "பெயர்",
+      guarantor_id_label: "அடையாள அட்டை எண்",
+      guarantor_photo_label: "அடையாள அட்டை புகைப்படம் (2MB)",
+      guarantor_phone_label: "தொலைபேசி எண்",
+      submit_btn_text: "விண்ணப்பத்தை சமர்ப்பிக்கவும்",
+      required_fields_error: "அனைத்து கட்டாய புலங்களையும் நிரப்பவும்",
+      nic_required: "தேசிய அடையாள அட்டை எண் தேவை",
+      nic_front_required: "தேசிய அடையாள அட்டை முன்புறம் தேவை",
+      nic_back_required: "தேசிய அடையாள அட்டை பின்புறம் தேவை",
+      loan_amount_required: "கடன் தொகை தேவை",
+      guarantor_id_required: "பிணையாளரின் அடையாள அட்டை எண் தேவை",
+      guarantor_photo_required: "பிணையாளரின் அடையாள அட்டை புகைப்படம் தேவை",
+      guarantor_name_required: "பிணையாளரின் பெயர் தேவை",
+      guarantor_phone_required: "பிணையாளரின் தொலைபேசி எண் தேவை",
+      applicant_phone_required: "விண்ணப்பதாரரின் தொலைபேசி எண் தேவை",
+      file_size_exceed: "கோப்பு 2MB ஐ விட பெரியது",
+      address_required: "முகவரி தேவை",
+      fullname_required: "முழு பெயர் தேவை",
+      success_msg: "✅ உங்கள் கடன் விண்ணப்பம் வெற்றிகரமாக சமர்ப்பிக்கப்பட்டது! நாங்கள் விரைவில் தொடர்புகொள்வோம்.",
+      submitting: "சமர்ப்பிக்கிறது...",
+      repayment_placeholder: "இந்த சேவை விரைவில் கிடைக்கும். தயவுசெய்து எங்கள் கிளையை தொடர்புகொள்ளவும் 0112 345 678."
+    },
+    en: {
+      back_btn: "Back to Menu",
+      full_name_label: "Full Name",
+      address_label: "Address",
+      nic_label: "NIC Number",
+      nic_front_label: "NIC Front Photo",
+      nic_back_label: "NIC Back Photo",
+      phone_label: "Phone Number",
+      loan_amount_label: "Loan Amount (LKR)",
+      guarantor_check_label: "Tick if you have a guarantor",
+      guarantor_details_title: "📌 Guarantor Details",
+      guarantor_name_label: "Name",
+      guarantor_id_label: "ID Number",
+      guarantor_photo_label: "ID Photo (2MB max)",
+      guarantor_phone_label: "Phone Number",
+      submit_btn_text: "Submit Application",
+      required_fields_error: "Please fill all mandatory fields",
+      nic_required: "NIC Number is required",
+      nic_front_required: "NIC Front Photo is required",
+      nic_back_required: "NIC Back Photo is required",
+      loan_amount_required: "Loan Amount is required",
+      guarantor_id_required: "Guarantor ID Number is required",
+      guarantor_photo_required: "Guarantor ID Photo is required",
+      guarantor_name_required: "Guarantor Name is required",
+      guarantor_phone_required: "Guarantor Phone is required",
+      applicant_phone_required: "Applicant Phone is required",
+      file_size_exceed: "File exceeds 2MB limit",
+      address_required: "Address is required",
+      fullname_required: "Full Name is required",
+      success_msg: "✅ Your loan application has been submitted successfully! We will contact you soon.",
+      submitting: "Submitting...",
+      repayment_placeholder: "This service will be available soon. Please contact our branch at 0112 345 678."
+    }
+  };
+
+  let currentLang = "si";   // default Sinhala
+  function t(key) {
+    return translations[currentLang][key] || translations.si[key] || key;
+  }
+
+  // DOM elements
+  const mainMenuDiv = document.getElementById('mainMenu');
+  const appFormDiv = document.getElementById('applicationForm');
+  const repaymentDiv = document.getElementById('repaymentPanel');
+  const hasGuarantorCheck = document.getElementById('hasGuarantorCheck');
+  const guarantorSection = document.getElementById('guarantorSection');
+  const nicFrontInput = document.getElementById('nicFrontPhoto');
+  const nicBackInput = document.getElementById('nicBackPhoto');
+  const guarantorPhotoInput = document.getElementById('guarantorPhoto');
+  const submitBtn = document.getElementById('submitApplicationBtn');
+  const formFeedback = document.getElementById('formFeedback');
+  const loanAppForm = document.getElementById('loanAppForm');
+
+  function setupPreview(inputElement, previewContainerId) {
+    inputElement.addEventListener('change', (e) => {
+      const container = document.getElementById(previewContainerId);
+      if (!container) return;
+      container.innerHTML = '';
+      const file = e.target.files[0];
+      if (file && file.type.startsWith('image/')) {
+        const reader = new FileReader();
+        reader.onload = function(ev) {
+          const img = document.createElement('img');
+          img.src = ev.target.result;
+          img.classList.add('preview-img');
+          container.appendChild(img);
+        };
+        reader.readAsDataURL(file);
+      } else if(file) {
+        container.innerHTML = '<span style="color:#c7362b;">⚠️ Invalid image</span>';
+      }
+    });
+  }
+  setupPreview(nicFrontInput, 'nicFrontPreview');
+  setupPreview(nicBackInput, 'nicBackPreview');
+  setupPreview(guarantorPhotoInput, 'guarantorPreview');
+
+  function isFileValid(file) {
+    return !file || (file.size <= 2 * 1024 * 1024);
+  }
+
+  hasGuarantorCheck.addEventListener('change', () => {
+    guarantorSection.style.display = hasGuarantorCheck.checked ? 'block' : 'none';
+    updateLanguageOnDynamic();
+  });
+
+  function updateLanguageOnDynamic() {
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const key = el.getAttribute('data-i18n');
+      if (key && translations[currentLang][key]) el.innerText = t(key);
+    });
+    // Update all dynamic label spans
+    const labelMappings = [
+      { id: 'fullName', key: 'full_name_label' },
+      { id: 'address', key: 'address_label' },
+      { id: 'nicNumber', key: 'nic_label' },
+      { id: 'applicantPhone', key: 'phone_label' },
+      { id: 'loanAmount', key: 'loan_amount_label' }
+    ];
+    labelMappings.forEach(({id, key}) => {
+      const input = document.getElementById(id);
+      if (input && input.closest('.form-group')) {
+        const labelSpan = input.closest('.form-group')?.querySelector('label span:first-child');
+        if (labelSpan) labelSpan.innerText = t(key);
+      }
+    });
+    // NIC front/back labels
+    const frontLabelSpan = document.querySelector('#nicFrontPhoto')?.closest('.form-group')?.querySelector('label span:first-child');
+    if (frontLabelSpan) frontLabelSpan.innerText = t('nic_front_label');
+    const backLabelSpan = document.querySelector('#nicBackPhoto')?.closest('.form-group')?.querySelector('label span:first-child');
+    if (backLabelSpan) backLabelSpan.innerText = t('nic_back_label');
+    
+    const guarantorNameLabel = document.querySelector('#guarantorName')?.closest('.form-group')?.querySelector('label span:first-child');
+    if(guarantorNameLabel) guarantorNameLabel.innerText = t('guarantor_name_label');
+    const guarantorIdLabel = document.querySelector('#guarantorIdNumber')?.closest('.form-group')?.querySelector('label span:first-child');
+    if(guarantorIdLabel) guarantorIdLabel.innerText = t('guarantor_id_label');
+    const guarantorPhoneLabel = document.querySelector('#guarantorPhone')?.closest('.form-group')?.querySelector('label span:first-child');
+    if(guarantorPhoneLabel) guarantorPhoneLabel.innerText = t('guarantor_phone_label');
+    const guarantorPhotoLabel = document.querySelector('#guarantorPhoto')?.closest('.form-group')?.querySelector('label span:first-child');
+    if(guarantorPhotoLabel) guarantorPhotoLabel.innerText = t('guarantor_photo_label');
+    const guarantorCheckLabel = document.querySelector('label[for="hasGuarantorCheck"]');
+    if(guarantorCheckLabel) guarantorCheckLabel.innerText = t('guarantor_check_label');
+    document.getElementById('repaymentMessage').innerText = t('repayment_placeholder');
+    document.getElementById('formTitle').innerHTML = currentLang === 'si' ? '📋 ණය අයදුම්පත' : (currentLang === 'ta' ? '📋 கடன் விண்ணப்பம்' : '📋 Loan Application');
+    document.getElementById('mainTitle').innerHTML = currentLang === 'si' ? '🏦 ණය කළමනාකරණය' : (currentLang === 'ta' ? '🏦 கடன் முகாமைத்துவம்' : '🏦 Loan Management');
+    document.getElementById('loanApplyBtn').innerHTML = currentLang === 'si' ? '📄 ණය අයදුම් කිරීම' : (currentLang === 'ta' ? '📄 கடன் விண்ணப்பிக்க' : '📄 Apply for Loan');
+    document.getElementById('loanPayBtn').innerHTML = currentLang === 'si' ? '💳 ණය ගෙවීම' : (currentLang === 'ta' ? '💳 கடன் செலுத்துதல்' : '💳 Loan Payment');
+    document.getElementById('repaymentTitle').innerHTML = currentLang === 'si' ? '💰 ණය ගෙවීම' : (currentLang === 'ta' ? '💰 கடன் செலுத்துதல்' : '💰 Loan Repayment');
+  }
+
+  function setLanguage(lang) {
+    currentLang = lang;
+    updateLanguageOnDynamic();
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+      if(btn.getAttribute('data-lang') === lang) btn.classList.add('active');
+      else btn.classList.remove('active');
+    });
+  }
+
+  document.querySelectorAll('.lang-btn').forEach(btn => {
+    btn.addEventListener('click', () => setLanguage(btn.getAttribute('data-lang')));
+  });
+  setLanguage('si');
+
+  // Navigation
+  document.getElementById('loanApplyBtn').addEventListener('click', () => {
+    mainMenuDiv.style.display = 'none';
+    appFormDiv.style.display = 'block';
+    repaymentDiv.style.display = 'none';
+    formFeedback.innerHTML = '';
+  });
+  document.getElementById('loanPayBtn').addEventListener('click', () => {
+    mainMenuDiv.style.display = 'none';
+    appFormDiv.style.display = 'none';
+    repaymentDiv.style.display = 'block';
+  });
+  function backToMenu() {
+    mainMenuDiv.style.display = 'block';
+    appFormDiv.style.display = 'none';
+    repaymentDiv.style.display = 'none';
+    loanAppForm.reset();
+    guarantorSection.style.display = 'none';
+    hasGuarantorCheck.checked = false;
+    document.getElementById('nicFrontPreview').innerHTML = '';
+    document.getElementById('nicBackPreview').innerHTML = '';
+    document.getElementById('guarantorPreview').innerHTML = '';
+    formFeedback.innerHTML = '';
+  }
+  document.getElementById('backToMenuFromApply').addEventListener('click', backToMenu);
+  document.getElementById('backToMenuFromPay').addEventListener('click', backToMenu);
+  document.getElementById('backFromRepayBtn').addEventListener('click', backToMenu);
+
+  // Firebase submission with NIC front & back, loan amount
+  loanAppForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    formFeedback.innerHTML = `<div style="color:#0f5b8c;">⏳ ${t('submitting')}</div>`;
+    submitBtn.disabled = true;
+
+    const fullName = document.getElementById('fullName').value.trim();
+    const address = document.getElementById('address').value.trim();
+    const nicNumber = document.getElementById('nicNumber').value.trim();
+    const applicantPhone = document.getElementById('applicantPhone').value.trim();
+    const loanAmount = document.getElementById('loanAmount').value.trim();
+    const nicFrontFile = nicFrontInput.files[0];
+    const nicBackFile = nicBackInput.files[0];
+    const hasGuarantor = hasGuarantorCheck.checked;
+    let guarantorData = null;
+    if (hasGuarantor) {
+      const gName = document.getElementById('guarantorName').value.trim();
+      const gId = document.getElementById('guarantorIdNumber').value.trim();
+      const gPhone = document.getElementById('guarantorPhone').value.trim();
+      const gPhoto = guarantorPhotoInput.files[0];
+      guarantorData = { name: gName, idNumber: gId, phone: gPhone, photoFile: gPhoto };
+    }
+
+    let errors = [];
+    if (!fullName) errors.push(t('fullname_required'));
+    if (!address) errors.push(t('address_required'));
+    if (!nicNumber) errors.push(t('nic_required'));
+    if (!applicantPhone) errors.push(t('applicant_phone_required'));
+    if (!loanAmount) errors.push(t('loan_amount_required'));
+    if (!nicFrontFile) errors.push(t('nic_front_required'));
+    else if (!isFileValid(nicFrontFile)) errors.push(t('file_size_exceed'));
+    if (!nicBackFile) errors.push(t('nic_back_required'));
+    else if (!isFileValid(nicBackFile)) errors.push(t('file_size_exceed'));
+    if (hasGuarantor) {
+      if (!guarantorData.name) errors.push(t('guarantor_name_required'));
+      if (!guarantorData.idNumber) errors.push(t('guarantor_id_required'));
+      if (!guarantorData.phone) errors.push(t('guarantor_phone_required'));
+      if (!guarantorData.photoFile) errors.push(t('guarantor_photo_required'));
+      else if (!isFileValid(guarantorData.photoFile)) errors.push(t('file_size_exceed'));
+    }
+
+    if (errors.length) {
+      formFeedback.innerHTML = `<div class="error-text">⚠️ ${errors.join(', ')}</div>`;
+      submitBtn.disabled = false;
+      return;
+    }
+
+    try {
+      const docId = `app_${Date.now()}_${Math.random().toString(36).substr(2, 6)}`;
+      // Upload NIC front & back
+      const nicFrontRef = window.ref(window.storage, `loan_applications/${docId}/nic_front`);
+      await window.uploadBytes(nicFrontRef, nicFrontFile);
+      const nicFrontURL = await window.getDownloadURL(nicFrontRef);
+      
+      const nicBackRef = window.ref(window.storage, `loan_applications/${docId}/nic_back`);
+      await window.uploadBytes(nicBackRef, nicBackFile);
+      const nicBackURL = await window.getDownloadURL(nicBackRef);
+      
+      let guarantorPhotoURL = null;
+      if (hasGuarantor && guarantorData.photoFile) {
+        const guarStorageRef = window.ref(window.storage, `loan_applications/${docId}/guarantor_id`);
+        await window.uploadBytes(guarStorageRef, guarantorData.photoFile);
+        guarantorPhotoURL = await window.getDownloadURL(guarStorageRef);
+      }
+
+      const applicationData = {
+        fullName, address, nicNumber, applicantPhone, loanAmount: parseFloat(loanAmount),
+        nicFrontURL, nicBackURL,
+        hasGuarantor,
+        timestamp: window.serverTimestamp(),
+        guarantor: hasGuarantor ? {
+          name: guarantorData.name,
+          idNumber: guarantorData.idNumber,
+          phone: guarantorData.phone,
+          idPhotoURL: guarantorPhotoURL
+        } : null
+      };
+      await window.addDoc(window.collection(window.db, "loan_applications"), applicationData);
+      formFeedback.innerHTML = `<div class="success-message">${t('success_msg')}</div>`;
+      loanAppForm.reset();
+      guarantorSection.style.display = 'none';
+      hasGuarantorCheck.checked = false;
+      document.getElementById('nicFrontPreview').innerHTML = '';
+      document.getElementById('nicBackPreview').innerHTML = '';
+      document.getElementById('guarantorPreview').innerHTML = '';
+    } catch (err) {
+      console.error(err);
+      formFeedback.innerHTML = `<div class="error-text">⚠️ ${currentLang === 'si' ? 'සේවාදායක දෝෂයකි. පසුව නැවත උත්සාහ කරන්න.' : (currentLang === 'ta' ? 'சேவையக பிழை. பின்னர் முயற்சிக்கவும்.' : 'Server error. Please try later.')}</div>`;
+    } finally {
+      submitBtn.disabled = false;
+    }
+  });
+
+  updateLanguageOnDynamic();
+</script>
+</body>
+</html>
