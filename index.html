@@ -406,6 +406,51 @@
       cursor: pointer;
     }
 
+    /* Compact notice box (red) */
+    .notice-box {
+      background: #fff5f5;
+      border-left: 4px solid #dc2626;
+      border-radius: 16px;
+      padding: 0.8rem 1rem;
+      margin-bottom: 1.5rem;
+      font-size: 0.85rem;
+      color: #991b1b;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      align-items: flex-start;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    }
+    .notice-box i {
+      font-size: 1rem;
+      margin-top: 0.15rem;
+      color: #dc2626;
+    }
+    .notice-content {
+      flex: 1;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      justify-content: space-between;
+    }
+    .notice-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(220,38,38,0.08);
+      padding: 0.3rem 0.7rem;
+      border-radius: 40px;
+    }
+    .notice-item strong {
+      font-weight: 700;
+      color: #b91c1c;
+    }
+    @media (max-width: 600px) {
+      .notice-content {
+        flex-direction: column;
+      }
+    }
+
     /* WhatsApp floating button */
     .whatsapp-float {
       position: fixed;
@@ -612,8 +657,17 @@
         <button class="tab-btn active-tab" data-loan-tab="apply">📝 <span data-i18n="loan_apply_tab">ණය අයදුම් කරන්න</span></button>
         <button class="tab-btn" data-loan-tab="repay">💰 <span data-i18n="loan_repay_tab">ණය ගෙවීම</span></button>
       </div>
-      <!-- Application Form -->
+      <!-- Application Form with compact red notice -->
       <div id="applyLoanPanel">
+        <!-- Compact Notice Box -->
+        <div class="notice-box" id="applyNoticeBox">
+          <i class="fas fa-exclamation-triangle"></i>
+          <div class="notice-content">
+            <div class="notice-item"><i class="fas fa-percent"></i> <strong data-i18n="notice_interest_label">මාසික පොලිය:</strong> <span data-i18n="notice_interest_value">1.5% (18% වාර්ෂික)</span></div>
+            <div class="notice-item"><i class="fas fa-clock"></i> <strong data-i18n="notice_late_label">ප්‍රමාද ගාස්තු:</strong> <span data-i18n="notice_late_value">දිනකට රු. 100/-</span></div>
+            <div class="notice-item"><i class="fas fa-calendar-week"></i> <strong data-i18n="notice_payment_label">ගෙවීම්:</strong> <span data-i18n="notice_payment_value">මාසික / සතිපතා</span></div>
+          </div>
+        </div>
         <form id="loanAppForm">
           <div class="form-group"><label><span data-i18n="full_name_label">සම්පූර්ණ නම</span><span class="required-star">*</span></label><input type="text" id="fullName" data-i18n-placeholder="full_name_placeholder"></div>
           <div class="form-group"><label><span data-i18n="address_label">ලිපිනය</span><span class="required-star">*</span></label><textarea id="address" rows="2" data-i18n-placeholder="address_placeholder"></textarea></div>
@@ -640,9 +694,18 @@
           <div id="formFeedback"></div>
         </form>
       </div>
-      <!-- Repayment Panel - NEW FORM -->
+      <!-- Repayment Panel with compact red notice -->
       <div id="repayLoanPanel" style="display: none;">
         <div style="background: #f9fbfe; border-radius: 32px; padding: 1.5rem;">
+          <!-- Compact Notice Box (same as apply) -->
+          <div class="notice-box" id="repayNoticeBox">
+            <i class="fas fa-exclamation-triangle"></i>
+            <div class="notice-content">
+              <div class="notice-item"><i class="fas fa-percent"></i> <strong data-i18n="notice_interest_label">මාසික පොලිය:</strong> <span data-i18n="notice_interest_value">1.5% (18% වාර්ෂික)</span></div>
+              <div class="notice-item"><i class="fas fa-clock"></i> <strong data-i18n="notice_late_label">ප්‍රමාද ගාස්තු:</strong> <span data-i18n="notice_late_value">දිනකට රු. 100/-</span></div>
+              <div class="notice-item"><i class="fas fa-calendar-week"></i> <strong data-i18n="notice_payment_label">ගෙවීම්:</strong> <span data-i18n="notice_payment_value">මාසික / සතිපතා</span></div>
+            </div>
+          </div>
           <h3 data-i18n="repayment_form_title" style="margin-bottom: 1rem;">💰 ණය ගෙවීම් විස්තර</h3>
           <form id="repaymentForm">
             <div class="form-group">
@@ -710,7 +773,7 @@
 </footer>
 
 <script type="module">
-  // ==================== TRANSLATIONS (FULL with placeholders) ====================
+  // ==================== TRANSLATIONS (with new compact notice keys) ====================
   const translations = {
     si: {
       nav_home: "මුල් පිටුව", nav_services: "සේවා", nav_loan: "ණය", nav_about: "අපි ගැන", nav_contact: "සම්බන්ධ වන්න",
@@ -718,6 +781,13 @@
       company_description: "ඔබගේ සිහින සැබෑ කර ගැනීමට අපි මෙහි සිටිමු. විශ්වාසනීය, වේගවත් හා විනිවිද පෙනෙන ණය සේවාවන්. දශකයකට වැඩි අත්දැකීම් සහිතව, පුද්ගලික ණය සිට ව්‍යාපාරික ණය දක්වා ඔබේ ආර්ථික අවශ්‍යතා සපුරාලීමට අපි කැපවී සිටිමු.",
       apply_now_btn: "දැන් ණය අයදුම් කරන්න",
       stat_years: "වසරක පළපුරුද්ද", stat_satisfaction: "සේවා තෘප්තිය", stat_loans: "සාර්ථක ණය",
+      // Compact notice translations
+      notice_interest_label: "මාසික පොලිය:",
+      notice_interest_value: "1.5% (18% වාර්ෂික)",
+      notice_late_label: "ප්‍රමාද ගාස්තු:",
+      notice_late_value: "දිනකට රු. 100/-",
+      notice_payment_label: "ගෙවීම්:",
+      notice_payment_value: "මාසික / සතිපතා",
       services_title: "අපගේ සේවාවන්", service1_title: "පුද්ගලික ණය", service1_desc: "ඔබගේ පෞද්ගලික අවශ්‍යතා සඳහා අඩු පොලිය, වේගවත් අනුමැතිය.",
       service2_title: "ව්‍යාපාරික ණය", service2_desc: "ව්‍යාපාර පුළුල් කිරීමට නම්‍යශීලී වාරික.", service3_title: "ක්ෂණික අනුමැතිය", service3_desc: "ඩිජිටල් අයදුම්පත, 24 පැය ඇතුලත ප්‍රතිචාරය.",
       about_title: "අපි ගැන", about_text: "LendEasy Finance ශ්‍රී ලංකාවේ විශ්වාසනීය මූල්‍ය සේවා සපයන්නෙකු ලෙස වසර 15කට වැඩි කාලයක් පුරාවට දහස් ගණනකගේ ආර්ථික සිහින සැබෑ කර ඇත. අපගේ මෙහෙවර වන්නේ සරල, විනිවිද පෙනෙන ණය විසඳුම් ලබා දීමයි.",
@@ -727,7 +797,6 @@
       whatsapp_text: "WhatsApp මගින් කතා කරන්න", back_home: "මුල් පිටුවට", contact_support: "සහාය අමතන්න", repayment_title: "ණය ගෙවීම", repayment_placeholder: "මෙම සේවාව ඉක්මනින් ලබා ගත හැක. කරුණාකර අපගේ ශාඛාව අමතන්න 0112 345 678.",
       loan_apply_tab: "ණය අයදුම් කරන්න", loan_repay_tab: "ණය ගෙවීම",
       full_name_label: "සම්පූර්ණ නම", address_label: "ලිපිනය", nic_label: "NIC අංකය", nic_front_label: "NIC ඉදිරිපස", nic_back_label: "NIC පසුපස", phone_label: "දුරකතන අංකය", loan_amount_label: "ණය මුදල (රු.)", guarantor_check_label: "ටික් කරන්න ඇප කරුවන් සිටීද", guarantor_details_title: "📌 ඇපකරු විස්තර", guarantor_name_label: "නම", guarantor_id_label: "ID අංකය", guarantor_photo_label: "ID ඡායාරූපය", guarantor_phone_label: "දුරකතන අංකය", submit_btn_text: "අයදුම්පත ඉදිරිපත් කරන්න", submitting: "සම්ප්‍රේෂණය වෙමින්...", success_msg: "✅ ඔබගේ ණය අයදුම්පත සාර්ථකව ලැබුණි!",
-      // Placeholders
       full_name_placeholder: "උදා: අමරසිංහ මහේෂ්",
       address_placeholder: "නිවස් අංකය, වීදිය, නගරය",
       nic_placeholder: "1995XXXXX හෝ XXXXXXXXXV",
@@ -739,7 +808,6 @@
       repay_name_placeholder: "උදා: අමරසිංහ මහේෂ්",
       repay_nic_placeholder: "1995XXXXX හෝ XXXXXXXXXV",
       repay_phone_placeholder: "071 234 5678",
-      // Repayment form translations
       repayment_form_title: "💰 ණය ගෙවීම් විස්තර",
       repay_name_label: "සම්පූර්ණ නම",
       repay_nic_label: "NIC අංකය",
@@ -757,6 +825,12 @@
       company_description: "உங்கள் கனவுகளை நனவாக்க நாங்கள் இங்கு இருக்கிறோம். நம்பகமான, விரைவான மற்றும் வெளிப்படையான கடன் சேவைகள். பத்தாண்டுகளுக்கும் மேலான அனுபவத்துடன், தனிப்பட்ட கடன் முதல் வணிக கடன் வரை உங்கள் நிதித் தேவைகளை பூர்த்தி செய்ய அர்ப்பணித்துள்ளோம்.",
       apply_now_btn: "இப்போது கடன் விண்ணப்பிக்கவும்",
       stat_years: "அனுபவ ஆண்டுகள்", stat_satisfaction: "வாடிக்கையாளர் திருப்தி", stat_loans: "வெற்றிகரமான கடன்கள்",
+      notice_interest_label: "மாத வட்டி:",
+      notice_interest_value: "1.5% (ஆண்டுக்கு 18%)",
+      notice_late_label: "தாமதக் கட்டணம்:",
+      notice_late_value: "ஒரு நாளைக்கு ரூ. 100/-",
+      notice_payment_label: "செலுத்தும் முறை:",
+      notice_payment_value: "மாதாந்திர / வாராந்திர",
       services_title: "எங்கள் சேவைகள்", service1_title: "தனிப்பட்ட கடன்", service1_desc: "உங்கள் தனிப்பட்ட தேவைகளுக்கு குறைந்த வட்டி, விரைவான ஒப்புதல்.",
       service2_title: "வணிக கடன்", service2_desc: "வணிகத்தை விரிவுபடுத்த நெகிழ்வான தவணைகள்.", service3_title: "உடனடி ஒப்புதல்", service3_desc: "டிஜிட்டல் விண்ணப்பம், 24 மணி நேரத்தில் பதில்.",
       about_title: "எங்களை பற்றி", about_text: "LendEasy Finance இலங்கையின் நம்பகமான நிதிச் சேவையாளராக 15 ஆண்டுகளுக்கு மேலாக ஆயிரக்கணக்கானோரின் பொருளாதாரக் கனவுகளை நனவாக்கியுள்ளது. எங்கள் பணி எளிய, வெளிப்படையான கடன் தீர்வுகளை வழங்குவதாகும்.",
@@ -766,7 +840,6 @@
       whatsapp_text: "WhatsApp இல் பேசுங்கள்", back_home: "முகப்புக்கு", contact_support: "உதவியை தொடர்பு கொள்ளுங்கள்", repayment_placeholder: "இந்த சேவை விரைவில் கிடைக்கும். தயவுசெய்து எங்கள் கிளையை தொடர்புகொள்ளவும் 0112 345 678.",
       loan_apply_tab: "கடன் விண்ணப்பிக்க", loan_repay_tab: "கடன் செலுத்துதல்",
       full_name_label: "முழு பெயர்", address_label: "முகவரி", nic_label: "தேசிய அடையாள அட்டை எண்", nic_front_label: "அட்டை முன்புறம்", nic_back_label: "அட்டை பின்புறம்", phone_label: "தொலைபேசி எண்", loan_amount_label: "கடன் தொகை (ரூ.)", guarantor_check_label: "பிணையாளர் உள்ளாரா?", guarantor_details_title: "📌 பிணையாளர் விவரங்கள்", guarantor_name_label: "பெயர்", guarantor_id_label: "அடையாள எண்", guarantor_photo_label: "அடையாள அட்டை புகைப்படம்", guarantor_phone_label: "தொலைபேசி எண்", submit_btn_text: "விண்ணப்பத்தை சமர்ப்பிக்கவும்", submitting: "சமர்ப்பிக்கிறது...", success_msg: "✅ உங்கள் கடன் விண்ணப்பம் வெற்றிகரமாக சமர்ப்பிக்கப்பட்டது!",
-      // Placeholders
       full_name_placeholder: "உதாரணம்: அமரசிங்க மஹேஷ்",
       address_placeholder: "வீட்டு எண், தெரு, நகரம்",
       nic_placeholder: "1995XXXXX  அல்லது XXXXXXXXXV",
@@ -795,6 +868,12 @@
       company_description: "We're here to turn your dreams into reality. Reliable, fast, and transparent loan services. With over a decade of experience, we are committed to fulfilling your financial needs from personal loans to business financing.",
       apply_now_btn: "Apply for Loan Now",
       stat_years: "Years of Experience", stat_satisfaction: "Satisfaction Rate", stat_loans: "Loans Disbursed",
+      notice_interest_label: "Monthly Interest:",
+      notice_interest_value: "1.5% (18% p.a.)",
+      notice_late_label: "Late Fee:",
+      notice_late_value: "LKR 100/day",
+      notice_payment_label: "Payment Options:",
+      notice_payment_value: "Monthly / Weekly",
       services_title: "Our Services", service1_title: "Personal Loans", service1_desc: "Low interest, fast approval for your personal needs.",
       service2_title: "Business Loans", service2_desc: "Flexible installments to expand your business.", service3_title: "Instant Approval", service3_desc: "Digital application, response within 24 hours.",
       about_title: "About Us", about_text: "LendEasy Finance has been a trusted financial service provider in Sri Lanka for over 15 years, fulfilling thousands of economic dreams. Our mission is to provide simple, transparent loan solutions.",
@@ -804,7 +883,6 @@
       whatsapp_text: "Chat on WhatsApp", back_home: "Back to Home", contact_support: "Contact Support", repayment_placeholder: "This service will be available soon. Please contact our branch at 0112 345 678.",
       loan_apply_tab: "Apply for Loan", loan_repay_tab: "Repay Loan",
       full_name_label: "Full Name", address_label: "Address", nic_label: "NIC Number", nic_front_label: "NIC Front", nic_back_label: "NIC Back", phone_label: "Phone Number", loan_amount_label: "Loan Amount (LKR)", guarantor_check_label: "Tick if you have a guarantor", guarantor_details_title: "📌 Guarantor Details", guarantor_name_label: "Name", guarantor_id_label: "ID Number", guarantor_photo_label: "ID Photo", guarantor_phone_label: "Phone Number", submit_btn_text: "Submit Application", submitting: "Submitting...", success_msg: "✅ Your loan application has been submitted successfully!",
-      // Placeholders
       full_name_placeholder: "e.g., Amarasinha Mahesh",
       address_placeholder: "House No, Street, City",
       nic_placeholder: "1995XXXXX or XXXXXXXXXV",
