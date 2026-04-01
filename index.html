@@ -4,576 +4,97 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
   <title>LendEasy Finance | Smart Loans, Brighter Future</title>
-  <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&family=Noto+Sans+Sinhala:wght@400;500;600;700&family=Noto+Sans+Tamil:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <!-- Font Awesome 6 (free icons) -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  <!-- Firebase SDKs -->
-  <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-    import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
-    import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-storage.js";
-    
-    // ========== FIREBASE CONFIG (REPLACE WITH YOUR CREDENTIALS) ==========
-    const firebaseConfig = {
-      apiKey: "YOUR_API_KEY",
-      authDomain: "YOUR_PROJECT.firebaseapp.com",
-      projectId: "YOUR_PROJECT_ID",
-      storageBucket: "YOUR_PROJECT.appspot.com",
-      messagingSenderId: "YOUR_SENDER_ID",
-      appId: "YOUR_APP_ID"
-    };
-    
-    const app = initializeApp(firebaseConfig);
-    const db = getFirestore(app);
-    const storage = getStorage(app);
-    
-    window.db = db;
-    window.storage = storage;
-    window.addDoc = addDoc;
-    window.collection = collection;
-    window.serverTimestamp = serverTimestamp;
-    window.ref = ref;
-    window.uploadBytes = uploadBytes;
-    window.getDownloadURL = getDownloadURL;
-    console.log("Firebase initialized (update config)");
-  </script>
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      background: linear-gradient(135deg, #f8faff 0%, #f0f4fa 100%);
-      font-family: 'Inter', 'Noto Sans Sinhala', 'Noto Sans Tamil', sans-serif;
-      color: #1e2f3e;
-      overflow-x: hidden;
-    }
-
-    /* ========== NAVBAR ========== */
-    .navbar {
-      background: rgba(255, 255, 255, 0.96);
-      backdrop-filter: blur(12px);
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-      padding: 0.7rem 2rem;
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-      border-bottom: 1px solid rgba(15, 91, 140, 0.2);
-      transition: all 0.3s ease;
-    }
-
-    .nav-container {
-      max-width: 1300px;
-      margin: 0 auto;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-    }
-
-    .logo {
-      font-size: 1.7rem;
-      font-weight: 800;
-      background: linear-gradient(120deg, #0f5b8c, #2b9b7a, #f4b942);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-      cursor: pointer;
-      transition: transform 0.2s;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    .logo i { font-size: 1.6rem; background: none; -webkit-background-clip: unset; color: #0f5b8c; }
-    .logo:hover { transform: scale(1.02); }
-
-    .nav-links {
-      display: flex;
-      gap: 1.8rem;
-      align-items: center;
-      flex-wrap: wrap;
-    }
-
-    .nav-links a {
-      text-decoration: none;
-      font-weight: 600;
-      color: #2c4e6e;
-      font-size: 1rem;
-      padding: 0.5rem 0;
-      transition: 0.2s;
-      position: relative;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .nav-links a i { font-size: 1rem; }
-
-    .nav-links a::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 0%;
-      height: 2.5px;
-      background: linear-gradient(90deg, #0f5b8c, #2b9b7a);
-      border-radius: 4px;
-      transition: width 0.25s ease;
-    }
-
-    .nav-links a:hover::after,
-    .nav-links a.active-nav::after {
-      width: 100%;
-    }
-
-    .nav-links a:hover { color: #0f5b8c; }
-
-    .nav-lang {
-      display: flex;
-      gap: 0.5rem;
-      margin-left: 0.5rem;
-    }
-
-    .lang-nav-btn {
-      background: #eef2f8;
-      border: none;
-      padding: 0.4rem 1rem;
-      border-radius: 40px;
-      font-weight: 600;
-      font-size: 0.8rem;
-      cursor: pointer;
-      font-family: inherit;
-      transition: all 0.2s;
-      color: #1e466e;
-    }
-    .lang-nav-btn.active {
-      background: #0f5b8c;
-      color: white;
-      box-shadow: 0 4px 8px rgba(15,91,140,0.2);
-    }
-
-    .hamburger {
-      display: none;
-      font-size: 1.8rem;
-      background: none;
-      border: none;
-      cursor: pointer;
-      color: #0f5b8c;
-    }
-
-    /* Main content */
-    .main-content {
-      max-width: 1300px;
-      margin: 2rem auto;
-      padding: 0 1.5rem;
-    }
-
-    /* Views */
-    .view {
-      animation: fadeSlideUp 0.5s ease-out;
-    }
-    @keyframes fadeSlideUp {
-      from { opacity: 0; transform: translateY(20px);}
-      to { opacity: 1; transform: translateY(0);}
-    }
-
-    /* Sections styling */
-    .section {
-      background: white;
-      border-radius: 40px;
-      padding: 2.5rem 2rem;
-      margin-bottom: 2.5rem;
-      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.05);
-      transition: transform 0.3s, box-shadow 0.3s;
-      border: 1px solid rgba(0,0,0,0.03);
-    }
-    .section:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 25px 45px rgba(15,91,140,0.1);
-    }
-
-    .hero-section {
-      background: linear-gradient(135deg, #ffffff 0%, #f1f9ff 100%);
-      text-align: center;
-    }
-    .hero-title {
-      font-size: 2.8rem;
-      font-weight: 800;
-      background: linear-gradient(120deg, #0f5b8c, #2b9b7a);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-      margin-bottom: 1rem;
-    }
-    .hero-desc {
-      font-size: 1.2rem;
-      max-width: 800px;
-      margin: 1rem auto 0;
-      line-height: 1.5;
-      color: #2c4e6e;
-    }
-
-    /* CTA Button */
-    .cta-btn {
-      display: inline-block;
-      margin-top: 2rem;
-      background: linear-gradient(95deg, #0f5b8c, #2b9b7a);
-      color: white;
-      border: none;
-      padding: 1rem 2.2rem;
-      font-size: 1.1rem;
-      font-weight: 700;
-      border-radius: 60px;
-      cursor: pointer;
-      transition: 0.3s;
-      box-shadow: 0 10px 20px rgba(15,91,140,0.3);
-      text-decoration: none;
-    }
-    .cta-btn:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 15px 25px rgba(15,91,140,0.4);
-    }
-
-    /* Stats grid */
-    .stats-grid {
-      display: flex;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 2rem;
-      text-align: center;
-    }
-    .stat-item {
-      flex: 1;
-      min-width: 150px;
-      background: rgba(15,91,140,0.03);
-      padding: 1.2rem;
-      border-radius: 32px;
-      transition: all 0.3s;
-    }
-    .stat-item:hover { background: rgba(15,91,140,0.08); transform: scale(1.02);}
-    .stat-number {
-      font-size: 3rem;
-      font-weight: 800;
-      background: linear-gradient(135deg, #0f5b8c, #2b9b7a);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-      line-height: 1;
-    }
-    .stat-label {
-      font-size: 1rem;
-      font-weight: 600;
-      margin-top: 0.5rem;
-      color: #2c4e6e;
-    }
-
-    /* Services grid */
-    .services-grid {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 2rem;
-      margin-top: 1.5rem;
-    }
-    .service-card {
-      flex: 1;
-      min-width: 230px;
-      background: #fafcff;
-      padding: 1.8rem;
-      border-radius: 32px;
-      transition: all 0.3s;
-      text-align: center;
-      border: 1px solid #eef2fa;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.02);
-    }
-    .service-card:hover {
-      transform: translateY(-8px);
-      background: white;
-      border-color: #cde1ed;
-      box-shadow: 0 20px 30px rgba(15,91,140,0.1);
-    }
-    .service-card i {
-      font-size: 2.5rem;
-      color: #0f5b8c;
-      margin-bottom: 1rem;
-    }
-    .service-card h3 { margin: 0.5rem 0; font-size: 1.4rem; color: #1a4b6e;}
-
-    /* About & Contact */
-    .about-text, .mission-text {
-      line-height: 1.6;
-      font-size: 1rem;
-      margin-top: 1rem;
-    }
-    .contact-info p {
-      margin: 1rem 0;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      font-size: 1rem;
-    }
-    .contact-info i { width: 28px; color: #0f5b8c; font-size: 1.2rem;}
-
-    /* Loan view (form) */
-    .loan-card {
-      background: white;
-      border-radius: 40px;
-      padding: 2rem;
-    }
-    .loan-tabs {
-      display: flex;
-      gap: 1rem;
-      margin-bottom: 2rem;
-      border-bottom: 1px solid #e0ecf3;
-      padding-bottom: 0.75rem;
-    }
-    .tab-btn {
-      background: none;
-      border: none;
-      font-size: 1.1rem;
-      font-weight: 700;
-      padding: 0.6rem 1.5rem;
-      border-radius: 40px;
-      cursor: pointer;
-      color: #4a627a;
-      transition: 0.2s;
-    }
-    .tab-btn.active-tab {
-      background: #0f5b8c;
-      color: white;
-      box-shadow: 0 6px 12px rgba(15,91,140,0.2);
-    }
-    .form-group { margin-bottom: 1.4rem; }
-    label { font-weight: 600; display: block; margin-bottom: 0.4rem; color: #1f3b4c; }
-    input, textarea {
-      width: 100%;
-      padding: 0.85rem 1rem;
-      border: 1.5px solid #e0eaf0;
-      border-radius: 24px;
-      font-family: inherit;
-      transition: 0.2s;
-    }
-    input:focus, textarea:focus { border-color: #0f5b8c; outline: none; box-shadow: 0 0 0 3px rgba(15,91,140,0.1);}
-    .double-photo-group { display: flex; gap: 1.5rem; flex-wrap: wrap; }
-    .double-photo-group .form-group { flex: 1; }
-    .photo-preview { display: flex; gap: 10px; margin-top: 8px; flex-wrap: wrap; }
-    .preview-img { width: 70px; height: 70px; object-fit: cover; border-radius: 14px; border: 1px solid #cddfe7; }
-    .checkbox-wrapper {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin: 1rem 0;
-      background: #f8fafd;
-      padding: 0.7rem 1rem;
-      border-radius: 28px;
-    }
-    .checkbox-wrapper input {
-      width: 20px;
-      height: 20px;
-      margin: 0;
-    }
-    .checkbox-wrapper label {
-      margin: 0;
-      font-weight: 500;
-      cursor: pointer;
-    }
-    .guarantor-section { background: #f9fbfe; padding: 1.2rem 1.5rem; border-radius: 28px; margin-top: 0.5rem; border-left: 4px solid #0f5b8c; }
-    .submit-btn {
-      background: linear-gradient(95deg, #1f7b5a, #2b9b7a);
-      color: white;
-      border: none;
-      padding: 1rem;
-      font-weight: 700;
-      border-radius: 50px;
-      width: 100%;
-      cursor: pointer;
-      font-size: 1.1rem;
-      transition: 0.2s;
-      box-shadow: 0 6px 14px rgba(43,155,122,0.3);
-    }
-    .submit-btn:hover { transform: scale(1.01); background: linear-gradient(95deg, #166b4e, #218a6b);}
-    .success-message { background: #dcfce7; padding: 1rem; border-radius: 24px; color: #15803d; text-align: center; margin-top: 1rem;}
-    .error-text { color: #c7362b; font-size: 0.8rem; margin-top: 5px; }
-    .back-home-btn {
-      background: #eef2f8;
-      border: none;
-      padding: 0.6rem 1.5rem;
-      border-radius: 40px;
-      font-weight: 600;
-      margin-bottom: 1rem;
-      cursor: pointer;
-    }
-
-    /* Compact notice box (red) */
-    .notice-box {
-      background: #fff5f5;
-      border-left: 4px solid #dc2626;
-      border-radius: 16px;
-      padding: 0.8rem 1rem;
-      margin-bottom: 1.5rem;
-      font-size: 0.85rem;
-      color: #991b1b;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.75rem;
-      align-items: flex-start;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
-    }
-    .notice-box i {
-      font-size: 1rem;
-      margin-top: 0.15rem;
-      color: #dc2626;
-    }
-    .notice-content {
-      flex: 1;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-      justify-content: space-between;
-    }
-    .notice-item {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      background: rgba(220,38,38,0.08);
-      padding: 0.3rem 0.7rem;
-      border-radius: 40px;
-    }
-    .notice-item strong {
-      font-weight: 700;
-      color: #b91c1c;
-    }
-    @media (max-width: 600px) {
-      .notice-content {
-        flex-direction: column;
-      }
-    }
-
-    /* WhatsApp floating button */
-    .whatsapp-float {
-      position: fixed;
-      bottom: 30px;
-      right: 30px;
-      background-color: #25d366;
-      color: white;
-      border-radius: 50px;
-      padding: 12px 20px;
-      font-weight: 700;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      box-shadow: 0 10px 20px rgba(37,211,102,0.3);
-      z-index: 1000;
-      text-decoration: none;
-      font-size: 1rem;
-      transition: all 0.3s;
-      font-family: inherit;
-    }
-    .whatsapp-float i { font-size: 1.5rem; }
-    .whatsapp-float:hover {
-      transform: scale(1.05);
-      background-color: #20b859;
-      box-shadow: 0 15px 25px rgba(37,211,102,0.4);
-    }
-
-    /* Footer */
-    .footer {
-      background: #0a2a3b;
-      color: #e0edf5;
-      padding: 3rem 2rem 1.5rem;
-      margin-top: 3rem;
-      border-top-left-radius: 40px;
-      border-top-right-radius: 40px;
-    }
-    .footer-container {
-      max-width: 1300px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 2rem;
-    }
-    .footer-col h4 {
-      font-size: 1.2rem;
-      margin-bottom: 1rem;
-      color: white;
-      position: relative;
-      display: inline-block;
-    }
-    .footer-col h4::after {
-      content: '';
-      position: absolute;
-      bottom: -5px;
-      left: 0;
-      width: 50%;
-      height: 2px;
-      background: #2b9b7a;
-    }
-    .footer-col p, .footer-col a {
-      color: #cbdbe6;
-      line-height: 1.6;
-      text-decoration: none;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      margin: 0.7rem 0;
-      transition: 0.2s;
-    }
-    .footer-col a:hover { color: #2b9b7a; transform: translateX(5px); }
-    .social-icons {
-      display: flex;
-      gap: 1rem;
-      margin-top: 1rem;
-    }
-    .social-icons a {
-      background: rgba(255,255,255,0.1);
-      width: 38px;
-      height: 38px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: 0.2s;
-    }
-    .social-icons a:hover { background: #2b9b7a; transform: translateY(-3px); }
-    .copyright {
-      text-align: center;
-      margin-top: 2rem;
-      padding-top: 1rem;
-      border-top: 1px solid rgba(255,255,255,0.1);
-      font-size: 0.8rem;
-    }
-
-    /* Responsive */
-    @media (max-width: 800px) {
-      .navbar { padding: 0.8rem 1rem; }
-      .nav-links {
-        display: none;
-        width: 100%;
-        flex-direction: column;
-        gap: 1rem;
-        padding: 1rem 0 0.5rem;
-        background: white;
-      }
-      .nav-links.show {
-        display: flex;
-      }
-      .hamburger { display: block; }
-      .nav-lang { margin-left: 0; justify-content: center; }
-      .hero-title { font-size: 2rem; }
-      .stats-grid { flex-direction: column; gap: 1rem; }
-      .services-grid { flex-direction: column; }
-      .whatsapp-float { padding: 8px 15px; font-size: 0.8rem; bottom: 20px; right: 20px; }
-    }
-    html {
-      scroll-behavior: smooth;
-      scroll-padding-top: 90px;
-    }
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{background:linear-gradient(135deg,#f8faff 0%,#f0f4fa 100%);font-family:'Inter','Noto Sans Sinhala','Noto Sans Tamil',sans-serif;color:#1e2f3e;overflow-x:hidden}
+    .navbar{background:rgba(255,255,255,.96);backdrop-filter:blur(12px);box-shadow:0 4px 20px rgba(0,0,0,.05);padding:.7rem 2rem;position:sticky;top:0;z-index:1000;border-bottom:1px solid rgba(15,91,140,.2)}
+    .nav-container{max-width:1300px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap}
+    .logo{font-size:1.7rem;font-weight:800;background:linear-gradient(120deg,#0f5b8c,#2b9b7a,#f4b942);-webkit-background-clip:text;background-clip:text;color:transparent;cursor:pointer;transition:transform .2s;display:flex;align-items:center;gap:8px}
+    .logo i{font-size:1.6rem;background:none;-webkit-background-clip:unset;color:#0f5b8c}
+    .logo:hover{transform:scale(1.02)}
+    .nav-links{display:flex;gap:1.8rem;align-items:center;flex-wrap:wrap}
+    .nav-links a{text-decoration:none;font-weight:600;color:#2c4e6e;font-size:1rem;padding:.5rem 0;transition:.2s;position:relative;display:flex;align-items:center;gap:6px}
+    .nav-links a::after{content:'';position:absolute;bottom:0;left:0;width:0%;height:2.5px;background:linear-gradient(90deg,#0f5b8c,#2b9b7a);border-radius:4px;transition:width .25s ease}
+    .nav-links a:hover::after,.nav-links a.active-nav::after{width:100%}
+    .nav-links a:hover{color:#0f5b8c}
+    .nav-lang{display:flex;gap:.5rem;margin-left:.5rem}
+    .lang-nav-btn{background:#eef2f8;border:none;padding:.4rem 1rem;border-radius:40px;font-weight:600;font-size:.8rem;cursor:pointer;font-family:inherit;transition:all .2s;color:#1e466e}
+    .lang-nav-btn.active{background:#0f5b8c;color:white;box-shadow:0 4px 8px rgba(15,91,140,.2)}
+    .hamburger{display:none;font-size:1.8rem;background:none;border:none;cursor:pointer;color:#0f5b8c}
+    .main-content{max-width:1300px;margin:2rem auto;padding:0 1.5rem}
+    .view{animation:fadeSlideUp .5s ease-out}
+    @keyframes fadeSlideUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+    .section{background:white;border-radius:40px;padding:2.5rem 2rem;margin-bottom:2.5rem;box-shadow:0 15px 35px rgba(0,0,0,.05);transition:transform .3s,box-shadow .3s;border:1px solid rgba(0,0,0,.03)}
+    .section:hover{transform:translateY(-5px);box-shadow:0 25px 45px rgba(15,91,140,.1)}
+    .hero-section{background:linear-gradient(135deg,#ffffff 0%,#f1f9ff 100%);text-align:center}
+    .hero-title{font-size:2.8rem;font-weight:800;background:linear-gradient(120deg,#0f5b8c,#2b9b7a);-webkit-background-clip:text;background-clip:text;color:transparent;margin-bottom:1rem}
+    .hero-desc{font-size:1.2rem;max-width:800px;margin:1rem auto 0;line-height:1.5;color:#2c4e6e}
+    .cta-btn{display:inline-block;margin-top:2rem;background:linear-gradient(95deg,#0f5b8c,#2b9b7a);color:white;border:none;padding:1rem 2.2rem;font-size:1.1rem;font-weight:700;border-radius:60px;cursor:pointer;transition:.3s;box-shadow:0 10px 20px rgba(15,91,140,.3);text-decoration:none}
+    .cta-btn:hover{transform:translateY(-3px);box-shadow:0 15px 25px rgba(15,91,140,.4)}
+    .stats-grid{display:flex;justify-content:space-between;flex-wrap:wrap;gap:2rem;text-align:center}
+    .stat-item{flex:1;min-width:150px;background:rgba(15,91,140,.03);padding:1.2rem;border-radius:32px;transition:all .3s}
+    .stat-item:hover{background:rgba(15,91,140,.08);transform:scale(1.02)}
+    .stat-number{font-size:3rem;font-weight:800;background:linear-gradient(135deg,#0f5b8c,#2b9b7a);-webkit-background-clip:text;background-clip:text;color:transparent;line-height:1}
+    .stat-label{font-size:1rem;font-weight:600;margin-top:.5rem;color:#2c4e6e}
+    .services-grid{display:flex;flex-wrap:wrap;gap:2rem;margin-top:1.5rem}
+    .service-card{flex:1;min-width:230px;background:#fafcff;padding:1.8rem;border-radius:32px;transition:all .3s;text-align:center;border:1px solid #eef2fa}
+    .service-card:hover{transform:translateY(-8px);background:white;border-color:#cde1ed;box-shadow:0 20px 30px rgba(15,91,140,.1)}
+    .service-card i{font-size:2.5rem;color:#0f5b8c;margin-bottom:1rem}
+    .service-card h3{margin:.5rem 0;font-size:1.4rem;color:#1a4b6e}
+    .about-text{line-height:1.6;font-size:1rem;margin-top:1rem}
+    .contact-info p{margin:1rem 0;display:flex;align-items:center;gap:12px;font-size:1rem}
+    .contact-info i{width:28px;color:#0f5b8c;font-size:1.2rem}
+    .loan-card{background:white;border-radius:40px;padding:2rem}
+    .loan-tabs{display:flex;gap:1rem;margin-bottom:2rem;border-bottom:1px solid #e0ecf3;padding-bottom:.75rem}
+    .tab-btn{background:none;border:none;font-size:1.1rem;font-weight:700;padding:.6rem 1.5rem;border-radius:40px;cursor:pointer;color:#4a627a;transition:.2s}
+    .tab-btn.active-tab{background:#0f5b8c;color:white;box-shadow:0 6px 12px rgba(15,91,140,.2)}
+    .form-group{margin-bottom:1.4rem}
+    label{font-weight:600;display:block;margin-bottom:.4rem;color:#1f3b4c}
+    input,textarea{width:100%;padding:.85rem 1rem;border:1.5px solid #e0eaf0;border-radius:24px;font-family:inherit;transition:.2s;font-size:1rem}
+    input:focus,textarea:focus{border-color:#0f5b8c;outline:none;box-shadow:0 0 0 3px rgba(15,91,140,.1)}
+    .double-photo-group{display:flex;gap:1.5rem;flex-wrap:wrap}
+    .double-photo-group .form-group{flex:1}
+    .photo-preview{display:flex;gap:10px;margin-top:8px;flex-wrap:wrap}
+    .preview-img{width:70px;height:70px;object-fit:cover;border-radius:14px;border:1px solid #cddfe7}
+    .checkbox-wrapper{display:flex;align-items:center;gap:12px;margin:1rem 0;background:#f8fafd;padding:.7rem 1rem;border-radius:28px}
+    .checkbox-wrapper input{width:20px;height:20px;margin:0}
+    .checkbox-wrapper label{margin:0;font-weight:500;cursor:pointer}
+    .guarantor-section{background:#f9fbfe;padding:1.2rem 1.5rem;border-radius:28px;margin-top:.5rem;border-left:4px solid #0f5b8c}
+    .submit-btn{background:linear-gradient(95deg,#1f7b5a,#2b9b7a);color:white;border:none;padding:1rem;font-weight:700;border-radius:50px;width:100%;cursor:pointer;font-size:1.1rem;transition:.2s;box-shadow:0 6px 14px rgba(43,155,122,.3)}
+    .submit-btn:hover{transform:scale(1.01)}
+    .submit-btn:disabled{opacity:.6;cursor:not-allowed;transform:none}
+    .success-message{background:#dcfce7;padding:1rem;border-radius:24px;color:#15803d;text-align:center;margin-top:1rem}
+    .error-text{color:#c7362b;font-size:.85rem;margin-top:8px;padding:.5rem 1rem;background:#fff5f5;border-radius:12px}
+    .back-home-btn{background:#eef2f8;border:none;padding:.6rem 1.5rem;border-radius:40px;font-weight:600;margin-bottom:1rem;cursor:pointer}
+    .notice-box{background:#fff5f5;border-left:4px solid #dc2626;border-radius:16px;padding:.8rem 1rem;margin-bottom:1.5rem;font-size:.85rem;color:#991b1b;display:flex;flex-wrap:wrap;gap:.75rem;align-items:flex-start}
+    .notice-box i{font-size:1rem;margin-top:.15rem;color:#dc2626}
+    .notice-content{flex:1;display:flex;flex-wrap:wrap;gap:.5rem;justify-content:space-between}
+    .notice-item{display:flex;align-items:center;gap:6px;background:rgba(220,38,38,.08);padding:.3rem .7rem;border-radius:40px}
+    .notice-item strong{font-weight:700;color:#b91c1c}
+    .upload-progress{background:#eff6ff;border-radius:16px;padding:.8rem 1rem;margin-bottom:1rem;border:1px solid #bfdbfe;display:none}
+    .progress-bar-wrap{background:#dbeafe;border-radius:40px;height:8px;margin-top:.4rem;overflow:hidden}
+    .progress-bar{background:linear-gradient(90deg,#0f5b8c,#2b9b7a);height:8px;border-radius:40px;width:0%;transition:width .4s}
+    .whatsapp-float{position:fixed;bottom:30px;right:30px;background-color:#25d366;color:white;border-radius:50px;padding:12px 20px;font-weight:700;display:flex;align-items:center;gap:10px;box-shadow:0 10px 20px rgba(37,211,102,.3);z-index:1000;text-decoration:none;font-size:1rem;transition:all .3s;font-family:inherit}
+    .whatsapp-float:hover{transform:scale(1.05);background-color:#20b859}
+    .footer{background:#0a2a3b;color:#e0edf5;padding:3rem 2rem 1.5rem;margin-top:3rem;border-top-left-radius:40px;border-top-right-radius:40px}
+    .footer-container{max-width:1300px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:2rem}
+    .footer-col h4{font-size:1.2rem;margin-bottom:1rem;color:white;position:relative;display:inline-block}
+    .footer-col h4::after{content:'';position:absolute;bottom:-5px;left:0;width:50%;height:2px;background:#2b9b7a}
+    .footer-col p,.footer-col a{color:#cbdbe6;line-height:1.6;text-decoration:none;display:flex;align-items:center;gap:8px;margin:.7rem 0;transition:.2s}
+    .footer-col a:hover{color:#2b9b7a;transform:translateX(5px)}
+    .social-icons{display:flex;gap:1rem;margin-top:1rem}
+    .social-icons a{background:rgba(255,255,255,.1);width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;transition:.2s}
+    .social-icons a:hover{background:#2b9b7a;transform:translateY(-3px)}
+    .copyright{text-align:center;margin-top:2rem;padding-top:1rem;border-top:1px solid rgba(255,255,255,.1);font-size:.8rem}
+    /* max-amount hint badge */
+    .amount-hint{font-size:.78rem;color:#0f5b8c;background:#e8f4ff;padding:.25rem .75rem;border-radius:40px;display:inline-block;margin-top:.4rem;font-weight:600}
+    @media(max-width:800px){.navbar{padding:.8rem 1rem}.nav-links{display:none;width:100%;flex-direction:column;gap:1rem;padding:1rem 0 .5rem;background:white}.nav-links.show{display:flex}.hamburger{display:block}.hero-title{font-size:2rem}.stats-grid{flex-direction:column;gap:1rem}.services-grid{flex-direction:column}.notice-content{flex-direction:column}.whatsapp-float{padding:8px 15px;font-size:.8rem;bottom:20px;right:20px}}
+    html{scroll-behavior:smooth;scroll-padding-top:90px}
   </style>
 </head>
 <body>
-
 <nav class="navbar">
   <div class="nav-container">
     <div class="logo" id="logoHomeBtn"><i class="fas fa-chart-line"></i> LendEasy</div>
@@ -594,19 +115,12 @@
 </nav>
 
 <div class="main-content">
-  <!-- HOME VIEW: contains all info sections -->
-  <div id="homeView" class="view" style="display: block;">
-    <!-- Hero / description -->
+  <div id="homeView" class="view" style="display:block;">
     <div class="section hero-section" id="home-hero">
       <div class="hero-title" data-i18n="hero_title">🏦 Smart Loans, Brighter Tomorrow</div>
-      <div class="hero-desc" data-i18n="company_description">
-        ඔබගේ සිහින සැබෑ කර ගැනීමට අපි මෙහි සිටිමු. විශ්වාසනීය, වේගවත් හා විනිවිද පෙනෙන ණය සේවාවන්. දශකයකට වැඩි අත්දැකීම් සහිතව, පුද්ගලික ණය සිට ව්‍යාපාරික ණය දක්වා ඔබේ ආර්ථික අවශ්‍යතා සපුරාලීමට අපි කැපවී සිටිමු.
-      </div>
-      <!-- CTA Button to Loan Section -->
+      <div class="hero-desc" data-i18n="company_description">ඔබගේ සිහින සැබෑ කර ගැනීමට අපි මෙහි සිටිමු. විශ්වාසනීය, වේගවත් හා විනිවිද පෙනෙන ණය සේවාවන්.</div>
       <button id="frontPageLoanBtn" class="cta-btn"><i class="fas fa-file-invoice-dollar"></i> <span data-i18n="apply_now_btn">Apply for Loan Now</span></button>
     </div>
-
-    <!-- Stats section -->
     <div class="section" id="stats-section">
       <div class="stats-grid" id="statsGrid">
         <div class="stat-item"><div class="stat-number" id="yearsCount">0</div><div class="stat-label" data-i18n="stat_years">වසරක පළපුරුද්ද</div></div>
@@ -614,117 +128,80 @@
         <div class="stat-item"><div class="stat-number" id="loansCount">0</div><div class="stat-label" data-i18n="stat_loans">සාර්ථක ණය</div></div>
       </div>
     </div>
-
-    <!-- Services Section -->
     <div class="section" id="services-section">
-      <h2 style="font-size: 1.8rem; margin-bottom: 0.5rem;" data-i18n="services_title"><i class="fas fa-star"></i> අපගේ සේවාවන්</h2>
+      <h2 style="font-size:1.8rem;margin-bottom:.5rem;" data-i18n="services_title"><i class="fas fa-star"></i> අපගේ සේවාවන්</h2>
       <div class="services-grid">
-        <div class="service-card"><i class="fas fa-user-check"></i><h3 data-i18n="service1_title">පුද්ගලික ණය</h3><p data-i18n="service1_desc">ඔබගේ පෞද්ගලික අවශ්‍යතා සඳහා අඩු පොලිය, වේගවත් අනුමැතිය.</p></div>
+        <div class="service-card"><i class="fas fa-user-check"></i><h3 data-i18n="service1_title">පුද්ගලික ණය</h3><p data-i18n="service1_desc">ඔබගේ පෞද්ගලික අවශ්‍යතා සඳහා අඩු පොලිය.</p></div>
         <div class="service-card"><i class="fas fa-building"></i><h3 data-i18n="service2_title">ව්‍යාපාරික ණය</h3><p data-i18n="service2_desc">ව්‍යාපාර පුළුල් කිරීමට නම්‍යශීලී වාරික.</p></div>
         <div class="service-card"><i class="fas fa-bolt"></i><h3 data-i18n="service3_title">ක්ෂණික අනුමැතිය</h3><p data-i18n="service3_desc">ඩිජිටල් අයදුම්පත, 24 පැය ඇතුලත ප්‍රතිචාරය.</p></div>
       </div>
     </div>
-
-    <!-- About Section -->
     <div class="section" id="about-section">
-      <h2 style="font-size: 1.8rem;" data-i18n="about_title"><i class="fas fa-chalkboard-user"></i> අපි ගැන</h2>
-      <div class="about-text" data-i18n="about_text">
-        LendEasy Finance ශ්‍රී ලංකාවේ විශ්වාසනීය මූල්‍ය සේවා සපයන්නෙකු ලෙස වසර 15කට වැඩි කාලයක් පුරාවට දහස් ගණනකගේ ආර්ථික සිහින සැබෑ කර ඇත. අපගේ මෙහෙවර වන්නේ සරල, විනිවිද පෙනෙන ණය විසඳුම් ලබා දීමයි. නවීන තාක්ෂණය සහ පුද්ගලාරෝපිත සේවාව එක් කරමින් අපි ඔබ ළඟ සිටිමු.
-      </div>
-      <div style="margin-top: 1.5rem; background: #f0f8ff; padding: 1rem; border-radius: 28px;">
-        <span style="font-weight:800;"><i class="fas fa-bullseye"></i> <span data-i18n="mission_title">අපගේ ඉලක්කය</span>:</span>
-        <span data-i18n="mission_desc"> සෑම ශ්‍රී ලාංකිකයෙකුටම සාධාරණ මූල්‍ය ප්‍රවේශය.</span>
-      </div>
+      <h2 style="font-size:1.8rem;" data-i18n="about_title"><i class="fas fa-chalkboard-user"></i> අපි ගැන</h2>
+      <div class="about-text" data-i18n="about_text">LendEasy Finance ශ්‍රී ලංකාවේ විශ්වාසනීය මූල්‍ය සේවා සපයන්නෙකු ලෙස වසර 15කට වැඩි කාලයක් ආර්ථික සිහින සැබෑ කර ඇත.</div>
+      <div style="margin-top:1.5rem;background:#f0f8ff;padding:1rem;border-radius:28px;"><span style="font-weight:800;"><i class="fas fa-bullseye"></i> <span data-i18n="mission_title">අපගේ ඉලක්කය</span>:</span><span data-i18n="mission_desc"> සෑම ශ්‍රී ලාංකිකයෙකුටම සාධාරණ මූල්‍ය ප්‍රවේශය.</span></div>
     </div>
-
-    <!-- Contact Section -->
     <div class="section" id="contact-section">
-      <h2 style="font-size: 1.8rem;" data-i18n="contact_title"><i class="fas fa-address-card"></i> අමතන්න</h2>
+      <h2 style="font-size:1.8rem;" data-i18n="contact_title"><i class="fas fa-address-card"></i> අමතන්න</h2>
       <div class="contact-info">
-        <p><i class="fas fa-map-marker-alt"></i> <span data-i18n="contact_address">කොළඹ 03, ශ්‍රී ලංකාව, ඩබ්ලිව්.ඒ. ඩී සිල්වා මාවත, ලෙන්ඩීසි පාර්ක්</span></p>
-        <p><i class="fas fa-phone-alt"></i> <span data-i18n="contact_phone">+94 112 345 678 / +94 77 123 4567</span></p>
-        <p><i class="fas fa-envelope"></i> <span data-i18n="contact_email">support@lendeasy.lk</span></p>
-        <p><i class="fas fa-clock"></i> <span data-i18n="contact_hours">සඳු-සෙන: 9:00AM - 5:30PM, සෙනසුරාදා: 9:00AM - 1:00PM</span></p>
+        <p><i class="fas fa-map-marker-alt"></i><span data-i18n="contact_address">කොළඹ 03, ශ්‍රී ලංකාව</span></p>
+        <p><i class="fas fa-phone-alt"></i><span data-i18n="contact_phone">+94 112 345 678 / +94 77 123 4567</span></p>
+        <p><i class="fas fa-envelope"></i>support@lendeasy.lk</p>
+        <p><i class="fas fa-clock"></i><span data-i18n="contact_hours">සඳු-සෙන: 9:00AM - 5:30PM, සෙනසුරාදා: 9:00AM - 1:00PM</span></p>
       </div>
     </div>
   </div>
 
-  <!-- LOAN VIEW (Application & Repayment) -->
-  <div id="loanView" class="view" style="display: none;">
+  <div id="loanView" class="view" style="display:none;">
     <div class="loan-card">
       <button id="backToHomeFromLoan" class="back-home-btn"><i class="fas fa-arrow-left"></i> <span data-i18n="back_home">Back to Home</span></button>
       <div class="loan-tabs">
         <button class="tab-btn active-tab" data-loan-tab="apply">📝 <span data-i18n="loan_apply_tab">ණය අයදුම් කරන්න</span></button>
         <button class="tab-btn" data-loan-tab="repay">💰 <span data-i18n="loan_repay_tab">ණය ගෙවීම</span></button>
       </div>
-      <!-- Application Form with compact red notice -->
       <div id="applyLoanPanel">
-        <!-- Compact Notice Box -->
-        <div class="notice-box" id="applyNoticeBox">
-          <i class="fas fa-exclamation-triangle"></i>
-          <div class="notice-content">
-            <div class="notice-item"><i class="fas fa-percent"></i> <strong data-i18n="notice_interest_label">මාසික පොලිය:</strong> <span data-i18n="notice_interest_value">1.5% (18% වාර්ෂික)</span></div>
-            <div class="notice-item"><i class="fas fa-clock"></i> <strong data-i18n="notice_late_label">ප්‍රමාද ගාස්තු:</strong> <span data-i18n="notice_late_value">දිනකට රු. 100/-</span></div>
-            <div class="notice-item"><i class="fas fa-calendar-week"></i> <strong data-i18n="notice_payment_label">ගෙවීම්:</strong> <span data-i18n="notice_payment_value">මාසික / සතිපතා</span></div>
-          </div>
-        </div>
+        <div class="notice-box"><i class="fas fa-exclamation-triangle"></i><div class="notice-content"><div class="notice-item"><i class="fas fa-percent"></i><strong data-i18n="notice_interest_label">මාසික පොලිය:</strong><span data-i18n="notice_interest_value">1.5% (18% වාර්ෂික)</span></div><div class="notice-item"><i class="fas fa-clock"></i><strong data-i18n="notice_late_label">ප්‍රමාද ගාස්තු:</strong><span data-i18n="notice_late_value">දිනකට රු. 100/-</span></div><div class="notice-item"><i class="fas fa-calendar-week"></i><strong data-i18n="notice_payment_label">ගෙවීම්:</strong><span data-i18n="notice_payment_value">මාසික / සතිපතා</span></div></div></div>
+        <div class="upload-progress" id="applyProgress"><div style="font-size:.85rem;font-weight:600;color:#1e466e;">⏳ <span id="applyProgressText">Processing...</span></div><div class="progress-bar-wrap"><div class="progress-bar" id="applyProgressBar"></div></div></div>
         <form id="loanAppForm">
-          <div class="form-group"><label><span data-i18n="full_name_label">සම්පූර්ණ නම</span><span class="required-star">*</span></label><input type="text" id="fullName" data-i18n-placeholder="full_name_placeholder"></div>
-          <div class="form-group"><label><span data-i18n="address_label">ලිපිනය</span><span class="required-star">*</span></label><textarea id="address" rows="2" data-i18n-placeholder="address_placeholder"></textarea></div>
-          <div class="form-group"><label><span data-i18n="nic_label">NIC අංකය</span><span class="required-star">*</span></label><input type="text" id="nicNumber" data-i18n-placeholder="nic_placeholder"></div>
+          <div class="form-group"><label><span data-i18n="full_name_label">සම්පූර්ණ නම</span> *</label><input type="text" id="fullName" placeholder="උදා: අමරසිංහ මහේෂ්"></div>
+          <div class="form-group"><label><span data-i18n="address_label">ලිපිනය</span> *</label><textarea id="address" rows="2" placeholder="නිවස් අංකය, වීදිය, නගරය"></textarea></div>
+          <div class="form-group"><label><span data-i18n="nic_label">NIC අංකය</span> *</label><input type="text" id="nicNumber" placeholder="1995XXXXX හෝ XXXXXXXXXV"></div>
           <div class="double-photo-group">
-            <div class="form-group"><label><span data-i18n="nic_front_label">NIC ඉදිරිපස</span><span class="required-star">*</span></label><input type="file" id="nicFrontPhoto" accept="image/*"><div id="nicFrontPreview" class="photo-preview"></div></div>
-            <div class="form-group"><label><span data-i18n="nic_back_label">NIC පසුපස</span><span class="required-star">*</span></label><input type="file" id="nicBackPhoto" accept="image/*"><div id="nicBackPreview" class="photo-preview"></div></div>
+            <div class="form-group"><label><span data-i18n="nic_front_label">NIC ඉදිරිපස</span> *</label><input type="file" id="nicFrontPhoto" accept="image/*"><div id="nicFrontPreview" class="photo-preview"></div></div>
+            <div class="form-group"><label><span data-i18n="nic_back_label">NIC පසුපස</span> *</label><input type="file" id="nicBackPhoto" accept="image/*"><div id="nicBackPreview" class="photo-preview"></div></div>
           </div>
-          <div class="form-group"><label><span data-i18n="phone_label">දුරකතන අංකය</span><span class="required-star">*</span></label><input type="tel" id="applicantPhone" data-i18n-placeholder="phone_placeholder"></div>
-          <div class="form-group"><label><span data-i18n="loan_amount_label">ණය මුදල (රු.)</span><span class="required-star">*</span></label><input type="number" id="loanAmount" step="1000" data-i18n-placeholder="loan_amount_placeholder"></div>
-          <div class="checkbox-wrapper">
-            <input type="checkbox" id="hasGuarantorCheck">
-            <label for="hasGuarantorCheck" data-i18n="guarantor_check_label">ටික් කරන්න ඇප කරුවන් සිටීද</label>
+          <div class="form-group"><label><span data-i18n="phone_label">දුරකතන අංකය</span> *</label><input type="tel" id="applicantPhone" placeholder="071 234 5678"></div>
+
+          <!-- ✅ FIX: max 50,000 enforced here -->
+          <div class="form-group">
+            <label><span data-i18n="loan_amount_label">ණය මුදල (රු.)</span> *</label>
+            <input type="number" id="loanAmount" step="1000" min="1000" max="50000" placeholder="50000">
+            <span class="amount-hint" data-i18n="loan_max_hint">උපරිම ණය: රු. 50,000/-</span>
           </div>
+
+          <div class="checkbox-wrapper"><input type="checkbox" id="hasGuarantorCheck"><label for="hasGuarantorCheck" data-i18n="guarantor_check_label">ඇප කරුවන් සිටීද</label></div>
           <div id="guarantorSection" style="display:none;">
             <div class="guarantor-section"><h4 data-i18n="guarantor_details_title">📌 ඇපකරු විස්තර</h4>
-              <div class="form-group"><label><span data-i18n="guarantor_name_label">නම</span><span class="required-star">*</span></label><input type="text" id="guarantorName" data-i18n-placeholder="guarantor_name_placeholder"></div>
-              <div class="form-group"><label><span data-i18n="guarantor_id_label">ID අංකය</span><span class="required-star">*</span></label><input type="text" id="guarantorIdNumber" data-i18n-placeholder="guarantor_id_placeholder"></div>
-              <div class="form-group"><label><span data-i18n="guarantor_photo_label">ID ඡායාරූපය</span><span class="required-star">*</span></label><input type="file" id="guarantorPhoto" accept="image/*"><div id="guarantorPreview" class="photo-preview"></div></div>
-              <div class="form-group"><label><span data-i18n="guarantor_phone_label">දුරකතන අංකය</span><span class="required-star">*</span></label><input type="tel" id="guarantorPhone" data-i18n-placeholder="guarantor_phone_placeholder"></div>
+              <div class="form-group"><label><span data-i18n="guarantor_name_label">නම</span> *</label><input type="text" id="guarantorName" placeholder="ඇපකරුගේ සම්පූර්ණ නම"></div>
+              <div class="form-group"><label><span data-i18n="guarantor_id_label">ID අංකය</span> *</label><input type="text" id="guarantorIdNumber" placeholder="ජාතික හැඳුනුම්පත් අංකය"></div>
+              <div class="form-group"><label><span data-i18n="guarantor_photo_label">ID ඡායාරූපය</span> *</label><input type="file" id="guarantorPhoto" accept="image/*"><div id="guarantorPreview" class="photo-preview"></div></div>
+              <div class="form-group"><label><span data-i18n="guarantor_phone_label">දුරකතන අංකය</span> *</label><input type="tel" id="guarantorPhone" placeholder="071 234 5678"></div>
             </div>
           </div>
           <button type="submit" id="submitApplicationBtn" class="submit-btn"><span data-i18n="submit_btn_text">අයදුම්පත ඉදිරිපත් කරන්න</span></button>
           <div id="formFeedback"></div>
         </form>
       </div>
-      <!-- Repayment Panel with compact red notice -->
-      <div id="repayLoanPanel" style="display: none;">
-        <div style="background: #f9fbfe; border-radius: 32px; padding: 1.5rem;">
-          <!-- Compact Notice Box (same as apply) -->
-          <div class="notice-box" id="repayNoticeBox">
-            <i class="fas fa-exclamation-triangle"></i>
-            <div class="notice-content">
-              <div class="notice-item"><i class="fas fa-percent"></i> <strong data-i18n="notice_interest_label">මාසික පොලිය:</strong> <span data-i18n="notice_interest_value">1.5% (18% වාර්ෂික)</span></div>
-              <div class="notice-item"><i class="fas fa-clock"></i> <strong data-i18n="notice_late_label">ප්‍රමාද ගාස්තු:</strong> <span data-i18n="notice_late_value">දිනකට රු. 100/-</span></div>
-              <div class="notice-item"><i class="fas fa-calendar-week"></i> <strong data-i18n="notice_payment_label">ගෙවීම්:</strong> <span data-i18n="notice_payment_value">මාසික / සතිපතා</span></div>
-            </div>
-          </div>
-          <h3 data-i18n="repayment_form_title" style="margin-bottom: 1rem;">💰 ණය ගෙවීම් විස්තර</h3>
+      <div id="repayLoanPanel" style="display:none;">
+        <div style="background:#f9fbfe;border-radius:32px;padding:1.5rem;">
+          <div class="notice-box"><i class="fas fa-exclamation-triangle"></i><div class="notice-content"><div class="notice-item"><i class="fas fa-percent"></i><strong data-i18n="notice_interest_label">මාසික පොලිය:</strong><span data-i18n="notice_interest_value">1.5% (18% වාර්ෂික)</span></div><div class="notice-item"><i class="fas fa-clock"></i><strong data-i18n="notice_late_label">ප්‍රමාද ගාස්තු:</strong><span data-i18n="notice_late_value">දිනකට රු. 100/-</span></div><div class="notice-item"><i class="fas fa-calendar-week"></i><strong data-i18n="notice_payment_label">ගෙවීම්:</strong><span data-i18n="notice_payment_value">මාසික / සතිපතා</span></div></div></div>
+          <div class="upload-progress" id="repayProgress"><div style="font-size:.85rem;font-weight:600;color:#1e466e;">⏳ <span id="repayProgressText">Processing...</span></div><div class="progress-bar-wrap"><div class="progress-bar" id="repayProgressBar"></div></div></div>
+          <h3 style="margin-bottom:1rem;" data-i18n="repayment_form_title">💰 ණය ගෙවීම් විස්තර</h3>
           <form id="repaymentForm">
-            <div class="form-group">
-              <label><span data-i18n="repay_name_label">සම්පූර්ණ නම</span><span class="required-star">*</span></label>
-              <input type="text" id="repayFullName" data-i18n-placeholder="repay_name_placeholder">
-            </div>
-            <div class="form-group">
-              <label><span data-i18n="repay_nic_label">NIC අංකය</span><span class="required-star">*</span></label>
-              <input type="text" id="repayNic" data-i18n-placeholder="repay_nic_placeholder">
-            </div>
-            <div class="form-group">
-              <label><span data-i18n="repay_photo_label">බැංකු රිසිට්පත / ස්ක්‍රීන්ෂොට්</span><span class="required-star">*</span></label>
-              <input type="file" id="repayReceipt" accept="image/*">
-              <div id="repayReceiptPreview" class="photo-preview"></div>
-            </div>
-            <div class="form-group">
-              <label><span data-i18n="repay_phone_label">දුරකතන අංකය</span><span class="required-star">*</span></label>
-              <input type="tel" id="repayPhone" data-i18n-placeholder="repay_phone_placeholder">
-            </div>
+            <div class="form-group"><label><span data-i18n="repay_name_label">සම්පූර්ණ නම</span> *</label><input type="text" id="repayFullName" placeholder="උදා: අමරසිංහ මහේෂ්"></div>
+            <div class="form-group"><label><span data-i18n="repay_nic_label">NIC අංකය</span> *</label><input type="text" id="repayNic" placeholder="1995XXXXX හෝ XXXXXXXXXV"></div>
+            <div class="form-group"><label><span data-i18n="repay_photo_label">බැංකු රිසිට්පත / ස්ක්‍රීන්ෂොට්</span> *</label><input type="file" id="repayReceipt" accept="image/*"><div id="repayReceiptPreview" class="photo-preview"></div></div>
+            <div class="form-group"><label><span data-i18n="repay_phone_label">දුරකතන අංකය</span> *</label><input type="tel" id="repayPhone" placeholder="071 234 5678"></div>
             <button type="submit" id="submitRepaymentBtn" class="submit-btn"><span data-i18n="repay_submit_btn">ගෙවීම තහවුරු කරන්න</span></button>
             <div id="repaymentFeedback"></div>
           </form>
@@ -734,434 +211,338 @@
   </div>
 </div>
 
-<!-- Floating WhatsApp Button -->
-<a href="https://wa.me/94771234567?text=Hello%21%20I%20need%20loan%20assistance" class="whatsapp-float" target="_blank" rel="noopener noreferrer">
-  <i class="fab fa-whatsapp"></i> <span data-i18n="whatsapp_text">Chat on WhatsApp</span>
-</a>
+<a href="https://wa.me/94771234567?text=Hello%21%20I%20need%20loan%20assistance" class="whatsapp-float" target="_blank" rel="noopener noreferrer"><i class="fab fa-whatsapp"></i> <span data-i18n="whatsapp_text">Chat on WhatsApp</span></a>
 
-<!-- Footer -->
 <footer class="footer">
   <div class="footer-container">
-    <div class="footer-col">
-      <h4><i class="fas fa-building"></i> <span data-i18n="footer_company">LendEasy Finance</span></h4>
-      <p><i class="fas fa-map-marker-alt"></i> <span data-i18n="footer_address">No. 123, W.A.D Silva Mawatha, Colombo 03, Sri Lanka</span></p>
-      <p><i class="fas fa-phone"></i> <span data-i18n="footer_phone">+94 112 345 678 | +94 77 123 4567</span></p>
-      <p><i class="fas fa-envelope"></i> support@lendeasy.lk</p>
-    </div>
-    <div class="footer-col">
-      <h4><span data-i18n="footer_follow">Follow Us</span></h4>
-      <div class="social-icons">
-        <a href="https://facebook.com" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-        <a href="https://wa.me/94771234567" target="_blank" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
-        <a href="https://instagram.com" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-        <a href="https://tiktok.com" target="_blank" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
-      </div>
-      <p style="margin-top: 1rem;"><i class="fas fa-clock"></i> <span data-i18n="footer_hours">Mon-Fri: 9AM-5:30PM | Sat: 9AM-1PM</span></p>
-    </div>
-    <div class="footer-col">
-      <h4><span data-i18n="footer_links">Quick Links</span></h4>
-      <p><a href="#" data-nav="home"><i class="fas fa-angle-right"></i> <span data-i18n="nav_home">Home</span></a></p>
-      <p><a href="#" data-nav="loan"><i class="fas fa-angle-right"></i> <span data-i18n="nav_loan">Loan</span></a></p>
-      <p><a href="#" data-nav="services"><i class="fas fa-angle-right"></i> <span data-i18n="nav_services">Services</span></a></p>
-      <p><a href="#" data-nav="about"><i class="fas fa-angle-right"></i> <span data-i18n="nav_about">About</span></a></p>
-      <p><a href="#" data-nav="contact"><i class="fas fa-angle-right"></i> <span data-i18n="nav_contact">Contact</span></a></p>
-    </div>
+    <div class="footer-col"><h4><i class="fas fa-building"></i> LendEasy Finance</h4><p><i class="fas fa-map-marker-alt"></i> No. 123, W.A.D Silva Mawatha, Colombo 03</p><p><i class="fas fa-phone"></i> +94 112 345 678</p><p><i class="fas fa-envelope"></i> support@lendeasy.lk</p></div>
+    <div class="footer-col"><h4>Follow Us</h4><div class="social-icons"><a href="https://facebook.com" target="_blank"><i class="fab fa-facebook-f"></i></a><a href="https://wa.me/94771234567" target="_blank"><i class="fab fa-whatsapp"></i></a><a href="https://instagram.com" target="_blank"><i class="fab fa-instagram"></i></a></div></div>
+    <div class="footer-col"><h4>Quick Links</h4><p><a href="#" data-nav="home"><i class="fas fa-angle-right"></i> Home</a></p><p><a href="#" data-nav="loan"><i class="fas fa-angle-right"></i> Loan</a></p><p><a href="#" data-nav="contact"><i class="fas fa-angle-right"></i> Contact</a></p></div>
   </div>
-  <div class="copyright">
-    <span data-i18n="copyright_text">© 2025 LendEasy Finance. All rights reserved.</span> | <span data-i18n="developed_by">Developed by DualSyntax IT</span>
-  </div>
+  <div class="copyright">© 2025 LendEasy Finance. All rights reserved. | Developed by DualSyntax IT</div>
 </footer>
 
 <script type="module">
-  // ==================== TRANSLATIONS (with new compact notice keys) ====================
-  const translations = {
-    si: {
-      nav_home: "මුල් පිටුව", nav_services: "සේවා", nav_loan: "ණය", nav_about: "අපි ගැන", nav_contact: "සම්බන්ධ වන්න",
-      hero_title: "🏦 Smart Loans, Brighter Tomorrow",
-      company_description: "ඔබගේ සිහින සැබෑ කර ගැනීමට අපි මෙහි සිටිමු. විශ්වාසනීය, වේගවත් හා විනිවිද පෙනෙන ණය සේවාවන්. දශකයකට වැඩි අත්දැකීම් සහිතව, පුද්ගලික ණය සිට ව්‍යාපාරික ණය දක්වා ඔබේ ආර්ථික අවශ්‍යතා සපුරාලීමට අපි කැපවී සිටිමු.",
-      apply_now_btn: "දැන් ණය අයදුම් කරන්න",
-      stat_years: "වසරක පළපුරුද්ද", stat_satisfaction: "සේවා තෘප්තිය", stat_loans: "සාර්ථක ණය",
-      // Compact notice translations
-      notice_interest_label: "මාසික පොලිය:",
-      notice_interest_value: "1.5% (18% වාර්ෂික)",
-      notice_late_label: "ප්‍රමාද ගාස්තු:",
-      notice_late_value: "දිනකට රු. 100/-",
-      notice_payment_label: "ගෙවීම්:",
-      notice_payment_value: "මාසික / සතිපතා",
-      services_title: "අපගේ සේවාවන්", service1_title: "පුද්ගලික ණය", service1_desc: "ඔබගේ පෞද්ගලික අවශ්‍යතා සඳහා අඩු පොලිය, වේගවත් අනුමැතිය.",
-      service2_title: "ව්‍යාපාරික ණය", service2_desc: "ව්‍යාපාර පුළුල් කිරීමට නම්‍යශීලී වාරික.", service3_title: "ක්ෂණික අනුමැතිය", service3_desc: "ඩිජිටල් අයදුම්පත, 24 පැය ඇතුලත ප්‍රතිචාරය.",
-      about_title: "අපි ගැන", about_text: "LendEasy Finance ශ්‍රී ලංකාවේ විශ්වාසනීය මූල්‍ය සේවා සපයන්නෙකු ලෙස වසර 15කට වැඩි කාලයක් පුරාවට දහස් ගණනකගේ ආර්ථික සිහින සැබෑ කර ඇත. අපගේ මෙහෙවර වන්නේ සරල, විනිවිද පෙනෙන ණය විසඳුම් ලබා දීමයි.",
-      mission_title: "අපගේ ඉලක්කය", mission_desc: "සෑම ශ්‍රී ලාංකිකයෙකුටම සාධාරණ මූල්‍ය ප්‍රවේශය.",
-      contact_title: "අමතන්න", contact_address: "කොළඹ 03, ශ්‍රී ලංකාව, ඩබ්ලිව්.ඒ. ඩී සිල්වා මාවත, ලෙන්ඩීසි පාර්ක්", contact_phone: "+94 112 345 678 / +94 77 123 4567", contact_email: "support@lendeasy.lk", contact_hours: "සඳු-සෙන: 9:00AM - 5:30PM, සෙනසුරාදා: 9:00AM - 1:00PM",
-      footer_company: "LendEasy Finance", footer_address: "අංක 123, ඩබ්ලිව්.ඒ. ඩී සිල්වා මාවත, කොළඹ 03, ශ්‍රී ලංකාව", footer_phone: "+94 112 345 678 | +94 77 123 4567", footer_follow: "අපව අනුගමනය කරන්න", footer_hours: "සඳු-සෙන: 9AM-5:30PM | සෙන: 9AM-1PM", footer_links: "වේගවත් සබැඳි", copyright_text: "© 2025 LendEasy Finance. සියලුම හිමිකම් ඇවිරිණි.", developed_by: "සංවර්ධනය කරන ලද්දේ DualSyntax IT විසිනි",
-      whatsapp_text: "WhatsApp මගින් කතා කරන්න", back_home: "මුල් පිටුවට", contact_support: "සහාය අමතන්න", repayment_title: "ණය ගෙවීම", repayment_placeholder: "මෙම සේවාව ඉක්මනින් ලබා ගත හැක. කරුණාකර අපගේ ශාඛාව අමතන්න 0112 345 678.",
-      loan_apply_tab: "ණය අයදුම් කරන්න", loan_repay_tab: "ණය ගෙවීම",
-      full_name_label: "සම්පූර්ණ නම", address_label: "ලිපිනය", nic_label: "NIC අංකය", nic_front_label: "NIC ඉදිරිපස", nic_back_label: "NIC පසුපස", phone_label: "දුරකතන අංකය", loan_amount_label: "ණය මුදල (රු.)", guarantor_check_label: "ටික් කරන්න ඇප කරුවන් සිටීද", guarantor_details_title: "📌 ඇපකරු විස්තර", guarantor_name_label: "නම", guarantor_id_label: "ID අංකය", guarantor_photo_label: "ID ඡායාරූපය", guarantor_phone_label: "දුරකතන අංකය", submit_btn_text: "අයදුම්පත ඉදිරිපත් කරන්න", submitting: "සම්ප්‍රේෂණය වෙමින්...", success_msg: "✅ ඔබගේ ණය අයදුම්පත සාර්ථකව ලැබුණි!",
-      full_name_placeholder: "උදා: අමරසිංහ මහේෂ්",
-      address_placeholder: "නිවස් අංකය, වීදිය, නගරය",
-      nic_placeholder: "1995XXXXX හෝ XXXXXXXXXV",
-      phone_placeholder: "071 234 5678",
-      loan_amount_placeholder: "50000",
-      guarantor_name_placeholder: "ඇපකරුගේ සම්පූර්ණ නම",
-      guarantor_id_placeholder: "ජාතික හැඳුනුම්පත් අංකය",
-      guarantor_phone_placeholder: "071 234 5678",
-      repay_name_placeholder: "උදා: අමරසිංහ මහේෂ්",
-      repay_nic_placeholder: "1995XXXXX හෝ XXXXXXXXXV",
-      repay_phone_placeholder: "071 234 5678",
-      repayment_form_title: "💰 ණය ගෙවීම් විස්තර",
-      repay_name_label: "සම්පූර්ණ නම",
-      repay_nic_label: "NIC අංකය",
-      repay_photo_label: "බැංකු රිසිට්පත / ස්ක්‍රීන්ෂොට්",
-      repay_phone_label: "දුරකතන අංකය",
-      repay_submit_btn: "ගෙවීම තහවුරු කරන්න",
-      repay_success_msg: "✅ ඔබගේ ගෙවීම සාර්ථකව ලැබුණි! ස්තුතියි.",
-      repay_required_fields: "සියලුම අත්‍යවශ්‍ය ක්ෂේත්‍ර පුරවන්න",
-      repay_photo_required: "බැංකු රිසිට්පත හෝ ස්ක්‍රීන්ෂොට් අවශ්‍යයි",
-      repay_submitting: "තහවුරු කරමින්..."
-    },
-    ta: {
-      nav_home: "முகப்பு", nav_services: "சேவைகள்", nav_loan: "கடன்", nav_about: "எங்களை பற்றி", nav_contact: "தொடர்பு",
-      hero_title: "🏦 ஸ்மார்ட் கடன்கள், பிரகாசமான எதிர்காலம்",
-      company_description: "உங்கள் கனவுகளை நனவாக்க நாங்கள் இங்கு இருக்கிறோம். நம்பகமான, விரைவான மற்றும் வெளிப்படையான கடன் சேவைகள். பத்தாண்டுகளுக்கும் மேலான அனுபவத்துடன், தனிப்பட்ட கடன் முதல் வணிக கடன் வரை உங்கள் நிதித் தேவைகளை பூர்த்தி செய்ய அர்ப்பணித்துள்ளோம்.",
-      apply_now_btn: "இப்போது கடன் விண்ணப்பிக்கவும்",
-      stat_years: "அனுபவ ஆண்டுகள்", stat_satisfaction: "வாடிக்கையாளர் திருப்தி", stat_loans: "வெற்றிகரமான கடன்கள்",
-      notice_interest_label: "மாத வட்டி:",
-      notice_interest_value: "1.5% (ஆண்டுக்கு 18%)",
-      notice_late_label: "தாமதக் கட்டணம்:",
-      notice_late_value: "ஒரு நாளைக்கு ரூ. 100/-",
-      notice_payment_label: "செலுத்தும் முறை:",
-      notice_payment_value: "மாதாந்திர / வாராந்திர",
-      services_title: "எங்கள் சேவைகள்", service1_title: "தனிப்பட்ட கடன்", service1_desc: "உங்கள் தனிப்பட்ட தேவைகளுக்கு குறைந்த வட்டி, விரைவான ஒப்புதல்.",
-      service2_title: "வணிக கடன்", service2_desc: "வணிகத்தை விரிவுபடுத்த நெகிழ்வான தவணைகள்.", service3_title: "உடனடி ஒப்புதல்", service3_desc: "டிஜிட்டல் விண்ணப்பம், 24 மணி நேரத்தில் பதில்.",
-      about_title: "எங்களை பற்றி", about_text: "LendEasy Finance இலங்கையின் நம்பகமான நிதிச் சேவையாளராக 15 ஆண்டுகளுக்கு மேலாக ஆயிரக்கணக்கானோரின் பொருளாதாரக் கனவுகளை நனவாக்கியுள்ளது. எங்கள் பணி எளிய, வெளிப்படையான கடன் தீர்வுகளை வழங்குவதாகும்.",
-      mission_title: "எங்கள் நோக்கம்", mission_desc: "ஒவ்வொரு இலங்கையருக்கும் நியாயமான நிதி அணுகல்.",
-      contact_title: "தொடர்பு", contact_address: "கொழும்பு 03, இலங்கை, டபிள்யூ.ஏ. டி சில்வா மாவத்தை, லெண்டீஸி பார்க்", contact_phone: "+94 112 345 678 / +94 77 123 4567", contact_email: "support@lendeasy.lk", contact_hours: "திங்-வெள்: 9:00AM - 5:30PM, சனி: 9:00AM - 1:00PM",
-      footer_company: "LendEasy Finance", footer_address: "இல. 123, டபிள்யூ.ஏ. டி சில்வா மாவத்தை, கொழும்பு 03, இலங்கை", footer_phone: "+94 112 345 678 | +94 77 123 4567", footer_follow: "எங்களை பின்தொடரவும்", footer_hours: "திங்-வெள்: 9AM-5:30PM | சனி: 9AM-1PM", footer_links: "விரைவு இணைப்புகள்", copyright_text: "© 2025 LendEasy Finance. அனைத்து உரிமைகளும் பாதுகாக்கப்பட்டவை.", developed_by: "DualSyntax IT ஆல் உருவாக்கப்பட்டது",
-      whatsapp_text: "WhatsApp இல் பேசுங்கள்", back_home: "முகப்புக்கு", contact_support: "உதவியை தொடர்பு கொள்ளுங்கள்", repayment_placeholder: "இந்த சேவை விரைவில் கிடைக்கும். தயவுசெய்து எங்கள் கிளையை தொடர்புகொள்ளவும் 0112 345 678.",
-      loan_apply_tab: "கடன் விண்ணப்பிக்க", loan_repay_tab: "கடன் செலுத்துதல்",
-      full_name_label: "முழு பெயர்", address_label: "முகவரி", nic_label: "தேசிய அடையாள அட்டை எண்", nic_front_label: "அட்டை முன்புறம்", nic_back_label: "அட்டை பின்புறம்", phone_label: "தொலைபேசி எண்", loan_amount_label: "கடன் தொகை (ரூ.)", guarantor_check_label: "பிணையாளர் உள்ளாரா?", guarantor_details_title: "📌 பிணையாளர் விவரங்கள்", guarantor_name_label: "பெயர்", guarantor_id_label: "அடையாள எண்", guarantor_photo_label: "அடையாள அட்டை புகைப்படம்", guarantor_phone_label: "தொலைபேசி எண்", submit_btn_text: "விண்ணப்பத்தை சமர்ப்பிக்கவும்", submitting: "சமர்ப்பிக்கிறது...", success_msg: "✅ உங்கள் கடன் விண்ணப்பம் வெற்றிகரமாக சமர்ப்பிக்கப்பட்டது!",
-      full_name_placeholder: "உதாரணம்: அமரசிங்க மஹேஷ்",
-      address_placeholder: "வீட்டு எண், தெரு, நகரம்",
-      nic_placeholder: "1995XXXXX  அல்லது XXXXXXXXXV",
-      phone_placeholder: "071 234 5678",
-      loan_amount_placeholder: "50000",
-      guarantor_name_placeholder: "பிணையாளரின் முழு பெயர்",
-      guarantor_id_placeholder: "தேசிய அடையாள அட்டை எண்",
-      guarantor_phone_placeholder: "071 234 5678",
-      repay_name_placeholder: "உதாரணம்: அமரசிங்க மஹேஷ்",
-      repay_nic_placeholder: "1995XXXXX  அல்லது XXXXXXXXXV",
-      repay_phone_placeholder: "071 234 5678",
-      repayment_form_title: "💰 கடன் செலுத்துதல் விவரங்கள்",
-      repay_name_label: "முழு பெயர்",
-      repay_nic_label: "தேசிய அடையாள அட்டை எண்",
-      repay_photo_label: "வங்கி ரசீது / ஸ்கிரீன்ஷாட்",
-      repay_phone_label: "தொலைபேசி எண்",
-      repay_submit_btn: "செலுத்துதலை உறுதிப்படுத்தவும்",
-      repay_success_msg: "✅ உங்கள் செலுத்துதல் வெற்றிகரமாக பதிவு செய்யப்பட்டது! நன்றி.",
-      repay_required_fields: "அனைத்து கட்டாய புலங்களையும் நிரப்பவும்",
-      repay_photo_required: "வங்கி ரசீது அல்லது ஸ்கிரீன்ஷாட் தேவை",
-      repay_submitting: "உறுதிப்படுத்துகிறது..."
-    },
-    en: {
-      nav_home: "Home", nav_services: "Services", nav_loan: "Loan", nav_about: "About", nav_contact: "Contact",
-      hero_title: "🏦 Smart Loans, Brighter Tomorrow",
-      company_description: "We're here to turn your dreams into reality. Reliable, fast, and transparent loan services. With over a decade of experience, we are committed to fulfilling your financial needs from personal loans to business financing.",
-      apply_now_btn: "Apply for Loan Now",
-      stat_years: "Years of Experience", stat_satisfaction: "Satisfaction Rate", stat_loans: "Loans Disbursed",
-      notice_interest_label: "Monthly Interest:",
-      notice_interest_value: "1.5% (18% p.a.)",
-      notice_late_label: "Late Fee:",
-      notice_late_value: "LKR 100/day",
-      notice_payment_label: "Payment Options:",
-      notice_payment_value: "Monthly / Weekly",
-      services_title: "Our Services", service1_title: "Personal Loans", service1_desc: "Low interest, fast approval for your personal needs.",
-      service2_title: "Business Loans", service2_desc: "Flexible installments to expand your business.", service3_title: "Instant Approval", service3_desc: "Digital application, response within 24 hours.",
-      about_title: "About Us", about_text: "LendEasy Finance has been a trusted financial service provider in Sri Lanka for over 15 years, fulfilling thousands of economic dreams. Our mission is to provide simple, transparent loan solutions.",
-      mission_title: "Our Mission", mission_desc: "Fair financial access for every Sri Lankan.",
-      contact_title: "Contact Us", contact_address: "Colombo 03, Sri Lanka, W.A.D Silva Mawatha, LendEasy Park", contact_phone: "+94 112 345 678 / +94 77 123 4567", contact_email: "support@lendeasy.lk", contact_hours: "Mon-Fri: 9:00AM - 5:30PM, Sat: 9:00AM - 1:00PM",
-      footer_company: "LendEasy Finance", footer_address: "No. 123, W.A.D Silva Mawatha, Colombo 03, Sri Lanka", footer_phone: "+94 112 345 678 | +94 77 123 4567", footer_follow: "Follow Us", footer_hours: "Mon-Fri: 9AM-5:30PM | Sat: 9AM-1PM", footer_links: "Quick Links", copyright_text: "© 2025 LendEasy Finance. All rights reserved.", developed_by: "Developed by DualSyntax IT",
-      whatsapp_text: "Chat on WhatsApp", back_home: "Back to Home", contact_support: "Contact Support", repayment_placeholder: "This service will be available soon. Please contact our branch at 0112 345 678.",
-      loan_apply_tab: "Apply for Loan", loan_repay_tab: "Repay Loan",
-      full_name_label: "Full Name", address_label: "Address", nic_label: "NIC Number", nic_front_label: "NIC Front", nic_back_label: "NIC Back", phone_label: "Phone Number", loan_amount_label: "Loan Amount (LKR)", guarantor_check_label: "Tick if you have a guarantor", guarantor_details_title: "📌 Guarantor Details", guarantor_name_label: "Name", guarantor_id_label: "ID Number", guarantor_photo_label: "ID Photo", guarantor_phone_label: "Phone Number", submit_btn_text: "Submit Application", submitting: "Submitting...", success_msg: "✅ Your loan application has been submitted successfully!",
-      full_name_placeholder: "e.g., Amarasinha Mahesh",
-      address_placeholder: "House No, Street, City",
-      nic_placeholder: "1995XXXXX or XXXXXXXXXV",
-      phone_placeholder: "071 234 5678",
-      loan_amount_placeholder: "50000",
-      guarantor_name_placeholder: "Guarantor's full name",
-      guarantor_id_placeholder: "National ID Number",
-      guarantor_phone_placeholder: "071 234 5678",
-      repay_name_placeholder: "e.g., Amarasinha Mahesh",
-      repay_nic_placeholder: "1995XXXXX or XXXXXXXXXV",
-      repay_phone_placeholder: "071 234 5678",
-      repayment_form_title: "💰 Loan Repayment Details",
-      repay_name_label: "Full Name",
-      repay_nic_label: "NIC Number",
-      repay_photo_label: "Bank Slip / Screenshot",
-      repay_phone_label: "Phone Number",
-      repay_submit_btn: "Confirm Payment",
-      repay_success_msg: "✅ Your repayment has been recorded successfully! Thank you.",
-      repay_required_fields: "Please fill all mandatory fields",
-      repay_photo_required: "Bank slip or screenshot is required",
-      repay_submitting: "Confirming..."
-    }
-  };
-  
-  let currentLang = "si";
-  function t(key) { return translations[currentLang][key] || translations.si[key] || key; }
+  import { initializeApp }    from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+  import { getFirestore, collection, addDoc, serverTimestamp }
+                              from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
-  // DOM elements
+  const firebaseConfig = {
+    apiKey: "AIzaSyDlNPMm6sEQlQ-UTsrFrKiGIwBIyyYjI-g",
+    authDomain: "loansale-site.firebaseapp.com",
+    projectId: "loansale-site",
+    storageBucket: "loansale-site.firebasestorage.app",
+    messagingSenderId: "35285094302",
+    appId: "1:35285094302:web:e5dae614a7017b6f0e508f"
+  };
+  const app = initializeApp(firebaseConfig);
+  const db  = getFirestore(app);
+  console.log("Firebase ready ✅");
+
+  // ── Image compressor ───────────────────────────────────────────
+  function compressImage(file, maxW = 800, maxH = 800, quality = 0.65) {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = ev => {
+        const img = new Image();
+        img.onload = () => {
+          let w = img.width, h = img.height;
+          if (w > maxW || h > maxH) {
+            const r = Math.min(maxW / w, maxH / h);
+            w = Math.round(w * r); h = Math.round(h * r);
+          }
+          const canvas = document.createElement('canvas');
+          canvas.width = w; canvas.height = h;
+          canvas.getContext('2d').drawImage(img, 0, 0, w, h);
+          resolve(canvas.toDataURL('image/jpeg', quality));
+        };
+        img.onerror = reject;
+        img.src = ev.target.result;
+      };
+      reader.onerror = reject;
+      reader.readAsDataURL(file);
+    });
+  }
+
+  // ── Translations ───────────────────────────────────────────────
+  const translations = {
+    si:{nav_home:"මුල් පිටුව",nav_services:"සේවා",nav_loan:"ණය",nav_about:"අපි ගැන",nav_contact:"සම්බන්ධ වන්න",hero_title:"🏦 Smart Loans, Brighter Tomorrow",company_description:"ඔබගේ සිහින සැබෑ කර ගැනීමට අපි මෙහි සිටිමු. විශ්වාසනීය, වේගවත් හා විනිවිද පෙනෙන ණය සේවාවන්.",apply_now_btn:"දැන් ණය අයදුම් කරන්න",stat_years:"වසරක පළපුරුද්ද",stat_satisfaction:"සේවා තෘප්තිය",stat_loans:"සාර්ථක ණය",notice_interest_label:"මාසික පොලිය:",notice_interest_value:"1.5% (18% වාර්ෂික)",notice_late_label:"ප්‍රමාද ගාස්තු:",notice_late_value:"දිනකට රු. 100/-",notice_payment_label:"ගෙවීම්:",notice_payment_value:"මාසික / සතිපතා",services_title:"අපගේ සේවාවන්",service1_title:"පුද්ගලික ණය",service1_desc:"ඔබගේ පෞද්ගලික අවශ්‍යතා සඳහා අඩු පොලිය.",service2_title:"ව්‍යාපාරික ණය",service2_desc:"ව්‍යාපාර පුළුල් කිරීමට නම්‍යශීලී වාරික.",service3_title:"ක්ෂණික අනුමැතිය",service3_desc:"ඩිජිටල් අයදුම්පත, 24 පැය ඇතුලත ප්‍රතිචාරය.",about_title:"අපි ගැන",about_text:"LendEasy Finance ශ්‍රී ලංකාවේ විශ්වාසනීය මූල්‍ය සේවා සපයන්නෙකු ලෙස වසර 15කට වැඩි කාලයක් ආර්ථික සිහින සැබෑ කර ඇත.",mission_title:"අපගේ ඉලක්කය",mission_desc:" සෑම ශ්‍රී ලාංකිකයෙකුටම සාධාරණ මූල්‍ය ප්‍රවේශය.",contact_title:"අමතන්න",contact_address:"කොළඹ 03, ශ්‍රී ලංකාව",contact_phone:"+94 112 345 678 / +94 77 123 4567",contact_hours:"සඳු-සෙන: 9:00AM - 5:30PM, සෙනසුරාදා: 9:00AM - 1:00PM",back_home:"මුල් පිටුවට",loan_apply_tab:"ණය අයදුම් කරන්න",loan_repay_tab:"ණය ගෙවීම",full_name_label:"සම්පූර්ණ නම",address_label:"ලිපිනය",nic_label:"NIC අංකය",nic_front_label:"NIC ඉදිරිපස",nic_back_label:"NIC පසුපස",phone_label:"දුරකතන අංකය",loan_amount_label:"ණය මුදල (රු.)",loan_max_hint:"උපරිම ණය: රු. 50,000/-",loan_max_error:"ණය මුදල රු. 50,000 ඉක්මවිය නොහැක",guarantor_check_label:"ඇප කරුවන් සිටීද",guarantor_details_title:"📌 ඇපකරු විස්තර",guarantor_name_label:"නම",guarantor_id_label:"ID අංකය",guarantor_photo_label:"ID ඡායාරූපය",guarantor_phone_label:"දුරකතන අංකය",submit_btn_text:"අයදුම්පත ඉදිරිපත් කරන්න",submitting:"ඡායාරූප සකස් කරමින්... රැඳී සිටින්න",success_msg:"✅ ඔබගේ ණය අයදුම්පත සාර්ථකව ලැබුණි!",repayment_form_title:"💰 ණය ගෙවීම් විස්තර",repay_name_label:"සම්පූර්ණ නම",repay_nic_label:"NIC අංකය",repay_photo_label:"බැංකු රිසිට්පත / ස්ක්‍රීන්ෂොට්",repay_phone_label:"දුරකතන අංකය",repay_submit_btn:"ගෙවීම තහවුරු කරන්න",repay_success_msg:"✅ ඔබගේ ගෙවීම සාර්ථකව ලැබුණි! ස්තුතියි.",repay_photo_required:"රිසිට්පත හෝ ස්ක්‍රීන්ෂොට් අවශ්‍යයි",repay_submitting:"ඡායාරූප සකස් කරමින්...",whatsapp_text:"WhatsApp මගින් කතා කරන්න"},
+    ta:{nav_home:"முகப்பு",nav_services:"சேவைகள்",nav_loan:"கடன்",nav_about:"எங்களை பற்றி",nav_contact:"தொடர்பு",hero_title:"🏦 ஸ்மார்ட் கடன்கள், பிரகாசமான எதிர்காலம்",company_description:"உங்கள் கனவுகளை நனவாக்க நாங்கள் இங்கு இருக்கிறோம். நம்பகமான கடன் சேவைகள்.",apply_now_btn:"இப்போது கடன் விண்ணப்பிக்கவும்",stat_years:"அனுபவ ஆண்டுகள்",stat_satisfaction:"வாடிக்கையாளர் திருப்தி",stat_loans:"வெற்றிகரமான கடன்கள்",notice_interest_label:"மாத வட்டி:",notice_interest_value:"1.5% (ஆண்டுக்கு 18%)",notice_late_label:"தாமதக் கட்டணம்:",notice_late_value:"ஒரு நாளைக்கு ரூ. 100/-",notice_payment_label:"செலுத்தும் முறை:",notice_payment_value:"மாதாந்திர / வாராந்திர",services_title:"எங்கள் சேவைகள்",service1_title:"தனிப்பட்ட கடன்",service1_desc:"குறைந்த வட்டி, விரைவான ஒப்புதல்.",service2_title:"வணிக கடன்",service2_desc:"நெகிழ்வான தவணைகள்.",service3_title:"உடனடி ஒப்புதல்",service3_desc:"24 மணி நேரத்தில் பதில்.",about_title:"எங்களை பற்றி",about_text:"LendEasy Finance இலங்கையின் நம்பகமான நிதிச் சேவையாளர்.",mission_title:"எங்கள் நோக்கம்",mission_desc:" ஒவ்வொரு இலங்கையருக்கும் நியாயமான நிதி அணுகல்.",contact_title:"தொடர்பு",contact_address:"கொழும்பு 03, இலங்கை",contact_phone:"+94 112 345 678",contact_hours:"திங்-வெள்: 9:00AM - 5:30PM",back_home:"முகப்புக்கு",loan_apply_tab:"கடன் விண்ணப்பிக்க",loan_repay_tab:"கடன் செலுத்துதல்",full_name_label:"முழு பெயர்",address_label:"முகவரி",nic_label:"தேசிய அடையாள அட்டை எண்",nic_front_label:"அட்டை முன்புறம்",nic_back_label:"அட்டை பின்புறம்",phone_label:"தொலைபேசி எண்",loan_amount_label:"கடன் தொகை (ரூ.)",loan_max_hint:"அதிகபட்சம்: ரூ. 50,000/-",loan_max_error:"கடன் தொகை ரூ. 50,000 மிகாமல் இருக்க வேண்டும்",guarantor_check_label:"பிணையாளர் உள்ளாரா?",guarantor_details_title:"📌 பிணையாளர் விவரங்கள்",guarantor_name_label:"பெயர்",guarantor_id_label:"அடையாள எண்",guarantor_photo_label:"அடையாள அட்டை புகைப்படம்",guarantor_phone_label:"தொலைபேசி எண்",submit_btn_text:"விண்ணப்பத்தை சமர்ப்பிக்கவும்",submitting:"படங்களை செயல்படுத்துகிறது...",success_msg:"✅ விண்ணப்பம் வெற்றிகரமாக சமர்ப்பிக்கப்பட்டது!",repayment_form_title:"💰 கடன் செலுத்துதல் விவரங்கள்",repay_name_label:"முழு பெயர்",repay_nic_label:"தேசிய அடையாள அட்டை எண்",repay_photo_label:"வங்கி ரசீது / ஸ்கிரீன்ஷாட்",repay_phone_label:"தொலைபேசி எண்",repay_submit_btn:"செலுத்துதலை உறுதிப்படுத்தவும்",repay_success_msg:"✅ செலுத்துதல் பதிவு செய்யப்பட்டது!",repay_photo_required:"ரசீது தேவை",repay_submitting:"படத்தை செயல்படுத்துகிறது...",whatsapp_text:"WhatsApp இல் பேசுங்கள்"},
+    en:{nav_home:"Home",nav_services:"Services",nav_loan:"Loan",nav_about:"About",nav_contact:"Contact",hero_title:"🏦 Smart Loans, Brighter Tomorrow",company_description:"We're here to turn your dreams into reality. Reliable, fast, and transparent loan services.",apply_now_btn:"Apply for Loan Now",stat_years:"Years of Experience",stat_satisfaction:"Satisfaction Rate",stat_loans:"Loans Disbursed",notice_interest_label:"Monthly Interest:",notice_interest_value:"1.5% (18% p.a.)",notice_late_label:"Late Fee:",notice_late_value:"LKR 100/day",notice_payment_label:"Payment Options:",notice_payment_value:"Monthly / Weekly",services_title:"Our Services",service1_title:"Personal Loans",service1_desc:"Low interest, fast approval.",service2_title:"Business Loans",service2_desc:"Flexible installments.",service3_title:"Instant Approval",service3_desc:"Response within 24 hours.",about_title:"About Us",about_text:"LendEasy Finance has been a trusted financial service provider in Sri Lanka for over 15 years.",mission_title:"Our Mission",mission_desc:" Fair financial access for every Sri Lankan.",contact_title:"Contact Us",contact_address:"Colombo 03, Sri Lanka",contact_phone:"+94 112 345 678 / +94 77 123 4567",contact_hours:"Mon-Fri: 9:00AM - 5:30PM, Sat: 9:00AM - 1:00PM",back_home:"Back to Home",loan_apply_tab:"Apply for Loan",loan_repay_tab:"Repay Loan",full_name_label:"Full Name",address_label:"Address",nic_label:"NIC Number",nic_front_label:"NIC Front",nic_back_label:"NIC Back",phone_label:"Phone Number",loan_amount_label:"Loan Amount (LKR)",loan_max_hint:"Maximum loan: LKR 50,000/-",loan_max_error:"Loan amount cannot exceed LKR 50,000",guarantor_check_label:"Tick if you have a guarantor",guarantor_details_title:"📌 Guarantor Details",guarantor_name_label:"Name",guarantor_id_label:"ID Number",guarantor_photo_label:"ID Photo",guarantor_phone_label:"Phone Number",submit_btn_text:"Submit Application",submitting:"Processing images... please wait",success_msg:"✅ Your loan application submitted successfully!",repayment_form_title:"💰 Loan Repayment Details",repay_name_label:"Full Name",repay_nic_label:"NIC Number",repay_photo_label:"Bank Slip / Screenshot",repay_phone_label:"Phone Number",repay_submit_btn:"Confirm Payment",repay_success_msg:"✅ Repayment recorded successfully! Thank you.",repay_photo_required:"Bank slip or screenshot required",repay_submitting:"Processing image...",whatsapp_text:"Chat on WhatsApp"}
+  };
+  let currentLang = "si";
+  function t(k) { return translations[currentLang][k] || translations.si[k] || k; }
+
+  // ── Navigation ─────────────────────────────────────────────────
   const homeView = document.getElementById('homeView');
   const loanView = document.getElementById('loanView');
   const navLinks = document.querySelectorAll('[data-nav]');
-  const logoBtn = document.getElementById('logoHomeBtn');
-  const backHomeBtn = document.getElementById('backToHomeFromLoan');
-  const frontPageLoanBtn = document.getElementById('frontPageLoanBtn');
 
-  function showHome() { homeView.style.display = 'block'; loanView.style.display = 'none'; window.scrollTo({ top: 0, behavior: 'smooth' }); updateActiveNav('home'); }
-  function showLoan() { homeView.style.display = 'none'; loanView.style.display = 'block'; updateActiveNav('loan'); }
-
-  function updateActiveNav(activeId) {
-    navLinks.forEach(link => {
-      const navVal = link.getAttribute('data-nav');
-      if (navVal === activeId) link.classList.add('active-nav');
-      else link.classList.remove('active-nav');
-    });
+  function showHome() {
+    homeView.style.display = 'block'; loanView.style.display = 'none';
+    window.scrollTo({ top: 0, behavior: 'smooth' }); updateActiveNav('home');
   }
-
-  // Scroll to section (for home sections)
-  function scrollToSection(sectionId) {
+  function showLoan() {
+    homeView.style.display = 'none'; loanView.style.display = 'block';
+    window.scrollTo({ top: 0, behavior: 'smooth' }); updateActiveNav('loan');
+  }
+  function updateActiveNav(id) {
+    navLinks.forEach(l => l.getAttribute('data-nav') === id ? l.classList.add('active-nav') : l.classList.remove('active-nav'));
+  }
+  function scrollToSection(id) {
     if (homeView.style.display !== 'block') showHome();
-    setTimeout(() => {
-      const el = document.getElementById(sectionId);
-      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }, 100);
+    setTimeout(() => { const el = document.getElementById(id); if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 100);
   }
 
   navLinks.forEach(link => {
-    link.addEventListener('click', (e) => {
+    link.addEventListener('click', e => {
       e.preventDefault();
-      const target = link.getAttribute('data-nav');
-      if (target === 'home') showHome();
-      else if (target === 'loan') showLoan();
-      else if (target === 'services') scrollToSection('services-section');
-      else if (target === 'about') scrollToSection('about-section');
-      else if (target === 'contact') scrollToSection('contact-section');
+      const tgt = link.getAttribute('data-nav');
+      if (tgt === 'home') showHome();
+      else if (tgt === 'loan') showLoan();
+      else if (tgt === 'services') scrollToSection('services-section');
+      else if (tgt === 'about') scrollToSection('about-section');
+      else if (tgt === 'contact') scrollToSection('contact-section');
       if (window.innerWidth <= 800) document.getElementById('navLinks')?.classList.remove('show');
     });
   });
-  logoBtn?.addEventListener('click', showHome);
-  backHomeBtn?.addEventListener('click', showHome);
-  frontPageLoanBtn?.addEventListener('click', showLoan);
+
+  document.getElementById('logoHomeBtn')?.addEventListener('click', showHome);
+  document.getElementById('backToHomeFromLoan')?.addEventListener('click', showHome);
+  document.getElementById('frontPageLoanBtn')?.addEventListener('click', showLoan);
   document.getElementById('hamburgerBtn')?.addEventListener('click', () => document.getElementById('navLinks')?.classList.toggle('show'));
 
-  // Language switcher
+  // ── Language ───────────────────────────────────────────────────
   function updateAllTexts() {
-    // Update all data-i18n text
     document.querySelectorAll('[data-i18n]').forEach(el => {
-      const key = el.getAttribute('data-i18n');
-      if (key && translations[currentLang][key]) el.innerText = t(key);
+      const k = el.getAttribute('data-i18n');
+      if (k && translations[currentLang][k]) el.innerText = t(k);
     });
-    // Update all data-i18n-placeholder attributes
-    document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
-      const key = el.getAttribute('data-i18n-placeholder');
-      if (key && translations[currentLang][key]) el.placeholder = t(key);
-    });
-    // Update loan tab texts (spans inside tab buttons)
-    document.querySelectorAll('.tab-btn span').forEach(span => {
-      const key = span.getAttribute('data-i18n');
-      if (key) span.innerText = t(key);
-    });
-    const repayMsg = document.getElementById('repaymentMessage');
-    if (repayMsg) repayMsg.innerText = t('repayment_placeholder');
   }
-  function setLanguage(lang) { currentLang = lang; updateAllTexts(); document.querySelectorAll('.lang-nav-btn').forEach(btn => { if(btn.getAttribute('data-lang') === lang) btn.classList.add('active'); else btn.classList.remove('active'); }); }
-  document.querySelectorAll('.lang-nav-btn').forEach(btn => btn.addEventListener('click', () => setLanguage(btn.getAttribute('data-lang'))));
-  setLanguage('si');
+  function setLanguage(lang) {
+    currentLang = lang; updateAllTexts();
+    document.querySelectorAll('.lang-nav-btn').forEach(b =>
+      b.getAttribute('data-lang') === lang ? b.classList.add('active') : b.classList.remove('active'));
+  }
+  document.querySelectorAll('.lang-nav-btn').forEach(b => b.addEventListener('click', () => setLanguage(b.getAttribute('data-lang'))));
 
-  // CountUp on stats
+  // ── Stats countup ──────────────────────────────────────────────
   let counted = false;
   function startCountup() {
     if (counted) return;
-    const statsGrid = document.getElementById('statsGrid');
-    if (!statsGrid) return;
-    const rect = statsGrid.getBoundingClientRect();
+    const grid = document.getElementById('statsGrid');
+    if (!grid) return;
+    const rect = grid.getBoundingClientRect();
     if (rect.top < window.innerHeight - 100) {
       counted = true;
       const targets = { yearsCount: 15, satisfactionCount: 98, loansCount: 1850 };
-      const elements = { yearsCount: document.getElementById('yearsCount'), satisfactionCount: document.getElementById('satisfactionCount'), loansCount: document.getElementById('loansCount') };
-      let startTime = null;
-      const duration = 1500;
+      const els = {
+        yearsCount: document.getElementById('yearsCount'),
+        satisfactionCount: document.getElementById('satisfactionCount'),
+        loansCount: document.getElementById('loansCount')
+      };
+      let st = null; const dur = 1500;
       function animate(now) {
-        if (!startTime) startTime = now;
-        const progress = Math.min(1, (now - startTime) / duration);
+        if (!st) st = now;
+        const p = Math.min(1, (now - st) / dur);
         for (let [id, target] of Object.entries(targets)) {
-          let val = Math.floor(progress * target);
-          if (elements[id]) elements[id].innerText = (id === 'satisfactionCount') ? val + '%' : val;
-          if (progress === 1 && elements[id]) elements[id].innerText = (id === 'satisfactionCount') ? target + '%' : target;
+          if (els[id]) els[id].innerText = (id === 'satisfactionCount') ? Math.floor(p * target) + '%' : Math.floor(p * target);
         }
-        if (progress < 1) requestAnimationFrame(animate);
+        if (p < 1) requestAnimationFrame(animate);
+        else { if (els.satisfactionCount) els.satisfactionCount.innerText = '98%'; if (els.yearsCount) els.yearsCount.innerText = '15'; if (els.loansCount) els.loansCount.innerText = '1850'; }
       }
       requestAnimationFrame(animate);
     }
   }
   window.addEventListener('scroll', startCountup);
-  window.addEventListener('load', () => { showHome(); startCountup(); });
 
-  // ==================== LOAN APPLICATION LOGIC (unchanged) ====================
-  const hasGuarantorCheck = document.getElementById('hasGuarantorCheck');
-  const guarantorSectionDiv = document.getElementById('guarantorSection');
-  hasGuarantorCheck?.addEventListener('change', () => guarantorSectionDiv.style.display = hasGuarantorCheck.checked ? 'block' : 'none');
-  function preview(inputId, previewId) {
+  // ── Photo preview helper ───────────────────────────────────────
+  function previewPhoto(inputId, previewId) {
     const inp = document.getElementById(inputId);
-    if(inp) inp.addEventListener('change', (e) => {
-      const container = document.getElementById(previewId);
-      if(container && e.target.files[0]) {
-        const reader = new FileReader();
-        reader.onload = ev => { const img = document.createElement('img'); img.src = ev.target.result; img.classList.add('preview-img'); container.innerHTML = ''; container.appendChild(img); };
-        reader.readAsDataURL(e.target.files[0]);
+    if (!inp) return;
+    inp.addEventListener('change', e => {
+      const c = document.getElementById(previewId);
+      if (c && e.target.files[0]) {
+        const r = new FileReader();
+        r.onload = ev => { c.innerHTML = `<img src="${ev.target.result}" class="preview-img">`; };
+        r.readAsDataURL(e.target.files[0]);
       }
     });
   }
-  preview('nicFrontPhoto','nicFrontPreview'); preview('nicBackPhoto','nicBackPreview'); preview('guarantorPhoto','guarantorPreview');
+  previewPhoto('nicFrontPhoto', 'nicFrontPreview');
+  previewPhoto('nicBackPhoto', 'nicBackPreview');
+  previewPhoto('guarantorPhoto', 'guarantorPreview');
+  previewPhoto('repayReceipt', 'repayReceiptPreview');
 
-  const loanForm = document.getElementById('loanAppForm');
-  loanForm?.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const feedbackDiv = document.getElementById('formFeedback');
-    feedbackDiv.innerHTML = `<div style="color:#0f5b8c;">⏳ ${t('submitting')}</div>`;
-    const submitBtnElem = document.getElementById('submitApplicationBtn');
-    if(submitBtnElem) submitBtnElem.disabled = true;
-    const fullName = document.getElementById('fullName').value.trim();
-    const address = document.getElementById('address').value.trim();
-    const nicNumber = document.getElementById('nicNumber').value.trim();
-    const applicantPhone = document.getElementById('applicantPhone').value.trim();
-    const loanAmount = document.getElementById('loanAmount').value.trim();
-    const nicFront = document.getElementById('nicFrontPhoto').files[0];
-    const nicBack = document.getElementById('nicBackPhoto').files[0];
-    const hasGuarantor = document.getElementById('hasGuarantorCheck').checked;
-    let guarantorData = null;
-    if(hasGuarantor) {
-      guarantorData = { name: document.getElementById('guarantorName').value.trim(), idNumber: document.getElementById('guarantorIdNumber').value.trim(), phone: document.getElementById('guarantorPhone').value.trim(), photo: document.getElementById('guarantorPhoto').files[0] };
-    }
-    let errors = [];
-    if(!fullName) errors.push(t('fullname_required') || 'Full name required');
-    if(!address) errors.push(t('address_required') || 'Address required');
-    if(!nicNumber) errors.push(t('nic_required'));
-    if(!applicantPhone) errors.push(t('applicant_phone_required'));
-    if(!loanAmount) errors.push(t('loan_amount_required'));
-    if(!nicFront) errors.push(t('nic_front_required'));
-    if(!nicBack) errors.push(t('nic_back_required'));
-    if(hasGuarantor) {
-      if(!guarantorData.name) errors.push(t('guarantor_name_required'));
-      if(!guarantorData.idNumber) errors.push(t('guarantor_id_required'));
-      if(!guarantorData.phone) errors.push(t('guarantor_phone_required'));
-      if(!guarantorData.photo) errors.push(t('guarantor_photo_required'));
-    }
-    if(errors.length) {
-      feedbackDiv.innerHTML = `<div class="error-text">⚠️ ${errors.join(', ')}</div>`;
-      if(submitBtnElem) submitBtnElem.disabled=false;
-      return;
-    }
-    try {
-      const docId = `app_${Date.now()}_${Math.random().toString(36).substr(2,6)}`;
-      const nicFrontRef = window.ref(window.storage, `loan_applications/${docId}/nic_front`); await window.uploadBytes(nicFrontRef, nicFront); const nicFrontURL = await window.getDownloadURL(nicFrontRef);
-      const nicBackRef = window.ref(window.storage, `loan_applications/${docId}/nic_back`); await window.uploadBytes(nicBackRef, nicBack); const nicBackURL = await window.getDownloadURL(nicBackRef);
-      let guarantorPhotoURL = null;
-      if(hasGuarantor && guarantorData.photo) { const gRef = window.ref(window.storage, `loan_applications/${docId}/guarantor_id`); await window.uploadBytes(gRef, guarantorData.photo); guarantorPhotoURL = await window.getDownloadURL(gRef); }
-      await window.addDoc(window.collection(window.db, "loan_applications"), { fullName, address, nicNumber, applicantPhone, loanAmount: parseFloat(loanAmount), nicFrontURL, nicBackURL, hasGuarantor, timestamp: window.serverTimestamp(), guarantor: hasGuarantor ? { name: guarantorData.name, idNumber: guarantorData.idNumber, phone: guarantorData.phone, idPhotoURL: guarantorPhotoURL } : null });
-      feedbackDiv.innerHTML = `<div class="success-message">${t('success_msg')}</div>`;
-      loanForm.reset(); guarantorSectionDiv.style.display = 'none'; document.getElementById('hasGuarantorCheck').checked = false; document.getElementById('nicFrontPreview').innerHTML = ''; document.getElementById('nicBackPreview').innerHTML = ''; document.getElementById('guarantorPreview').innerHTML = '';
-    } catch(err) {
-      console.error(err);
-      feedbackDiv.innerHTML = `<div class="error-text">⚠️ ${currentLang === 'si' ? 'සේවාදායක දෝෂයකි' : 'Server error'}</div>`;
-    } finally { if(submitBtnElem) submitBtnElem.disabled = false; }
+  document.getElementById('hasGuarantorCheck')?.addEventListener('change', function () {
+    document.getElementById('guarantorSection').style.display = this.checked ? 'block' : 'none';
   });
 
-  // ==================== REPAYMENT LOGIC ====================
-  const repaymentForm = document.getElementById('repaymentForm');
-  const repayReceiptInput = document.getElementById('repayReceipt');
-  const repayReceiptPreview = document.getElementById('repayReceiptPreview');
-  
-  // Preview for receipt
-  repayReceiptInput?.addEventListener('change', (e) => {
-    if(repayReceiptPreview && e.target.files[0]) {
-      const reader = new FileReader();
-      reader.onload = ev => {
-        const img = document.createElement('img');
-        img.src = ev.target.result;
-        img.classList.add('preview-img');
-        repayReceiptPreview.innerHTML = '';
-        repayReceiptPreview.appendChild(img);
-      };
-      reader.readAsDataURL(e.target.files[0]);
-    } else if(repayReceiptPreview) {
-      repayReceiptPreview.innerHTML = '';
-    }
-  });
+  function setProgress(barId, pct) {
+    const b = document.getElementById(barId); if (b) b.style.width = pct + '%';
+  }
 
-  repaymentForm?.addEventListener('submit', async (e) => {
+  // ── LOAN APPLICATION SUBMIT ────────────────────────────────────
+  // ✅ FIX: progressBox hidden in finally block — always hides whether success or error
+  document.getElementById('loanAppForm')?.addEventListener('submit', async e => {
     e.preventDefault();
-    const feedbackDiv = document.getElementById('repaymentFeedback');
-    feedbackDiv.innerHTML = `<div style="color:#0f5b8c;">⏳ ${t('repay_submitting')}</div>`;
-    const submitBtn = document.getElementById('submitRepaymentBtn');
-    if(submitBtn) submitBtn.disabled = true;
+    const feedbackDiv  = document.getElementById('formFeedback');
+    const submitBtn    = document.getElementById('submitApplicationBtn');
+    const progressBox  = document.getElementById('applyProgress');
+    const progressTxt  = document.getElementById('applyProgressText');
 
-    const fullName = document.getElementById('repayFullName').value.trim();
-    const nicNumber = document.getElementById('repayNic').value.trim();
-    const receiptFile = repayReceiptInput.files[0];
-    const phoneNumber = document.getElementById('repayPhone').value.trim();
-
-    let errors = [];
-    if(!fullName) errors.push(t('fullname_required') || 'Full name required');
-    if(!nicNumber) errors.push(t('nic_required'));
-    if(!receiptFile) errors.push(t('repay_photo_required'));
-    if(!phoneNumber) errors.push(t('applicant_phone_required'));
-
-    if(errors.length) {
-      feedbackDiv.innerHTML = `<div class="error-text">⚠️ ${errors.join(', ')}</div>`;
-      if(submitBtn) submitBtn.disabled = false;
-      return;
+    const fullName      = document.getElementById('fullName').value.trim();
+    const address       = document.getElementById('address').value.trim();
+    const nicNumber     = document.getElementById('nicNumber').value.trim();
+    const applicantPhone= document.getElementById('applicantPhone').value.trim();
+    const loanAmount    = document.getElementById('loanAmount').value.trim();
+    const nicFront      = document.getElementById('nicFrontPhoto').files[0];
+    const nicBack       = document.getElementById('nicBackPhoto').files[0];
+    const hasGuarantor  = document.getElementById('hasGuarantorCheck').checked;
+    let gName = '', gId = '', gPhone = '', gPhoto = null;
+    if (hasGuarantor) {
+      gName  = document.getElementById('guarantorName').value.trim();
+      gId    = document.getElementById('guarantorIdNumber').value.trim();
+      gPhone = document.getElementById('guarantorPhone').value.trim();
+      gPhoto = document.getElementById('guarantorPhoto').files[0];
     }
+
+    const errors = [];
+    if (!fullName) errors.push('Name required');
+    if (!address) errors.push('Address required');
+    if (!nicNumber) errors.push('NIC required');
+    if (!applicantPhone) errors.push('Phone required');
+    if (!loanAmount) errors.push('Loan amount required');
+    // ✅ FIX: enforce max 50,000 in JS validation too
+    if (loanAmount && parseFloat(loanAmount) > 50000) errors.push(t('loan_max_error'));
+    if (!nicFront) errors.push('NIC front photo required');
+    if (!nicBack) errors.push('NIC back photo required');
+    if (hasGuarantor) {
+      if (!gName) errors.push('Guarantor name required');
+      if (!gId) errors.push('Guarantor ID required');
+      if (!gPhone) errors.push('Guarantor phone required');
+      if (!gPhoto) errors.push('Guarantor photo required');
+    }
+    if (errors.length) { feedbackDiv.innerHTML = `<div class="error-text">⚠️ ${errors.join(' | ')}</div>`; return; }
+
+    submitBtn.disabled = true;
+    submitBtn.innerHTML = `<i class="fas fa-spinner fa-spin"></i> ${t('submitting')}`;
+    progressBox.style.display = 'block';
+    setProgress('applyProgressBar', 0);
+    feedbackDiv.innerHTML = '';
 
     try {
-      const docId = `repay_${Date.now()}_${Math.random().toString(36).substr(2,6)}`;
-      const receiptRef = window.ref(window.storage, `loan_repayments/${docId}/receipt`);
-      await window.uploadBytes(receiptRef, receiptFile);
-      const receiptURL = await window.getDownloadURL(receiptRef);
+      progressTxt.textContent = 'Compressing NIC front...'; setProgress('applyProgressBar', 15);
+      const nicFrontB64 = await compressImage(nicFront);
 
-      await window.addDoc(window.collection(window.db, "loan_repayments"), {
-        fullName,
-        nicNumber,
-        phoneNumber,
-        receiptURL,
-        timestamp: window.serverTimestamp()
+      progressTxt.textContent = 'Compressing NIC back...'; setProgress('applyProgressBar', 35);
+      const nicBackB64 = await compressImage(nicBack);
+
+      let guarantorPhotoB64 = null;
+      if (hasGuarantor && gPhoto) {
+        progressTxt.textContent = 'Compressing guarantor photo...'; setProgress('applyProgressBar', 55);
+        guarantorPhotoB64 = await compressImage(gPhoto);
+      }
+
+      progressTxt.textContent = 'Saving to Firestore...'; setProgress('applyProgressBar', 80);
+      await addDoc(collection(db, 'loan_applications'), {
+        fullName, address, nicNumber, applicantPhone,
+        loanAmount: parseFloat(loanAmount),
+        nicFrontImg: nicFrontB64,
+        nicBackImg: nicBackB64,
+        hasGuarantor,
+        status: 'pending',
+        timestamp: serverTimestamp(),
+        guarantor: hasGuarantor ? { name: gName, idNumber: gId, phone: gPhone, idPhotoImg: guarantorPhotoB64 } : null
       });
 
-      feedbackDiv.innerHTML = `<div class="success-message">${t('repay_success_msg')}</div>`;
-      repaymentForm.reset();
-      if(repayReceiptPreview) repayReceiptPreview.innerHTML = '';
-    } catch(err) {
-      console.error(err);
-      feedbackDiv.innerHTML = `<div class="error-text">⚠️ ${currentLang === 'si' ? 'සේවාදායක දෝෂයකි' : 'Server error'}</div>`;
+      setProgress('applyProgressBar', 100);
+      feedbackDiv.innerHTML = `<div class="success-message">${t('success_msg')}</div>`;
+      document.getElementById('loanAppForm').reset();
+      document.getElementById('guarantorSection').style.display = 'none';
+      document.getElementById('hasGuarantorCheck').checked = false;
+      ['nicFrontPreview', 'nicBackPreview', 'guarantorPreview'].forEach(id => { document.getElementById(id).innerHTML = ''; });
+    } catch (err) {
+      console.error('Firestore error:', err);
+      feedbackDiv.innerHTML = `<div class="error-text">⚠️ Error: ${err.message}</div>`;
     } finally {
-      if(submitBtn) submitBtn.disabled = false;
+      // ✅ FIX: always hide progress box — was missing from finally before
+      progressBox.style.display = 'none';
+      submitBtn.disabled = false;
+      submitBtn.innerHTML = `<span data-i18n="submit_btn_text">${t('submit_btn_text')}</span>`;
     }
   });
 
-  // Tab switching inside loan view
-  const tabBtns = document.querySelectorAll('.tab-btn');
+  // ── REPAYMENT SUBMIT ───────────────────────────────────────────
+  // ✅ FIX: same finally-block fix applied here
+  document.getElementById('repaymentForm')?.addEventListener('submit', async e => {
+    e.preventDefault();
+    const feedbackDiv = document.getElementById('repaymentFeedback');
+    const submitBtn   = document.getElementById('submitRepaymentBtn');
+    const progressBox = document.getElementById('repayProgress');
+    const progressTxt = document.getElementById('repayProgressText');
+
+    const fullName    = document.getElementById('repayFullName').value.trim();
+    const nicNumber   = document.getElementById('repayNic').value.trim();
+    const receiptFile = document.getElementById('repayReceipt').files[0];
+    const phoneNumber = document.getElementById('repayPhone').value.trim();
+
+    const errors = [];
+    if (!fullName) errors.push('Name required');
+    if (!nicNumber) errors.push('NIC required');
+    if (!receiptFile) errors.push(t('repay_photo_required'));
+    if (!phoneNumber) errors.push('Phone required');
+    if (errors.length) { feedbackDiv.innerHTML = `<div class="error-text">⚠️ ${errors.join(' | ')}</div>`; return; }
+
+    submitBtn.disabled = true;
+    submitBtn.innerHTML = `<i class="fas fa-spinner fa-spin"></i> ${t('repay_submitting')}`;
+    progressBox.style.display = 'block';
+    setProgress('repayProgressBar', 0);
+    feedbackDiv.innerHTML = '';
+
+    try {
+      progressTxt.textContent = 'Compressing receipt image...'; setProgress('repayProgressBar', 40);
+      const receiptB64 = await compressImage(receiptFile);
+
+      progressTxt.textContent = 'Saving to Firestore...'; setProgress('repayProgressBar', 80);
+      await addDoc(collection(db, 'loan_repayments'), {
+        fullName, nicNumber, phoneNumber,
+        receiptImg: receiptB64,
+        status: 'pending',
+        timestamp: serverTimestamp()
+      });
+
+      setProgress('repayProgressBar', 100);
+      feedbackDiv.innerHTML = `<div class="success-message">${t('repay_success_msg')}</div>`;
+      document.getElementById('repaymentForm').reset();
+      document.getElementById('repayReceiptPreview').innerHTML = '';
+    } catch (err) {
+      console.error('Firestore error:', err);
+      feedbackDiv.innerHTML = `<div class="error-text">⚠️ Error: ${err.message}</div>`;
+    } finally {
+      // ✅ FIX: always hide progress box
+      progressBox.style.display = 'none';
+      submitBtn.disabled = false;
+      submitBtn.innerHTML = `<span data-i18n="repay_submit_btn">${t('repay_submit_btn')}</span>`;
+    }
+  });
+
+  // ── Loan tabs ──────────────────────────────────────────────────
+  const tabBtns   = document.querySelectorAll('.tab-btn');
   const applyPanel = document.getElementById('applyLoanPanel');
   const repayPanel = document.getElementById('repayLoanPanel');
   function setLoanTab(tab) {
-    if (tab === 'apply') { applyPanel.style.display = 'block'; repayPanel.style.display = 'none'; }
-    else { applyPanel.style.display = 'none'; repayPanel.style.display = 'block'; }
-    tabBtns.forEach(btn => { if(btn.getAttribute('data-loan-tab') === tab) btn.classList.add('active-tab'); else btn.classList.remove('active-tab'); });
+    applyPanel.style.display = tab === 'apply' ? 'block' : 'none';
+    repayPanel.style.display = tab === 'repay' ? 'block' : 'none';
+    tabBtns.forEach(b => b.getAttribute('data-loan-tab') === tab ? b.classList.add('active-tab') : b.classList.remove('active-tab'));
   }
-  tabBtns.forEach(btn => btn.addEventListener('click', () => setLoanTab(btn.getAttribute('data-loan-tab'))));
+  tabBtns.forEach(b => b.addEventListener('click', () => setLoanTab(b.getAttribute('data-loan-tab'))));
+
+  // ── Init ───────────────────────────────────────────────────────
+  setLanguage('si');
   setLoanTab('apply');
-  document.getElementById('mockPayBtn')?.addEventListener('click', () => alert(t('contact_support') + " - 0112 345 678"));
-  updateAllTexts();
+  showHome();
+  startCountup();
 </script>
 </body>
 </html>
