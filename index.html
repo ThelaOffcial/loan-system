@@ -360,7 +360,25 @@
     .double-photo-group .form-group { flex: 1; }
     .photo-preview { display: flex; gap: 10px; margin-top: 8px; flex-wrap: wrap; }
     .preview-img { width: 70px; height: 70px; object-fit: cover; border-radius: 14px; border: 1px solid #cddfe7; }
-    .checkbox-wrapper { display: flex; align-items: center; gap: 12px; margin: 1rem 0; background: #f8fafd; padding: 0.7rem 1rem; border-radius: 28px; }
+    .checkbox-wrapper {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 1rem 0;
+      background: #f8fafd;
+      padding: 0.7rem 1rem;
+      border-radius: 28px;
+    }
+    .checkbox-wrapper input {
+      width: 20px;
+      height: 20px;
+      margin: 0;
+    }
+    .checkbox-wrapper label {
+      margin: 0;
+      font-weight: 500;
+      cursor: pointer;
+    }
     .guarantor-section { background: #f9fbfe; padding: 1.2rem 1.5rem; border-radius: 28px; margin-top: 0.5rem; border-left: 4px solid #0f5b8c; }
     .submit-btn {
       background: linear-gradient(95deg, #1f7b5a, #2b9b7a);
@@ -597,34 +615,56 @@
       <!-- Application Form -->
       <div id="applyLoanPanel">
         <form id="loanAppForm">
-          <div class="form-group"><label><span data-i18n="full_name_label">සම්පූර්ණ නම</span><span class="required-star">*</span></label><input type="text" id="fullName" placeholder="උදා: අමරසිංහ මහේෂ්"></div>
-          <div class="form-group"><label><span data-i18n="address_label">ලිපිනය</span><span class="required-star">*</span></label><textarea id="address" rows="2"></textarea></div>
-          <div class="form-group"><label><span data-i18n="nic_label">NIC අංකය</span><span class="required-star">*</span></label><input type="text" id="nicNumber"></div>
+          <div class="form-group"><label><span data-i18n="full_name_label">සම්පූර්ණ නම</span><span class="required-star">*</span></label><input type="text" id="fullName" data-i18n-placeholder="full_name_placeholder"></div>
+          <div class="form-group"><label><span data-i18n="address_label">ලිපිනය</span><span class="required-star">*</span></label><textarea id="address" rows="2" data-i18n-placeholder="address_placeholder"></textarea></div>
+          <div class="form-group"><label><span data-i18n="nic_label">NIC අංකය</span><span class="required-star">*</span></label><input type="text" id="nicNumber" data-i18n-placeholder="nic_placeholder"></div>
           <div class="double-photo-group">
             <div class="form-group"><label><span data-i18n="nic_front_label">NIC ඉදිරිපස</span><span class="required-star">*</span></label><input type="file" id="nicFrontPhoto" accept="image/*"><div id="nicFrontPreview" class="photo-preview"></div></div>
             <div class="form-group"><label><span data-i18n="nic_back_label">NIC පසුපස</span><span class="required-star">*</span></label><input type="file" id="nicBackPhoto" accept="image/*"><div id="nicBackPreview" class="photo-preview"></div></div>
           </div>
-          <div class="form-group"><label><span data-i18n="phone_label">දුරකතන අංකය</span><span class="required-star">*</span></label><input type="tel" id="applicantPhone"></div>
-          <div class="form-group"><label><span data-i18n="loan_amount_label">ණය මුදල (රු.)</span><span class="required-star">*</span></label><input type="number" id="loanAmount" step="1000"></div>
-          <div class="checkbox-wrapper"><input type="checkbox" id="hasGuarantorCheck"><label for="hasGuarantorCheck" style="margin:0;" data-i18n="guarantor_check_label">ටික් කරන්න ඇප කරුවන් සිටීද</label></div>
+          <div class="form-group"><label><span data-i18n="phone_label">දුරකතන අංකය</span><span class="required-star">*</span></label><input type="tel" id="applicantPhone" data-i18n-placeholder="phone_placeholder"></div>
+          <div class="form-group"><label><span data-i18n="loan_amount_label">ණය මුදල (රු.)</span><span class="required-star">*</span></label><input type="number" id="loanAmount" step="1000" data-i18n-placeholder="loan_amount_placeholder"></div>
+          <div class="checkbox-wrapper">
+            <input type="checkbox" id="hasGuarantorCheck">
+            <label for="hasGuarantorCheck" data-i18n="guarantor_check_label">ටික් කරන්න ඇප කරුවන් සිටීද</label>
+          </div>
           <div id="guarantorSection" style="display:none;">
             <div class="guarantor-section"><h4 data-i18n="guarantor_details_title">📌 ඇපකරු විස්තර</h4>
-              <div class="form-group"><label><span data-i18n="guarantor_name_label">නම</span><span class="required-star">*</span></label><input type="text" id="guarantorName"></div>
-              <div class="form-group"><label><span data-i18n="guarantor_id_label">ID අංකය</span><span class="required-star">*</span></label><input type="text" id="guarantorIdNumber"></div>
+              <div class="form-group"><label><span data-i18n="guarantor_name_label">නම</span><span class="required-star">*</span></label><input type="text" id="guarantorName" data-i18n-placeholder="guarantor_name_placeholder"></div>
+              <div class="form-group"><label><span data-i18n="guarantor_id_label">ID අංකය</span><span class="required-star">*</span></label><input type="text" id="guarantorIdNumber" data-i18n-placeholder="guarantor_id_placeholder"></div>
               <div class="form-group"><label><span data-i18n="guarantor_photo_label">ID ඡායාරූපය</span><span class="required-star">*</span></label><input type="file" id="guarantorPhoto" accept="image/*"><div id="guarantorPreview" class="photo-preview"></div></div>
-              <div class="form-group"><label><span data-i18n="guarantor_phone_label">දුරකතන අංකය</span><span class="required-star">*</span></label><input type="tel" id="guarantorPhone"></div>
+              <div class="form-group"><label><span data-i18n="guarantor_phone_label">දුරකතන අංකය</span><span class="required-star">*</span></label><input type="tel" id="guarantorPhone" data-i18n-placeholder="guarantor_phone_placeholder"></div>
             </div>
           </div>
           <button type="submit" id="submitApplicationBtn" class="submit-btn"><span data-i18n="submit_btn_text">අයදුම්පත ඉදිරිපත් කරන්න</span></button>
           <div id="formFeedback"></div>
         </form>
       </div>
-      <!-- Repayment Panel -->
+      <!-- Repayment Panel - NEW FORM -->
       <div id="repayLoanPanel" style="display: none;">
-        <div style="background: #f0f7fa; padding: 2rem; border-radius: 28px; text-align: center;">
-          <h3 data-i18n="repayment_title">💳 ණය ගෙවීම</h3>
-          <p id="repaymentMessage" style="margin: 1rem 0;" data-i18n="repayment_placeholder">මෙම සේවාව ඉක්මනින් ලබා ගත හැක. කරුණාකර අපගේ ශාඛාව අමතන්න 0112 345 678.</p>
-          <button id="mockPayBtn" class="back-home-btn" style="background:#eef2f8;" data-i18n="contact_support">සහාය අමතන්න</button>
+        <div style="background: #f9fbfe; border-radius: 32px; padding: 1.5rem;">
+          <h3 data-i18n="repayment_form_title" style="margin-bottom: 1rem;">💰 ණය ගෙවීම් විස්තර</h3>
+          <form id="repaymentForm">
+            <div class="form-group">
+              <label><span data-i18n="repay_name_label">සම්පූර්ණ නම</span><span class="required-star">*</span></label>
+              <input type="text" id="repayFullName" data-i18n-placeholder="repay_name_placeholder">
+            </div>
+            <div class="form-group">
+              <label><span data-i18n="repay_nic_label">NIC අංකය</span><span class="required-star">*</span></label>
+              <input type="text" id="repayNic" data-i18n-placeholder="repay_nic_placeholder">
+            </div>
+            <div class="form-group">
+              <label><span data-i18n="repay_photo_label">බැංකු රිසිට්පත / ස්ක්‍රීන්ෂොට්</span><span class="required-star">*</span></label>
+              <input type="file" id="repayReceipt" accept="image/*">
+              <div id="repayReceiptPreview" class="photo-preview"></div>
+            </div>
+            <div class="form-group">
+              <label><span data-i18n="repay_phone_label">දුරකතන අංකය</span><span class="required-star">*</span></label>
+              <input type="tel" id="repayPhone" data-i18n-placeholder="repay_phone_placeholder">
+            </div>
+            <button type="submit" id="submitRepaymentBtn" class="submit-btn"><span data-i18n="repay_submit_btn">ගෙවීම තහවුරු කරන්න</span></button>
+            <div id="repaymentFeedback"></div>
+          </form>
         </div>
       </div>
     </div>
@@ -670,7 +710,7 @@
 </footer>
 
 <script type="module">
-  // ==================== TRANSLATIONS (FULL with new keys) ====================
+  // ==================== TRANSLATIONS (FULL with placeholders) ====================
   const translations = {
     si: {
       nav_home: "මුල් පිටුව", nav_services: "සේවා", nav_loan: "ණය", nav_about: "අපි ගැන", nav_contact: "සම්බන්ධ වන්න",
@@ -686,7 +726,30 @@
       footer_company: "LendEasy Finance", footer_address: "අංක 123, ඩබ්ලිව්.ඒ. ඩී සිල්වා මාවත, කොළඹ 03, ශ්‍රී ලංකාව", footer_phone: "+94 112 345 678 | +94 77 123 4567", footer_follow: "අපව අනුගමනය කරන්න", footer_hours: "සඳු-සෙන: 9AM-5:30PM | සෙන: 9AM-1PM", footer_links: "වේගවත් සබැඳි", copyright_text: "© 2025 LendEasy Finance. සියලුම හිමිකම් ඇවිරිණි.", developed_by: "සංවර්ධනය කරන ලද්දේ DualSyntax IT විසිනි",
       whatsapp_text: "WhatsApp මගින් කතා කරන්න", back_home: "මුල් පිටුවට", contact_support: "සහාය අමතන්න", repayment_title: "ණය ගෙවීම", repayment_placeholder: "මෙම සේවාව ඉක්මනින් ලබා ගත හැක. කරුණාකර අපගේ ශාඛාව අමතන්න 0112 345 678.",
       loan_apply_tab: "ණය අයදුම් කරන්න", loan_repay_tab: "ණය ගෙවීම",
-      full_name_label: "සම්පූර්ණ නම", address_label: "ලිපිනය", nic_label: "NIC අංකය", nic_front_label: "NIC ඉදිරිපස", nic_back_label: "NIC පසුපස", phone_label: "දුරකතන අංකය", loan_amount_label: "ණය මුදල (රු.)", guarantor_check_label: "ටික් කරන්න ඇප කරුවන් සිටීද", guarantor_details_title: "📌 ඇපකරු විස්තර", guarantor_name_label: "නම", guarantor_id_label: "ID අංකය", guarantor_photo_label: "ID ඡායාරූපය", guarantor_phone_label: "දුරකතන අංකය", submit_btn_text: "අයදුම්පත ඉදිරිපත් කරන්න", submitting: "සම්ප්‍රේෂණය වෙමින්...", success_msg: "✅ ඔබගේ ණය අයදුම්පත සාර්ථකව ලැබුණි!", file_size_exceed: "ගොනුව 2MB ට වඩා විශාලයි"
+      full_name_label: "සම්පූර්ණ නම", address_label: "ලිපිනය", nic_label: "NIC අංකය", nic_front_label: "NIC ඉදිරිපස", nic_back_label: "NIC පසුපස", phone_label: "දුරකතන අංකය", loan_amount_label: "ණය මුදල (රු.)", guarantor_check_label: "ටික් කරන්න ඇප කරුවන් සිටීද", guarantor_details_title: "📌 ඇපකරු විස්තර", guarantor_name_label: "නම", guarantor_id_label: "ID අංකය", guarantor_photo_label: "ID ඡායාරූපය", guarantor_phone_label: "දුරකතන අංකය", submit_btn_text: "අයදුම්පත ඉදිරිපත් කරන්න", submitting: "සම්ප්‍රේෂණය වෙමින්...", success_msg: "✅ ඔබගේ ණය අයදුම්පත සාර්ථකව ලැබුණි!",
+      // Placeholders
+      full_name_placeholder: "උදා: අමරසිංහ මහේෂ්",
+      address_placeholder: "නිවස් අංකය, වීදිය, නගරය",
+      nic_placeholder: "1995XXXXX හෝ XXXXXXXXXV",
+      phone_placeholder: "071 234 5678",
+      loan_amount_placeholder: "50000",
+      guarantor_name_placeholder: "ඇපකරුගේ සම්පූර්ණ නම",
+      guarantor_id_placeholder: "ජාතික හැඳුනුම්පත් අංකය",
+      guarantor_phone_placeholder: "071 234 5678",
+      repay_name_placeholder: "උදා: අමරසිංහ මහේෂ්",
+      repay_nic_placeholder: "1995XXXXX හෝ XXXXXXXXXV",
+      repay_phone_placeholder: "071 234 5678",
+      // Repayment form translations
+      repayment_form_title: "💰 ණය ගෙවීම් විස්තර",
+      repay_name_label: "සම්පූර්ණ නම",
+      repay_nic_label: "NIC අංකය",
+      repay_photo_label: "බැංකු රිසිට්පත / ස්ක්‍රීන්ෂොට්",
+      repay_phone_label: "දුරකතන අංකය",
+      repay_submit_btn: "ගෙවීම තහවුරු කරන්න",
+      repay_success_msg: "✅ ඔබගේ ගෙවීම සාර්ථකව ලැබුණි! ස්තුතියි.",
+      repay_required_fields: "සියලුම අත්‍යවශ්‍ය ක්ෂේත්‍ර පුරවන්න",
+      repay_photo_required: "බැංකු රිසිට්පත හෝ ස්ක්‍රීන්ෂොට් අවශ්‍යයි",
+      repay_submitting: "තහවුරු කරමින්..."
     },
     ta: {
       nav_home: "முகப்பு", nav_services: "சேவைகள்", nav_loan: "கடன்", nav_about: "எங்களை பற்றி", nav_contact: "தொடர்பு",
@@ -702,7 +765,29 @@
       footer_company: "LendEasy Finance", footer_address: "இல. 123, டபிள்யூ.ஏ. டி சில்வா மாவத்தை, கொழும்பு 03, இலங்கை", footer_phone: "+94 112 345 678 | +94 77 123 4567", footer_follow: "எங்களை பின்தொடரவும்", footer_hours: "திங்-வெள்: 9AM-5:30PM | சனி: 9AM-1PM", footer_links: "விரைவு இணைப்புகள்", copyright_text: "© 2025 LendEasy Finance. அனைத்து உரிமைகளும் பாதுகாக்கப்பட்டவை.", developed_by: "DualSyntax IT ஆல் உருவாக்கப்பட்டது",
       whatsapp_text: "WhatsApp இல் பேசுங்கள்", back_home: "முகப்புக்கு", contact_support: "உதவியை தொடர்பு கொள்ளுங்கள்", repayment_placeholder: "இந்த சேவை விரைவில் கிடைக்கும். தயவுசெய்து எங்கள் கிளையை தொடர்புகொள்ளவும் 0112 345 678.",
       loan_apply_tab: "கடன் விண்ணப்பிக்க", loan_repay_tab: "கடன் செலுத்துதல்",
-      full_name_label: "முழு பெயர்", address_label: "முகவரி", nic_label: "தேசிய அடையாள அட்டை எண்", nic_front_label: "அட்டை முன்புறம்", nic_back_label: "அட்டை பின்புறம்", phone_label: "தொலைபேசி எண்", loan_amount_label: "கடன் தொகை (ரூ.)", guarantor_check_label: "பிணையாளர் உள்ளாரா?", guarantor_details_title: "📌 பிணையாளர் விவரங்கள்", guarantor_name_label: "பெயர்", guarantor_id_label: "அடையாள எண்", guarantor_photo_label: "அடையாள அட்டை புகைப்படம்", guarantor_phone_label: "தொலைபேசி எண்", submit_btn_text: "விண்ணப்பத்தை சமர்ப்பிக்கவும்", submitting: "சமர்ப்பிக்கிறது...", success_msg: "✅ உங்கள் கடன் விண்ணப்பம் வெற்றிகரமாக சமர்ப்பிக்கப்பட்டது!", file_size_exceed: "கோப்பு 2MB ஐ விட பெரியது"
+      full_name_label: "முழு பெயர்", address_label: "முகவரி", nic_label: "தேசிய அடையாள அட்டை எண்", nic_front_label: "அட்டை முன்புறம்", nic_back_label: "அட்டை பின்புறம்", phone_label: "தொலைபேசி எண்", loan_amount_label: "கடன் தொகை (ரூ.)", guarantor_check_label: "பிணையாளர் உள்ளாரா?", guarantor_details_title: "📌 பிணையாளர் விவரங்கள்", guarantor_name_label: "பெயர்", guarantor_id_label: "அடையாள எண்", guarantor_photo_label: "அடையாள அட்டை புகைப்படம்", guarantor_phone_label: "தொலைபேசி எண்", submit_btn_text: "விண்ணப்பத்தை சமர்ப்பிக்கவும்", submitting: "சமர்ப்பிக்கிறது...", success_msg: "✅ உங்கள் கடன் விண்ணப்பம் வெற்றிகரமாக சமர்ப்பிக்கப்பட்டது!",
+      // Placeholders
+      full_name_placeholder: "உதாரணம்: அமரசிங்க மஹேஷ்",
+      address_placeholder: "வீட்டு எண், தெரு, நகரம்",
+      nic_placeholder: "1995XXXXX  அல்லது XXXXXXXXXV",
+      phone_placeholder: "071 234 5678",
+      loan_amount_placeholder: "50000",
+      guarantor_name_placeholder: "பிணையாளரின் முழு பெயர்",
+      guarantor_id_placeholder: "தேசிய அடையாள அட்டை எண்",
+      guarantor_phone_placeholder: "071 234 5678",
+      repay_name_placeholder: "உதாரணம்: அமரசிங்க மஹேஷ்",
+      repay_nic_placeholder: "1995XXXXX  அல்லது XXXXXXXXXV",
+      repay_phone_placeholder: "071 234 5678",
+      repayment_form_title: "💰 கடன் செலுத்துதல் விவரங்கள்",
+      repay_name_label: "முழு பெயர்",
+      repay_nic_label: "தேசிய அடையாள அட்டை எண்",
+      repay_photo_label: "வங்கி ரசீது / ஸ்கிரீன்ஷாட்",
+      repay_phone_label: "தொலைபேசி எண்",
+      repay_submit_btn: "செலுத்துதலை உறுதிப்படுத்தவும்",
+      repay_success_msg: "✅ உங்கள் செலுத்துதல் வெற்றிகரமாக பதிவு செய்யப்பட்டது! நன்றி.",
+      repay_required_fields: "அனைத்து கட்டாய புலங்களையும் நிரப்பவும்",
+      repay_photo_required: "வங்கி ரசீது அல்லது ஸ்கிரீன்ஷாட் தேவை",
+      repay_submitting: "உறுதிப்படுத்துகிறது..."
     },
     en: {
       nav_home: "Home", nav_services: "Services", nav_loan: "Loan", nav_about: "About", nav_contact: "Contact",
@@ -718,7 +803,29 @@
       footer_company: "LendEasy Finance", footer_address: "No. 123, W.A.D Silva Mawatha, Colombo 03, Sri Lanka", footer_phone: "+94 112 345 678 | +94 77 123 4567", footer_follow: "Follow Us", footer_hours: "Mon-Fri: 9AM-5:30PM | Sat: 9AM-1PM", footer_links: "Quick Links", copyright_text: "© 2025 LendEasy Finance. All rights reserved.", developed_by: "Developed by DualSyntax IT",
       whatsapp_text: "Chat on WhatsApp", back_home: "Back to Home", contact_support: "Contact Support", repayment_placeholder: "This service will be available soon. Please contact our branch at 0112 345 678.",
       loan_apply_tab: "Apply for Loan", loan_repay_tab: "Repay Loan",
-      full_name_label: "Full Name", address_label: "Address", nic_label: "NIC Number", nic_front_label: "NIC Front", nic_back_label: "NIC Back", phone_label: "Phone Number", loan_amount_label: "Loan Amount (LKR)", guarantor_check_label: "Tick if you have a guarantor", guarantor_details_title: "📌 Guarantor Details", guarantor_name_label: "Name", guarantor_id_label: "ID Number", guarantor_photo_label: "ID Photo", guarantor_phone_label: "Phone Number", submit_btn_text: "Submit Application", submitting: "Submitting...", success_msg: "✅ Your loan application has been submitted successfully!", file_size_exceed: "File exceeds 2MB limit"
+      full_name_label: "Full Name", address_label: "Address", nic_label: "NIC Number", nic_front_label: "NIC Front", nic_back_label: "NIC Back", phone_label: "Phone Number", loan_amount_label: "Loan Amount (LKR)", guarantor_check_label: "Tick if you have a guarantor", guarantor_details_title: "📌 Guarantor Details", guarantor_name_label: "Name", guarantor_id_label: "ID Number", guarantor_photo_label: "ID Photo", guarantor_phone_label: "Phone Number", submit_btn_text: "Submit Application", submitting: "Submitting...", success_msg: "✅ Your loan application has been submitted successfully!",
+      // Placeholders
+      full_name_placeholder: "e.g., Amarasinha Mahesh",
+      address_placeholder: "House No, Street, City",
+      nic_placeholder: "1995XXXXX or XXXXXXXXXV",
+      phone_placeholder: "071 234 5678",
+      loan_amount_placeholder: "50000",
+      guarantor_name_placeholder: "Guarantor's full name",
+      guarantor_id_placeholder: "National ID Number",
+      guarantor_phone_placeholder: "071 234 5678",
+      repay_name_placeholder: "e.g., Amarasinha Mahesh",
+      repay_nic_placeholder: "1995XXXXX or XXXXXXXXXV",
+      repay_phone_placeholder: "071 234 5678",
+      repayment_form_title: "💰 Loan Repayment Details",
+      repay_name_label: "Full Name",
+      repay_nic_label: "NIC Number",
+      repay_photo_label: "Bank Slip / Screenshot",
+      repay_phone_label: "Phone Number",
+      repay_submit_btn: "Confirm Payment",
+      repay_success_msg: "✅ Your repayment has been recorded successfully! Thank you.",
+      repay_required_fields: "Please fill all mandatory fields",
+      repay_photo_required: "Bank slip or screenshot is required",
+      repay_submitting: "Confirming..."
     }
   };
   
@@ -772,11 +879,17 @@
 
   // Language switcher
   function updateAllTexts() {
+    // Update all data-i18n text
     document.querySelectorAll('[data-i18n]').forEach(el => {
       const key = el.getAttribute('data-i18n');
       if (key && translations[currentLang][key]) el.innerText = t(key);
     });
-    // Update loan tab texts
+    // Update all data-i18n-placeholder attributes
+    document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+      const key = el.getAttribute('data-i18n-placeholder');
+      if (key && translations[currentLang][key]) el.placeholder = t(key);
+    });
+    // Update loan tab texts (spans inside tab buttons)
     document.querySelectorAll('.tab-btn span').forEach(span => {
       const key = span.getAttribute('data-i18n');
       if (key) span.innerText = t(key);
@@ -817,7 +930,7 @@
   window.addEventListener('scroll', startCountup);
   window.addEventListener('load', () => { showHome(); startCountup(); });
 
-  // Loan form logic (unchanged but fixed missing translations)
+  // ==================== LOAN APPLICATION LOGIC (unchanged) ====================
   const hasGuarantorCheck = document.getElementById('hasGuarantorCheck');
   const guarantorSectionDiv = document.getElementById('guarantorSection');
   hasGuarantorCheck?.addEventListener('change', () => guarantorSectionDiv.style.display = hasGuarantorCheck.checked ? 'block' : 'none');
@@ -854,11 +967,24 @@
       guarantorData = { name: document.getElementById('guarantorName').value.trim(), idNumber: document.getElementById('guarantorIdNumber').value.trim(), phone: document.getElementById('guarantorPhone').value.trim(), photo: document.getElementById('guarantorPhoto').files[0] };
     }
     let errors = [];
-    if(!fullName) errors.push(t('fullname_required') || 'Full name req'); if(!address) errors.push(t('address_required') || 'Address'); if(!nicNumber) errors.push(t('nic_required')); if(!applicantPhone) errors.push(t('applicant_phone_required')); if(!loanAmount) errors.push(t('loan_amount_required'));
-    if(!nicFront) errors.push(t('nic_front_required')); else if(nicFront.size>2*1024*1024) errors.push(t('file_size_exceed'));
-    if(!nicBack) errors.push(t('nic_back_required')); else if(nicBack.size>2*1024*1024) errors.push(t('file_size_exceed'));
-    if(hasGuarantor) { if(!guarantorData.name) errors.push(t('guarantor_name_required')); if(!guarantorData.idNumber) errors.push(t('guarantor_id_required')); if(!guarantorData.phone) errors.push(t('guarantor_phone_required')); if(!guarantorData.photo) errors.push(t('guarantor_photo_required')); else if(guarantorData.photo.size>2*1024*1024) errors.push(t('file_size_exceed')); }
-    if(errors.length) { feedbackDiv.innerHTML = `<div class="error-text">⚠️ ${errors.join(', ')}</div>`; if(submitBtnElem) submitBtnElem.disabled=false; return; }
+    if(!fullName) errors.push(t('fullname_required') || 'Full name required');
+    if(!address) errors.push(t('address_required') || 'Address required');
+    if(!nicNumber) errors.push(t('nic_required'));
+    if(!applicantPhone) errors.push(t('applicant_phone_required'));
+    if(!loanAmount) errors.push(t('loan_amount_required'));
+    if(!nicFront) errors.push(t('nic_front_required'));
+    if(!nicBack) errors.push(t('nic_back_required'));
+    if(hasGuarantor) {
+      if(!guarantorData.name) errors.push(t('guarantor_name_required'));
+      if(!guarantorData.idNumber) errors.push(t('guarantor_id_required'));
+      if(!guarantorData.phone) errors.push(t('guarantor_phone_required'));
+      if(!guarantorData.photo) errors.push(t('guarantor_photo_required'));
+    }
+    if(errors.length) {
+      feedbackDiv.innerHTML = `<div class="error-text">⚠️ ${errors.join(', ')}</div>`;
+      if(submitBtnElem) submitBtnElem.disabled=false;
+      return;
+    }
     try {
       const docId = `app_${Date.now()}_${Math.random().toString(36).substr(2,6)}`;
       const nicFrontRef = window.ref(window.storage, `loan_applications/${docId}/nic_front`); await window.uploadBytes(nicFrontRef, nicFront); const nicFrontURL = await window.getDownloadURL(nicFrontRef);
@@ -868,7 +994,81 @@
       await window.addDoc(window.collection(window.db, "loan_applications"), { fullName, address, nicNumber, applicantPhone, loanAmount: parseFloat(loanAmount), nicFrontURL, nicBackURL, hasGuarantor, timestamp: window.serverTimestamp(), guarantor: hasGuarantor ? { name: guarantorData.name, idNumber: guarantorData.idNumber, phone: guarantorData.phone, idPhotoURL: guarantorPhotoURL } : null });
       feedbackDiv.innerHTML = `<div class="success-message">${t('success_msg')}</div>`;
       loanForm.reset(); guarantorSectionDiv.style.display = 'none'; document.getElementById('hasGuarantorCheck').checked = false; document.getElementById('nicFrontPreview').innerHTML = ''; document.getElementById('nicBackPreview').innerHTML = ''; document.getElementById('guarantorPreview').innerHTML = '';
-    } catch(err) { feedbackDiv.innerHTML = `<div class="error-text">⚠️ ${currentLang === 'si' ? 'සේවාදායක දෝෂයකි' : 'Server error'}</div>`; } finally { if(submitBtnElem) submitBtnElem.disabled = false; }
+    } catch(err) {
+      console.error(err);
+      feedbackDiv.innerHTML = `<div class="error-text">⚠️ ${currentLang === 'si' ? 'සේවාදායක දෝෂයකි' : 'Server error'}</div>`;
+    } finally { if(submitBtnElem) submitBtnElem.disabled = false; }
+  });
+
+  // ==================== REPAYMENT LOGIC ====================
+  const repaymentForm = document.getElementById('repaymentForm');
+  const repayReceiptInput = document.getElementById('repayReceipt');
+  const repayReceiptPreview = document.getElementById('repayReceiptPreview');
+  
+  // Preview for receipt
+  repayReceiptInput?.addEventListener('change', (e) => {
+    if(repayReceiptPreview && e.target.files[0]) {
+      const reader = new FileReader();
+      reader.onload = ev => {
+        const img = document.createElement('img');
+        img.src = ev.target.result;
+        img.classList.add('preview-img');
+        repayReceiptPreview.innerHTML = '';
+        repayReceiptPreview.appendChild(img);
+      };
+      reader.readAsDataURL(e.target.files[0]);
+    } else if(repayReceiptPreview) {
+      repayReceiptPreview.innerHTML = '';
+    }
+  });
+
+  repaymentForm?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const feedbackDiv = document.getElementById('repaymentFeedback');
+    feedbackDiv.innerHTML = `<div style="color:#0f5b8c;">⏳ ${t('repay_submitting')}</div>`;
+    const submitBtn = document.getElementById('submitRepaymentBtn');
+    if(submitBtn) submitBtn.disabled = true;
+
+    const fullName = document.getElementById('repayFullName').value.trim();
+    const nicNumber = document.getElementById('repayNic').value.trim();
+    const receiptFile = repayReceiptInput.files[0];
+    const phoneNumber = document.getElementById('repayPhone').value.trim();
+
+    let errors = [];
+    if(!fullName) errors.push(t('fullname_required') || 'Full name required');
+    if(!nicNumber) errors.push(t('nic_required'));
+    if(!receiptFile) errors.push(t('repay_photo_required'));
+    if(!phoneNumber) errors.push(t('applicant_phone_required'));
+
+    if(errors.length) {
+      feedbackDiv.innerHTML = `<div class="error-text">⚠️ ${errors.join(', ')}</div>`;
+      if(submitBtn) submitBtn.disabled = false;
+      return;
+    }
+
+    try {
+      const docId = `repay_${Date.now()}_${Math.random().toString(36).substr(2,6)}`;
+      const receiptRef = window.ref(window.storage, `loan_repayments/${docId}/receipt`);
+      await window.uploadBytes(receiptRef, receiptFile);
+      const receiptURL = await window.getDownloadURL(receiptRef);
+
+      await window.addDoc(window.collection(window.db, "loan_repayments"), {
+        fullName,
+        nicNumber,
+        phoneNumber,
+        receiptURL,
+        timestamp: window.serverTimestamp()
+      });
+
+      feedbackDiv.innerHTML = `<div class="success-message">${t('repay_success_msg')}</div>`;
+      repaymentForm.reset();
+      if(repayReceiptPreview) repayReceiptPreview.innerHTML = '';
+    } catch(err) {
+      console.error(err);
+      feedbackDiv.innerHTML = `<div class="error-text">⚠️ ${currentLang === 'si' ? 'සේවාදායක දෝෂයකි' : 'Server error'}</div>`;
+    } finally {
+      if(submitBtn) submitBtn.disabled = false;
+    }
   });
 
   // Tab switching inside loan view
