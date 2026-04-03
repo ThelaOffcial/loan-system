@@ -4,173 +4,225 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>LendEasy Admin Panel</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <style>
-    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
-    body{font-family:'Inter',sans-serif;background:#f0f4f8;color:#1e2f3e;min-height:100vh}
-    #loginScreen{min-height:100vh;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#0a2a3b 0%,#0f5b8c 50%,#2b9b7a 100%)}
-    .login-box{background:white;border-radius:32px;padding:3rem 2.5rem;width:100%;max-width:420px;box-shadow:0 30px 60px rgba(0,0,0,.25);text-align:center}
-    .login-logo{font-size:2.5rem;font-weight:800;background:linear-gradient(120deg,#0f5b8c,#2b9b7a);-webkit-background-clip:text;background-clip:text;color:transparent;margin-bottom:.3rem}
-    .login-sub{color:#64748b;font-size:.95rem;margin-bottom:2rem}
-    .login-box input{width:100%;padding:.9rem 1.2rem;border:1.5px solid #e0eaf0;border-radius:20px;font-family:inherit;font-size:1rem;margin-bottom:1rem;transition:.2s}
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{font-family:'Segoe UI',system-ui,sans-serif;background:#f0f4f8;color:#1e2f3e;min-height:100vh}
+
+    /* ── LOGIN ── */
+    #loginScreen{display:flex;align-items:center;justify-content:center;min-height:100vh;background:linear-gradient(135deg,#0a1f2e,#0f5b8c)}
+    .login-box{background:white;border-radius:28px;padding:2.5rem 2rem;width:100%;max-width:380px;box-shadow:0 30px 60px rgba(0,0,0,.3);text-align:center}
+    .login-logo{font-size:2rem;font-weight:800;background:linear-gradient(120deg,#0f5b8c,#2b9b7a);-webkit-background-clip:text;background-clip:text;color:transparent;margin-bottom:.3rem}
+    .login-sub{color:#7a9ab0;font-size:.9rem;margin-bottom:2rem}
+    .login-box input{width:100%;padding:.85rem 1rem;border:1.5px solid #e0eaf0;border-radius:16px;font-size:1rem;font-family:inherit;margin-bottom:1rem;transition:.2s}
     .login-box input:focus{border-color:#0f5b8c;outline:none;box-shadow:0 0 0 3px rgba(15,91,140,.1)}
-    #loginBtn{width:100%;padding:1rem;background:linear-gradient(95deg,#0f5b8c,#2b9b7a);color:white;border:none;border-radius:20px;font-size:1.05rem;font-weight:700;cursor:pointer;transition:.2s;font-family:inherit}
-    #loginBtn:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(15,91,140,.3)}
-    #loginBtn:disabled{opacity:.7;transform:none;cursor:not-allowed}
-    #loginError{color:#dc2626;font-size:.85rem;margin-top:.8rem;min-height:1.2em}
-    #adminDashboard{display:none}
-    .admin-navbar{background:#0a2a3b;color:white;padding:1rem 2rem;display:flex;justify-content:space-between;align-items:center;box-shadow:0 4px 12px rgba(0,0,0,.2);position:sticky;top:0;z-index:100}
-    .admin-logo{font-size:1.5rem;font-weight:800;background:linear-gradient(120deg,#4db8f0,#2b9b7a);-webkit-background-clip:text;background-clip:text;color:transparent;display:flex;align-items:center;gap:8px}
-    .admin-nav-right{display:flex;align-items:center;gap:1rem;font-size:.9rem}
-    #adminUserEmail{color:#94c7e0}
-    #logoutBtn{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);color:white;padding:.5rem 1.2rem;border-radius:40px;cursor:pointer;font-family:inherit;font-size:.9rem;transition:.2s}
-    #logoutBtn:hover{background:rgba(255,255,255,.2)}
-    .dashboard-content{max-width:1400px;margin:2rem auto;padding:0 1.5rem}
-    .stats-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:1rem;margin-bottom:2rem}
-    .stat-card{background:white;border-radius:20px;padding:1.2rem;text-align:center;box-shadow:0 4px 12px rgba(0,0,0,.05);border-top:4px solid #e2e8f0;transition:.2s}
-    .stat-card:hover{transform:translateY(-3px);box-shadow:0 8px 20px rgba(0,0,0,.1)}
-    .stat-card.blue{border-top-color:#0f5b8c}.stat-card.orange{border-top-color:#f59e0b}.stat-card.green{border-top-color:#10b981}.stat-card.red{border-top-color:#ef4444}.stat-card.gray{border-top-color:#6b7280}.stat-card.teal{border-top-color:#2b9b7a}.stat-card.purple{border-top-color:#8b5cf6}
-    .stat-num{font-size:2.2rem;font-weight:800;color:#1e2f3e;line-height:1}
-    .stat-lbl{font-size:.75rem;font-weight:600;color:#64748b;margin-top:.3rem;text-transform:uppercase;letter-spacing:.5px}
-    .admin-tabs{display:flex;gap:.5rem;margin-bottom:1.5rem;background:white;padding:.4rem;border-radius:16px;box-shadow:0 2px 8px rgba(0,0,0,.05);width:fit-content}
-    .admin-tab-btn{padding:.7rem 1.5rem;background:none;border:none;border-radius:12px;font-family:inherit;font-size:1rem;font-weight:600;color:#64748b;cursor:pointer;transition:.2s;display:flex;align-items:center;gap:8px}
-    .admin-tab-btn.active-admin-tab{background:#0f5b8c;color:white;box-shadow:0 4px 10px rgba(15,91,140,.25)}
-    .toolbar{display:flex;gap:1rem;align-items:center;margin-bottom:1.5rem;flex-wrap:wrap}
-    .search-box{flex:1;min-width:220px;max-width:380px;padding:.75rem 1rem .75rem 2.8rem;border:1.5px solid #e0eaf0;border-radius:20px;font-family:inherit;font-size:.95rem;background:white url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%2364748b' viewBox='0 0 16 16'%3E%3Cpath d='M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z'/%3E%3C/svg%3E") no-repeat .9rem center;transition:.2s}
-    .search-box:focus{border-color:#0f5b8c;outline:none;box-shadow:0 0 0 3px rgba(15,91,140,.1)}
-    .filter-btns{display:flex;gap:.4rem;flex-wrap:wrap}
-    .filter-btn{padding:.5rem 1rem;border-radius:40px;border:1.5px solid #e0eaf0;background:white;font-family:inherit;font-size:.82rem;font-weight:600;cursor:pointer;color:#64748b;transition:.2s}
+    .login-btn{width:100%;background:linear-gradient(95deg,#0f5b8c,#2b9b7a);color:white;border:none;padding:1rem;border-radius:16px;font-size:1rem;font-weight:700;cursor:pointer;transition:.2s}
+    .login-btn:hover{transform:translateY(-2px);box-shadow:0 8px 16px rgba(15,91,140,.3)}
+    .login-error{color:#dc2626;font-size:.85rem;margin-top:.5rem;display:none}
+
+    /* ── LAYOUT ── */
+    #adminApp{display:none}
+    .sidebar{position:fixed;top:0;left:0;width:240px;height:100vh;background:linear-gradient(180deg,#0a1f2e,#0d3550);padding:1.5rem 1rem;display:flex;flex-direction:column;gap:.4rem;z-index:100;overflow-y:auto}
+    .sidebar-logo{font-size:1.3rem;font-weight:800;color:white;padding:.5rem .8rem 1.5rem;border-bottom:1px solid rgba(255,255,255,.1);margin-bottom:.5rem}
+    .sidebar-logo span{color:#2b9b7a}
+    .nav-item{display:flex;align-items:center;gap:10px;padding:.75rem 1rem;border-radius:14px;color:#a0bfd0;font-weight:600;cursor:pointer;transition:.2s;font-size:.95rem;border:none;background:none;width:100%;text-align:left}
+    .nav-item:hover{background:rgba(255,255,255,.08);color:white}
+    .nav-item.active{background:rgba(43,155,122,.2);color:#2b9b7a}
+    .nav-item i{width:18px;text-align:center}
+    .badge{background:#ef4444;color:white;font-size:.7rem;padding:.15rem .5rem;border-radius:40px;margin-left:auto;font-weight:700}
+    .badge.green{background:#16a34a}
+    .logout-btn{margin-top:auto;display:flex;align-items:center;gap:10px;padding:.75rem 1rem;border-radius:14px;color:#f87171;font-weight:600;cursor:pointer;background:none;border:none;width:100%;font-size:.95rem}
+    .logout-btn:hover{background:rgba(248,113,113,.1)}
+    .main-area{margin-left:240px;padding:2rem;min-height:100vh}
+    .topbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:2rem}
+    .page-title{font-size:1.6rem;font-weight:800;color:#0f2d42}
+    .topbar-right{display:flex;align-items:center;gap:1rem;color:#5a7a8e;font-size:.9rem}
+
+    /* ── STATS ── */
+    .stats-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:1.2rem;margin-bottom:2rem}
+    .stat-card{background:white;border-radius:20px;padding:1.4rem 1.2rem;box-shadow:0 4px 12px rgba(0,0,0,.05);display:flex;align-items:center;gap:1rem}
+    .stat-icon{width:50px;height:50px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0}
+    .stat-icon.blue{background:#e0f0ff;color:#0f5b8c}
+    .stat-icon.yellow{background:#fff8e0;color:#d97706}
+    .stat-icon.green{background:#dcfce7;color:#16a34a}
+    .stat-icon.red{background:#fee2e2;color:#dc2626}
+    .stat-icon.purple{background:#f3e8ff;color:#7c3aed}
+    .stat-value{font-size:1.8rem;font-weight:800;color:#0f2d42;line-height:1}
+    .stat-label{font-size:.75rem;color:#7a9ab0;font-weight:600;margin-top:.2rem}
+
+    /* ── FILTER / SEARCH ── */
+    .filter-bar{display:flex;gap:.7rem;margin-bottom:1.5rem;flex-wrap:wrap;align-items:center}
+    .filter-btn{background:white;border:1.5px solid #e0eaf0;padding:.5rem 1.2rem;border-radius:40px;font-weight:600;font-size:.85rem;cursor:pointer;transition:.2s;color:#4a627a}
     .filter-btn:hover{border-color:#0f5b8c;color:#0f5b8c}
-    .filter-btn.active-filter{background:#0f5b8c;color:white;border-color:#0f5b8c}
-    .filter-btn.f-pending.active-filter{background:#f59e0b;border-color:#f59e0b}
-    .filter-btn.f-approved.active-filter{background:#10b981;border-color:#10b981}
-    .filter-btn.f-rejected.active-filter{background:#ef4444;border-color:#ef4444}
-    .filter-btn.f-cancelled.active-filter{background:#6b7280;border-color:#6b7280}
-    .filter-btn.f-verified.active-filter{background:#10b981;border-color:#10b981}
-    .cards-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(480px,1fr));gap:1.5rem}
-    .app-card{background:white;border-radius:24px;padding:1.5rem;box-shadow:0 4px 16px rgba(0,0,0,.06);border-left:5px solid #e2e8f0;transition:.3s}
-    .app-card:hover{box-shadow:0 10px 30px rgba(0,0,0,.12);transform:translateY(-3px)}
-    .app-card.card-pending{border-left-color:#f59e0b}.app-card.card-approved{border-left-color:#10b981}.app-card.card-rejected{border-left-color:#ef4444}.app-card.card-cancelled{border-left-color:#6b7280}.app-card.card-verified{border-left-color:#10b981}
-    .card-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:1rem;gap:.5rem}
-    .card-title{display:flex;align-items:center;gap:.75rem}
-    .applicant-avatar{width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,#0f5b8c,#2b9b7a);color:white;display:flex;align-items:center;justify-content:center;font-size:1.2rem;font-weight:700;flex-shrink:0}
-    .repay-avatar{background:linear-gradient(135deg,#8b5cf6,#ec4899)}
-    .applicant-name{font-size:1.05rem;font-weight:700;color:#1e2f3e}
-    .applicant-sub{font-size:.78rem;color:#64748b;margin-top:2px}
-    .status-badge{padding:.35rem .9rem;border-radius:40px;font-size:.72rem;font-weight:700;letter-spacing:.5px;white-space:nowrap;flex-shrink:0}
-    .status-pending{background:#fef3c7;color:#92400e}.status-approved{background:#d1fae5;color:#065f46}.status-rejected{background:#fee2e2;color:#991b1b}.status-cancelled{background:#f3f4f6;color:#374151}.status-verified{background:#d1fae5;color:#065f46}
-    .info-grid{display:grid;grid-template-columns:1fr 1fr;gap:.6rem;margin-bottom:1rem}
-    .info-item{background:#f8fafc;padding:.5rem .75rem;border-radius:12px}
-    .info-key{display:block;font-size:.72rem;font-weight:600;color:#64748b;text-transform:uppercase;letter-spacing:.3px;margin-bottom:2px}
-    .info-val{font-size:.9rem;font-weight:600;color:#1e2f3e}
-    .amount-val{color:#0f5b8c;font-size:1rem}
-    .info-label{font-size:.8rem;font-weight:700;color:#0f5b8c;margin-bottom:.5rem;text-transform:uppercase}
-    .nic-photos{display:flex;gap:1rem;margin-bottom:1rem;flex-wrap:wrap}
-    .photo-item{text-align:center}
-    .photo-label{font-size:.72rem;font-weight:600;color:#64748b;margin-bottom:4px}
-    .thumb-img{width:90px;height:65px;object-fit:cover;border-radius:10px;border:2px solid #e0eaf0;cursor:pointer;transition:.2s}
-    .thumb-img:hover{border-color:#0f5b8c;transform:scale(1.05)}
-    .guarantor-info{background:#f0f9ff;border-radius:16px;padding:.8rem 1rem;margin-bottom:1rem;border-left:3px solid #0f5b8c}
-    .card-actions{display:flex;gap:.6rem;flex-wrap:wrap;padding-top:.75rem;border-top:1px solid #f1f5f9}
-    .action-btn{padding:.55rem 1.1rem;border-radius:40px;border:none;font-family:inherit;font-size:.85rem;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:6px;transition:.2s}
-    .action-btn:disabled{opacity:.6;cursor:not-allowed;transform:none!important}
-    .approve-btn{background:#d1fae5;color:#065f46}.approve-btn:hover{background:#10b981;color:white;transform:translateY(-1px)}
-    .reject-btn{background:#fee2e2;color:#991b1b}.reject-btn:hover{background:#ef4444;color:white;transform:translateY(-1px)}
-    .cancel-btn{background:#f3f4f6;color:#374151}.cancel-btn:hover{background:#6b7280;color:white;transform:translateY(-1px)}
-    .reset-btn{background:#ede9fe;color:#5b21b6}.reset-btn:hover{background:#8b5cf6;color:white;transform:translateY(-1px)}
-    .empty-state{text-align:center;padding:4rem 2rem;color:#64748b;grid-column:1 / -1}
-    .empty-state i{font-size:3rem;margin-bottom:1rem;opacity:.4;display:block}
-    .empty-state p{font-size:1.1rem;font-weight:600}
-    .section-header{font-size:1.3rem;font-weight:800;color:#1e2f3e;margin-bottom:1.2rem;display:flex;align-items:center;gap:.6rem}
-    #imageModal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.85);z-index:9999;align-items:center;justify-content:center;flex-direction:column;gap:1rem}
-    #modalTitle{color:white;font-size:1.1rem;font-weight:600}
-    #modalImg{max-width:90vw;max-height:80vh;border-radius:16px;object-fit:contain;box-shadow:0 20px 60px rgba(0,0,0,.5)}
-    #closeModal{position:absolute;top:1.5rem;right:1.5rem;background:rgba(255,255,255,.15);border:none;color:white;width:44px;height:44px;border-radius:50%;font-size:1.3rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.2s}
-    #closeModal:hover{background:rgba(255,255,255,.3)}
-    @media(max-width:768px){.cards-grid{grid-template-columns:1fr}.info-grid{grid-template-columns:1fr}.admin-navbar{flex-wrap:wrap;gap:.5rem}.stats-row{grid-template-columns:repeat(2,1fr)}}
+    .filter-btn.active{background:#0f5b8c;color:white;border-color:#0f5b8c}
+    .search-box{background:white;border:1.5px solid #e0eaf0;padding:.5rem 1rem;border-radius:40px;font-size:.9rem;font-family:inherit;outline:none;transition:.2s;margin-left:auto;width:220px}
+    .search-box:focus{border-color:#0f5b8c}
+
+    /* ── CARDS ── */
+    .cards-list{display:flex;flex-direction:column;gap:1rem}
+    .loan-entry{background:white;border-radius:20px;padding:1.4rem 1.5rem;box-shadow:0 4px 12px rgba(0,0,0,.04);border-left:4px solid #e0eaf0;transition:.2s}
+    .loan-entry.pending{border-left-color:#f59e0b}
+    .loan-entry.accepted{border-left-color:#16a34a}
+    .loan-entry.cancelled{border-left-color:#dc2626}
+    .loan-header{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:.5rem}
+    .loan-name{font-size:1.1rem;font-weight:700;color:#0f2d42}
+    .loan-meta{font-size:.82rem;color:#7a9ab0;margin-top:.2rem}
+    .status-badge{padding:.3rem .9rem;border-radius:40px;font-size:.78rem;font-weight:700;text-transform:uppercase}
+    .status-badge.pending{background:#fff8e0;color:#d97706}
+    .status-badge.accepted{background:#dcfce7;color:#16a34a}
+    .status-badge.cancelled{background:#fee2e2;color:#dc2626}
+    .loan-details{display:flex;flex-wrap:wrap;gap:1rem;margin:1rem 0;font-size:.88rem}
+    .loan-detail-item{display:flex;align-items:center;gap:6px;color:#4a627a}
+    .loan-detail-item i{color:#0f5b8c;width:14px}
+    .loan-photos{display:flex;gap:.7rem;margin:.8rem 0;flex-wrap:wrap}
+    .photo-thumb{width:80px;height:80px;object-fit:cover;border-radius:12px;border:2px solid #e0eaf0;cursor:pointer;transition:.2s}
+    .photo-thumb:hover{border-color:#0f5b8c;transform:scale(1.05)}
+    .loan-actions{display:flex;gap:.7rem;margin-top:1rem;flex-wrap:wrap}
+    .action-btn{padding:.55rem 1.3rem;border-radius:40px;font-size:.85rem;font-weight:700;cursor:pointer;border:none;transition:.2s;display:flex;align-items:center;gap:6px}
+    .btn-accept{background:#dcfce7;color:#16a34a}
+    .btn-accept:hover{background:#16a34a;color:white}
+    .btn-cancel{background:#fee2e2;color:#dc2626}
+    .btn-cancel:hover{background:#dc2626;color:white}
+    .btn-pending{background:#fff8e0;color:#d97706}
+    .btn-pending:hover{background:#d97706;color:white}
+    .btn-delete{background:#f3f4f6;color:#6b7280}
+    .btn-delete:hover{background:#6b7280;color:white}
+    .btn-blacklist{background:#fce7f3;color:#be185d}
+    .btn-blacklist:hover{background:#be185d;color:white}
+    .guarantor-block{background:#f8faff;border-radius:14px;padding:.9rem 1rem;margin-top:.8rem;border-left:3px solid #0f5b8c;font-size:.85rem}
+    .guarantor-block h5{color:#0f5b8c;margin-bottom:.5rem;font-size:.88rem}
+
+    /* ── FINANCIAL PANEL ── */
+    .financial-panel{background:linear-gradient(135deg,#f0f9ff,#ecfdf5);border-radius:16px;padding:1.1rem 1.2rem;margin-top:1rem;border:1px solid #bae6fd}
+    .financial-panel h5{font-size:.9rem;font-weight:700;color:#0f5b8c;margin-bottom:.8rem;display:flex;align-items:center;gap:6px}
+    .fin-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:.7rem}
+    .fin-item{background:white;border-radius:12px;padding:.7rem .9rem;text-align:center;box-shadow:0 2px 6px rgba(0,0,0,.04)}
+    .fin-label{font-size:.72rem;color:#7a9ab0;font-weight:600;margin-bottom:.2rem}
+    .fin-value{font-size:1rem;font-weight:800;color:#0f2d42}
+    .fin-value.red{color:#dc2626}
+    .fin-value.green{color:#16a34a}
+    .fin-value.orange{color:#d97706}
+    .fin-value.blue{color:#0f5b8c}
+    .outstanding-banner{background:linear-gradient(95deg,#dc2626,#991b1b);color:white;border-radius:12px;padding:.7rem 1rem;margin-top:.7rem;display:flex;justify-content:space-between;align-items:center;font-weight:700;font-size:.9rem}
+    .outstanding-banner.settled{background:linear-gradient(95deg,#16a34a,#15803d)}
+    .repay-history{margin-top:.6rem}
+    .repay-history h6{font-size:.78rem;font-weight:700;color:#4a627a;margin-bottom:.4rem}
+    .repay-row{display:flex;justify-content:space-between;align-items:center;padding:.35rem .5rem;border-radius:8px;font-size:.8rem;background:#f8faff;margin-bottom:.3rem}
+    .repay-row .rr-date{color:#7a9ab0}
+    .repay-row .rr-amount{font-weight:700;color:#16a34a}
+    .repay-row .rr-status{padding:.15rem .5rem;border-radius:20px;font-size:.7rem;font-weight:700}
+    .rr-status.pending{background:#fff8e0;color:#d97706}
+    .rr-status.accepted{background:#dcfce7;color:#16a34a}
+    .rr-status.cancelled{background:#fee2e2;color:#dc2626}
+    .late-warning{background:#fff8e0;border:1px solid #fbbf24;border-radius:10px;padding:.5rem .8rem;margin-top:.5rem;font-size:.78rem;color:#92400e;font-weight:600;display:flex;align-items:center;gap:6px}
+    .blacklisted-tag{background:#fce7f3;border:1px solid #f9a8d4;border-radius:10px;padding:.4rem .8rem;margin-top:.5rem;font-size:.78rem;color:#9d174d;font-weight:700;display:flex;align-items:center;gap:6px}
+
+    /* ── BLACKLIST TAB ── */
+    .blacklist-entry{background:white;border-radius:18px;padding:1.2rem 1.4rem;box-shadow:0 4px 12px rgba(0,0,0,.05);border-left:4px solid #be185d;display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:1rem}
+    .bl-info{flex:1;min-width:200px}
+    .bl-name{font-size:1rem;font-weight:700;color:#0f2d42;display:flex;align-items:center;gap:6px}
+    .bl-name i{color:#be185d}
+    .bl-meta{font-size:.82rem;color:#7a9ab0;margin-top:.3rem;display:flex;flex-wrap:wrap;gap:.5rem}
+    .bl-meta-item{display:flex;align-items:center;gap:5px;background:#fdf2f8;padding:.2rem .6rem;border-radius:20px;color:#9d174d}
+    .bl-reason{font-size:.8rem;background:#fce7f3;color:#9d174d;padding:.3rem .7rem;border-radius:10px;margin-top:.5rem;display:inline-block;font-weight:600}
+    .bl-auto-tag{font-size:.7rem;background:#fee2e2;color:#dc2626;padding:.2rem .5rem;border-radius:10px;margin-left:.4rem;font-weight:700}
+    .add-bl-form{background:white;border-radius:20px;padding:1.4rem;box-shadow:0 4px 12px rgba(0,0,0,.05);margin-bottom:1.5rem;border:2px dashed #f9a8d4}
+    .add-bl-form h4{color:#be185d;margin-bottom:1rem;font-size:1rem}
+    .bl-form-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:.8rem}
+    .bl-form-grid input,.bl-form-grid textarea{width:100%;padding:.7rem .9rem;border:1.5px solid #e0eaf0;border-radius:14px;font-family:inherit;font-size:.9rem;transition:.2s}
+    .bl-form-grid input:focus,.bl-form-grid textarea:focus{border-color:#be185d;outline:none}
+    .btn-add-bl{background:linear-gradient(95deg,#be185d,#9d174d);color:white;border:none;padding:.7rem 1.5rem;border-radius:40px;font-weight:700;font-size:.9rem;cursor:pointer;display:flex;align-items:center;gap:6px;margin-top:.8rem}
+    .btn-add-bl:hover{transform:translateY(-2px)}
+    .btn-unblacklist{background:#dcfce7;color:#16a34a;border:none;padding:.45rem 1rem;border-radius:40px;font-size:.8rem;font-weight:700;cursor:pointer;transition:.2s;display:flex;align-items:center;gap:5px;flex-shrink:0}
+    .btn-unblacklist:hover{background:#16a34a;color:white}
+
+    /* ── EMPTY / SPINNER ── */
+    .empty-state{text-align:center;padding:4rem 2rem;color:#7a9ab0}
+    .empty-state i{font-size:3rem;margin-bottom:1rem;display:block}
+    .spinner{display:flex;justify-content:center;padding:3rem}
+    .spinner i{font-size:2rem;color:#0f5b8c;animation:spin 1s linear infinite}
+    @keyframes spin{to{transform:rotate(360deg)}}
+
+    /* ── LIGHTBOX ── */
+    #lightbox{display:none;position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:9999;align-items:center;justify-content:center}
+    #lightbox.show{display:flex}
+    #lightbox img{max-width:90vw;max-height:90vh;border-radius:12px}
+    #lightboxClose{position:fixed;top:20px;right:24px;color:white;font-size:2rem;cursor:pointer;z-index:10000}
+
+    /* ── TOAST ── */
+    #toast{position:fixed;bottom:30px;right:30px;background:#1e2f3e;color:white;padding:.8rem 1.5rem;border-radius:14px;font-weight:600;font-size:.9rem;z-index:9998;transform:translateY(100px);opacity:0;transition:.3s}
+    #toast.show{transform:translateY(0);opacity:1}
+    #toast.success{background:#16a34a}
+    #toast.warning{background:#d97706}
+    #toast.error{background:#dc2626}
+
+    @media(max-width:768px){.sidebar{width:100%;height:auto;position:relative;flex-direction:row;flex-wrap:wrap;padding:1rem}.sidebar-logo{width:100%}.main-area{margin-left:0}.stats-row{grid-template-columns:1fr 1fr}.search-box{width:100%;margin-left:0}}
   </style>
 </head>
 <body>
 
+<!-- LOGIN -->
 <div id="loginScreen">
   <div class="login-box">
-    <div class="login-logo"><i class="fas fa-shield-alt" style="font-size:2rem;background:none;-webkit-background-clip:unset;color:#0f5b8c;"></i> LendEasy Admin</div>
-    <div class="login-sub">Admin Access Only — Secured with Firebase Auth</div>
-    <form id="loginForm">
-      <input type="email" id="adminEmail" placeholder="Admin Email" required autocomplete="email">
-      <input type="password" id="adminPass" placeholder="Password" required autocomplete="current-password">
-      <button type="submit" id="loginBtn"><i class="fas fa-sign-in-alt"></i> Login</button>
-      <div id="loginError"></div>
-    </form>
-    <div style="margin-top:1.5rem;font-size:.78rem;color:#94a3b8;">🔒 Only authorised admins can access this panel</div>
+    <div class="login-logo">🏦 LendEasy</div>
+    <div class="login-sub">Admin Panel — Secure Access</div>
+    <input type="text" id="loginUser" placeholder="Username" autocomplete="off">
+    <input type="password" id="loginPass" placeholder="Password">
+    <button class="login-btn" id="loginBtn"><i class="fas fa-sign-in-alt"></i> Sign In</button>
+    <div class="login-error" id="loginError">⚠️ Invalid username or password</div>
   </div>
 </div>
 
-<div id="adminDashboard">
-  <nav class="admin-navbar">
-    <div class="admin-logo"><i class="fas fa-chart-line" style="background:none;-webkit-background-clip:unset;color:#4db8f0;"></i> LendEasy Admin</div>
-    <div class="admin-nav-right">
-      <i class="fas fa-user-shield" style="color:#4db8f0;"></i>
-      <span id="adminUserEmail"></span>
-      <button id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Logout</button>
-    </div>
+<!-- ADMIN APP -->
+<div id="adminApp">
+  <nav class="sidebar">
+    <div class="sidebar-logo">Lend<span>Easy</span> Admin</div>
+    <button class="nav-item active" data-view="applications"><i class="fas fa-file-invoice-dollar"></i> Applications <span class="badge" id="pendingBadge" style="display:none">0</span></button>
+    <button class="nav-item" data-view="repayments"><i class="fas fa-money-bill-wave"></i> Repayments <span class="badge green" id="repayPendingBadge" style="display:none">0</span></button>
+    <button class="nav-item" data-view="blacklist"><i class="fas fa-ban"></i> Blacklist <span class="badge" id="blacklistBadge" style="display:none">0</span></button>
+    <button class="logout-btn" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Logout</button>
   </nav>
-  <div class="dashboard-content">
-    <div class="stats-row">
-      <div class="stat-card blue"><div class="stat-num" id="stat-total">0</div><div class="stat-lbl">Total Apps</div></div>
-      <div class="stat-card orange"><div class="stat-num" id="stat-pending">0</div><div class="stat-lbl">Pending</div></div>
-      <div class="stat-card green"><div class="stat-num" id="stat-approved">0</div><div class="stat-lbl">Approved</div></div>
-      <div class="stat-card red"><div class="stat-num" id="stat-rejected">0</div><div class="stat-lbl">Rejected</div></div>
-      <div class="stat-card gray"><div class="stat-num" id="stat-cancelled">0</div><div class="stat-lbl">Cancelled</div></div>
-      <div class="stat-card purple"><div class="stat-num" id="stat-repay-pending">0</div><div class="stat-lbl">Repay Pending</div></div>
-      <div class="stat-card teal"><div class="stat-num" id="stat-repay-verified">0</div><div class="stat-lbl">Repay Verified</div></div>
+
+  <div class="main-area">
+    <div class="topbar">
+      <div class="page-title" id="pageTitle">Loan Applications</div>
+      <div class="topbar-right"><i class="fas fa-circle" style="color:#2b9b7a;font-size:.6rem"></i> Live</div>
     </div>
-    <div class="admin-tabs">
-      <button class="admin-tab-btn active-admin-tab" data-tab="apps" onclick="setAdminTab('apps')"><i class="fas fa-file-invoice-dollar"></i> Loan Applications</button>
-      <button class="admin-tab-btn" data-tab="repay" onclick="setAdminTab('repay')"><i class="fas fa-receipt"></i> Repayments</button>
+
+    <!-- STATS ROW -->
+    <div class="stats-row" id="statsRow">
+      <div class="stat-card"><div class="stat-icon blue"><i class="fas fa-file-alt"></i></div><div><div class="stat-value" id="sTotalApps">0</div><div class="stat-label">Total Applications</div></div></div>
+      <div class="stat-card"><div class="stat-icon yellow"><i class="fas fa-clock"></i></div><div><div class="stat-value" id="sPending">0</div><div class="stat-label">Pending</div></div></div>
+      <div class="stat-card"><div class="stat-icon green"><i class="fas fa-check-circle"></i></div><div><div class="stat-value" id="sAccepted">0</div><div class="stat-label">Accepted</div></div></div>
+      <div class="stat-card"><div class="stat-icon red"><i class="fas fa-times-circle"></i></div><div><div class="stat-value" id="sCancelled">0</div><div class="stat-label">Cancelled</div></div></div>
+      <div class="stat-card"><div class="stat-icon purple"><i class="fas fa-ban"></i></div><div><div class="stat-value" id="sBlacklisted">0</div><div class="stat-label">Blacklisted</div></div></div>
     </div>
-    <div id="appsTab">
-      <div class="section-header"><i class="fas fa-file-invoice-dollar" style="color:#0f5b8c;"></i> Loan Applications</div>
-      <div class="toolbar">
-        <input type="text" id="searchApps" class="search-box" placeholder="Search by name, NIC or phone...">
-        <div class="filter-btns">
-          <button class="filter-btn active-filter" data-col="apps" data-filter="all" onclick="setAppFilter('all')">All</button>
-          <button class="filter-btn f-pending" data-col="apps" data-filter="pending" onclick="setAppFilter('pending')">⏳ Pending</button>
-          <button class="filter-btn f-approved" data-col="apps" data-filter="approved" onclick="setAppFilter('approved')">✅ Approved</button>
-          <button class="filter-btn f-rejected" data-col="apps" data-filter="rejected" onclick="setAppFilter('rejected')">❌ Rejected</button>
-          <button class="filter-btn f-cancelled" data-col="apps" data-filter="cancelled" onclick="setAppFilter('cancelled')">🚫 Cancelled</button>
-        </div>
-      </div>
-      <div class="cards-grid" id="applicationsContainer"><div class="empty-state"><i class="fas fa-spinner fa-spin"></i><p>Loading applications...</p></div></div>
+
+    <!-- FILTER BAR -->
+    <div class="filter-bar" id="filterBar">
+      <button class="filter-btn active" data-filter="all">All</button>
+      <button class="filter-btn" data-filter="pending">⏳ Pending</button>
+      <button class="filter-btn" data-filter="accepted">✅ Accepted</button>
+      <button class="filter-btn" data-filter="cancelled">❌ Cancelled</button>
+      <input class="search-box" id="searchBox" placeholder="🔍 Search name or NIC...">
     </div>
-    <div id="repayTab" style="display:none;">
-      <div class="section-header"><i class="fas fa-receipt" style="color:#2b9b7a;"></i> Repayment Submissions</div>
-      <div class="toolbar">
-        <input type="text" id="searchRepay" class="search-box" placeholder="Search by name, NIC or phone...">
-        <div class="filter-btns">
-          <button class="filter-btn active-filter" data-col="repay" data-filter="all" onclick="setRepayFilter('all')">All</button>
-          <button class="filter-btn f-pending" data-col="repay" data-filter="pending" onclick="setRepayFilter('pending')">⏳ Pending</button>
-          <button class="filter-btn f-verified" data-col="repay" data-filter="verified" onclick="setRepayFilter('verified')">✅ Verified</button>
-          <button class="filter-btn f-rejected" data-col="repay" data-filter="rejected" onclick="setRepayFilter('rejected')">❌ Rejected</button>
-        </div>
-      </div>
-      <div class="cards-grid" id="repaymentsContainer"><div class="empty-state"><i class="fas fa-spinner fa-spin"></i><p>Loading repayments...</p></div></div>
+
+    <!-- CARDS LIST -->
+    <div class="cards-list" id="cardsList">
+      <div class="spinner"><i class="fas fa-circle-notch"></i></div>
     </div>
   </div>
 </div>
 
-<div id="imageModal">
-  <button id="closeModal"><i class="fas fa-times"></i></button>
-  <div id="modalTitle"></div>
-  <img id="modalImg" src="" alt="Preview">
-</div>
+<!-- LIGHTBOX -->
+<div id="lightbox"><span id="lightboxClose">✕</span><img id="lightboxImg" src="" alt=""></div>
 
-<!-- ✅ Script is AFTER the HTML body so all elements exist when it runs -->
+<!-- TOAST -->
+<div id="toast"></div>
+
 <script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-  import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
-  import { getFirestore, collection, onSnapshot, doc, updateDoc, query, orderBy } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+  import { initializeApp }                                   from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+  import { getDatabase, ref, onValue, update, remove, push } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
 
   const firebaseConfig = {
     apiKey: "AIzaSyDlNPMm6sEQlQ-UTsrFrKiGIwBIyyYjI-g",
@@ -178,224 +230,516 @@
     projectId: "loansale-site",
     storageBucket: "loansale-site.firebasestorage.app",
     messagingSenderId: "35285094302",
-    appId: "1:35285094302:web:e5dae614a7017b6f0e508f"
+    appId: "1:35285094302:web:e5dae614a7017b6f0e508f",
+    databaseURL: "https://loansale-site-default-rtdb.firebaseio.com"
   };
-
   const app = initializeApp(firebaseConfig);
-  const auth = getAuth(app);
-  const db = getFirestore(app);
+  const db  = getDatabase(app);
 
-  // ✅ All DOM queries now work because the HTML is above this script
-  document.getElementById('loginForm').addEventListener('submit', async e => {
-    e.preventDefault();
-    const email = document.getElementById('adminEmail').value.trim();
-    const pass  = document.getElementById('adminPass').value;
-    const errDiv = document.getElementById('loginError');
-    const btn   = document.getElementById('loginBtn');
-    btn.disabled = true;
-    btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Logging in...';
-    try {
-      await signInWithEmailAndPassword(auth, email, pass);
-    } catch(err) {
-      errDiv.textContent = '⚠️ ' + (err.code === 'auth/invalid-credential' ? 'Wrong email or password.' : err.message);
-      btn.disabled = false;
-      btn.innerHTML = '<i class="fas fa-sign-in-alt"></i> Login';
-    }
-  });
+  const ADMIN_USER = "admin";
+  const ADMIN_PASS = "lendeasy2025";
 
-  document.getElementById('logoutBtn').addEventListener('click', () => signOut(auth));
+  // ── State ────────────────────────────────────────────────────────
+  let allApps      = [];
+  let allRepays    = [];
+  let allBlacklist = [];
+  let currentView  = 'applications';
+  let filterStatus = 'all';
+  let searchQuery  = '';
 
-  onAuthStateChanged(auth, user => {
-    if (user) {
-      document.getElementById('loginScreen').style.display = 'none';
-      document.getElementById('adminDashboard').style.display = 'block';
-      document.getElementById('adminUserEmail').textContent = user.email;
-      loadData();
+  // ── LOGIN ────────────────────────────────────────────────────────
+  document.getElementById('loginBtn').addEventListener('click', doLogin);
+  document.getElementById('loginPass').addEventListener('keydown', e => { if(e.key==='Enter') doLogin(); });
+  function doLogin() {
+    const u = document.getElementById('loginUser').value.trim();
+    const p = document.getElementById('loginPass').value.trim();
+    if(u===ADMIN_USER && p===ADMIN_PASS) {
+      document.getElementById('loginScreen').style.display='none';
+      document.getElementById('adminApp').style.display='block';
+      initListeners();
     } else {
-      document.getElementById('loginScreen').style.display = 'flex';
-      document.getElementById('adminDashboard').style.display = 'none';
+      document.getElementById('loginError').style.display='block';
     }
+  }
+  document.getElementById('logoutBtn').addEventListener('click', ()=>{
+    document.getElementById('adminApp').style.display='none';
+    document.getElementById('loginScreen').style.display='flex';
+    document.getElementById('loginUser').value='';
+    document.getElementById('loginPass').value='';
   });
 
-  let allApplications = [], allRepayments = [], currentAppFilter = 'all', currentRepayFilter = 'all';
-
-  function loadData() {
-    onSnapshot(query(collection(db, 'loan_applications'), orderBy('timestamp', 'desc')), snap => {
-      allApplications = snap.docs.map(d => ({ id: d.id, ...d.data() }));
-      renderApplications();
+  // ── FIREBASE LISTENERS ────────────────────────────────────────────
+  function initListeners() {
+    onValue(ref(db,'loan_applications'), snap => {
+      allApps = [];
+      snap.forEach(child => { allApps.push({ id:child.key, ...child.val() }); });
+      allApps.sort((a,b)=> (b.timestamp||0)-(a.timestamp||0));
       updateStats();
+      checkAutoBlacklist();
+      if(currentView==='applications') renderList();
     });
-    onSnapshot(query(collection(db, 'loan_repayments'), orderBy('timestamp', 'desc')), snap => {
-      allRepayments = snap.docs.map(d => ({ id: d.id, ...d.data() }));
-      renderRepayments();
-      updateStats();
+    onValue(ref(db,'loan_repayments'), snap => {
+      allRepays = [];
+      snap.forEach(child => { allRepays.push({ id:child.key, ...child.val() }); });
+      allRepays.sort((a,b)=> (b.timestamp||0)-(a.timestamp||0));
+      updateRepayBadge();
+      if(currentView==='repayments') renderList();
+      if(currentView==='applications') renderList(); // refresh balance calcs
+    });
+    onValue(ref(db,'blacklist'), snap => {
+      allBlacklist = [];
+      snap.forEach(child => { allBlacklist.push({ id:child.key, ...child.val() }); });
+      updateBlacklistBadge();
+      if(currentView==='blacklist') renderList();
     });
   }
 
+  // ── FINANCIAL CALCULATIONS ────────────────────────────────────────
+  /**
+   * Calculate all financial details for an accepted loan.
+   * Returns null if loan isn't accepted or has no approvedDate.
+   */
+  function calcFinancials(loan) {
+    if (loan.status !== 'accepted' || !loan.approvedDate) return null;
+
+    const MS_DAY   = 86400000;
+    const MS_MONTH = MS_DAY * 30;
+    const now      = Date.now();
+
+    const principal       = parseFloat(loan.loanAmount) || 0;
+    const daysSince       = Math.floor((now - loan.approvedDate) / MS_DAY);
+    const monthsElapsed   = Math.max(1, Math.ceil(daysSince / 30));
+
+    // Interest: 1.5% per month on principal (flat/simple)
+    const monthlyRate     = 0.015;
+    const yearlyRate      = 0.18;
+    const interestPerMonth= principal * monthlyRate;
+    const totalInterest   = principal * monthlyRate * monthsElapsed;
+    const totalDue        = principal + totalInterest;
+
+    // Confirmed repayments linked by NIC or loanId
+    const loanRepayments  = allRepays.filter(r =>
+      r.status === 'accepted' &&
+      (
+        (r.nicNumber && loan.nicNumber && r.nicNumber.toLowerCase() === loan.nicNumber.toLowerCase()) ||
+        r.loanId === loan.id
+      )
+    );
+    const totalPaid       = loanRepayments.reduce((s, r) => s + (parseFloat(r.amount) || 0), 0);
+    const outstanding     = Math.max(0, totalDue - totalPaid);
+
+    // Late fee: accrues after first 30 days (grace period), Rs100/day if outstanding
+    const graceDays       = 30;
+    const daysLate        = outstanding > 0 ? Math.max(0, daysSince - graceDays) : 0;
+    const lateFee         = daysLate * 100;
+    const totalOutstanding= outstanding + lateFee;
+    const isSettled       = totalOutstanding <= 0;
+
+    return {
+      principal, monthlyRate, yearlyRate,
+      interestPerMonth, totalInterest, totalDue,
+      monthsElapsed, daysSince, daysLate,
+      lateFee, totalPaid, outstanding,
+      totalOutstanding, isSettled,
+      loanRepayments
+    };
+  }
+
+  // ── AUTO BLACKLIST (3 months no payment) ─────────────────────────
+  async function checkAutoBlacklist() {
+    const MS_3MONTHS = 90 * 86400000;
+    for (const loan of allApps) {
+      if (loan.status !== 'accepted' || !loan.approvedDate) continue;
+      if ((Date.now() - loan.approvedDate) < MS_3MONTHS) continue;
+
+      const fin = calcFinancials(loan);
+      if (!fin || fin.totalPaid > 0) continue; // has made a payment, skip
+
+      // Already blacklisted?
+      const alreadyBL = allBlacklist.some(b =>
+        (b.nicNumber && loan.nicNumber && b.nicNumber.toLowerCase() === loan.nicNumber.toLowerCase()) ||
+        b.loanId === loan.id
+      );
+      if (alreadyBL) continue;
+
+      // Auto-add to blacklist
+      try {
+        await push(ref(db,'blacklist'), {
+          name:       loan.fullName     || '—',
+          nicNumber:  loan.nicNumber    || '—',
+          phone:      loan.applicantPhone || '—',
+          reason:     'No payment for 3+ months (auto-blacklisted)',
+          addedDate:  Date.now(),
+          loanId:     loan.id,
+          autoAdded:  true
+        });
+        showToast(`⚠️ ${loan.fullName} auto-blacklisted (90+ days, zero payment)`, 'warning');
+      } catch(e) { console.error('Auto-blacklist error:', e); }
+    }
+  }
+
+  // ── STATS ────────────────────────────────────────────────────────
   function updateStats() {
-    document.getElementById('stat-total').textContent = allApplications.length;
-    document.getElementById('stat-pending').textContent   = allApplications.filter(a => a.status === 'pending').length;
-    document.getElementById('stat-approved').textContent  = allApplications.filter(a => a.status === 'approved').length;
-    document.getElementById('stat-rejected').textContent  = allApplications.filter(a => a.status === 'rejected').length;
-    document.getElementById('stat-cancelled').textContent = allApplications.filter(a => a.status === 'cancelled').length;
-    document.getElementById('stat-repay-pending').textContent  = allRepayments.filter(r => r.status === 'pending').length;
-    document.getElementById('stat-repay-verified').textContent = allRepayments.filter(r => r.status === 'verified').length;
+    const pending   = allApps.filter(a=>a.status==='pending').length;
+    const accepted  = allApps.filter(a=>a.status==='accepted').length;
+    const cancelled = allApps.filter(a=>a.status==='cancelled').length;
+    document.getElementById('sTotalApps').textContent = allApps.length;
+    document.getElementById('sPending').textContent   = pending;
+    document.getElementById('sAccepted').textContent  = accepted;
+    document.getElementById('sCancelled').textContent = cancelled;
+    document.getElementById('sBlacklisted').textContent = allBlacklist.length;
+    const pb = document.getElementById('pendingBadge');
+    pb.textContent = pending; pb.style.display = pending > 0 ? 'inline' : 'none';
+  }
+  function updateRepayBadge() {
+    const pending = allRepays.filter(r=>r.status==='pending').length;
+    const rb = document.getElementById('repayPendingBadge');
+    rb.textContent = pending; rb.style.display = pending > 0 ? 'inline' : 'none';
+  }
+  function updateBlacklistBadge() {
+    const bb = document.getElementById('blacklistBadge');
+    bb.textContent = allBlacklist.length;
+    bb.style.display = allBlacklist.length > 0 ? 'inline' : 'none';
+    document.getElementById('sBlacklisted').textContent = allBlacklist.length;
   }
 
-  window.updateStatus = async (col, docId, newStatus) => {
-    const btn = document.getElementById(`btn-${newStatus}-${docId}`);
-    if (btn) { btn.disabled = true; btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i>'; }
-    try {
-      await updateDoc(doc(db, col, docId), { status: newStatus, updatedAt: new Date() });
-    } catch(err) {
-      alert('Error: ' + err.message);
-      if (btn) btn.disabled = false;
-    }
-  };
+  // ── NAV ──────────────────────────────────────────────────────────
+  document.querySelectorAll('[data-view]').forEach(btn => {
+    btn.addEventListener('click', ()=>{
+      document.querySelectorAll('[data-view]').forEach(b=> b.classList.remove('active'));
+      btn.classList.add('active');
+      currentView  = btn.getAttribute('data-view');
+      filterStatus = 'all';
+      searchQuery  = '';
+      const sb = document.getElementById('searchBox');
+      if(sb) sb.value = '';
+      document.querySelectorAll('.filter-btn').forEach(b=> b.classList.toggle('active', b.getAttribute('data-filter')==='all'));
 
-  window.openImageModal = (src, title) => {
-    document.getElementById('modalImg').src = src;
-    document.getElementById('modalTitle').textContent = title;
-    document.getElementById('imageModal').style.display = 'flex';
-  };
+      const isApps = currentView === 'applications';
+      const isReps = currentView === 'repayments';
+      const isBL   = currentView === 'blacklist';
 
-  document.getElementById('closeModal').addEventListener('click', () => {
-    document.getElementById('imageModal').style.display = 'none';
+      document.getElementById('statsRow').style.display  = isApps ? 'grid' : 'none';
+      document.getElementById('filterBar').style.display = isBL   ? 'none' : 'flex';
+      document.getElementById('pageTitle').textContent   =
+        isApps ? 'Loan Applications' :
+        isReps ? 'Loan Repayments'   : 'Blacklist Management';
+
+      renderList();
+    });
   });
-  document.getElementById('imageModal').addEventListener('click', e => {
-    if (e.target === document.getElementById('imageModal'))
-      document.getElementById('imageModal').style.display = 'none';
+
+  // ── FILTER / SEARCH ──────────────────────────────────────────────
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', ()=>{
+      document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+      btn.classList.add('active');
+      filterStatus = btn.getAttribute('data-filter');
+      renderList();
+    });
+  });
+  document.getElementById('searchBox').addEventListener('input', e=>{
+    searchQuery = e.target.value.toLowerCase();
+    renderList();
   });
 
-  function renderApplications() {
-    const search = (document.getElementById('searchApps')?.value || '').toLowerCase();
-    let data = allApplications;
-    if (currentAppFilter !== 'all') data = data.filter(a => a.status === currentAppFilter);
-    if (search) data = data.filter(a =>
-      (a.fullName || '').toLowerCase().includes(search) ||
-      (a.nicNumber || '').toLowerCase().includes(search) ||
-      (a.applicantPhone || '').toLowerCase().includes(search)
+  // ── RENDER LIST ──────────────────────────────────────────────────
+  function renderList() {
+    const list = document.getElementById('cardsList');
+    if (currentView === 'blacklist') { renderBlacklist(list); return; }
+
+    let data = currentView==='applications' ? allApps : allRepays;
+    if(currentView==='applications' && filterStatus!=='all') data = data.filter(a=>a.status===filterStatus);
+    if(searchQuery) data = data.filter(a=>
+      (a.fullName||'').toLowerCase().includes(searchQuery) ||
+      (a.nicNumber||'').toLowerCase().includes(searchQuery)
     );
-    const container = document.getElementById('applicationsContainer');
-    if (data.length === 0) {
-      container.innerHTML = '<div class="empty-state"><i class="fas fa-inbox"></i><p>No applications found</p></div>';
+    if(data.length===0){ list.innerHTML=`<div class="empty-state"><i class="fas fa-inbox"></i>No records found</div>`; return; }
+    list.innerHTML = data.map(item => currentView==='applications' ? appCard(item) : repayCard(item)).join('');
+  }
+
+  // ── APPLICATION CARD ─────────────────────────────────────────────
+  function appCard(a) {
+    const date      = a.timestamp   ? new Date(a.timestamp).toLocaleString()   : '—';
+    const fin       = calcFinancials(a);
+    const isInBL    = allBlacklist.some(b =>
+      (b.nicNumber && a.nicNumber && b.nicNumber.toLowerCase() === a.nicNumber.toLowerCase())
+    );
+
+    const guarantorHtml = a.hasGuarantor && a.guarantor ? `
+      <div class="guarantor-block">
+        <h5><i class="fas fa-user-shield"></i> Guarantor</h5>
+        <div style="display:flex;flex-wrap:wrap;gap:.8rem;font-size:.85rem;color:#4a627a">
+          <span><i class="fas fa-user" style="color:#0f5b8c"></i> ${a.guarantor.name||'—'}</span>
+          <span><i class="fas fa-id-card" style="color:#0f5b8c"></i> ${a.guarantor.idNumber||'—'}</span>
+          <span><i class="fas fa-phone" style="color:#0f5b8c"></i> ${a.guarantor.phone||'—'}</span>
+        </div>
+        ${a.guarantor.idPhotoImg ? `<img src="${a.guarantor.idPhotoImg}" class="photo-thumb" style="margin-top:.6rem" onclick="showImg('${a.guarantor.idPhotoImg}')">` : ''}
+      </div>` : '';
+
+    const financialHtml = fin ? buildFinancialHtml(fin) : (
+      a.status === 'accepted' ? `<div class="late-warning"><i class="fas fa-exclamation-triangle"></i> Approval date not recorded. Re-accept to set start date.</div>` : ''
+    );
+
+    const blacklistWarning = isInBL
+      ? `<div class="blacklisted-tag"><i class="fas fa-ban"></i> This applicant is on the BLACKLIST</div>` : '';
+
+    const approvedDateStr = a.approvedDate ? `<span style="margin-left:.5rem;font-size:.75rem;color:#16a34a"><i class="fas fa-calendar-check"></i> Approved: ${new Date(a.approvedDate).toLocaleDateString()}</span>` : '';
+
+    return `
+    <div class="loan-entry ${a.status||'pending'}" id="entry-${a.id}">
+      <div class="loan-header">
+        <div>
+          <div class="loan-name"><i class="fas fa-user"></i> ${a.fullName||'—'} ${isInBL ? '<span style="background:#fee2e2;color:#dc2626;font-size:.65rem;padding:.15rem .5rem;border-radius:20px;margin-left:.3rem;font-weight:700">BLACKLISTED</span>':''}</div>
+          <div class="loan-meta"><i class="fas fa-clock"></i> ${date}${approvedDateStr}</div>
+        </div>
+        <span class="status-badge ${a.status||'pending'}">${(a.status||'pending').toUpperCase()}</span>
+      </div>
+      <div class="loan-details">
+        <div class="loan-detail-item"><i class="fas fa-id-card"></i> ${a.nicNumber||'—'}</div>
+        <div class="loan-detail-item"><i class="fas fa-phone"></i> ${a.applicantPhone||'—'}</div>
+        <div class="loan-detail-item"><i class="fas fa-coins"></i> LKR ${(a.loanAmount||0).toLocaleString()}</div>
+        <div class="loan-detail-item"><i class="fas fa-map-marker-alt"></i> ${a.address||'—'}</div>
+      </div>
+      <div class="loan-photos">
+        ${a.nicFrontImg ? `<img src="${a.nicFrontImg}" class="photo-thumb" title="NIC Front" onclick="showImg('${a.nicFrontImg}')">` : ''}
+        ${a.nicBackImg  ? `<img src="${a.nicBackImg}"  class="photo-thumb" title="NIC Back"  onclick="showImg('${a.nicBackImg}')">` : ''}
+      </div>
+      ${guarantorHtml}
+      ${financialHtml}
+      ${blacklistWarning}
+      <div class="loan-actions">
+        <button class="action-btn btn-accept"    onclick="setStatus('${a.id}','accepted')"><i class="fas fa-check"></i> Accept</button>
+        <button class="action-btn btn-cancel"    onclick="setStatus('${a.id}','cancelled')"><i class="fas fa-times"></i> Cancel</button>
+        <button class="action-btn btn-pending"   onclick="setStatus('${a.id}','pending')"><i class="fas fa-clock"></i> Pending</button>
+        <button class="action-btn btn-blacklist" onclick="manualBlacklist('${a.id}')"><i class="fas fa-ban"></i> Blacklist</button>
+        <button class="action-btn btn-delete"    onclick="deleteEntry('${a.id}','loan_applications')"><i class="fas fa-trash"></i> Delete</button>
+      </div>
+    </div>`;
+  }
+
+  // ── FINANCIAL HTML ────────────────────────────────────────────────
+  function buildFinancialHtml(fin) {
+    const fmt = v => 'LKR ' + Math.round(v).toLocaleString();
+    const repayRows = fin.loanRepayments.length > 0 ? `
+      <div class="repay-history">
+        <h6><i class="fas fa-history"></i> Confirmed Payments</h6>
+        ${fin.loanRepayments.map(r=>`
+          <div class="repay-row">
+            <span class="rr-date">${r.timestamp ? new Date(r.timestamp).toLocaleDateString() : '—'}</span>
+            <span class="rr-amount">${fmt(r.amount||0)}</span>
+            <span class="rr-status accepted">✓ confirmed</span>
+          </div>`).join('')}
+      </div>` : '';
+
+    const lateHtml = fin.daysLate > 0 ? `
+      <div class="late-warning">
+        <i class="fas fa-exclamation-triangle"></i>
+        ${fin.daysLate} days overdue — Late fee: ${fmt(fin.lateFee)} (Rs 100/day)
+      </div>` : '';
+
+    const outstandingClass = fin.isSettled ? 'settled' : '';
+    const outstandingLabel = fin.isSettled
+      ? '<i class="fas fa-check-circle"></i> LOAN SETTLED — No Outstanding Balance'
+      : `<span>Total Outstanding</span><span>${fmt(fin.totalOutstanding)}</span>`;
+
+    return `
+      <div class="financial-panel">
+        <h5><i class="fas fa-calculator"></i> Financial Summary (${fin.monthsElapsed} month${fin.monthsElapsed!==1?'s':''} elapsed / ${fin.daysSince} days)</h5>
+        <div class="fin-grid">
+          <div class="fin-item">
+            <div class="fin-label">Principal</div>
+            <div class="fin-value blue">${fmt(fin.principal)}</div>
+          </div>
+          <div class="fin-item">
+            <div class="fin-label">Monthly Interest (1.5%)</div>
+            <div class="fin-value">${fmt(fin.interestPerMonth)}/mo</div>
+          </div>
+          <div class="fin-item">
+            <div class="fin-label">Total Interest Accrued</div>
+            <div class="fin-value orange">${fmt(fin.totalInterest)}</div>
+          </div>
+          <div class="fin-item">
+            <div class="fin-label">Total Due (P+I)</div>
+            <div class="fin-value">${fmt(fin.totalDue)}</div>
+          </div>
+          <div class="fin-item">
+            <div class="fin-label">Total Paid</div>
+            <div class="fin-value green">${fmt(fin.totalPaid)}</div>
+          </div>
+          <div class="fin-item">
+            <div class="fin-label">Late Fee (Rs100/day)</div>
+            <div class="fin-value ${fin.lateFee>0?'red':''}">${fin.lateFee>0 ? fmt(fin.lateFee) : 'None'}</div>
+          </div>
+        </div>
+        <div class="outstanding-banner ${outstandingClass}" style="margin-top:.7rem">
+          ${outstandingLabel}
+        </div>
+        ${lateHtml}
+        ${repayRows}
+      </div>`;
+  }
+
+  // ── REPAYMENT CARD ────────────────────────────────────────────────
+  function repayCard(r) {
+    const date = r.timestamp ? new Date(r.timestamp).toLocaleString() : '—';
+    return `
+    <div class="loan-entry ${r.status||'pending'}" id="entry-${r.id}">
+      <div class="loan-header">
+        <div>
+          <div class="loan-name"><i class="fas fa-user"></i> ${r.fullName||'—'}</div>
+          <div class="loan-meta"><i class="fas fa-clock"></i> ${date}</div>
+        </div>
+        <span class="status-badge ${r.status||'pending'}">${(r.status||'pending').toUpperCase()}</span>
+      </div>
+      <div class="loan-details">
+        <div class="loan-detail-item"><i class="fas fa-id-card"></i> ${r.nicNumber||'—'}</div>
+        <div class="loan-detail-item"><i class="fas fa-phone"></i> ${r.phoneNumber||'—'}</div>
+        <div class="loan-detail-item" style="font-size:1rem;font-weight:700;color:#16a34a"><i class="fas fa-coins"></i> LKR ${(r.amount||0).toLocaleString()}</div>
+      </div>
+      ${r.receiptImg ? `<div class="loan-photos"><img src="${r.receiptImg}" class="photo-thumb" title="Receipt" onclick="showImg('${r.receiptImg}')"></div>` : ''}
+      <div class="loan-actions">
+        <button class="action-btn btn-accept" onclick="setRepayStatus('${r.id}','accepted')"><i class="fas fa-check"></i> Confirm</button>
+        <button class="action-btn btn-cancel" onclick="setRepayStatus('${r.id}','cancelled')"><i class="fas fa-times"></i> Reject</button>
+        <button class="action-btn btn-delete" onclick="deleteEntry('${r.id}','loan_repayments')"><i class="fas fa-trash"></i> Delete</button>
+      </div>
+    </div>`;
+  }
+
+  // ── BLACKLIST VIEW ────────────────────────────────────────────────
+  function renderBlacklist(list) {
+    const filtered = searchQuery
+      ? allBlacklist.filter(b =>
+          (b.name||'').toLowerCase().includes(searchQuery) ||
+          (b.nicNumber||'').toLowerCase().includes(searchQuery) ||
+          (b.phone||'').toLowerCase().includes(searchQuery))
+      : allBlacklist;
+
+    const addForm = `
+      <div class="add-bl-form">
+        <h4><i class="fas fa-user-slash"></i> Manually Blacklist a Person</h4>
+        <div class="bl-form-grid">
+          <input type="text"  id="blName"   placeholder="Full Name *">
+          <input type="text"  id="blNic"    placeholder="NIC Number *">
+          <input type="text"  id="blPhone"  placeholder="Phone Number">
+          <input type="text"  id="blReason" placeholder="Reason (e.g. loan default)">
+        </div>
+        <button class="btn-add-bl" onclick="addToBlacklist()"><i class="fas fa-ban"></i> Add to Blacklist</button>
+      </div>
+      <div style="display:flex;gap:.7rem;margin-bottom:1rem;flex-wrap:wrap;align-items:center">
+        <span style="font-weight:700;color:#9d174d"><i class="fas fa-ban"></i> ${filtered.length} person${filtered.length!==1?'s':''} blacklisted</span>
+        <input class="search-box" style="margin-left:auto" placeholder="🔍 Search blacklist..." oninput="searchQuery=this.value.toLowerCase();renderList()">
+      </div>`;
+
+    if (filtered.length === 0) {
+      list.innerHTML = addForm + `<div class="empty-state"><i class="fas fa-shield-check"></i>No blacklisted persons found</div>`;
       return;
     }
-    container.innerHTML = data.map(app => {
-      const ts  = app.timestamp?.toDate ? app.timestamp.toDate().toLocaleString() : 'N/A';
-      const sc  = `status-${app.status || 'pending'}`;
-      const sl  = (app.status || 'pending').toUpperCase();
-      const amt = app.loanAmount ? `LKR ${Number(app.loanAmount).toLocaleString()}` : 'N/A';
-      const actions = (app.status === 'pending') ? `
-        <button id="btn-approved-${app.id}" class="action-btn approve-btn" onclick="updateStatus('loan_applications','${app.id}','approved')"><i class="fas fa-check"></i> Approve</button>
-        <button id="btn-rejected-${app.id}" class="action-btn reject-btn" onclick="updateStatus('loan_applications','${app.id}','rejected')"><i class="fas fa-times"></i> Reject</button>
-        <button id="btn-cancelled-${app.id}" class="action-btn cancel-btn" onclick="updateStatus('loan_applications','${app.id}','cancelled')"><i class="fas fa-ban"></i> Cancel</button>` : `
-        <button class="action-btn reset-btn" onclick="updateStatus('loan_applications','${app.id}','pending')"><i class="fas fa-undo"></i> Reset to Pending</button>`;
-      const gHTML = (app.hasGuarantor && app.guarantor) ? `
-        <div class="guarantor-info">
-          <div class="info-label"><i class="fas fa-user-shield"></i> Guarantor Details</div>
-          <div class="info-grid">
-            <div class="info-item"><span class="info-key">Name</span><span class="info-val">${app.guarantor.name || 'N/A'}</span></div>
-            <div class="info-item"><span class="info-key">ID</span><span class="info-val">${app.guarantor.idNumber || 'N/A'}</span></div>
-            <div class="info-item"><span class="info-key">Phone</span><span class="info-val">${app.guarantor.phone || 'N/A'}</span></div>
+
+    list.innerHTML = addForm + filtered.map(b => {
+      const date = b.addedDate ? new Date(b.addedDate).toLocaleDateString() : '—';
+      const autoTag = b.autoAdded ? `<span class="bl-auto-tag">AUTO</span>` : '';
+      return `
+      <div class="blacklist-entry" id="bl-${b.id}">
+        <div class="bl-info">
+          <div class="bl-name"><i class="fas fa-user-slash"></i> ${b.name||'—'} ${autoTag}</div>
+          <div class="bl-meta">
+            <span class="bl-meta-item"><i class="fas fa-id-card"></i> ${b.nicNumber||'—'}</span>
+            <span class="bl-meta-item"><i class="fas fa-phone"></i> ${b.phone||'—'}</span>
+            <span class="bl-meta-item"><i class="fas fa-calendar"></i> ${date}</span>
           </div>
-          ${app.guarantor.idPhotoImg ? `<div class="photo-item" style="margin-top:.5rem;"><div class="photo-label">Guarantor ID Photo</div><img src="${app.guarantor.idPhotoImg}" class="thumb-img" onclick="openImageModal('${app.guarantor.idPhotoImg}','Guarantor ID')" alt="Guarantor ID"></div>` : ''}
-        </div>` : '';
-      return `<div class="app-card card-${app.status || 'pending'}">
-        <div class="card-header">
-          <div class="card-title">
-            <div class="applicant-avatar">${(app.fullName || '?')[0].toUpperCase()}</div>
-            <div>
-              <div class="applicant-name">${app.fullName || 'Unknown'}</div>
-              <div class="applicant-sub">NIC: ${app.nicNumber || 'N/A'} &nbsp;|&nbsp; ${ts}</div>
-            </div>
-          </div>
-          <span class="status-badge ${sc}">${sl}</span>
+          <span class="bl-reason"><i class="fas fa-exclamation-circle"></i> ${b.reason||'Not specified'}</span>
         </div>
-        <div class="info-grid">
-          <div class="info-item"><span class="info-key"><i class="fas fa-map-marker-alt"></i> Address</span><span class="info-val">${app.address || 'N/A'}</span></div>
-          <div class="info-item"><span class="info-key"><i class="fas fa-phone"></i> Phone</span><span class="info-val">${app.applicantPhone || 'N/A'}</span></div>
-          <div class="info-item"><span class="info-key"><i class="fas fa-money-bill-wave"></i> Loan Amount</span><span class="info-val amount-val">${amt}</span></div>
-          <div class="info-item"><span class="info-key"><i class="fas fa-users"></i> Guarantor</span><span class="info-val">${app.hasGuarantor ? '✅ Yes' : '❌ No'}</span></div>
-        </div>
-        <div class="nic-photos">
-          ${app.nicFrontImg ? `<div class="photo-item"><div class="photo-label">NIC Front</div><img src="${app.nicFrontImg}" class="thumb-img" onclick="openImageModal('${app.nicFrontImg}','NIC Front')" alt="NIC Front"></div>` : ''}
-          ${app.nicBackImg  ? `<div class="photo-item"><div class="photo-label">NIC Back</div><img src="${app.nicBackImg}"  class="thumb-img" onclick="openImageModal('${app.nicBackImg}','NIC Back')"   alt="NIC Back"></div>`  : ''}
-        </div>
-        ${gHTML}
-        <div class="card-actions">${actions}</div>
+        <button class="btn-unblacklist" onclick="removeBlacklist('${b.id}','${(b.name||'').replace(/'/g,"\\'")}')">
+          <i class="fas fa-user-check"></i> Remove
+        </button>
       </div>`;
     }).join('');
   }
 
-  function renderRepayments() {
-    const search = (document.getElementById('searchRepay')?.value || '').toLowerCase();
-    let data = allRepayments;
-    if (currentRepayFilter !== 'all') data = data.filter(r => r.status === currentRepayFilter);
-    if (search) data = data.filter(r =>
-      (r.fullName || '').toLowerCase().includes(search) ||
-      (r.nicNumber || '').toLowerCase().includes(search) ||
-      (r.phoneNumber || '').toLowerCase().includes(search)
-    );
-    const container = document.getElementById('repaymentsContainer');
-    if (data.length === 0) {
-      container.innerHTML = '<div class="empty-state"><i class="fas fa-receipt"></i><p>No repayments found</p></div>';
-      return;
+  // ── ACTIONS ──────────────────────────────────────────────────────
+  window.setStatus = async (id, status) => {
+    const updates = { status };
+    if (status === 'accepted') {
+      const existing = allApps.find(a => a.id === id);
+      if (existing && !existing.approvedDate) {
+        updates.approvedDate = Date.now();
+      }
     }
-    container.innerHTML = data.map(rep => {
-      const ts = rep.timestamp?.toDate ? rep.timestamp.toDate().toLocaleString() : 'N/A';
-      const sc = rep.status === 'verified' ? 'status-approved' : rep.status === 'rejected' ? 'status-rejected' : 'status-pending';
-      const sl = (rep.status || 'pending').toUpperCase();
-      const actions = (rep.status === 'pending') ? `
-        <button id="btn-verified-${rep.id}" class="action-btn approve-btn" onclick="updateStatus('loan_repayments','${rep.id}','verified')"><i class="fas fa-check-double"></i> Verify</button>
-        <button id="btn-rejected-${rep.id}" class="action-btn reject-btn" onclick="updateStatus('loan_repayments','${rep.id}','rejected')"><i class="fas fa-times"></i> Reject</button>` : `
-        <button class="action-btn reset-btn" onclick="updateStatus('loan_repayments','${rep.id}','pending')"><i class="fas fa-undo"></i> Reset</button>`;
-      return `<div class="app-card card-${rep.status || 'pending'}">
-        <div class="card-header">
-          <div class="card-title">
-            <div class="applicant-avatar repay-avatar">${(rep.fullName || '?')[0].toUpperCase()}</div>
-            <div>
-              <div class="applicant-name">${rep.fullName || 'Unknown'}</div>
-              <div class="applicant-sub">NIC: ${rep.nicNumber || 'N/A'} &nbsp;|&nbsp; ${ts}</div>
-            </div>
-          </div>
-          <span class="status-badge ${sc}">${sl}</span>
-        </div>
-        <div class="info-grid">
-          <div class="info-item"><span class="info-key"><i class="fas fa-phone"></i> Phone</span><span class="info-val">${rep.phoneNumber || 'N/A'}</span></div>
-        </div>
-        ${rep.receiptImg ? `<div class="nic-photos"><div class="photo-item"><div class="photo-label">Bank Receipt / Screenshot</div><img src="${rep.receiptImg}" class="thumb-img" onclick="openImageModal('${rep.receiptImg}','Bank Receipt')" alt="Receipt"></div></div>` : ''}
-        <div class="card-actions">${actions}</div>
-      </div>`;
-    }).join('');
+    await update(ref(db, `loan_applications/${id}`), updates);
+    showToast(`Application marked as ${status}`, status === 'accepted' ? 'success' : '');
+  };
+
+  window.setRepayStatus = async (id, status) => {
+    await update(ref(db, `loan_repayments/${id}`), { status });
+    showToast(`Repayment ${status === 'accepted' ? 'confirmed' : 'rejected'}`, status === 'accepted' ? 'success' : '');
+  };
+
+  window.deleteEntry = async (id, path) => {
+    if(!confirm('Delete this record permanently?')) return;
+    await remove(ref(db, `${path}/${id}`));
+    showToast('Record deleted');
+  };
+
+  window.manualBlacklist = async (loanId) => {
+    const loan = allApps.find(a => a.id === loanId);
+    if (!loan) return;
+    const already = allBlacklist.some(b =>
+      b.nicNumber && loan.nicNumber && b.nicNumber.toLowerCase() === loan.nicNumber.toLowerCase()
+    );
+    if (already) { showToast('Already blacklisted', 'warning'); return; }
+    if (!confirm(`Blacklist ${loan.fullName}? This will prevent future loan applications.`)) return;
+    await push(ref(db, 'blacklist'), {
+      name:      loan.fullName       || '—',
+      nicNumber: loan.nicNumber      || '—',
+      phone:     loan.applicantPhone || '—',
+      reason:    'Manually blacklisted by admin',
+      addedDate: Date.now(),
+      loanId:    loan.id,
+      autoAdded: false
+    });
+    showToast(`${loan.fullName} added to blacklist`, 'warning');
+  };
+
+  window.addToBlacklist = async () => {
+    const name   = document.getElementById('blName').value.trim();
+    const nic    = document.getElementById('blNic').value.trim();
+    const phone  = document.getElementById('blPhone').value.trim();
+    const reason = document.getElementById('blReason').value.trim();
+    if (!name || !nic) { showToast('Name and NIC are required', 'error'); return; }
+    await push(ref(db, 'blacklist'), {
+      name, nicNumber: nic, phone,
+      reason: reason || 'Manually blacklisted by admin',
+      addedDate: Date.now(), autoAdded: false
+    });
+    document.getElementById('blName').value = '';
+    document.getElementById('blNic').value  = '';
+    document.getElementById('blPhone').value= '';
+    document.getElementById('blReason').value='';
+    showToast(`${name} added to blacklist`, 'warning');
+  };
+
+  window.removeBlacklist = async (id, name) => {
+    if (!confirm(`Remove ${name} from the blacklist?`)) return;
+    await remove(ref(db, `blacklist/${id}`));
+    showToast(`${name} removed from blacklist`, 'success');
+  };
+
+  // ── LIGHTBOX ─────────────────────────────────────────────────────
+  window.showImg = (url) => {
+    document.getElementById('lightboxImg').src = url;
+    document.getElementById('lightbox').classList.add('show');
+  };
+  document.getElementById('lightboxClose').addEventListener('click', ()=> document.getElementById('lightbox').classList.remove('show'));
+  document.getElementById('lightbox').addEventListener('click', e=>{ if(e.target===e.currentTarget) e.currentTarget.classList.remove('show'); });
+
+  // ── TOAST ────────────────────────────────────────────────────────
+  function showToast(msg, type='') {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.className = `show${type ? ' '+type : ''}`;
+    setTimeout(()=> t.className = '', 2800);
   }
-
-  window.setAdminTab = tab => {
-    document.getElementById('appsTab').style.display  = tab === 'apps'  ? 'block' : 'none';
-    document.getElementById('repayTab').style.display = tab === 'repay' ? 'block' : 'none';
-    document.querySelectorAll('.admin-tab-btn').forEach(b => {
-      b.getAttribute('data-tab') === tab ? b.classList.add('active-admin-tab') : b.classList.remove('active-admin-tab');
-    });
-  };
-
-  window.setAppFilter = filter => {
-    currentAppFilter = filter;
-    document.querySelectorAll('.filter-btn[data-col="apps"]').forEach(b => {
-      b.getAttribute('data-filter') === filter ? b.classList.add('active-filter') : b.classList.remove('active-filter');
-    });
-    renderApplications();
-  };
-
-  window.setRepayFilter = filter => {
-    currentRepayFilter = filter;
-    document.querySelectorAll('.filter-btn[data-col="repay"]').forEach(b => {
-      b.getAttribute('data-filter') === filter ? b.classList.add('active-filter') : b.classList.remove('active-filter');
-    });
-    renderRepayments();
-  };
-
-  document.getElementById('searchApps').addEventListener('input', renderApplications);
-  document.getElementById('searchRepay').addEventListener('input', renderRepayments);
 </script>
 </body>
 </html>

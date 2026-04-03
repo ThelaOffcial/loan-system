@@ -52,8 +52,8 @@
     .tab-btn.active-tab{background:#0f5b8c;color:white;box-shadow:0 6px 12px rgba(15,91,140,.2)}
     .form-group{margin-bottom:1.4rem}
     label{font-weight:600;display:block;margin-bottom:.4rem;color:#1f3b4c}
-    input,textarea{width:100%;padding:.85rem 1rem;border:1.5px solid #e0eaf0;border-radius:24px;font-family:inherit;transition:.2s;font-size:1rem}
-    input:focus,textarea:focus{border-color:#0f5b8c;outline:none;box-shadow:0 0 0 3px rgba(15,91,140,.1)}
+    input,textarea,select{width:100%;padding:.85rem 1rem;border:1.5px solid #e0eaf0;border-radius:24px;font-family:inherit;transition:.2s;font-size:1rem}
+    input:focus,textarea:focus,select:focus{border-color:#0f5b8c;outline:none;box-shadow:0 0 0 3px rgba(15,91,140,.1)}
     .double-photo-group{display:flex;gap:1.5rem;flex-wrap:wrap}
     .double-photo-group .form-group{flex:1}
     .photo-preview{display:flex;gap:10px;margin-top:8px;flex-wrap:wrap}
@@ -76,6 +76,14 @@
     .upload-progress{background:#eff6ff;border-radius:16px;padding:.8rem 1rem;margin-bottom:1rem;border:1px solid #bfdbfe;display:none}
     .progress-bar-wrap{background:#dbeafe;border-radius:40px;height:8px;margin-top:.4rem;overflow:hidden}
     .progress-bar{background:linear-gradient(90deg,#0f5b8c,#2b9b7a);height:8px;border-radius:40px;width:0%;transition:width .4s}
+    /* BLACKLIST REJECTION BOX */
+    .blacklist-rejection{background:linear-gradient(135deg,#1a0000,#3a0000);border:2px solid #dc2626;border-radius:28px;padding:2rem;text-align:center;color:white;margin-top:1.5rem;animation:pulseRed .8s ease-in-out}
+    .blacklist-rejection i{font-size:3rem;color:#ef4444;display:block;margin-bottom:1rem}
+    .blacklist-rejection h3{font-size:1.4rem;color:#fca5a5;margin-bottom:.7rem}
+    .blacklist-rejection p{font-size:.95rem;color:#fecaca;line-height:1.6;margin-bottom:.5rem}
+    .blacklist-rejection .bl-details{background:rgba(255,255,255,.07);border-radius:16px;padding:.8rem 1rem;margin-top:1rem;font-size:.85rem;color:#fda4af;text-align:left}
+    @keyframes pulseRed{0%{box-shadow:0 0 0 0 rgba(220,38,38,.5)}70%{box-shadow:0 0 0 15px rgba(220,38,38,0)}100%{box-shadow:0 0 0 0 rgba(220,38,38,0)}}
+    .checking-blacklist{background:#f0f9ff;border:1px solid #bae6fd;border-radius:16px;padding:1rem;text-align:center;color:#0369a1;font-size:.9rem;margin-bottom:1rem;display:none}
     .whatsapp-float{position:fixed;bottom:30px;right:30px;background-color:#25d366;color:white;border-radius:50px;padding:12px 20px;font-weight:700;display:flex;align-items:center;gap:10px;box-shadow:0 10px 20px rgba(37,211,102,.3);z-index:1000;text-decoration:none;font-size:1rem;transition:all .3s;font-family:inherit}
     .whatsapp-float:hover{transform:scale(1.05);background-color:#20b859}
     .footer{background:#0a2a3b;color:#e0edf5;padding:3rem 2rem 1.5rem;margin-top:3rem;border-top-left-radius:40px;border-top-right-radius:40px}
@@ -88,13 +96,13 @@
     .social-icons a{background:rgba(255,255,255,.1);width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;transition:.2s}
     .social-icons a:hover{background:#2b9b7a;transform:translateY(-3px)}
     .copyright{text-align:center;margin-top:2rem;padding-top:1rem;border-top:1px solid rgba(255,255,255,.1);font-size:.8rem}
-    /* max-amount hint badge */
     .amount-hint{font-size:.78rem;color:#0f5b8c;background:#e8f4ff;padding:.25rem .75rem;border-radius:40px;display:inline-block;margin-top:.4rem;font-weight:600}
     @media(max-width:800px){.navbar{padding:.8rem 1rem}.nav-links{display:none;width:100%;flex-direction:column;gap:1rem;padding:1rem 0 .5rem;background:white}.nav-links.show{display:flex}.hamburger{display:block}.hero-title{font-size:2rem}.stats-grid{flex-direction:column;gap:1rem}.services-grid{flex-direction:column}.notice-content{flex-direction:column}.whatsapp-float{padding:8px 15px;font-size:.8rem;bottom:20px;right:20px}}
     html{scroll-behavior:smooth;scroll-padding-top:90px}
   </style>
 </head>
 <body>
+
 <nav class="navbar">
   <div class="nav-container">
     <div class="logo" id="logoHomeBtn"><i class="fas fa-chart-line"></i> LendEasy</div>
@@ -115,6 +123,7 @@
 </nav>
 
 <div class="main-content">
+  <!-- HOME VIEW -->
   <div id="homeView" class="view" style="display:block;">
     <div class="section hero-section" id="home-hero">
       <div class="hero-title" data-i18n="hero_title">🏦 Smart Loans, Brighter Tomorrow</div>
@@ -152,6 +161,7 @@
     </div>
   </div>
 
+  <!-- LOAN VIEW -->
   <div id="loanView" class="view" style="display:none;">
     <div class="loan-card">
       <button id="backToHomeFromLoan" class="back-home-btn"><i class="fas fa-arrow-left"></i> <span data-i18n="back_home">Back to Home</span></button>
@@ -159,9 +169,29 @@
         <button class="tab-btn active-tab" data-loan-tab="apply">📝 <span data-i18n="loan_apply_tab">ණය අයදුම් කරන්න</span></button>
         <button class="tab-btn" data-loan-tab="repay">💰 <span data-i18n="loan_repay_tab">ණය ගෙවීම</span></button>
       </div>
+
+      <!-- APPLY PANEL -->
       <div id="applyLoanPanel">
-        <div class="notice-box"><i class="fas fa-exclamation-triangle"></i><div class="notice-content"><div class="notice-item"><i class="fas fa-percent"></i><strong data-i18n="notice_interest_label">මාසික පොලිය:</strong><span data-i18n="notice_interest_value">1.5% (18% වාර්ෂික)</span></div><div class="notice-item"><i class="fas fa-clock"></i><strong data-i18n="notice_late_label">ප්‍රමාද ගාස්තු:</strong><span data-i18n="notice_late_value">දිනකට රු. 100/-</span></div><div class="notice-item"><i class="fas fa-calendar-week"></i><strong data-i18n="notice_payment_label">ගෙවීම්:</strong><span data-i18n="notice_payment_value">මාසික / සතිපතා</span></div></div></div>
-        <div class="upload-progress" id="applyProgress"><div style="font-size:.85rem;font-weight:600;color:#1e466e;">⏳ <span id="applyProgressText">Processing...</span></div><div class="progress-bar-wrap"><div class="progress-bar" id="applyProgressBar"></div></div></div>
+        <div class="notice-box">
+          <i class="fas fa-exclamation-triangle"></i>
+          <div class="notice-content">
+            <div class="notice-item"><i class="fas fa-percent"></i><strong data-i18n="notice_interest_label">මාසික පොලිය:</strong><span data-i18n="notice_interest_value">1.5% (18% වාර්ෂික)</span></div>
+            <div class="notice-item"><i class="fas fa-clock"></i><strong data-i18n="notice_late_label">ප්‍රමාද ගාස්තු:</strong><span data-i18n="notice_late_value">දිනකට රු. 100/-</span></div>
+            <div class="notice-item"><i class="fas fa-calendar-week"></i><strong data-i18n="notice_payment_label">ගෙවීම්:</strong><span data-i18n="notice_payment_value">මාසික / සතිපතා</span></div>
+            <div class="notice-item"><i class="fas fa-ban"></i><strong data-i18n="notice_blacklist_label">කළු ලැයිස්තු:</strong><span data-i18n="notice_blacklist_value">මාස 3කට ගෙවීම් නැතිනම්</span></div>
+          </div>
+        </div>
+
+        <!-- BLACKLIST CHECK INDICATOR -->
+        <div class="checking-blacklist" id="checkingBlacklistBox">
+          <i class="fas fa-shield-alt fa-spin"></i> <span data-i18n="checking_blacklist">කළු ලැයිස්තු පරීක්ෂා කරමින්...</span>
+        </div>
+
+        <div class="upload-progress" id="applyProgress">
+          <div style="font-size:.85rem;font-weight:600;color:#1e466e;">⏳ <span id="applyProgressText">Processing...</span></div>
+          <div class="progress-bar-wrap"><div class="progress-bar" id="applyProgressBar"></div></div>
+        </div>
+
         <form id="loanAppForm">
           <div class="form-group"><label><span data-i18n="full_name_label">සම්පූර්ණ නම</span> *</label><input type="text" id="fullName" placeholder="උදා: අමරසිංහ මහේෂ්"></div>
           <div class="form-group"><label><span data-i18n="address_label">ලිපිනය</span> *</label><textarea id="address" rows="2" placeholder="නිවස් අංකය, වීදිය, නගරය"></textarea></div>
@@ -171,17 +201,15 @@
             <div class="form-group"><label><span data-i18n="nic_back_label">NIC පසුපස</span> *</label><input type="file" id="nicBackPhoto" accept="image/*"><div id="nicBackPreview" class="photo-preview"></div></div>
           </div>
           <div class="form-group"><label><span data-i18n="phone_label">දුරකතන අංකය</span> *</label><input type="tel" id="applicantPhone" placeholder="071 234 5678"></div>
-
-          <!-- ✅ FIX: max 50,000 enforced here -->
           <div class="form-group">
             <label><span data-i18n="loan_amount_label">ණය මුදල (රු.)</span> *</label>
             <input type="number" id="loanAmount" step="1000" min="1000" max="50000" placeholder="50000">
             <span class="amount-hint" data-i18n="loan_max_hint">උපරිම ණය: රු. 50,000/-</span>
           </div>
-
           <div class="checkbox-wrapper"><input type="checkbox" id="hasGuarantorCheck"><label for="hasGuarantorCheck" data-i18n="guarantor_check_label">ඇප කරුවන් සිටීද</label></div>
           <div id="guarantorSection" style="display:none;">
-            <div class="guarantor-section"><h4 data-i18n="guarantor_details_title">📌 ඇපකරු විස්තර</h4>
+            <div class="guarantor-section">
+              <h4 data-i18n="guarantor_details_title">📌 ඇපකරු විස්තර</h4>
               <div class="form-group"><label><span data-i18n="guarantor_name_label">නම</span> *</label><input type="text" id="guarantorName" placeholder="ඇපකරුගේ සම්පූර්ණ නම"></div>
               <div class="form-group"><label><span data-i18n="guarantor_id_label">ID අංකය</span> *</label><input type="text" id="guarantorIdNumber" placeholder="ජාතික හැඳුනුම්පත් අංකය"></div>
               <div class="form-group"><label><span data-i18n="guarantor_photo_label">ID ඡායාරූපය</span> *</label><input type="file" id="guarantorPhoto" accept="image/*"><div id="guarantorPreview" class="photo-preview"></div></div>
@@ -192,14 +220,31 @@
           <div id="formFeedback"></div>
         </form>
       </div>
+
+      <!-- REPAY PANEL -->
       <div id="repayLoanPanel" style="display:none;">
         <div style="background:#f9fbfe;border-radius:32px;padding:1.5rem;">
-          <div class="notice-box"><i class="fas fa-exclamation-triangle"></i><div class="notice-content"><div class="notice-item"><i class="fas fa-percent"></i><strong data-i18n="notice_interest_label">මාසික පොලිය:</strong><span data-i18n="notice_interest_value">1.5% (18% වාර්ෂික)</span></div><div class="notice-item"><i class="fas fa-clock"></i><strong data-i18n="notice_late_label">ප්‍රමාද ගාස්තු:</strong><span data-i18n="notice_late_value">දිනකට රු. 100/-</span></div><div class="notice-item"><i class="fas fa-calendar-week"></i><strong data-i18n="notice_payment_label">ගෙවීම්:</strong><span data-i18n="notice_payment_value">මාසික / සතිපතා</span></div></div></div>
-          <div class="upload-progress" id="repayProgress"><div style="font-size:.85rem;font-weight:600;color:#1e466e;">⏳ <span id="repayProgressText">Processing...</span></div><div class="progress-bar-wrap"><div class="progress-bar" id="repayProgressBar"></div></div></div>
+          <div class="notice-box">
+            <i class="fas fa-exclamation-triangle"></i>
+            <div class="notice-content">
+              <div class="notice-item"><i class="fas fa-percent"></i><strong data-i18n="notice_interest_label">මාසික පොලිය:</strong><span data-i18n="notice_interest_value">1.5% (18% වාර්ෂික)</span></div>
+              <div class="notice-item"><i class="fas fa-clock"></i><strong data-i18n="notice_late_label">ප්‍රමාද ගාස්තු:</strong><span data-i18n="notice_late_value">දිනකට රු. 100/-</span></div>
+              <div class="notice-item"><i class="fas fa-calendar-week"></i><strong data-i18n="notice_payment_label">ගෙවීම්:</strong><span data-i18n="notice_payment_value">මාසික / සතිපතා</span></div>
+            </div>
+          </div>
+          <div class="upload-progress" id="repayProgress">
+            <div style="font-size:.85rem;font-weight:600;color:#1e466e;">⏳ <span id="repayProgressText">Processing...</span></div>
+            <div class="progress-bar-wrap"><div class="progress-bar" id="repayProgressBar"></div></div>
+          </div>
           <h3 style="margin-bottom:1rem;" data-i18n="repayment_form_title">💰 ණය ගෙවීම් විස්තර</h3>
           <form id="repaymentForm">
             <div class="form-group"><label><span data-i18n="repay_name_label">සම්පූර්ණ නම</span> *</label><input type="text" id="repayFullName" placeholder="උදා: අමරසිංහ මහේෂ්"></div>
             <div class="form-group"><label><span data-i18n="repay_nic_label">NIC අංකය</span> *</label><input type="text" id="repayNic" placeholder="1995XXXXX හෝ XXXXXXXXXV"></div>
+            <div class="form-group">
+              <label><span data-i18n="repay_amount_label">ගෙවන මුදල (රු.)</span> *</label>
+              <input type="number" id="repayAmount" step="100" min="100" placeholder="5000">
+              <span class="amount-hint" data-i18n="repay_amount_hint">ඔබ ගෙවන මුදල ඇතුළත් කරන්න</span>
+            </div>
             <div class="form-group"><label><span data-i18n="repay_photo_label">බැංකු රිසිට්පත / ස්ක්‍රීන්ෂොට්</span> *</label><input type="file" id="repayReceipt" accept="image/*"><div id="repayReceiptPreview" class="photo-preview"></div></div>
             <div class="form-group"><label><span data-i18n="repay_phone_label">දුරකතන අංකය</span> *</label><input type="tel" id="repayPhone" placeholder="071 234 5678"></div>
             <button type="submit" id="submitRepaymentBtn" class="submit-btn"><span data-i18n="repay_submit_btn">ගෙවීම තහවුරු කරන්න</span></button>
@@ -211,21 +256,39 @@
   </div>
 </div>
 
-<a href="https://wa.me/94771234567?text=Hello%21%20I%20need%20loan%20assistance" class="whatsapp-float" target="_blank" rel="noopener noreferrer"><i class="fab fa-whatsapp"></i> <span data-i18n="whatsapp_text">Chat on WhatsApp</span></a>
+<a href="https://wa.me/94771234567?text=Hello%21%20I%20need%20loan%20assistance" class="whatsapp-float" target="_blank" rel="noopener noreferrer">
+  <i class="fab fa-whatsapp"></i> <span data-i18n="whatsapp_text">Chat on WhatsApp</span>
+</a>
 
 <footer class="footer">
   <div class="footer-container">
-    <div class="footer-col"><h4><i class="fas fa-building"></i> LendEasy Finance</h4><p><i class="fas fa-map-marker-alt"></i> No. 123, W.A.D Silva Mawatha, Colombo 03</p><p><i class="fas fa-phone"></i> +94 112 345 678</p><p><i class="fas fa-envelope"></i> support@lendeasy.lk</p></div>
-    <div class="footer-col"><h4>Follow Us</h4><div class="social-icons"><a href="https://facebook.com" target="_blank"><i class="fab fa-facebook-f"></i></a><a href="https://wa.me/94771234567" target="_blank"><i class="fab fa-whatsapp"></i></a><a href="https://instagram.com" target="_blank"><i class="fab fa-instagram"></i></a></div></div>
-    <div class="footer-col"><h4>Quick Links</h4><p><a href="#" data-nav="home"><i class="fas fa-angle-right"></i> Home</a></p><p><a href="#" data-nav="loan"><i class="fas fa-angle-right"></i> Loan</a></p><p><a href="#" data-nav="contact"><i class="fas fa-angle-right"></i> Contact</a></p></div>
+    <div class="footer-col">
+      <h4><i class="fas fa-building"></i> LendEasy Finance</h4>
+      <p><i class="fas fa-map-marker-alt"></i> No. 123, W.A.D Silva Mawatha, Colombo 03</p>
+      <p><i class="fas fa-phone"></i> +94 112 345 678</p>
+      <p><i class="fas fa-envelope"></i> support@lendeasy.lk</p>
+    </div>
+    <div class="footer-col">
+      <h4>Follow Us</h4>
+      <div class="social-icons">
+        <a href="https://facebook.com" target="_blank"><i class="fab fa-facebook-f"></i></a>
+        <a href="https://wa.me/94771234567" target="_blank"><i class="fab fa-whatsapp"></i></a>
+        <a href="https://instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Quick Links</h4>
+      <p><a href="#" data-nav="home"><i class="fas fa-angle-right"></i> Home</a></p>
+      <p><a href="#" data-nav="loan"><i class="fas fa-angle-right"></i> Loan</a></p>
+      <p><a href="#" data-nav="contact"><i class="fas fa-angle-right"></i> Contact</a></p>
+    </div>
   </div>
   <div class="copyright">© 2025 LendEasy Finance. All rights reserved. | Developed by DualSyntax IT</div>
 </footer>
 
 <script type="module">
-  import { initializeApp }    from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-  import { getFirestore, collection, addDoc, serverTimestamp }
-                              from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+  import { initializeApp }                                    from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+  import { getDatabase, ref, push, get, child }              from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
 
   const firebaseConfig = {
     apiKey: "AIzaSyDlNPMm6sEQlQ-UTsrFrKiGIwBIyyYjI-g",
@@ -233,248 +296,258 @@
     projectId: "loansale-site",
     storageBucket: "loansale-site.firebasestorage.app",
     messagingSenderId: "35285094302",
-    appId: "1:35285094302:web:e5dae614a7017b6f0e508f"
+    appId: "1:35285094302:web:e5dae614a7017b6f0e508f",
+    databaseURL: "https://loansale-site-default-rtdb.firebaseio.com"
   };
   const app = initializeApp(firebaseConfig);
-  const db  = getFirestore(app);
-  console.log("Firebase ready ✅");
+  const db  = getDatabase(app);
+  const dbRef = ref(db);
 
-  // ── Image compressor ───────────────────────────────────────────
-  function compressImage(file, maxW = 800, maxH = 800, quality = 0.65) {
-    return new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.onload = ev => {
-        const img = new Image();
-        img.onload = () => {
-          let w = img.width, h = img.height;
-          if (w > maxW || h > maxH) {
-            const r = Math.min(maxW / w, maxH / h);
-            w = Math.round(w * r); h = Math.round(h * r);
-          }
-          const canvas = document.createElement('canvas');
-          canvas.width = w; canvas.height = h;
-          canvas.getContext('2d').drawImage(img, 0, 0, w, h);
-          resolve(canvas.toDataURL('image/jpeg', quality));
-        };
-        img.onerror = reject;
-        img.src = ev.target.result;
-      };
-      reader.onerror = reject;
-      reader.readAsDataURL(file);
-    });
+  // ── Cloudinary uploader ──────────────────────────────────────────
+  async function uploadToCloudinary(file) {
+    const fd = new FormData();
+    fd.append("file", file);
+    fd.append("upload_preset", "drmmn0xp3");
+    const res  = await fetch("https://api.cloudinary.com/v1_1/drmmn0xp3/image/upload", { method: "POST", body: fd });
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error?.message || "Upload failed");
+    return data.secure_url;
   }
 
-  // ── Translations ───────────────────────────────────────────────
+  // ── BLACKLIST CHECK ──────────────────────────────────────────────
+  async function checkBlacklist(nicNumber, phone) {
+    try {
+      const snap = await get(child(dbRef, 'blacklist'));
+      if (!snap.exists()) return null;
+      let found = null;
+      snap.forEach(child => {
+        const d = child.val();
+        const nicMatch   = d.nicNumber && nicNumber && d.nicNumber.toLowerCase() === nicNumber.toLowerCase();
+        const phoneMatch = d.phone     && phone     && d.phone.replace(/\s/g,'') === phone.replace(/\s/g,'');
+        if (nicMatch || phoneMatch) found = d;
+      });
+      return found;
+    } catch (e) {
+      console.warn('Blacklist check error:', e);
+      return null;
+    }
+  }
+
+  function buildBlacklistRejectionHtml(entry, lang) {
+    const msgs = {
+      si: {
+        title: '🚫 ඔබගේ අයදුම්පත ප්‍රතික්ෂේප කරන ලදි',
+        sub: 'ඔබ LendEasy Finance හි කළු ලැයිස්තුවේ ඇත.',
+        reason: 'හේතුව',
+        contact: 'ගැටලුවක් ඇත්නම් +94 112 345 678 හෝ WhatsApp මගින් අපව අමතන්න.',
+        added: 'එකතු කළ දිනය'
+      },
+      ta: {
+        title: '🚫 உங்கள் விண்ணப்பம் நிராகரிக்கப்பட்டது',
+        sub: 'நீங்கள் LendEasy Finance கறுப்புப் பட்டியலில் உள்ளீர்கள்.',
+        reason: 'காரணம்',
+        contact: 'தொடர்பு: +94 112 345 678',
+        added: 'சேர்க்கப்பட்ட தேதி'
+      },
+      en: {
+        title: '🚫 Your Application Has Been Rejected',
+        sub: 'You are on the LendEasy Finance blacklist.',
+        reason: 'Reason',
+        contact: 'If you believe this is an error, contact us at +94 112 345 678 or via WhatsApp.',
+        added: 'Blacklisted on'
+      }
+    };
+    const m = msgs[lang] || msgs.en;
+    const addedDate = entry.addedDate ? new Date(entry.addedDate).toLocaleDateString() : '—';
+    return `
+      <div class="blacklist-rejection">
+        <i class="fas fa-ban"></i>
+        <h3>${m.title}</h3>
+        <p>${m.sub}</p>
+        <div class="bl-details">
+          <div><strong>${m.reason}:</strong> ${entry.reason || 'Previous loan default'}</div>
+          <div style="margin-top:.4rem"><strong>${m.added}:</strong> ${addedDate}</div>
+        </div>
+        <p style="margin-top:1rem;font-size:.82rem;opacity:.8">${m.contact}</p>
+      </div>`;
+  }
+
+  // ── Translations ─────────────────────────────────────────────────
   const translations = {
-    si:{nav_home:"මුල් පිටුව",nav_services:"සේවා",nav_loan:"ණය",nav_about:"අපි ගැන",nav_contact:"සම්බන්ධ වන්න",hero_title:"🏦 Smart Loans, Brighter Tomorrow",company_description:"ඔබගේ සිහින සැබෑ කර ගැනීමට අපි මෙහි සිටිමු. විශ්වාසනීය, වේගවත් හා විනිවිද පෙනෙන ණය සේවාවන්.",apply_now_btn:"දැන් ණය අයදුම් කරන්න",stat_years:"වසරක පළපුරුද්ද",stat_satisfaction:"සේවා තෘප්තිය",stat_loans:"සාර්ථක ණය",notice_interest_label:"මාසික පොලිය:",notice_interest_value:"1.5% (18% වාර්ෂික)",notice_late_label:"ප්‍රමාද ගාස්තු:",notice_late_value:"දිනකට රු. 100/-",notice_payment_label:"ගෙවීම්:",notice_payment_value:"මාසික / සතිපතා",services_title:"අපගේ සේවාවන්",service1_title:"පුද්ගලික ණය",service1_desc:"ඔබගේ පෞද්ගලික අවශ්‍යතා සඳහා අඩු පොලිය.",service2_title:"ව්‍යාපාරික ණය",service2_desc:"ව්‍යාපාර පුළුල් කිරීමට නම්‍යශීලී වාරික.",service3_title:"ක්ෂණික අනුමැතිය",service3_desc:"ඩිජිටල් අයදුම්පත, 24 පැය ඇතුලත ප්‍රතිචාරය.",about_title:"අපි ගැන",about_text:"LendEasy Finance ශ්‍රී ලංකාවේ විශ්වාසනීය මූල්‍ය සේවා සපයන්නෙකු ලෙස වසර 15කට වැඩි කාලයක් ආර්ථික සිහින සැබෑ කර ඇත.",mission_title:"අපගේ ඉලක්කය",mission_desc:" සෑම ශ්‍රී ලාංකිකයෙකුටම සාධාරණ මූල්‍ය ප්‍රවේශය.",contact_title:"අමතන්න",contact_address:"කොළඹ 03, ශ්‍රී ලංකාව",contact_phone:"+94 112 345 678 / +94 77 123 4567",contact_hours:"සඳු-සෙන: 9:00AM - 5:30PM, සෙනසුරාදා: 9:00AM - 1:00PM",back_home:"මුල් පිටුවට",loan_apply_tab:"ණය අයදුම් කරන්න",loan_repay_tab:"ණය ගෙවීම",full_name_label:"සම්පූර්ණ නම",address_label:"ලිපිනය",nic_label:"NIC අංකය",nic_front_label:"NIC ඉදිරිපස",nic_back_label:"NIC පසුපස",phone_label:"දුරකතන අංකය",loan_amount_label:"ණය මුදල (රු.)",loan_max_hint:"උපරිම ණය: රු. 50,000/-",loan_max_error:"ණය මුදල රු. 50,000 ඉක්මවිය නොහැක",guarantor_check_label:"ඇප කරුවන් සිටීද",guarantor_details_title:"📌 ඇපකරු විස්තර",guarantor_name_label:"නම",guarantor_id_label:"ID අංකය",guarantor_photo_label:"ID ඡායාරූපය",guarantor_phone_label:"දුරකතන අංකය",submit_btn_text:"අයදුම්පත ඉදිරිපත් කරන්න",submitting:"ඡායාරූප සකස් කරමින්... රැඳී සිටින්න",success_msg:"✅ ඔබගේ ණය අයදුම්පත සාර්ථකව ලැබුණි!",repayment_form_title:"💰 ණය ගෙවීම් විස්තර",repay_name_label:"සම්පූර්ණ නම",repay_nic_label:"NIC අංකය",repay_photo_label:"බැංකු රිසිට්පත / ස්ක්‍රීන්ෂොට්",repay_phone_label:"දුරකතන අංකය",repay_submit_btn:"ගෙවීම තහවුරු කරන්න",repay_success_msg:"✅ ඔබගේ ගෙවීම සාර්ථකව ලැබුණි! ස්තුතියි.",repay_photo_required:"රිසිට්පත හෝ ස්ක්‍රීන්ෂොට් අවශ්‍යයි",repay_submitting:"ඡායාරූප සකස් කරමින්...",whatsapp_text:"WhatsApp මගින් කතා කරන්න"},
-    ta:{nav_home:"முகப்பு",nav_services:"சேவைகள்",nav_loan:"கடன்",nav_about:"எங்களை பற்றி",nav_contact:"தொடர்பு",hero_title:"🏦 ஸ்மார்ட் கடன்கள், பிரகாசமான எதிர்காலம்",company_description:"உங்கள் கனவுகளை நனவாக்க நாங்கள் இங்கு இருக்கிறோம். நம்பகமான கடன் சேவைகள்.",apply_now_btn:"இப்போது கடன் விண்ணப்பிக்கவும்",stat_years:"அனுபவ ஆண்டுகள்",stat_satisfaction:"வாடிக்கையாளர் திருப்தி",stat_loans:"வெற்றிகரமான கடன்கள்",notice_interest_label:"மாத வட்டி:",notice_interest_value:"1.5% (ஆண்டுக்கு 18%)",notice_late_label:"தாமதக் கட்டணம்:",notice_late_value:"ஒரு நாளைக்கு ரூ. 100/-",notice_payment_label:"செலுத்தும் முறை:",notice_payment_value:"மாதாந்திர / வாராந்திர",services_title:"எங்கள் சேவைகள்",service1_title:"தனிப்பட்ட கடன்",service1_desc:"குறைந்த வட்டி, விரைவான ஒப்புதல்.",service2_title:"வணிக கடன்",service2_desc:"நெகிழ்வான தவணைகள்.",service3_title:"உடனடி ஒப்புதல்",service3_desc:"24 மணி நேரத்தில் பதில்.",about_title:"எங்களை பற்றி",about_text:"LendEasy Finance இலங்கையின் நம்பகமான நிதிச் சேவையாளர்.",mission_title:"எங்கள் நோக்கம்",mission_desc:" ஒவ்வொரு இலங்கையருக்கும் நியாயமான நிதி அணுகல்.",contact_title:"தொடர்பு",contact_address:"கொழும்பு 03, இலங்கை",contact_phone:"+94 112 345 678",contact_hours:"திங்-வெள்: 9:00AM - 5:30PM",back_home:"முகப்புக்கு",loan_apply_tab:"கடன் விண்ணப்பிக்க",loan_repay_tab:"கடன் செலுத்துதல்",full_name_label:"முழு பெயர்",address_label:"முகவரி",nic_label:"தேசிய அடையாள அட்டை எண்",nic_front_label:"அட்டை முன்புறம்",nic_back_label:"அட்டை பின்புறம்",phone_label:"தொலைபேசி எண்",loan_amount_label:"கடன் தொகை (ரூ.)",loan_max_hint:"அதிகபட்சம்: ரூ. 50,000/-",loan_max_error:"கடன் தொகை ரூ. 50,000 மிகாமல் இருக்க வேண்டும்",guarantor_check_label:"பிணையாளர் உள்ளாரா?",guarantor_details_title:"📌 பிணையாளர் விவரங்கள்",guarantor_name_label:"பெயர்",guarantor_id_label:"அடையாள எண்",guarantor_photo_label:"அடையாள அட்டை புகைப்படம்",guarantor_phone_label:"தொலைபேசி எண்",submit_btn_text:"விண்ணப்பத்தை சமர்ப்பிக்கவும்",submitting:"படங்களை செயல்படுத்துகிறது...",success_msg:"✅ விண்ணப்பம் வெற்றிகரமாக சமர்ப்பிக்கப்பட்டது!",repayment_form_title:"💰 கடன் செலுத்துதல் விவரங்கள்",repay_name_label:"முழு பெயர்",repay_nic_label:"தேசிய அடையாள அட்டை எண்",repay_photo_label:"வங்கி ரசீது / ஸ்கிரீன்ஷாட்",repay_phone_label:"தொலைபேசி எண்",repay_submit_btn:"செலுத்துதலை உறுதிப்படுத்தவும்",repay_success_msg:"✅ செலுத்துதல் பதிவு செய்யப்பட்டது!",repay_photo_required:"ரசீது தேவை",repay_submitting:"படத்தை செயல்படுத்துகிறது...",whatsapp_text:"WhatsApp இல் பேசுங்கள்"},
-    en:{nav_home:"Home",nav_services:"Services",nav_loan:"Loan",nav_about:"About",nav_contact:"Contact",hero_title:"🏦 Smart Loans, Brighter Tomorrow",company_description:"We're here to turn your dreams into reality. Reliable, fast, and transparent loan services.",apply_now_btn:"Apply for Loan Now",stat_years:"Years of Experience",stat_satisfaction:"Satisfaction Rate",stat_loans:"Loans Disbursed",notice_interest_label:"Monthly Interest:",notice_interest_value:"1.5% (18% p.a.)",notice_late_label:"Late Fee:",notice_late_value:"LKR 100/day",notice_payment_label:"Payment Options:",notice_payment_value:"Monthly / Weekly",services_title:"Our Services",service1_title:"Personal Loans",service1_desc:"Low interest, fast approval.",service2_title:"Business Loans",service2_desc:"Flexible installments.",service3_title:"Instant Approval",service3_desc:"Response within 24 hours.",about_title:"About Us",about_text:"LendEasy Finance has been a trusted financial service provider in Sri Lanka for over 15 years.",mission_title:"Our Mission",mission_desc:" Fair financial access for every Sri Lankan.",contact_title:"Contact Us",contact_address:"Colombo 03, Sri Lanka",contact_phone:"+94 112 345 678 / +94 77 123 4567",contact_hours:"Mon-Fri: 9:00AM - 5:30PM, Sat: 9:00AM - 1:00PM",back_home:"Back to Home",loan_apply_tab:"Apply for Loan",loan_repay_tab:"Repay Loan",full_name_label:"Full Name",address_label:"Address",nic_label:"NIC Number",nic_front_label:"NIC Front",nic_back_label:"NIC Back",phone_label:"Phone Number",loan_amount_label:"Loan Amount (LKR)",loan_max_hint:"Maximum loan: LKR 50,000/-",loan_max_error:"Loan amount cannot exceed LKR 50,000",guarantor_check_label:"Tick if you have a guarantor",guarantor_details_title:"📌 Guarantor Details",guarantor_name_label:"Name",guarantor_id_label:"ID Number",guarantor_photo_label:"ID Photo",guarantor_phone_label:"Phone Number",submit_btn_text:"Submit Application",submitting:"Processing images... please wait",success_msg:"✅ Your loan application submitted successfully!",repayment_form_title:"💰 Loan Repayment Details",repay_name_label:"Full Name",repay_nic_label:"NIC Number",repay_photo_label:"Bank Slip / Screenshot",repay_phone_label:"Phone Number",repay_submit_btn:"Confirm Payment",repay_success_msg:"✅ Repayment recorded successfully! Thank you.",repay_photo_required:"Bank slip or screenshot required",repay_submitting:"Processing image...",whatsapp_text:"Chat on WhatsApp"}
+    si:{nav_home:"මුල් පිටුව",nav_services:"සේවා",nav_loan:"ණය",nav_about:"අපි ගැන",nav_contact:"සම්බන්ධ වන්න",hero_title:"🏦 Smart Loans, Brighter Tomorrow",company_description:"ඔබගේ සිහින සැබෑ කර ගැනීමට අපි මෙහි සිටිමු. විශ්වාසනීය, වේගවත් හා විනිවිද පෙනෙන ණය සේවාවන්.",apply_now_btn:"දැන් ණය අයදුම් කරන්න",stat_years:"වසරක පළපුරුද්ද",stat_satisfaction:"සේවා තෘප්තිය",stat_loans:"සාර්ථක ණය",notice_interest_label:"මාසික පොලිය:",notice_interest_value:"1.5% (18% වාර්ෂික)",notice_late_label:"ප්‍රමාද ගාස්තු:",notice_late_value:"දිනකට රු. 100/-",notice_payment_label:"ගෙවීම්:",notice_payment_value:"මාසික / සතිපතා",notice_blacklist_label:"කළු ලැයිස්තු:",notice_blacklist_value:"මාස 3කට ගෙවීම් නැතිනම්",checking_blacklist:"කළු ලැයිස්තු පරීක්ෂා කරමින්...",services_title:"අපගේ සේවාවන්",service1_title:"පුද්ගලික ණය",service1_desc:"ඔබගේ පෞද්ගලික අවශ්‍යතා සඳහා අඩු පොලිය.",service2_title:"ව්‍යාපාරික ණය",service2_desc:"ව්‍යාපාර පුළුල් කිරීමට නම්‍යශීලී වාරික.",service3_title:"ක්ෂණික අනුමැතිය",service3_desc:"ඩිජිටල් අයදුම්පත, 24 පැය ඇතුලත ප්‍රතිචාරය.",about_title:"අපි ගැන",about_text:"LendEasy Finance ශ්‍රී ලංකාවේ විශ්වාසනීය මූල්‍ය සේවා සපයන්නෙකු ලෙස වසර 15කට වැඩි කාලයක් ආර්ථික සිහින සැබෑ කර ඇත.",mission_title:"අපගේ ඉලක්කය",mission_desc:" සෑම ශ්‍රී ලාංකිකයෙකුටම සාධාරණ මූල්‍ය ප්‍රවේශය.",contact_title:"අමතන්න",contact_address:"කොළඹ 03, ශ්‍රී ලංකාව",contact_phone:"+94 112 345 678 / +94 77 123 4567",contact_hours:"සඳු-සෙන: 9:00AM - 5:30PM, සෙනසුරාදා: 9:00AM - 1:00PM",back_home:"මුල් පිටුවට",loan_apply_tab:"ණය අයදුම් කරන්න",loan_repay_tab:"ණය ගෙවීම",full_name_label:"සම්පූර්ණ නම",address_label:"ලිපිනය",nic_label:"NIC අංකය",nic_front_label:"NIC ඉදිරිපස",nic_back_label:"NIC පසුපස",phone_label:"දුරකතන අංකය",loan_amount_label:"ණය මුදල (රු.)",loan_max_hint:"උපරිම ණය: රු. 50,000/-",loan_max_error:"ණය මුදල රු. 50,000 ඉක්මවිය නොහැක",guarantor_check_label:"ඇප කරුවන් සිටීද",guarantor_details_title:"📌 ඇපකරු විස්තර",guarantor_name_label:"නම",guarantor_id_label:"ID අංකය",guarantor_photo_label:"ID ඡායාරූපය",guarantor_phone_label:"දුරකතන අංකය",submit_btn_text:"අයදුම්පත ඉදිරිපත් කරන්න",submitting:"ඡායාරූප upload කරමින්...",success_msg:"✅ ඔබගේ ණය අයදුම්පත සාර්ථකව ලැබුණි!",repayment_form_title:"💰 ණය ගෙවීම් විස්තර",repay_name_label:"සම්පූර්ණ නම",repay_nic_label:"NIC අංකය",repay_amount_label:"ගෙවන මුදල (රු.)",repay_amount_hint:"ඔබ ගෙවන මුදල ඇතුළත් කරන්න",repay_photo_label:"බැංකු රිසිට්පත / ස්ක්‍රීන්ෂොට්",repay_phone_label:"දුරකතන අංකය",repay_submit_btn:"ගෙවීම තහවුරු කරන්න",repay_success_msg:"✅ ඔබගේ ගෙවීම සාර්ථකව ලැබුණි! ස්තුතියි.",repay_photo_required:"රිසිට්පත හෝ ස්ක්‍රීන්ෂොට් අවශ්‍යයි",repay_amount_required:"ගෙවන මුදල ඇතුළත් කරන්න",repay_submitting:"ඡායාරූප upload කරමින්...",whatsapp_text:"WhatsApp මගින් කතා කරන්න"},
+    ta:{nav_home:"முகப்பு",nav_services:"சேவைகள்",nav_loan:"கடன்",nav_about:"எங்களை பற்றி",nav_contact:"தொடர்பு",hero_title:"🏦 ஸ்மார்ட் கடன்கள், பிரகாசமான எதிர்காலம்",company_description:"உங்கள் கனவுகளை நனவாக்க நாங்கள் இங்கு இருக்கிறோம்.",apply_now_btn:"இப்போது கடன் விண்ணப்பிக்கவும்",stat_years:"அனுபவ ஆண்டுகள்",stat_satisfaction:"வாடிக்கையாளர் திருப்தி",stat_loans:"வெற்றிகரமான கடன்கள்",notice_interest_label:"மாத வட்டி:",notice_interest_value:"1.5% (ஆண்டுக்கு 18%)",notice_late_label:"தாமதக் கட்டணம்:",notice_late_value:"ஒரு நாளைக்கு ரூ. 100/-",notice_payment_label:"செலுத்தும் முறை:",notice_payment_value:"மாதாந்திர / வாராந்திர",notice_blacklist_label:"கறுப்புப் பட்டியல்:",notice_blacklist_value:"3 மாதம் செலுத்தவில்லையெனில்",checking_blacklist:"கறுப்புப் பட்டியல் சரிபார்க்கிறது...",services_title:"எங்கள் சேவைகள்",service1_title:"தனிப்பட்ட கடன்",service1_desc:"குறைந்த வட்டி, விரைவான ஒப்புதல்.",service2_title:"வணிக கடன்",service2_desc:"நெகிழ்வான தவணைகள்.",service3_title:"உடனடி ஒப்புதல்",service3_desc:"24 மணி நேரத்தில் பதில்.",about_title:"எங்களை பற்றி",about_text:"LendEasy Finance இலங்கையின் நம்பகமான நிதிச் சேவையாளர்.",mission_title:"எங்கள் நோக்கம்",mission_desc:" ஒவ்வொரு இலங்கையருக்கும் நியாயமான நிதி அணுகல்.",contact_title:"தொடர்பு",contact_address:"கொழும்பு 03, இலங்கை",contact_phone:"+94 112 345 678",contact_hours:"திங்-வெள்: 9:00AM - 5:30PM",back_home:"முகப்புக்கு",loan_apply_tab:"கடன் விண்ணப்பிக்க",loan_repay_tab:"கடன் செலுத்துதல்",full_name_label:"முழு பெயர்",address_label:"முகவரி",nic_label:"தேசிய அடையாள அட்டை எண்",nic_front_label:"அட்டை முன்புறம்",nic_back_label:"அட்டை பின்புறம்",phone_label:"தொலைபேசி எண்",loan_amount_label:"கடன் தொகை (ரூ.)",loan_max_hint:"அதிகபட்சம்: ரூ. 50,000/-",loan_max_error:"கடன் தொகை ரூ. 50,000 மிகாமல் இருக்க வேண்டும்",guarantor_check_label:"பிணையாளர் உள்ளாரா?",guarantor_details_title:"📌 பிணையாளர் விவரங்கள்",guarantor_name_label:"பெயர்",guarantor_id_label:"அடையாள எண்",guarantor_photo_label:"அடையாள அட்டை புகைப்படம்",guarantor_phone_label:"தொலைபேசி எண்",submit_btn_text:"விண்ணப்பத்தை சமர்ப்பிக்கவும்",submitting:"படங்களை பதிவேற்றுகிறது...",success_msg:"✅ விண்ணப்பம் வெற்றிகரமாக சமர்ப்பிக்கப்பட்டது!",repayment_form_title:"💰 கடன் செலுத்துதல் விவரங்கள்",repay_name_label:"முழு பெயர்",repay_nic_label:"தேசிய அடையாள அட்டை எண்",repay_amount_label:"செலுத்தும் தொகை (ரூ.)",repay_amount_hint:"நீங்கள் செலுத்தும் தொகையை உள்ளிடுங்கள்",repay_photo_label:"வங்கி ரசீது / ஸ்கிரீன்ஷாட்",repay_phone_label:"தொலைபேசி எண்",repay_submit_btn:"செலுத்துதலை உறுதிப்படுத்தவும்",repay_success_msg:"✅ செலுத்துதல் பதிவு செய்யப்பட்டது!",repay_photo_required:"ரசீது தேவை",repay_amount_required:"செலுத்தும் தொகை தேவை",repay_submitting:"படத்தை பதிவேற்றுகிறது...",whatsapp_text:"WhatsApp இல் பேசுங்கள்"},
+    en:{nav_home:"Home",nav_services:"Services",nav_loan:"Loan",nav_about:"About",nav_contact:"Contact",hero_title:"🏦 Smart Loans, Brighter Tomorrow",company_description:"We're here to turn your dreams into reality. Reliable, fast, and transparent loan services.",apply_now_btn:"Apply for Loan Now",stat_years:"Years of Experience",stat_satisfaction:"Satisfaction Rate",stat_loans:"Loans Disbursed",notice_interest_label:"Monthly Interest:",notice_interest_value:"1.5% (18% p.a.)",notice_late_label:"Late Fee:",notice_late_value:"LKR 100/day",notice_payment_label:"Payment Options:",notice_payment_value:"Monthly / Weekly",notice_blacklist_label:"Blacklist:",notice_blacklist_value:"No payment for 3 months",checking_blacklist:"Checking blacklist status...",services_title:"Our Services",service1_title:"Personal Loans",service1_desc:"Low interest, fast approval.",service2_title:"Business Loans",service2_desc:"Flexible installments.",service3_title:"Instant Approval",service3_desc:"Response within 24 hours.",about_title:"About Us",about_text:"LendEasy Finance has been a trusted financial service provider in Sri Lanka for over 15 years.",mission_title:"Our Mission",mission_desc:" Fair financial access for every Sri Lankan.",contact_title:"Contact Us",contact_address:"Colombo 03, Sri Lanka",contact_phone:"+94 112 345 678 / +94 77 123 4567",contact_hours:"Mon-Fri: 9:00AM - 5:30PM, Sat: 9:00AM - 1:00PM",back_home:"Back to Home",loan_apply_tab:"Apply for Loan",loan_repay_tab:"Repay Loan",full_name_label:"Full Name",address_label:"Address",nic_label:"NIC Number",nic_front_label:"NIC Front",nic_back_label:"NIC Back",phone_label:"Phone Number",loan_amount_label:"Loan Amount (LKR)",loan_max_hint:"Maximum loan: LKR 50,000/-",loan_max_error:"Loan amount cannot exceed LKR 50,000",guarantor_check_label:"Tick if you have a guarantor",guarantor_details_title:"📌 Guarantor Details",guarantor_name_label:"Name",guarantor_id_label:"ID Number",guarantor_photo_label:"ID Photo",guarantor_phone_label:"Phone Number",submit_btn_text:"Submit Application",submitting:"Uploading images...",success_msg:"✅ Your loan application submitted successfully!",repayment_form_title:"💰 Loan Repayment Details",repay_name_label:"Full Name",repay_nic_label:"NIC Number",repay_amount_label:"Payment Amount (LKR)",repay_amount_hint:"Enter the amount you are paying",repay_photo_label:"Bank Slip / Screenshot",repay_phone_label:"Phone Number",repay_submit_btn:"Confirm Payment",repay_success_msg:"✅ Repayment recorded successfully! Thank you.",repay_photo_required:"Bank slip or screenshot required",repay_amount_required:"Payment amount is required",repay_submitting:"Uploading image...",whatsapp_text:"Chat on WhatsApp"}
   };
   let currentLang = "si";
-  function t(k) { return translations[currentLang][k] || translations.si[k] || k; }
+  function t(k){ return translations[currentLang][k] || translations.si[k] || k; }
 
-  // ── Navigation ─────────────────────────────────────────────────
+  // ── Navigation ───────────────────────────────────────────────────
   const homeView = document.getElementById('homeView');
   const loanView = document.getElementById('loanView');
   const navLinks = document.querySelectorAll('[data-nav]');
 
-  function showHome() {
-    homeView.style.display = 'block'; loanView.style.display = 'none';
-    window.scrollTo({ top: 0, behavior: 'smooth' }); updateActiveNav('home');
-  }
-  function showLoan() {
-    homeView.style.display = 'none'; loanView.style.display = 'block';
-    window.scrollTo({ top: 0, behavior: 'smooth' }); updateActiveNav('loan');
-  }
-  function updateActiveNav(id) {
-    navLinks.forEach(l => l.getAttribute('data-nav') === id ? l.classList.add('active-nav') : l.classList.remove('active-nav'));
-  }
+  function showHome() { homeView.style.display='block'; loanView.style.display='none'; window.scrollTo({top:0,behavior:'smooth'}); updateActiveNav('home'); }
+  function showLoan() { homeView.style.display='none'; loanView.style.display='block'; window.scrollTo({top:0,behavior:'smooth'}); updateActiveNav('loan'); }
+  function updateActiveNav(id) { navLinks.forEach(l => l.getAttribute('data-nav')===id ? l.classList.add('active-nav') : l.classList.remove('active-nav')); }
   function scrollToSection(id) {
-    if (homeView.style.display !== 'block') showHome();
-    setTimeout(() => { const el = document.getElementById(id); if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 100);
+    if (homeView.style.display!=='block') showHome();
+    setTimeout(()=>{ const el=document.getElementById(id); if(el) el.scrollIntoView({behavior:'smooth',block:'start'}); },100);
   }
-
   navLinks.forEach(link => {
     link.addEventListener('click', e => {
       e.preventDefault();
       const tgt = link.getAttribute('data-nav');
-      if (tgt === 'home') showHome();
-      else if (tgt === 'loan') showLoan();
-      else if (tgt === 'services') scrollToSection('services-section');
-      else if (tgt === 'about') scrollToSection('about-section');
-      else if (tgt === 'contact') scrollToSection('contact-section');
-      if (window.innerWidth <= 800) document.getElementById('navLinks')?.classList.remove('show');
+      if (tgt==='home') showHome();
+      else if (tgt==='loan') showLoan();
+      else if (tgt==='services') scrollToSection('services-section');
+      else if (tgt==='about') scrollToSection('about-section');
+      else if (tgt==='contact') scrollToSection('contact-section');
+      if (window.innerWidth<=800) document.getElementById('navLinks')?.classList.remove('show');
     });
   });
-
   document.getElementById('logoHomeBtn')?.addEventListener('click', showHome);
   document.getElementById('backToHomeFromLoan')?.addEventListener('click', showHome);
   document.getElementById('frontPageLoanBtn')?.addEventListener('click', showLoan);
-  document.getElementById('hamburgerBtn')?.addEventListener('click', () => document.getElementById('navLinks')?.classList.toggle('show'));
+  document.getElementById('hamburgerBtn')?.addEventListener('click', ()=> document.getElementById('navLinks')?.classList.toggle('show'));
 
-  // ── Language ───────────────────────────────────────────────────
-  function updateAllTexts() {
-    document.querySelectorAll('[data-i18n]').forEach(el => {
-      const k = el.getAttribute('data-i18n');
-      if (k && translations[currentLang][k]) el.innerText = t(k);
-    });
-  }
+  // ── Language ─────────────────────────────────────────────────────
+  function updateAllTexts() { document.querySelectorAll('[data-i18n]').forEach(el=>{ const k=el.getAttribute('data-i18n'); if(k&&translations[currentLang][k]) el.innerText=t(k); }); }
   function setLanguage(lang) {
-    currentLang = lang; updateAllTexts();
-    document.querySelectorAll('.lang-nav-btn').forEach(b =>
-      b.getAttribute('data-lang') === lang ? b.classList.add('active') : b.classList.remove('active'));
+    currentLang=lang; updateAllTexts();
+    document.querySelectorAll('.lang-nav-btn').forEach(b=> b.getAttribute('data-lang')===lang ? b.classList.add('active') : b.classList.remove('active'));
   }
-  document.querySelectorAll('.lang-nav-btn').forEach(b => b.addEventListener('click', () => setLanguage(b.getAttribute('data-lang'))));
+  document.querySelectorAll('.lang-nav-btn').forEach(b=> b.addEventListener('click',()=> setLanguage(b.getAttribute('data-lang'))));
 
-  // ── Stats countup ──────────────────────────────────────────────
-  let counted = false;
+  // ── Stats countup ────────────────────────────────────────────────
+  let counted=false;
   function startCountup() {
-    if (counted) return;
-    const grid = document.getElementById('statsGrid');
-    if (!grid) return;
-    const rect = grid.getBoundingClientRect();
-    if (rect.top < window.innerHeight - 100) {
-      counted = true;
-      const targets = { yearsCount: 15, satisfactionCount: 98, loansCount: 1850 };
-      const els = {
-        yearsCount: document.getElementById('yearsCount'),
-        satisfactionCount: document.getElementById('satisfactionCount'),
-        loansCount: document.getElementById('loansCount')
-      };
-      let st = null; const dur = 1500;
-      function animate(now) {
-        if (!st) st = now;
-        const p = Math.min(1, (now - st) / dur);
-        for (let [id, target] of Object.entries(targets)) {
-          if (els[id]) els[id].innerText = (id === 'satisfactionCount') ? Math.floor(p * target) + '%' : Math.floor(p * target);
-        }
-        if (p < 1) requestAnimationFrame(animate);
-        else { if (els.satisfactionCount) els.satisfactionCount.innerText = '98%'; if (els.yearsCount) els.yearsCount.innerText = '15'; if (els.loansCount) els.loansCount.innerText = '1850'; }
+    if(counted) return;
+    const grid=document.getElementById('statsGrid');
+    if(!grid) return;
+    if(grid.getBoundingClientRect().top < window.innerHeight-100) {
+      counted=true;
+      const targets={yearsCount:15,satisfactionCount:98,loansCount:1850};
+      const els={yearsCount:document.getElementById('yearsCount'),satisfactionCount:document.getElementById('satisfactionCount'),loansCount:document.getElementById('loansCount')};
+      let st=null; const dur=1500;
+      function animate(now){ if(!st)st=now; const p=Math.min(1,(now-st)/dur);
+        for(let[id,target] of Object.entries(targets)){ if(els[id]) els[id].innerText=(id==='satisfactionCount')?Math.floor(p*target)+'%':Math.floor(p*target); }
+        if(p<1) requestAnimationFrame(animate);
+        else { els.satisfactionCount.innerText='98%'; els.yearsCount.innerText='15'; els.loansCount.innerText='1850'; }
       }
       requestAnimationFrame(animate);
     }
   }
   window.addEventListener('scroll', startCountup);
 
-  // ── Photo preview helper ───────────────────────────────────────
+  // ── Photo preview ────────────────────────────────────────────────
   function previewPhoto(inputId, previewId) {
-    const inp = document.getElementById(inputId);
-    if (!inp) return;
-    inp.addEventListener('change', e => {
-      const c = document.getElementById(previewId);
-      if (c && e.target.files[0]) {
-        const r = new FileReader();
-        r.onload = ev => { c.innerHTML = `<img src="${ev.target.result}" class="preview-img">`; };
-        r.readAsDataURL(e.target.files[0]);
-      }
+    document.getElementById(inputId)?.addEventListener('change', e => {
+      const c=document.getElementById(previewId);
+      if(c&&e.target.files[0]){ const r=new FileReader(); r.onload=ev=>{ c.innerHTML=`<img src="${ev.target.result}" class="preview-img">`; }; r.readAsDataURL(e.target.files[0]); }
     });
   }
-  previewPhoto('nicFrontPhoto', 'nicFrontPreview');
-  previewPhoto('nicBackPhoto', 'nicBackPreview');
-  previewPhoto('guarantorPhoto', 'guarantorPreview');
-  previewPhoto('repayReceipt', 'repayReceiptPreview');
+  previewPhoto('nicFrontPhoto','nicFrontPreview');
+  previewPhoto('nicBackPhoto','nicBackPreview');
+  previewPhoto('guarantorPhoto','guarantorPreview');
+  previewPhoto('repayReceipt','repayReceiptPreview');
 
-  document.getElementById('hasGuarantorCheck')?.addEventListener('change', function () {
-    document.getElementById('guarantorSection').style.display = this.checked ? 'block' : 'none';
-  });
+  document.getElementById('hasGuarantorCheck')?.addEventListener('change', function(){ document.getElementById('guarantorSection').style.display=this.checked?'block':'none'; });
 
-  function setProgress(barId, pct) {
-    const b = document.getElementById(barId); if (b) b.style.width = pct + '%';
-  }
+  function setProgress(barId,pct){ const b=document.getElementById(barId); if(b) b.style.width=pct+'%'; }
 
-  // ── LOAN APPLICATION SUBMIT ────────────────────────────────────
-  // ✅ FIX: progressBox hidden in finally block — always hides whether success or error
+  // ── LOAN APPLICATION SUBMIT ──────────────────────────────────────
   document.getElementById('loanAppForm')?.addEventListener('submit', async e => {
     e.preventDefault();
-    const feedbackDiv  = document.getElementById('formFeedback');
-    const submitBtn    = document.getElementById('submitApplicationBtn');
-    const progressBox  = document.getElementById('applyProgress');
-    const progressTxt  = document.getElementById('applyProgressText');
+    const feedbackDiv = document.getElementById('formFeedback');
+    const submitBtn   = document.getElementById('submitApplicationBtn');
+    const progressBox = document.getElementById('applyProgress');
+    const progressTxt = document.getElementById('applyProgressText');
+    const checkingBox = document.getElementById('checkingBlacklistBox');
 
-    const fullName      = document.getElementById('fullName').value.trim();
-    const address       = document.getElementById('address').value.trim();
-    const nicNumber     = document.getElementById('nicNumber').value.trim();
-    const applicantPhone= document.getElementById('applicantPhone').value.trim();
-    const loanAmount    = document.getElementById('loanAmount').value.trim();
-    const nicFront      = document.getElementById('nicFrontPhoto').files[0];
-    const nicBack       = document.getElementById('nicBackPhoto').files[0];
-    const hasGuarantor  = document.getElementById('hasGuarantorCheck').checked;
-    let gName = '', gId = '', gPhone = '', gPhoto = null;
-    if (hasGuarantor) {
-      gName  = document.getElementById('guarantorName').value.trim();
-      gId    = document.getElementById('guarantorIdNumber').value.trim();
-      gPhone = document.getElementById('guarantorPhone').value.trim();
-      gPhoto = document.getElementById('guarantorPhoto').files[0];
-    }
+    const fullName       = document.getElementById('fullName').value.trim();
+    const address        = document.getElementById('address').value.trim();
+    const nicNumber      = document.getElementById('nicNumber').value.trim();
+    const applicantPhone = document.getElementById('applicantPhone').value.trim();
+    const loanAmount     = document.getElementById('loanAmount').value.trim();
+    const nicFront       = document.getElementById('nicFrontPhoto').files[0];
+    const nicBack        = document.getElementById('nicBackPhoto').files[0];
+    const hasGuarantor   = document.getElementById('hasGuarantorCheck').checked;
+    let gName='', gId='', gPhone='', gPhoto=null;
+    if(hasGuarantor){ gName=document.getElementById('guarantorName').value.trim(); gId=document.getElementById('guarantorIdNumber').value.trim(); gPhone=document.getElementById('guarantorPhone').value.trim(); gPhoto=document.getElementById('guarantorPhoto').files[0]; }
 
-    const errors = [];
-    if (!fullName) errors.push('Name required');
-    if (!address) errors.push('Address required');
-    if (!nicNumber) errors.push('NIC required');
-    if (!applicantPhone) errors.push('Phone required');
-    if (!loanAmount) errors.push('Loan amount required');
-    // ✅ FIX: enforce max 50,000 in JS validation too
-    if (loanAmount && parseFloat(loanAmount) > 50000) errors.push(t('loan_max_error'));
-    if (!nicFront) errors.push('NIC front photo required');
-    if (!nicBack) errors.push('NIC back photo required');
-    if (hasGuarantor) {
-      if (!gName) errors.push('Guarantor name required');
-      if (!gId) errors.push('Guarantor ID required');
-      if (!gPhone) errors.push('Guarantor phone required');
-      if (!gPhoto) errors.push('Guarantor photo required');
-    }
-    if (errors.length) { feedbackDiv.innerHTML = `<div class="error-text">⚠️ ${errors.join(' | ')}</div>`; return; }
+    const errors=[];
+    if(!fullName) errors.push('Name required');
+    if(!address) errors.push('Address required');
+    if(!nicNumber) errors.push('NIC required');
+    if(!applicantPhone) errors.push('Phone required');
+    if(!loanAmount) errors.push('Loan amount required');
+    if(loanAmount && parseFloat(loanAmount)>50000) errors.push(t('loan_max_error'));
+    if(!nicFront) errors.push('NIC front photo required');
+    if(!nicBack) errors.push('NIC back photo required');
+    if(hasGuarantor){ if(!gName) errors.push('Guarantor name required'); if(!gId) errors.push('Guarantor ID required'); if(!gPhone) errors.push('Guarantor phone required'); if(!gPhoto) errors.push('Guarantor photo required'); }
+    if(errors.length){ feedbackDiv.innerHTML=`<div class="error-text">⚠️ ${errors.join(' | ')}</div>`; return; }
 
+    // ── BLACKLIST CHECK ──
     submitBtn.disabled = true;
-    submitBtn.innerHTML = `<i class="fas fa-spinner fa-spin"></i> ${t('submitting')}`;
-    progressBox.style.display = 'block';
-    setProgress('applyProgressBar', 0);
+    submitBtn.innerHTML = `<i class="fas fa-shield-alt fa-spin"></i> ${t('checking_blacklist')}`;
+    checkingBox.style.display = 'block';
     feedbackDiv.innerHTML = '';
 
-    try {
-      progressTxt.textContent = 'Compressing NIC front...'; setProgress('applyProgressBar', 15);
-      const nicFrontB64 = await compressImage(nicFront);
+    const blacklistEntry = await checkBlacklist(nicNumber, applicantPhone);
+    checkingBox.style.display = 'none';
 
-      progressTxt.textContent = 'Compressing NIC back...'; setProgress('applyProgressBar', 35);
-      const nicBackB64 = await compressImage(nicBack);
-
-      let guarantorPhotoB64 = null;
-      if (hasGuarantor && gPhoto) {
-        progressTxt.textContent = 'Compressing guarantor photo...'; setProgress('applyProgressBar', 55);
-        guarantorPhotoB64 = await compressImage(gPhoto);
-      }
-
-      progressTxt.textContent = 'Saving to Firestore...'; setProgress('applyProgressBar', 80);
-      await addDoc(collection(db, 'loan_applications'), {
-        fullName, address, nicNumber, applicantPhone,
-        loanAmount: parseFloat(loanAmount),
-        nicFrontImg: nicFrontB64,
-        nicBackImg: nicBackB64,
-        hasGuarantor,
-        status: 'pending',
-        timestamp: serverTimestamp(),
-        guarantor: hasGuarantor ? { name: gName, idNumber: gId, phone: gPhone, idPhotoImg: guarantorPhotoB64 } : null
-      });
-
-      setProgress('applyProgressBar', 100);
-      feedbackDiv.innerHTML = `<div class="success-message">${t('success_msg')}</div>`;
-      document.getElementById('loanAppForm').reset();
-      document.getElementById('guarantorSection').style.display = 'none';
-      document.getElementById('hasGuarantorCheck').checked = false;
-      ['nicFrontPreview', 'nicBackPreview', 'guarantorPreview'].forEach(id => { document.getElementById(id).innerHTML = ''; });
-    } catch (err) {
-      console.error('Firestore error:', err);
-      feedbackDiv.innerHTML = `<div class="error-text">⚠️ Error: ${err.message}</div>`;
-    } finally {
-      // ✅ FIX: always hide progress box — was missing from finally before
-      progressBox.style.display = 'none';
+    if (blacklistEntry) {
+      // REJECTED — show blacklist rejection UI
+      feedbackDiv.innerHTML = buildBlacklistRejectionHtml(blacklistEntry, currentLang);
       submitBtn.disabled = false;
       submitBtn.innerHTML = `<span data-i18n="submit_btn_text">${t('submit_btn_text')}</span>`;
+      feedbackDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      return;
+    }
+
+    // ── PROCEED WITH UPLOAD ──
+    submitBtn.innerHTML = `<i class="fas fa-spinner fa-spin"></i> ${t('submitting')}`;
+    progressBox.style.display='block'; setProgress('applyProgressBar',0);
+
+    try {
+      progressTxt.textContent='Uploading NIC front...'; setProgress('applyProgressBar',20);
+      const nicFrontURL = await uploadToCloudinary(nicFront);
+
+      progressTxt.textContent='Uploading NIC back...'; setProgress('applyProgressBar',40);
+      const nicBackURL = await uploadToCloudinary(nicBack);
+
+      let guarantorPhotoURL=null;
+      if(hasGuarantor && gPhoto){ progressTxt.textContent='Uploading guarantor photo...'; setProgress('applyProgressBar',60); guarantorPhotoURL=await uploadToCloudinary(gPhoto); }
+
+      progressTxt.textContent='Saving...'; setProgress('applyProgressBar',80);
+      await push(ref(db,'loan_applications'),{
+        fullName, address, nicNumber, applicantPhone,
+        loanAmount: parseFloat(loanAmount),
+        nicFrontImg: nicFrontURL,
+        nicBackImg:  nicBackURL,
+        hasGuarantor,
+        status: 'pending',
+        timestamp: Date.now(),
+        guarantor: hasGuarantor ? { name:gName, idNumber:gId, phone:gPhone, idPhotoImg:guarantorPhotoURL } : null
+      });
+
+      setProgress('applyProgressBar',100);
+      feedbackDiv.innerHTML=`<div class="success-message">${t('success_msg')}</div>`;
+      document.getElementById('loanAppForm').reset();
+      document.getElementById('guarantorSection').style.display='none';
+      document.getElementById('hasGuarantorCheck').checked=false;
+      ['nicFrontPreview','nicBackPreview','guarantorPreview'].forEach(id=>{ document.getElementById(id).innerHTML=''; });
+    } catch(err) {
+      console.error(err);
+      feedbackDiv.innerHTML=`<div class="error-text">⚠️ Error: ${err.message}</div>`;
+    } finally {
+      progressBox.style.display='none';
+      submitBtn.disabled=false;
+      submitBtn.innerHTML=`<span data-i18n="submit_btn_text">${t('submit_btn_text')}</span>`;
     }
   });
 
-  // ── REPAYMENT SUBMIT ───────────────────────────────────────────
-  // ✅ FIX: same finally-block fix applied here
+  // ── REPAYMENT SUBMIT ─────────────────────────────────────────────
   document.getElementById('repaymentForm')?.addEventListener('submit', async e => {
     e.preventDefault();
     const feedbackDiv = document.getElementById('repaymentFeedback');
@@ -484,61 +557,61 @@
 
     const fullName    = document.getElementById('repayFullName').value.trim();
     const nicNumber   = document.getElementById('repayNic').value.trim();
+    const amount      = document.getElementById('repayAmount').value.trim();
     const receiptFile = document.getElementById('repayReceipt').files[0];
     const phoneNumber = document.getElementById('repayPhone').value.trim();
 
-    const errors = [];
-    if (!fullName) errors.push('Name required');
-    if (!nicNumber) errors.push('NIC required');
-    if (!receiptFile) errors.push(t('repay_photo_required'));
-    if (!phoneNumber) errors.push('Phone required');
-    if (errors.length) { feedbackDiv.innerHTML = `<div class="error-text">⚠️ ${errors.join(' | ')}</div>`; return; }
+    const errors=[];
+    if(!fullName) errors.push('Name required');
+    if(!nicNumber) errors.push('NIC required');
+    if(!amount || parseFloat(amount) <= 0) errors.push(t('repay_amount_required'));
+    if(!receiptFile) errors.push(t('repay_photo_required'));
+    if(!phoneNumber) errors.push('Phone required');
+    if(errors.length){ feedbackDiv.innerHTML=`<div class="error-text">⚠️ ${errors.join(' | ')}</div>`; return; }
 
-    submitBtn.disabled = true;
-    submitBtn.innerHTML = `<i class="fas fa-spinner fa-spin"></i> ${t('repay_submitting')}`;
-    progressBox.style.display = 'block';
-    setProgress('repayProgressBar', 0);
-    feedbackDiv.innerHTML = '';
+    submitBtn.disabled=true;
+    submitBtn.innerHTML=`<i class="fas fa-spinner fa-spin"></i> ${t('repay_submitting')}`;
+    progressBox.style.display='block'; setProgress('repayProgressBar',0); feedbackDiv.innerHTML='';
 
     try {
-      progressTxt.textContent = 'Compressing receipt image...'; setProgress('repayProgressBar', 40);
-      const receiptB64 = await compressImage(receiptFile);
+      progressTxt.textContent='Uploading receipt...'; setProgress('repayProgressBar',50);
+      const receiptURL = await uploadToCloudinary(receiptFile);
 
-      progressTxt.textContent = 'Saving to Firestore...'; setProgress('repayProgressBar', 80);
-      await addDoc(collection(db, 'loan_repayments'), {
+      progressTxt.textContent='Saving...'; setProgress('repayProgressBar',80);
+      await push(ref(db,'loan_repayments'),{
         fullName, nicNumber, phoneNumber,
-        receiptImg: receiptB64,
+        amount: parseFloat(amount),
+        receiptImg: receiptURL,
         status: 'pending',
-        timestamp: serverTimestamp()
+        timestamp: Date.now()
       });
 
-      setProgress('repayProgressBar', 100);
-      feedbackDiv.innerHTML = `<div class="success-message">${t('repay_success_msg')}</div>`;
+      setProgress('repayProgressBar',100);
+      feedbackDiv.innerHTML=`<div class="success-message">${t('repay_success_msg')}</div>`;
       document.getElementById('repaymentForm').reset();
-      document.getElementById('repayReceiptPreview').innerHTML = '';
-    } catch (err) {
-      console.error('Firestore error:', err);
-      feedbackDiv.innerHTML = `<div class="error-text">⚠️ Error: ${err.message}</div>`;
+      document.getElementById('repayReceiptPreview').innerHTML='';
+    } catch(err) {
+      console.error(err);
+      feedbackDiv.innerHTML=`<div class="error-text">⚠️ Error: ${err.message}</div>`;
     } finally {
-      // ✅ FIX: always hide progress box
-      progressBox.style.display = 'none';
-      submitBtn.disabled = false;
-      submitBtn.innerHTML = `<span data-i18n="repay_submit_btn">${t('repay_submit_btn')}</span>`;
+      progressBox.style.display='none';
+      submitBtn.disabled=false;
+      submitBtn.innerHTML=`<span data-i18n="repay_submit_btn">${t('repay_submit_btn')}</span>`;
     }
   });
 
-  // ── Loan tabs ──────────────────────────────────────────────────
-  const tabBtns   = document.querySelectorAll('.tab-btn');
+  // ── Loan tabs ────────────────────────────────────────────────────
+  const tabBtns    = document.querySelectorAll('.tab-btn');
   const applyPanel = document.getElementById('applyLoanPanel');
   const repayPanel = document.getElementById('repayLoanPanel');
-  function setLoanTab(tab) {
-    applyPanel.style.display = tab === 'apply' ? 'block' : 'none';
-    repayPanel.style.display = tab === 'repay' ? 'block' : 'none';
-    tabBtns.forEach(b => b.getAttribute('data-loan-tab') === tab ? b.classList.add('active-tab') : b.classList.remove('active-tab'));
+  function setLoanTab(tab){
+    applyPanel.style.display=tab==='apply'?'block':'none';
+    repayPanel.style.display=tab==='repay'?'block':'none';
+    tabBtns.forEach(b=> b.getAttribute('data-loan-tab')===tab ? b.classList.add('active-tab') : b.classList.remove('active-tab'));
   }
-  tabBtns.forEach(b => b.addEventListener('click', () => setLoanTab(b.getAttribute('data-loan-tab'))));
+  tabBtns.forEach(b=> b.addEventListener('click',()=> setLoanTab(b.getAttribute('data-loan-tab'))));
 
-  // ── Init ───────────────────────────────────────────────────────
+  // ── Init ─────────────────────────────────────────────────────────
   setLanguage('si');
   setLoanTab('apply');
   showHome();
