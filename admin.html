@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <style>
     *{margin:0;padding:0;box-sizing:border-box}
-    body{font-family:'Segoe UI',system-ui,sans-serif;background:#f0f4f8;color:#1e2f3e;min-height:100vh}
+    body{font-family:'Segoe UI',system-ui,sans-serif;background:#eef2f7;color:#1e2f3e;min-height:100vh}
 
     /* ── LOGIN ── */
     #loginScreen{display:flex;align-items:center;justify-content:center;min-height:100vh;background:linear-gradient(135deg,#0a1f2e,#0f5b8c)}
@@ -22,141 +22,204 @@
 
     /* ── LAYOUT ── */
     #adminApp{display:none}
-    .sidebar{position:fixed;top:0;left:0;width:240px;height:100vh;background:linear-gradient(180deg,#0a1f2e,#0d3550);padding:1.5rem 1rem;display:flex;flex-direction:column;gap:.4rem;z-index:100;overflow-y:auto}
-    .sidebar-logo{font-size:1.3rem;font-weight:800;color:white;padding:.5rem .8rem 1.5rem;border-bottom:1px solid rgba(255,255,255,.1);margin-bottom:.5rem}
+    .sidebar{position:fixed;top:0;left:0;width:230px;height:100vh;background:linear-gradient(180deg,#0a1f2e,#0d3550);padding:1.5rem 1rem;display:flex;flex-direction:column;gap:.3rem;z-index:100;overflow-y:auto}
+    .sidebar-logo{font-size:1.25rem;font-weight:800;color:white;padding:.5rem .8rem 1.5rem;border-bottom:1px solid rgba(255,255,255,.1);margin-bottom:.5rem;display:flex;align-items:center;gap:8px}
     .sidebar-logo span{color:#2b9b7a}
-    .nav-item{display:flex;align-items:center;gap:10px;padding:.75rem 1rem;border-radius:14px;color:#a0bfd0;font-weight:600;cursor:pointer;transition:.2s;font-size:.95rem;border:none;background:none;width:100%;text-align:left}
+    .nav-item{display:flex;align-items:center;gap:10px;padding:.75rem 1rem;border-radius:14px;color:#a0bfd0;font-weight:600;cursor:pointer;transition:.2s;font-size:.9rem;border:none;background:none;width:100%;text-align:left}
     .nav-item:hover{background:rgba(255,255,255,.08);color:white}
     .nav-item.active{background:rgba(43,155,122,.2);color:#2b9b7a}
-    .nav-item i{width:18px;text-align:center}
-    .badge{background:#ef4444;color:white;font-size:.7rem;padding:.15rem .5rem;border-radius:40px;margin-left:auto;font-weight:700}
+    .nav-item i{width:18px;text-align:center;font-size:.9rem}
+    .badge{background:#ef4444;color:white;font-size:.68rem;padding:.12rem .45rem;border-radius:40px;margin-left:auto;font-weight:700;min-width:20px;text-align:center}
     .badge.green{background:#16a34a}
-    .logout-btn{margin-top:auto;display:flex;align-items:center;gap:10px;padding:.75rem 1rem;border-radius:14px;color:#f87171;font-weight:600;cursor:pointer;background:none;border:none;width:100%;font-size:.95rem}
+    .logout-btn{margin-top:auto;display:flex;align-items:center;gap:10px;padding:.75rem 1rem;border-radius:14px;color:#f87171;font-weight:600;cursor:pointer;background:none;border:none;width:100%;font-size:.9rem}
     .logout-btn:hover{background:rgba(248,113,113,.1)}
-    .main-area{margin-left:240px;padding:2rem;min-height:100vh}
-    .topbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:2rem}
-    .page-title{font-size:1.6rem;font-weight:800;color:#0f2d42}
-    .topbar-right{display:flex;align-items:center;gap:1rem;color:#5a7a8e;font-size:.9rem}
+    .main-area{margin-left:230px;padding:1.8rem;min-height:100vh}
+    .topbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:1.5rem}
+    .page-title{font-size:1.5rem;font-weight:800;color:#0f2d42}
+    .live-dot{display:flex;align-items:center;gap:.5rem;color:#5a7a8e;font-size:.85rem;background:white;padding:.4rem .9rem;border-radius:40px;box-shadow:0 2px 8px rgba(0,0,0,.06)}
+    .live-dot::before{content:'';width:8px;height:8px;border-radius:50%;background:#2b9b7a;animation:pulse 2s infinite}
+    @keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
 
     /* ── STATS ── */
-    .stats-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:1.2rem;margin-bottom:2rem}
-    .stat-card{background:white;border-radius:20px;padding:1.4rem 1.2rem;box-shadow:0 4px 12px rgba(0,0,0,.05);display:flex;align-items:center;gap:1rem}
-    .stat-icon{width:50px;height:50px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0}
-    .stat-icon.blue{background:#e0f0ff;color:#0f5b8c}
-    .stat-icon.yellow{background:#fff8e0;color:#d97706}
-    .stat-icon.green{background:#dcfce7;color:#16a34a}
-    .stat-icon.red{background:#fee2e2;color:#dc2626}
-    .stat-icon.purple{background:#f3e8ff;color:#7c3aed}
-    .stat-value{font-size:1.8rem;font-weight:800;color:#0f2d42;line-height:1}
-    .stat-label{font-size:.75rem;color:#7a9ab0;font-weight:600;margin-top:.2rem}
+    .stats-row{display:grid;grid-template-columns:repeat(5,1fr);gap:1rem;margin-bottom:1.8rem}
+    .stat-card{background:white;border-radius:18px;padding:1.2rem 1rem;box-shadow:0 2px 10px rgba(0,0,0,.05);display:flex;flex-direction:column;gap:.3rem;border-top:4px solid transparent;transition:.2s}
+    .stat-card:hover{transform:translateY(-2px);box-shadow:0 6px 18px rgba(0,0,0,.1)}
+    .stat-card.blue{border-top-color:#0f5b8c}
+    .stat-card.yellow{border-top-color:#f59e0b}
+    .stat-card.green{border-top-color:#16a34a}
+    .stat-card.red{border-top-color:#dc2626}
+    .stat-card.purple{border-top-color:#7c3aed}
+    .stat-value{font-size:1.9rem;font-weight:800;color:#0f2d42;line-height:1}
+    .stat-label{font-size:.72rem;color:#7a9ab0;font-weight:600;text-transform:uppercase;letter-spacing:.04em}
+    .stat-icon{font-size:1.2rem;margin-bottom:.2rem}
+    .stat-card.blue .stat-icon{color:#0f5b8c}
+    .stat-card.yellow .stat-icon{color:#f59e0b}
+    .stat-card.green .stat-icon{color:#16a34a}
+    .stat-card.red .stat-icon{color:#dc2626}
+    .stat-card.purple .stat-icon{color:#7c3aed}
 
     /* ── FILTER / SEARCH ── */
-    .filter-bar{display:flex;gap:.7rem;margin-bottom:1.5rem;flex-wrap:wrap;align-items:center}
-    .filter-btn{background:white;border:1.5px solid #e0eaf0;padding:.5rem 1.2rem;border-radius:40px;font-weight:600;font-size:.85rem;cursor:pointer;transition:.2s;color:#4a627a}
-    .filter-btn:hover{border-color:#0f5b8c;color:#0f5b8c}
-    .filter-btn.active{background:#0f5b8c;color:white;border-color:#0f5b8c}
-    .search-box{background:white;border:1.5px solid #e0eaf0;padding:.5rem 1rem;border-radius:40px;font-size:.9rem;font-family:inherit;outline:none;transition:.2s;margin-left:auto;width:220px}
-    .search-box:focus{border-color:#0f5b8c}
+    .filter-bar{display:flex;gap:.6rem;margin-bottom:1.4rem;flex-wrap:wrap;align-items:center;background:white;padding:.8rem 1rem;border-radius:16px;box-shadow:0 2px 8px rgba(0,0,0,.04)}
+    .filter-btn{background:#f0f4f8;border:none;padding:.45rem 1.1rem;border-radius:40px;font-weight:600;font-size:.82rem;cursor:pointer;transition:.2s;color:#4a627a;font-family:inherit}
+    .filter-btn:hover{background:#e0eaf0;color:#0f5b8c}
+    .filter-btn.active{background:#0f5b8c;color:white}
+    .search-box{background:#f0f4f8;border:none;padding:.5rem 1rem;border-radius:40px;font-size:.88rem;font-family:inherit;outline:none;transition:.2s;margin-left:auto;width:220px;color:#1e2f3e}
+    .search-box:focus{background:#e8f0f8;box-shadow:0 0 0 2px rgba(15,91,140,.15)}
 
-    /* ── CARDS ── */
-    .cards-list{display:flex;flex-direction:column;gap:1rem}
-    .loan-entry{background:white;border-radius:20px;padding:1.4rem 1.5rem;box-shadow:0 4px 12px rgba(0,0,0,.04);border-left:4px solid #e0eaf0;transition:.2s}
-    .loan-entry.pending{border-left-color:#f59e0b}
-    .loan-entry.accepted{border-left-color:#16a34a}
-    .loan-entry.cancelled{border-left-color:#dc2626}
-    .loan-header{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:.5rem}
-    .loan-name{font-size:1.1rem;font-weight:700;color:#0f2d42}
-    .loan-meta{font-size:.82rem;color:#7a9ab0;margin-top:.2rem}
-    .status-badge{padding:.3rem .9rem;border-radius:40px;font-size:.78rem;font-weight:700;text-transform:uppercase}
-    .status-badge.pending{background:#fff8e0;color:#d97706}
-    .status-badge.accepted{background:#dcfce7;color:#16a34a}
-    .status-badge.cancelled{background:#fee2e2;color:#dc2626}
-    .loan-details{display:flex;flex-wrap:wrap;gap:1rem;margin:1rem 0;font-size:.88rem}
-    .loan-detail-item{display:flex;align-items:center;gap:6px;color:#4a627a}
-    .loan-detail-item i{color:#0f5b8c;width:14px}
-    .loan-photos{display:flex;gap:.7rem;margin:.8rem 0;flex-wrap:wrap}
-    .photo-thumb{width:80px;height:80px;object-fit:cover;border-radius:12px;border:2px solid #e0eaf0;cursor:pointer;transition:.2s}
-    .photo-thumb:hover{border-color:#0f5b8c;transform:scale(1.05)}
-    .loan-actions{display:flex;gap:.7rem;margin-top:1rem;flex-wrap:wrap}
-    .action-btn{padding:.55rem 1.3rem;border-radius:40px;font-size:.85rem;font-weight:700;cursor:pointer;border:none;transition:.2s;display:flex;align-items:center;gap:6px}
+    /* ── GRID LAYOUT FOR CARDS ── */
+    .cards-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(420px,1fr));gap:1.2rem}
+
+    /* ── LOAN APPLICATION CARD ── */
+    .app-card{background:white;border-radius:20px;overflow:hidden;box-shadow:0 4px 16px rgba(0,0,0,.06);transition:.25s;display:flex;flex-direction:column}
+    .app-card:hover{transform:translateY(-3px);box-shadow:0 10px 28px rgba(15,91,140,.12)}
+
+    /* Card top bar */
+    .card-topbar{padding:1rem 1.2rem .8rem;display:flex;justify-content:space-between;align-items:flex-start;border-bottom:1px solid #f0f4fa}
+    .card-topbar.pending{border-left:4px solid #f59e0b}
+    .card-topbar.accepted{border-left:4px solid #16a34a}
+    .card-topbar.cancelled{border-left:4px solid #dc2626}
+    .card-topbar.rejected{border-left:4px solid #dc2626}
+    .card-person{display:flex;align-items:center;gap:.7rem}
+    .card-avatar{width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.1rem;font-weight:800;color:white;flex-shrink:0}
+    .card-avatar.pending{background:linear-gradient(135deg,#f59e0b,#d97706)}
+    .card-avatar.accepted{background:linear-gradient(135deg,#16a34a,#15803d)}
+    .card-avatar.cancelled,.card-avatar.rejected{background:linear-gradient(135deg,#dc2626,#b91c1c)}
+    .card-name{font-size:1rem;font-weight:700;color:#0f2d42;line-height:1.2}
+    .card-date{font-size:.72rem;color:#9ab0c0;margin-top:.15rem}
+    .card-status{padding:.28rem .8rem;border-radius:40px;font-size:.72rem;font-weight:700;text-transform:uppercase;flex-shrink:0}
+    .card-status.pending{background:#fff8e0;color:#d97706}
+    .card-status.accepted{background:#dcfce7;color:#16a34a}
+    .card-status.cancelled,.card-status.rejected{background:#fee2e2;color:#dc2626}
+
+    /* Card info grid */
+    .card-info{padding:.8rem 1.2rem;display:grid;grid-template-columns:1fr 1fr;gap:.5rem .8rem}
+    .ci-item{display:flex;flex-direction:column;gap:.15rem}
+    .ci-label{font-size:.68rem;font-weight:600;color:#9ab0c0;text-transform:uppercase;letter-spacing:.04em}
+    .ci-value{font-size:.88rem;font-weight:600;color:#1e2f3e;word-break:break-all}
+    .ci-value.amount{font-size:1rem;font-weight:800;color:#0f5b8c}
+    .ci-value.green{color:#16a34a}
+
+    /* NIC photos */
+    .card-photos{padding:.6rem 1.2rem;display:flex;gap:.5rem;flex-wrap:wrap}
+    .photo-chip{display:flex;align-items:center;gap:.4rem;background:#f0f4fa;border-radius:30px;padding:.3rem .7rem;cursor:pointer;transition:.2s;font-size:.78rem;font-weight:600;color:#0f5b8c;border:1px solid #e0eaf0}
+    .photo-chip:hover{background:#0f5b8c;color:white;border-color:#0f5b8c}
+    .photo-chip img{width:24px;height:24px;object-fit:cover;border-radius:50%;border:1px solid white}
+    .photo-chip i{font-size:.75rem}
+
+    /* Financial panel inside card */
+    .card-financial{margin:.2rem 1.2rem .8rem;background:linear-gradient(135deg,#f0f9ff,#f0fff4);border-radius:14px;padding:.8rem 1rem;border:1px solid #d4eaf8}
+    .fin-header{font-size:.75rem;font-weight:700;color:#0f5b8c;margin-bottom:.6rem;display:flex;align-items:center;gap:5px}
+    .fin-grid-mini{display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem}
+    .fin-mini-item{background:white;border-radius:10px;padding:.5rem .6rem;text-align:center;box-shadow:0 1px 4px rgba(0,0,0,.04)}
+    .fin-mini-label{font-size:.62rem;color:#9ab0c0;font-weight:600;margin-bottom:.15rem;text-transform:uppercase}
+    .fin-mini-value{font-size:.85rem;font-weight:800;color:#0f2d42}
+    .fin-mini-value.red{color:#dc2626}
+    .fin-mini-value.green{color:#16a34a}
+    .fin-mini-value.orange{color:#d97706}
+    .fin-mini-value.blue{color:#0f5b8c}
+    .outstanding-pill{background:linear-gradient(95deg,#dc2626,#b91c1c);color:white;border-radius:10px;padding:.55rem .9rem;margin-top:.6rem;display:flex;justify-content:space-between;align-items:center;font-size:.82rem;font-weight:700}
+    .outstanding-pill.settled{background:linear-gradient(95deg,#16a34a,#15803d)}
+    .late-chip{background:#fff8e0;border:1px solid #fde68a;border-radius:8px;padding:.35rem .7rem;margin-top:.4rem;font-size:.72rem;color:#92400e;font-weight:600;display:flex;align-items:center;gap:5px}
+
+    /* Repayment mini history */
+    .repay-mini{margin-top:.5rem}
+    .repay-mini-title{font-size:.68rem;font-weight:700;color:#4a627a;margin-bottom:.3rem;display:flex;align-items:center;gap:4px}
+    .repay-mini-row{display:flex;justify-content:space-between;align-items:center;padding:.25rem .4rem;border-radius:6px;font-size:.75rem;background:#f8faff;margin-bottom:.2rem}
+    .rmr-date{color:#9ab0c0}
+    .rmr-amount{font-weight:700;color:#16a34a}
+
+    /* Guarantor block */
+    .card-guarantor{margin:0 1.2rem .8rem;background:#f8faff;border-radius:12px;padding:.7rem .9rem;border-left:3px solid #0f5b8c;font-size:.82rem}
+    .guarantor-title{font-size:.72rem;font-weight:700;color:#0f5b8c;margin-bottom:.4rem;display:flex;align-items:center;gap:5px}
+    .guarantor-grid{display:flex;flex-wrap:wrap;gap:.5rem .8rem;color:#4a627a}
+    .guarantor-item{display:flex;align-items:center;gap:4px}
+    .guarantor-item i{color:#0f5b8c;font-size:.75rem}
+
+    /* Blacklist tag */
+    .bl-tag{margin:.2rem 1.2rem .5rem;background:#fce7f3;border:1px solid #f9a8d4;border-radius:8px;padding:.3rem .7rem;font-size:.75rem;color:#9d174d;font-weight:700;display:flex;align-items:center;gap:5px}
+
+    /* Bank details */
+    .card-bank{margin:0 1.2rem .6rem;background:#f0fff4;border-radius:10px;padding:.5rem .8rem;border-left:3px solid #16a34a;font-size:.8rem}
+    .bank-row{display:flex;gap:.5rem;color:#4a627a;align-items:center}
+    .bank-row i{color:#16a34a;font-size:.75rem}
+    .bank-label{color:#9ab0c0;font-size:.7rem}
+
+    /* Action row */
+    .card-actions{padding:.8rem 1.2rem;border-top:1px solid #f0f4fa;display:flex;gap:.5rem;flex-wrap:wrap;background:#fafbfd;border-radius:0 0 20px 20px}
+    .act-btn{padding:.42rem 1rem;border-radius:40px;font-size:.78rem;font-weight:700;cursor:pointer;border:none;transition:.2s;display:flex;align-items:center;gap:5px;font-family:inherit}
+    .act-btn i{font-size:.72rem}
     .btn-accept{background:#dcfce7;color:#16a34a}
     .btn-accept:hover{background:#16a34a;color:white}
     .btn-cancel{background:#fee2e2;color:#dc2626}
     .btn-cancel:hover{background:#dc2626;color:white}
     .btn-pending{background:#fff8e0;color:#d97706}
-    .btn-pending:hover{background:#d97706;color:white}
-    .btn-delete{background:#f3f4f6;color:#6b7280}
-    .btn-delete:hover{background:#6b7280;color:white}
+    .btn-pending:hover{background:#f59e0b;color:white}
     .btn-blacklist{background:#fce7f3;color:#be185d}
     .btn-blacklist:hover{background:#be185d;color:white}
-    .guarantor-block{background:#f8faff;border-radius:14px;padding:.9rem 1rem;margin-top:.8rem;border-left:3px solid #0f5b8c;font-size:.85rem}
-    .guarantor-block h5{color:#0f5b8c;margin-bottom:.5rem;font-size:.88rem}
+    .btn-delete{background:#f3f4f6;color:#6b7280}
+    .btn-delete:hover{background:#6b7280;color:white}
 
-    /* ── FINANCIAL PANEL ── */
-    .financial-panel{background:linear-gradient(135deg,#f0f9ff,#ecfdf5);border-radius:16px;padding:1.1rem 1.2rem;margin-top:1rem;border:1px solid #bae6fd}
-    .financial-panel h5{font-size:.9rem;font-weight:700;color:#0f5b8c;margin-bottom:.8rem;display:flex;align-items:center;gap:6px}
-    .fin-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:.7rem}
-    .fin-item{background:white;border-radius:12px;padding:.7rem .9rem;text-align:center;box-shadow:0 2px 6px rgba(0,0,0,.04)}
-    .fin-label{font-size:.72rem;color:#7a9ab0;font-weight:600;margin-bottom:.2rem}
-    .fin-value{font-size:1rem;font-weight:800;color:#0f2d42}
-    .fin-value.red{color:#dc2626}
-    .fin-value.green{color:#16a34a}
-    .fin-value.orange{color:#d97706}
-    .fin-value.blue{color:#0f5b8c}
-    .outstanding-banner{background:linear-gradient(95deg,#dc2626,#991b1b);color:white;border-radius:12px;padding:.7rem 1rem;margin-top:.7rem;display:flex;justify-content:space-between;align-items:center;font-weight:700;font-size:.9rem}
-    .outstanding-banner.settled{background:linear-gradient(95deg,#16a34a,#15803d)}
-    .repay-history{margin-top:.6rem}
-    .repay-history h6{font-size:.78rem;font-weight:700;color:#4a627a;margin-bottom:.4rem}
-    .repay-row{display:flex;justify-content:space-between;align-items:center;padding:.35rem .5rem;border-radius:8px;font-size:.8rem;background:#f8faff;margin-bottom:.3rem}
-    .repay-row .rr-date{color:#7a9ab0}
-    .repay-row .rr-amount{font-weight:700;color:#16a34a}
-    .repay-row .rr-status{padding:.15rem .5rem;border-radius:20px;font-size:.7rem;font-weight:700}
-    .rr-status.pending{background:#fff8e0;color:#d97706}
-    .rr-status.accepted{background:#dcfce7;color:#16a34a}
-    .rr-status.cancelled{background:#fee2e2;color:#dc2626}
-    .late-warning{background:#fff8e0;border:1px solid #fbbf24;border-radius:10px;padding:.5rem .8rem;margin-top:.5rem;font-size:.78rem;color:#92400e;font-weight:600;display:flex;align-items:center;gap:6px}
-    .blacklisted-tag{background:#fce7f3;border:1px solid #f9a8d4;border-radius:10px;padding:.4rem .8rem;margin-top:.5rem;font-size:.78rem;color:#9d174d;font-weight:700;display:flex;align-items:center;gap:6px}
+    /* ── REPAY CARDS ── */
+    .repay-card{background:white;border-radius:18px;overflow:hidden;box-shadow:0 3px 12px rgba(0,0,0,.05);display:flex;flex-direction:column}
+    .repay-card:hover{transform:translateY(-2px);box-shadow:0 8px 22px rgba(43,155,122,.12)}
+    .repay-header{padding:.9rem 1.2rem;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #f0f4fa;border-left:4px solid #e0eaf0}
+    .repay-header.pending{border-left-color:#f59e0b}
+    .repay-header.accepted{border-left-color:#16a34a}
+    .repay-header.cancelled{border-left-color:#dc2626}
+    .repay-amount-big{font-size:1.3rem;font-weight:800;color:#16a34a;background:#dcfce7;padding:.3rem .9rem;border-radius:40px}
 
-    /* ── BLACKLIST TAB ── */
-    .blacklist-entry{background:white;border-radius:18px;padding:1.2rem 1.4rem;box-shadow:0 4px 12px rgba(0,0,0,.05);border-left:4px solid #be185d;display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:1rem}
-    .bl-info{flex:1;min-width:200px}
-    .bl-name{font-size:1rem;font-weight:700;color:#0f2d42;display:flex;align-items:center;gap:6px}
-    .bl-name i{color:#be185d}
-    .bl-meta{font-size:.82rem;color:#7a9ab0;margin-top:.3rem;display:flex;flex-wrap:wrap;gap:.5rem}
-    .bl-meta-item{display:flex;align-items:center;gap:5px;background:#fdf2f8;padding:.2rem .6rem;border-radius:20px;color:#9d174d}
-    .bl-reason{font-size:.8rem;background:#fce7f3;color:#9d174d;padding:.3rem .7rem;border-radius:10px;margin-top:.5rem;display:inline-block;font-weight:600}
-    .bl-auto-tag{font-size:.7rem;background:#fee2e2;color:#dc2626;padding:.2rem .5rem;border-radius:10px;margin-left:.4rem;font-weight:700}
-    .add-bl-form{background:white;border-radius:20px;padding:1.4rem;box-shadow:0 4px 12px rgba(0,0,0,.05);margin-bottom:1.5rem;border:2px dashed #f9a8d4}
-    .add-bl-form h4{color:#be185d;margin-bottom:1rem;font-size:1rem}
-    .bl-form-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:.8rem}
-    .bl-form-grid input,.bl-form-grid textarea{width:100%;padding:.7rem .9rem;border:1.5px solid #e0eaf0;border-radius:14px;font-family:inherit;font-size:.9rem;transition:.2s}
-    .bl-form-grid input:focus,.bl-form-grid textarea:focus{border-color:#be185d;outline:none}
-    .btn-add-bl{background:linear-gradient(95deg,#be185d,#9d174d);color:white;border:none;padding:.7rem 1.5rem;border-radius:40px;font-weight:700;font-size:.9rem;cursor:pointer;display:flex;align-items:center;gap:6px;margin-top:.8rem}
-    .btn-add-bl:hover{transform:translateY(-2px)}
-    .btn-unblacklist{background:#dcfce7;color:#16a34a;border:none;padding:.45rem 1rem;border-radius:40px;font-size:.8rem;font-weight:700;cursor:pointer;transition:.2s;display:flex;align-items:center;gap:5px;flex-shrink:0}
-    .btn-unblacklist:hover{background:#16a34a;color:white}
+    /* ── BLACKLIST ── */
+    .bl-entry{background:white;border-radius:18px;padding:1.1rem 1.3rem;box-shadow:0 3px 12px rgba(0,0,0,.04);border-left:4px solid #be185d;display:flex;justify-content:space-between;align-items:flex-start;gap:1rem;transition:.2s}
+    .bl-entry:hover{box-shadow:0 6px 20px rgba(190,24,93,.1)}
+    .bl-info .bl-name{font-size:1rem;font-weight:700;color:#0f2d42;display:flex;align-items:center;gap:6px}
+    .bl-info .bl-name i{color:#be185d}
+    .bl-meta{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.4rem}
+    .bl-chip{display:flex;align-items:center;gap:4px;background:#fdf2f8;padding:.2rem .6rem;border-radius:20px;color:#9d174d;font-size:.78rem;font-weight:600}
+    .bl-chip i{font-size:.7rem}
+    .bl-reason{display:inline-block;background:#fce7f3;color:#9d174d;padding:.25rem .65rem;border-radius:8px;font-size:.75rem;font-weight:600;margin-top:.4rem}
+    .bl-auto{background:#fee2e2;color:#dc2626;font-size:.68rem;padding:.12rem .45rem;border-radius:8px;font-weight:700;margin-left:.3rem}
+    .btn-unbl{background:#dcfce7;color:#16a34a;border:none;padding:.42rem 1rem;border-radius:40px;font-size:.78rem;font-weight:700;cursor:pointer;transition:.2s;display:flex;align-items:center;gap:5px;flex-shrink:0;font-family:inherit}
+    .btn-unbl:hover{background:#16a34a;color:white}
+
+    /* ── ADD BLACKLIST FORM ── */
+    .add-bl-form{background:white;border-radius:18px;padding:1.3rem;box-shadow:0 3px 12px rgba(0,0,0,.04);margin-bottom:1.4rem;border:2px dashed #f9a8d4}
+    .add-bl-form h4{color:#be185d;margin-bottom:1rem;font-size:.95rem;display:flex;align-items:center;gap:6px}
+    .bl-form-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:.7rem}
+    .bl-form-grid input{width:100%;padding:.65rem .9rem;border:1.5px solid #e0eaf0;border-radius:12px;font-family:inherit;font-size:.88rem;transition:.2s;outline:none}
+    .bl-form-grid input:focus{border-color:#be185d}
+    .btn-add-bl{background:linear-gradient(95deg,#be185d,#9d174d);color:white;border:none;padding:.65rem 1.4rem;border-radius:40px;font-weight:700;font-size:.88rem;cursor:pointer;display:flex;align-items:center;gap:6px;margin-top:.8rem;font-family:inherit}
+    .btn-add-bl:hover{transform:translateY(-2px);box-shadow:0 6px 14px rgba(190,24,93,.25)}
 
     /* ── EMPTY / SPINNER ── */
-    .empty-state{text-align:center;padding:4rem 2rem;color:#7a9ab0}
-    .empty-state i{font-size:3rem;margin-bottom:1rem;display:block}
-    .spinner{display:flex;justify-content:center;padding:3rem}
+    .empty-state{text-align:center;padding:4rem 2rem;color:#9ab0c0;grid-column:1/-1}
+    .empty-state i{font-size:3rem;margin-bottom:1rem;display:block;opacity:.5}
+    .empty-state p{font-size:1rem;font-weight:600}
+    .spinner{display:flex;justify-content:center;padding:3rem;grid-column:1/-1}
     .spinner i{font-size:2rem;color:#0f5b8c;animation:spin 1s linear infinite}
     @keyframes spin{to{transform:rotate(360deg)}}
 
     /* ── LIGHTBOX ── */
-    #lightbox{display:none;position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:9999;align-items:center;justify-content:center}
+    #lightbox{display:none;position:fixed;inset:0;background:rgba(0,0,0,.88);z-index:9999;align-items:center;justify-content:center;flex-direction:column;gap:1rem}
     #lightbox.show{display:flex}
-    #lightbox img{max-width:90vw;max-height:90vh;border-radius:12px}
-    #lightboxClose{position:fixed;top:20px;right:24px;color:white;font-size:2rem;cursor:pointer;z-index:10000}
+    #lightbox img{max-width:90vw;max-height:85vh;border-radius:14px;box-shadow:0 30px 60px rgba(0,0,0,.5)}
+    #lightboxClose{position:fixed;top:20px;right:24px;color:white;font-size:2rem;cursor:pointer;z-index:10000;background:rgba(0,0,0,.4);width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;transition:.2s}
+    #lightboxClose:hover{background:rgba(255,255,255,.2)}
 
     /* ── TOAST ── */
-    #toast{position:fixed;bottom:30px;right:30px;background:#1e2f3e;color:white;padding:.8rem 1.5rem;border-radius:14px;font-weight:600;font-size:.9rem;z-index:9998;transform:translateY(100px);opacity:0;transition:.3s}
+    #toast{position:fixed;bottom:24px;right:24px;background:#1e2f3e;color:white;padding:.75rem 1.4rem;border-radius:14px;font-weight:600;font-size:.88rem;z-index:9998;transform:translateY(100px);opacity:0;transition:.3s;box-shadow:0 8px 24px rgba(0,0,0,.2)}
     #toast.show{transform:translateY(0);opacity:1}
     #toast.success{background:#16a34a}
     #toast.warning{background:#d97706}
     #toast.error{background:#dc2626}
 
-    @media(max-width:768px){.sidebar{width:100%;height:auto;position:relative;flex-direction:row;flex-wrap:wrap;padding:1rem}.sidebar-logo{width:100%}.main-area{margin-left:0}.stats-row{grid-template-columns:1fr 1fr}.search-box{width:100%;margin-left:0}}
+    @media(max-width:900px){
+      .sidebar{width:100%;height:auto;position:relative;flex-direction:row;flex-wrap:wrap;padding:.8rem}
+      .sidebar-logo{width:100%;padding:.3rem .5rem .8rem}
+      .main-area{margin-left:0}
+      .stats-row{grid-template-columns:repeat(2,1fr)}
+      .cards-grid{grid-template-columns:1fr}
+      .search-box{width:100%;margin-left:0}
+    }
   </style>
 </head>
 <body>
@@ -176,7 +239,7 @@
 <!-- ADMIN APP -->
 <div id="adminApp">
   <nav class="sidebar">
-    <div class="sidebar-logo">Lend<span>Easy</span> Admin</div>
+    <div class="sidebar-logo"><i class="fas fa-chart-line" style="color:#2b9b7a"></i> Lend<span>Easy</span> Admin</div>
     <button class="nav-item active" data-view="applications"><i class="fas fa-file-invoice-dollar"></i> Applications <span class="badge" id="pendingBadge" style="display:none">0</span></button>
     <button class="nav-item" data-view="repayments"><i class="fas fa-money-bill-wave"></i> Repayments <span class="badge green" id="repayPendingBadge" style="display:none">0</span></button>
     <button class="nav-item" data-view="blacklist"><i class="fas fa-ban"></i> Blacklist <span class="badge" id="blacklistBadge" style="display:none">0</span></button>
@@ -185,17 +248,17 @@
 
   <div class="main-area">
     <div class="topbar">
-      <div class="page-title" id="pageTitle">Loan Applications</div>
-      <div class="topbar-right"><i class="fas fa-circle" style="color:#2b9b7a;font-size:.6rem"></i> Live</div>
+      <div class="page-title" id="pageTitle">📋 Loan Applications</div>
+      <div class="live-dot">Live Data</div>
     </div>
 
     <!-- STATS ROW -->
     <div class="stats-row" id="statsRow">
-      <div class="stat-card"><div class="stat-icon blue"><i class="fas fa-file-alt"></i></div><div><div class="stat-value" id="sTotalApps">0</div><div class="stat-label">Total Applications</div></div></div>
-      <div class="stat-card"><div class="stat-icon yellow"><i class="fas fa-clock"></i></div><div><div class="stat-value" id="sPending">0</div><div class="stat-label">Pending</div></div></div>
-      <div class="stat-card"><div class="stat-icon green"><i class="fas fa-check-circle"></i></div><div><div class="stat-value" id="sAccepted">0</div><div class="stat-label">Accepted</div></div></div>
-      <div class="stat-card"><div class="stat-icon red"><i class="fas fa-times-circle"></i></div><div><div class="stat-value" id="sCancelled">0</div><div class="stat-label">Cancelled</div></div></div>
-      <div class="stat-card"><div class="stat-icon purple"><i class="fas fa-ban"></i></div><div><div class="stat-value" id="sBlacklisted">0</div><div class="stat-label">Blacklisted</div></div></div>
+      <div class="stat-card blue"><i class="fas fa-file-alt stat-icon"></i><div class="stat-value" id="sTotalApps">0</div><div class="stat-label">Total Applications</div></div>
+      <div class="stat-card yellow"><i class="fas fa-clock stat-icon"></i><div class="stat-value" id="sPending">0</div><div class="stat-label">Pending</div></div>
+      <div class="stat-card green"><i class="fas fa-check-circle stat-icon"></i><div class="stat-value" id="sAccepted">0</div><div class="stat-label">Accepted</div></div>
+      <div class="stat-card red"><i class="fas fa-times-circle stat-icon"></i><div class="stat-value" id="sCancelled">0</div><div class="stat-label">Cancelled</div></div>
+      <div class="stat-card purple"><i class="fas fa-ban stat-icon"></i><div class="stat-value" id="sBlacklisted">0</div><div class="stat-label">Blacklisted</div></div>
     </div>
 
     <!-- FILTER BAR -->
@@ -207,15 +270,18 @@
       <input class="search-box" id="searchBox" placeholder="🔍 Search name or NIC...">
     </div>
 
-    <!-- CARDS LIST -->
-    <div class="cards-list" id="cardsList">
+    <!-- CARDS GRID -->
+    <div class="cards-grid" id="cardsList">
       <div class="spinner"><i class="fas fa-circle-notch"></i></div>
     </div>
   </div>
 </div>
 
 <!-- LIGHTBOX -->
-<div id="lightbox"><span id="lightboxClose">✕</span><img id="lightboxImg" src="" alt=""></div>
+<div id="lightbox">
+  <span id="lightboxClose"><i class="fas fa-times"></i></span>
+  <img id="lightboxImg" src="" alt="">
+</div>
 
 <!-- TOAST -->
 <div id="toast"></div>
@@ -239,7 +305,6 @@
   const ADMIN_USER = "admin";
   const ADMIN_PASS = "lendeasy2025";
 
-  // ── State ────────────────────────────────────────────────────────
   let allApps      = [];
   let allRepays    = [];
   let allBlacklist = [];
@@ -249,11 +314,11 @@
 
   // ── LOGIN ────────────────────────────────────────────────────────
   document.getElementById('loginBtn').addEventListener('click', doLogin);
-  document.getElementById('loginPass').addEventListener('keydown', e => { if(e.key==='Enter') doLogin(); });
+  document.getElementById('loginPass').addEventListener('keydown', e=>{ if(e.key==='Enter') doLogin(); });
   function doLogin() {
     const u = document.getElementById('loginUser').value.trim();
     const p = document.getElementById('loginPass').value.trim();
-    if(u===ADMIN_USER && p===ADMIN_PASS) {
+    if(u===ADMIN_USER && p===ADMIN_PASS){
       document.getElementById('loginScreen').style.display='none';
       document.getElementById('adminApp').style.display='block';
       initListeners();
@@ -261,7 +326,7 @@
       document.getElementById('loginError').style.display='block';
     }
   }
-  document.getElementById('logoutBtn').addEventListener('click', ()=>{
+  document.getElementById('logoutBtn').addEventListener('click',()=>{
     document.getElementById('adminApp').style.display='none';
     document.getElementById('loginScreen').style.display='flex';
     document.getElementById('loginUser').value='';
@@ -273,7 +338,7 @@
     onValue(ref(db,'loan_applications'), snap => {
       allApps = [];
       snap.forEach(child => { allApps.push({ id:child.key, ...child.val() }); });
-      allApps.sort((a,b)=> (b.timestamp||0)-(a.timestamp||0));
+      allApps.sort((a,b)=>(b.timestamp||0)-(a.timestamp||0));
       updateStats();
       checkAutoBlacklist();
       if(currentView==='applications') renderList();
@@ -281,10 +346,10 @@
     onValue(ref(db,'loan_repayments'), snap => {
       allRepays = [];
       snap.forEach(child => { allRepays.push({ id:child.key, ...child.val() }); });
-      allRepays.sort((a,b)=> (b.timestamp||0)-(a.timestamp||0));
+      allRepays.sort((a,b)=>(b.timestamp||0)-(a.timestamp||0));
       updateRepayBadge();
       if(currentView==='repayments') renderList();
-      if(currentView==='applications') renderList(); // refresh balance calcs
+      if(currentView==='applications') renderList();
     });
     onValue(ref(db,'blacklist'), snap => {
       allBlacklist = [];
@@ -294,87 +359,48 @@
     });
   }
 
-  // ── FINANCIAL CALCULATIONS ────────────────────────────────────────
-  /**
-   * Calculate all financial details for an accepted loan.
-   * Returns null if loan isn't accepted or has no approvedDate.
-   */
+  // ── FINANCIAL CALC ────────────────────────────────────────────────
   function calcFinancials(loan) {
     if (loan.status !== 'accepted' || !loan.approvedDate) return null;
-
-    const MS_DAY   = 86400000;
-    const MS_MONTH = MS_DAY * 30;
-    const now      = Date.now();
-
-    const principal       = parseFloat(loan.loanAmount) || 0;
-    const daysSince       = Math.floor((now - loan.approvedDate) / MS_DAY);
-    const monthsElapsed   = Math.max(1, Math.ceil(daysSince / 30));
-
-    // Interest: 1.5% per month on principal (flat/simple)
-    const monthlyRate     = 0.015;
-    const yearlyRate      = 0.18;
-    const interestPerMonth= principal * monthlyRate;
-    const totalInterest   = principal * monthlyRate * monthsElapsed;
-    const totalDue        = principal + totalInterest;
-
-    // Confirmed repayments linked by NIC or loanId
-    const loanRepayments  = allRepays.filter(r =>
+    const MS_DAY      = 86400000;
+    const now         = Date.now();
+    const principal   = parseFloat(loan.loanAmount) || 0;
+    const daysSince   = Math.floor((now - loan.approvedDate) / MS_DAY);
+    const months      = Math.max(1, Math.ceil(daysSince / 30));
+    const interest    = principal * 0.015 * months;
+    const totalDue    = principal + interest;
+    const loanRepays  = allRepays.filter(r =>
       r.status === 'accepted' &&
-      (
-        (r.nicNumber && loan.nicNumber && r.nicNumber.toLowerCase() === loan.nicNumber.toLowerCase()) ||
-        r.loanId === loan.id
-      )
+      r.nicNumber && loan.nicNumber &&
+      r.nicNumber.toLowerCase() === loan.nicNumber.toLowerCase()
     );
-    const totalPaid       = loanRepayments.reduce((s, r) => s + (parseFloat(r.amount) || 0), 0);
-    const outstanding     = Math.max(0, totalDue - totalPaid);
-
-    // Late fee: accrues after first 30 days (grace period), Rs100/day if outstanding
-    const graceDays       = 30;
-    const daysLate        = outstanding > 0 ? Math.max(0, daysSince - graceDays) : 0;
-    const lateFee         = daysLate * 100;
-    const totalOutstanding= outstanding + lateFee;
-    const isSettled       = totalOutstanding <= 0;
-
-    return {
-      principal, monthlyRate, yearlyRate,
-      interestPerMonth, totalInterest, totalDue,
-      monthsElapsed, daysSince, daysLate,
-      lateFee, totalPaid, outstanding,
-      totalOutstanding, isSettled,
-      loanRepayments
-    };
+    const totalPaid   = loanRepays.reduce((s,r) => s + (parseFloat(r.amount)||0), 0);
+    const outstanding = Math.max(0, totalDue - totalPaid);
+    const daysLate    = outstanding > 0 ? Math.max(0, daysSince - 30) : 0;
+    const lateFee     = daysLate * 100;
+    const totalOut    = outstanding + lateFee;
+    const isSettled   = totalOut <= 0;
+    return { principal, interest, totalDue, months, daysSince, totalPaid, daysLate, lateFee, totalOut, isSettled, loanRepays };
   }
 
-  // ── AUTO BLACKLIST (3 months no payment) ─────────────────────────
+  // ── AUTO BLACKLIST ────────────────────────────────────────────────
   async function checkAutoBlacklist() {
-    const MS_3MONTHS = 90 * 86400000;
     for (const loan of allApps) {
       if (loan.status !== 'accepted' || !loan.approvedDate) continue;
-      if ((Date.now() - loan.approvedDate) < MS_3MONTHS) continue;
-
+      if ((Date.now() - loan.approvedDate) < 90 * 86400000) continue;
       const fin = calcFinancials(loan);
-      if (!fin || fin.totalPaid > 0) continue; // has made a payment, skip
-
-      // Already blacklisted?
-      const alreadyBL = allBlacklist.some(b =>
-        (b.nicNumber && loan.nicNumber && b.nicNumber.toLowerCase() === loan.nicNumber.toLowerCase()) ||
-        b.loanId === loan.id
+      if (!fin || fin.totalPaid > 0) continue;
+      const already = allBlacklist.some(b =>
+        b.nicNumber && loan.nicNumber && b.nicNumber.toLowerCase() === loan.nicNumber.toLowerCase()
       );
-      if (alreadyBL) continue;
-
-      // Auto-add to blacklist
+      if (already) continue;
       try {
-        await push(ref(db,'blacklist'), {
-          name:       loan.fullName     || '—',
-          nicNumber:  loan.nicNumber    || '—',
-          phone:      loan.applicantPhone || '—',
-          reason:     'No payment for 3+ months (auto-blacklisted)',
-          addedDate:  Date.now(),
-          loanId:     loan.id,
-          autoAdded:  true
+        await push(ref(db,'blacklist'),{
+          name: loan.fullName||'—', nicNumber: loan.nicNumber||'—', phone: loan.applicantPhone||'—',
+          reason:'No payment for 3+ months (auto-blacklisted)', addedDate: Date.now(), loanId: loan.id, autoAdded: true
         });
-        showToast(`⚠️ ${loan.fullName} auto-blacklisted (90+ days, zero payment)`, 'warning');
-      } catch(e) { console.error('Auto-blacklist error:', e); }
+        showToast(`⚠️ ${loan.fullName} auto-blacklisted`, 'warning');
+      } catch(e){}
     }
   }
 
@@ -398,259 +424,223 @@
   }
   function updateBlacklistBadge() {
     const bb = document.getElementById('blacklistBadge');
-    bb.textContent = allBlacklist.length;
-    bb.style.display = allBlacklist.length > 0 ? 'inline' : 'none';
+    bb.textContent = allBlacklist.length; bb.style.display = allBlacklist.length > 0 ? 'inline' : 'none';
     document.getElementById('sBlacklisted').textContent = allBlacklist.length;
   }
 
   // ── NAV ──────────────────────────────────────────────────────────
-  document.querySelectorAll('[data-view]').forEach(btn => {
-    btn.addEventListener('click', ()=>{
-      document.querySelectorAll('[data-view]').forEach(b=> b.classList.remove('active'));
+  document.querySelectorAll('[data-view]').forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      document.querySelectorAll('[data-view]').forEach(b=>b.classList.remove('active'));
       btn.classList.add('active');
-      currentView  = btn.getAttribute('data-view');
-      filterStatus = 'all';
-      searchQuery  = '';
-      const sb = document.getElementById('searchBox');
-      if(sb) sb.value = '';
-      document.querySelectorAll('.filter-btn').forEach(b=> b.classList.toggle('active', b.getAttribute('data-filter')==='all'));
-
-      const isApps = currentView === 'applications';
-      const isReps = currentView === 'repayments';
-      const isBL   = currentView === 'blacklist';
-
+      currentView = btn.getAttribute('data-view');
+      filterStatus = 'all'; searchQuery = '';
+      const sb = document.getElementById('searchBox'); if(sb) sb.value='';
+      document.querySelectorAll('.filter-btn').forEach(b=>b.classList.toggle('active', b.getAttribute('data-filter')==='all'));
+      const isApps = currentView==='applications';
+      const isBL   = currentView==='blacklist';
       document.getElementById('statsRow').style.display  = isApps ? 'grid' : 'none';
       document.getElementById('filterBar').style.display = isBL   ? 'none' : 'flex';
       document.getElementById('pageTitle').textContent   =
-        isApps ? 'Loan Applications' :
-        isReps ? 'Loan Repayments'   : 'Blacklist Management';
-
+        isApps ? '📋 Loan Applications' : currentView==='repayments' ? '💰 Loan Repayments' : '🚫 Blacklist Management';
       renderList();
     });
   });
 
-  // ── FILTER / SEARCH ──────────────────────────────────────────────
-  document.querySelectorAll('.filter-btn').forEach(btn => {
-    btn.addEventListener('click', ()=>{
+  document.querySelectorAll('.filter-btn').forEach(btn=>{
+    btn.addEventListener('click',()=>{
       document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
       btn.classList.add('active');
       filterStatus = btn.getAttribute('data-filter');
       renderList();
     });
   });
-  document.getElementById('searchBox').addEventListener('input', e=>{
-    searchQuery = e.target.value.toLowerCase();
-    renderList();
-  });
+  document.getElementById('searchBox').addEventListener('input', e=>{ searchQuery = e.target.value.toLowerCase(); renderList(); });
 
-  // ── RENDER LIST ──────────────────────────────────────────────────
+  // ── RENDER ───────────────────────────────────────────────────────
   function renderList() {
     const list = document.getElementById('cardsList');
     if (currentView === 'blacklist') { renderBlacklist(list); return; }
-
     let data = currentView==='applications' ? allApps : allRepays;
     if(currentView==='applications' && filterStatus!=='all') data = data.filter(a=>a.status===filterStatus);
     if(searchQuery) data = data.filter(a=>
       (a.fullName||'').toLowerCase().includes(searchQuery) ||
       (a.nicNumber||'').toLowerCase().includes(searchQuery)
     );
-    if(data.length===0){ list.innerHTML=`<div class="empty-state"><i class="fas fa-inbox"></i>No records found</div>`; return; }
+    if(data.length===0){ list.innerHTML=`<div class="empty-state"><i class="fas fa-inbox"></i><p>No records found</p></div>`; return; }
     list.innerHTML = data.map(item => currentView==='applications' ? appCard(item) : repayCard(item)).join('');
   }
 
+  // ── FORMAT ───────────────────────────────────────────────────────
+  const fmtAmt = v => 'LKR ' + Math.round(v).toLocaleString();
+  const initials = name => (name||'?').split(' ').map(w=>w[0]).join('').substring(0,2).toUpperCase();
+
   // ── APPLICATION CARD ─────────────────────────────────────────────
   function appCard(a) {
-    const date      = a.timestamp   ? new Date(a.timestamp).toLocaleString()   : '—';
-    const fin       = calcFinancials(a);
-    const isInBL    = allBlacklist.some(b =>
-      (b.nicNumber && a.nicNumber && b.nicNumber.toLowerCase() === a.nicNumber.toLowerCase())
-    );
+    const status  = a.status || 'pending';
+    const date    = a.timestamp ? new Date(a.timestamp).toLocaleString('en-GB',{day:'2-digit',month:'short',year:'numeric',hour:'2-digit',minute:'2-digit'}) : '—';
+    const fin     = calcFinancials(a);
+    const isInBL  = allBlacklist.some(b=>b.nicNumber && a.nicNumber && b.nicNumber.toLowerCase()===a.nicNumber.toLowerCase());
 
-    const guarantorHtml = a.hasGuarantor && a.guarantor ? `
-      <div class="guarantor-block">
-        <h5><i class="fas fa-user-shield"></i> Guarantor</h5>
-        <div style="display:flex;flex-wrap:wrap;gap:.8rem;font-size:.85rem;color:#4a627a">
-          <span><i class="fas fa-user" style="color:#0f5b8c"></i> ${a.guarantor.name||'—'}</span>
-          <span><i class="fas fa-id-card" style="color:#0f5b8c"></i> ${a.guarantor.idNumber||'—'}</span>
-          <span><i class="fas fa-phone" style="color:#0f5b8c"></i> ${a.guarantor.phone||'—'}</span>
+    // ── Financial block ──────────────────────────────────────────
+    let finHtml = '';
+    if (fin) {
+      const repayRows = fin.loanRepays.length > 0
+        ? `<div class="repay-mini"><div class="repay-mini-title"><i class="fas fa-history"></i> Confirmed Payments</div>
+          ${fin.loanRepays.map(r=>`<div class="repay-mini-row"><span class="rmr-date">${r.timestamp ? new Date(r.timestamp).toLocaleDateString() : '—'}</span><span class="rmr-amount">+ ${fmtAmt(r.amount||0)}</span></div>`).join('')}
+        </div>` : '';
+      const lateHtml = fin.lateFee > 0 ? `<div class="late-chip"><i class="fas fa-exclamation-triangle"></i> ${fin.daysLate} days overdue — Late fee: ${fmtAmt(fin.lateFee)}</div>` : '';
+      finHtml = `<div class="card-financial">
+        <div class="fin-header"><i class="fas fa-calculator"></i> Financial Summary — ${fin.months} month${fin.months!==1?'s':''} (${fin.daysSince} days)</div>
+        <div class="fin-grid-mini">
+          <div class="fin-mini-item"><div class="fin-mini-label">Principal</div><div class="fin-mini-value blue">${fmtAmt(fin.principal)}</div></div>
+          <div class="fin-mini-item"><div class="fin-mini-label">Interest</div><div class="fin-mini-value orange">${fmtAmt(fin.interest)}</div></div>
+          <div class="fin-mini-item"><div class="fin-mini-label">Paid</div><div class="fin-mini-value green">${fmtAmt(fin.totalPaid)}</div></div>
         </div>
-        ${a.guarantor.idPhotoImg ? `<img src="${a.guarantor.idPhotoImg}" class="photo-thumb" style="margin-top:.6rem" onclick="showImg('${a.guarantor.idPhotoImg}')">` : ''}
-      </div>` : '';
-
-    const financialHtml = fin ? buildFinancialHtml(fin) : (
-      a.status === 'accepted' ? `<div class="late-warning"><i class="fas fa-exclamation-triangle"></i> Approval date not recorded. Re-accept to set start date.</div>` : ''
-    );
-
-    const blacklistWarning = isInBL
-      ? `<div class="blacklisted-tag"><i class="fas fa-ban"></i> This applicant is on the BLACKLIST</div>` : '';
-
-    const approvedDateStr = a.approvedDate ? `<span style="margin-left:.5rem;font-size:.75rem;color:#16a34a"><i class="fas fa-calendar-check"></i> Approved: ${new Date(a.approvedDate).toLocaleDateString()}</span>` : '';
-
-    return `
-    <div class="loan-entry ${a.status||'pending'}" id="entry-${a.id}">
-      <div class="loan-header">
-        <div>
-          <div class="loan-name"><i class="fas fa-user"></i> ${a.fullName||'—'} ${isInBL ? '<span style="background:#fee2e2;color:#dc2626;font-size:.65rem;padding:.15rem .5rem;border-radius:20px;margin-left:.3rem;font-weight:700">BLACKLISTED</span>':''}</div>
-          <div class="loan-meta"><i class="fas fa-clock"></i> ${date}${approvedDateStr}</div>
-        </div>
-        <span class="status-badge ${a.status||'pending'}">${(a.status||'pending').toUpperCase()}</span>
-      </div>
-      <div class="loan-details">
-        <div class="loan-detail-item"><i class="fas fa-id-card"></i> ${a.nicNumber||'—'}</div>
-        <div class="loan-detail-item"><i class="fas fa-phone"></i> ${a.applicantPhone||'—'}</div>
-        <div class="loan-detail-item"><i class="fas fa-coins"></i> LKR ${(a.loanAmount||0).toLocaleString()}</div>
-        <div class="loan-detail-item"><i class="fas fa-map-marker-alt"></i> ${a.address||'—'}</div>
-      </div>
-      <div class="loan-photos">
-        ${a.nicFrontImg ? `<img src="${a.nicFrontImg}" class="photo-thumb" title="NIC Front" onclick="showImg('${a.nicFrontImg}')">` : ''}
-        ${a.nicBackImg  ? `<img src="${a.nicBackImg}"  class="photo-thumb" title="NIC Back"  onclick="showImg('${a.nicBackImg}')">` : ''}
-      </div>
-      ${guarantorHtml}
-      ${financialHtml}
-      ${blacklistWarning}
-      <div class="loan-actions">
-        <button class="action-btn btn-accept"    onclick="setStatus('${a.id}','accepted')"><i class="fas fa-check"></i> Accept</button>
-        <button class="action-btn btn-cancel"    onclick="setStatus('${a.id}','cancelled')"><i class="fas fa-times"></i> Cancel</button>
-        <button class="action-btn btn-pending"   onclick="setStatus('${a.id}','pending')"><i class="fas fa-clock"></i> Pending</button>
-        <button class="action-btn btn-blacklist" onclick="manualBlacklist('${a.id}')"><i class="fas fa-ban"></i> Blacklist</button>
-        <button class="action-btn btn-delete"    onclick="deleteEntry('${a.id}','loan_applications')"><i class="fas fa-trash"></i> Delete</button>
-      </div>
-    </div>`;
-  }
-
-  // ── FINANCIAL HTML ────────────────────────────────────────────────
-  function buildFinancialHtml(fin) {
-    const fmt = v => 'LKR ' + Math.round(v).toLocaleString();
-    const repayRows = fin.loanRepayments.length > 0 ? `
-      <div class="repay-history">
-        <h6><i class="fas fa-history"></i> Confirmed Payments</h6>
-        ${fin.loanRepayments.map(r=>`
-          <div class="repay-row">
-            <span class="rr-date">${r.timestamp ? new Date(r.timestamp).toLocaleDateString() : '—'}</span>
-            <span class="rr-amount">${fmt(r.amount||0)}</span>
-            <span class="rr-status accepted">✓ confirmed</span>
-          </div>`).join('')}
-      </div>` : '';
-
-    const lateHtml = fin.daysLate > 0 ? `
-      <div class="late-warning">
-        <i class="fas fa-exclamation-triangle"></i>
-        ${fin.daysLate} days overdue — Late fee: ${fmt(fin.lateFee)} (Rs 100/day)
-      </div>` : '';
-
-    const outstandingClass = fin.isSettled ? 'settled' : '';
-    const outstandingLabel = fin.isSettled
-      ? '<i class="fas fa-check-circle"></i> LOAN SETTLED — No Outstanding Balance'
-      : `<span>Total Outstanding</span><span>${fmt(fin.totalOutstanding)}</span>`;
-
-    return `
-      <div class="financial-panel">
-        <h5><i class="fas fa-calculator"></i> Financial Summary (${fin.monthsElapsed} month${fin.monthsElapsed!==1?'s':''} elapsed / ${fin.daysSince} days)</h5>
-        <div class="fin-grid">
-          <div class="fin-item">
-            <div class="fin-label">Principal</div>
-            <div class="fin-value blue">${fmt(fin.principal)}</div>
-          </div>
-          <div class="fin-item">
-            <div class="fin-label">Monthly Interest (1.5%)</div>
-            <div class="fin-value">${fmt(fin.interestPerMonth)}/mo</div>
-          </div>
-          <div class="fin-item">
-            <div class="fin-label">Total Interest Accrued</div>
-            <div class="fin-value orange">${fmt(fin.totalInterest)}</div>
-          </div>
-          <div class="fin-item">
-            <div class="fin-label">Total Due (P+I)</div>
-            <div class="fin-value">${fmt(fin.totalDue)}</div>
-          </div>
-          <div class="fin-item">
-            <div class="fin-label">Total Paid</div>
-            <div class="fin-value green">${fmt(fin.totalPaid)}</div>
-          </div>
-          <div class="fin-item">
-            <div class="fin-label">Late Fee (Rs100/day)</div>
-            <div class="fin-value ${fin.lateFee>0?'red':''}">${fin.lateFee>0 ? fmt(fin.lateFee) : 'None'}</div>
-          </div>
-        </div>
-        <div class="outstanding-banner ${outstandingClass}" style="margin-top:.7rem">
-          ${outstandingLabel}
+        <div class="outstanding-pill ${fin.isSettled ? 'settled' : ''}">
+          ${fin.isSettled
+            ? '<span><i class="fas fa-check-circle"></i> LOAN FULLY SETTLED</span><span>✅</span>'
+            : `<span>Outstanding Balance</span><span>${fmtAmt(fin.totalOut)}</span>`}
         </div>
         ${lateHtml}
         ${repayRows}
       </div>`;
-  }
+    } else if (status === 'accepted') {
+      finHtml = `<div class="card-financial"><div class="fin-header" style="color:#d97706"><i class="fas fa-exclamation-triangle"></i> No approval date recorded. Re-accept to set start date.</div></div>`;
+    }
 
-  // ── REPAYMENT CARD ────────────────────────────────────────────────
-  function repayCard(r) {
-    const date = r.timestamp ? new Date(r.timestamp).toLocaleString() : '—';
-    return `
-    <div class="loan-entry ${r.status||'pending'}" id="entry-${r.id}">
-      <div class="loan-header">
-        <div>
-          <div class="loan-name"><i class="fas fa-user"></i> ${r.fullName||'—'}</div>
-          <div class="loan-meta"><i class="fas fa-clock"></i> ${date}</div>
+    // ── Guarantor block ──────────────────────────────────────────
+    const gHtml = a.hasGuarantor && a.guarantor ? `
+      <div class="card-guarantor">
+        <div class="guarantor-title"><i class="fas fa-user-shield"></i> Guarantor</div>
+        <div class="guarantor-grid">
+          <span class="guarantor-item"><i class="fas fa-user"></i> ${a.guarantor.name||'—'}</span>
+          <span class="guarantor-item"><i class="fas fa-id-card"></i> ${a.guarantor.idNumber||'—'}</span>
+          <span class="guarantor-item"><i class="fas fa-phone"></i> ${a.guarantor.phone||'—'}</span>
         </div>
-        <span class="status-badge ${r.status||'pending'}">${(r.status||'pending').toUpperCase()}</span>
+        ${a.guarantor.idPhotoImg ? `<div style="margin-top:.4rem"><span class="photo-chip" onclick="showImg('${a.guarantor.idPhotoImg}')"><i class="fas fa-id-badge"></i> View ID</span></div>` : ''}
+      </div>` : '';
+
+    // ── Bank details ─────────────────────────────────────────────
+    const bankHtml = a.bankDetails ? `
+      <div class="card-bank">
+        <div class="bank-row"><i class="fas fa-university"></i> <span>${a.bankDetails.bankName||'—'}</span> <span class="bank-label">— ${a.bankDetails.bankBranch||'—'}</span></div>
+        <div class="bank-row" style="margin-top:.2rem"><i class="fas fa-hashtag"></i> <span style="font-family:monospace;font-size:.82rem">${a.bankDetails.accountNumber||'—'}</span></div>
+      </div>` : '';
+
+    const blTag = isInBL ? `<div class="bl-tag"><i class="fas fa-ban"></i> This person is on the BLACKLIST</div>` : '';
+    const approvedStr = a.approvedDate ? ` · Approved: ${new Date(a.approvedDate).toLocaleDateString()}` : '';
+
+    return `
+    <div class="app-card" id="entry-${a.id}">
+      <div class="card-topbar ${status}">
+        <div class="card-person">
+          <div class="card-avatar ${status}">${initials(a.fullName)}</div>
+          <div>
+            <div class="card-name">${a.fullName||'—'}</div>
+            <div class="card-date">${date}${approvedStr}</div>
+          </div>
+        </div>
+        <span class="card-status ${status}">${status.toUpperCase()}</span>
       </div>
-      <div class="loan-details">
-        <div class="loan-detail-item"><i class="fas fa-id-card"></i> ${r.nicNumber||'—'}</div>
-        <div class="loan-detail-item"><i class="fas fa-phone"></i> ${r.phoneNumber||'—'}</div>
-        <div class="loan-detail-item" style="font-size:1rem;font-weight:700;color:#16a34a"><i class="fas fa-coins"></i> LKR ${(r.amount||0).toLocaleString()}</div>
+
+      <div class="card-info">
+        <div class="ci-item"><div class="ci-label">NIC</div><div class="ci-value">${a.nicNumber||'—'}</div></div>
+        <div class="ci-item"><div class="ci-label">Phone</div><div class="ci-value">${a.applicantPhone||'—'}</div></div>
+        <div class="ci-item"><div class="ci-label">Loan Amount</div><div class="ci-value amount">${fmtAmt(a.loanAmount||0)}</div></div>
+        <div class="ci-item"><div class="ci-label">Address</div><div class="ci-value">${(a.address||'—').substring(0,40)}</div></div>
       </div>
-      ${r.receiptImg ? `<div class="loan-photos"><img src="${r.receiptImg}" class="photo-thumb" title="Receipt" onclick="showImg('${r.receiptImg}')"></div>` : ''}
-      <div class="loan-actions">
-        <button class="action-btn btn-accept" onclick="setRepayStatus('${r.id}','accepted')"><i class="fas fa-check"></i> Confirm</button>
-        <button class="action-btn btn-cancel" onclick="setRepayStatus('${r.id}','cancelled')"><i class="fas fa-times"></i> Reject</button>
-        <button class="action-btn btn-delete" onclick="deleteEntry('${r.id}','loan_repayments')"><i class="fas fa-trash"></i> Delete</button>
+
+      <div class="card-photos">
+        ${a.nicFrontImg ? `<span class="photo-chip" onclick="showImg('${a.nicFrontImg}')"><i class="fas fa-id-card"></i> NIC Front</span>` : ''}
+        ${a.nicBackImg  ? `<span class="photo-chip" onclick="showImg('${a.nicBackImg}')"><i class="fas fa-id-card"></i> NIC Back</span>` : ''}
+      </div>
+
+      ${bankHtml}
+      ${gHtml}
+      ${finHtml}
+      ${blTag}
+
+      <div class="card-actions">
+        <button class="act-btn btn-accept"    onclick="setStatus('${a.id}','accepted')"><i class="fas fa-check"></i> Accept</button>
+        <button class="act-btn btn-cancel"    onclick="setStatus('${a.id}','cancelled')"><i class="fas fa-times"></i> Cancel</button>
+        <button class="act-btn btn-pending"   onclick="setStatus('${a.id}','pending')"><i class="fas fa-clock"></i> Pending</button>
+        <button class="act-btn btn-blacklist" onclick="manualBlacklist('${a.id}')"><i class="fas fa-ban"></i> Blacklist</button>
+        <button class="act-btn btn-delete"    onclick="deleteEntry('${a.id}','loan_applications')"><i class="fas fa-trash"></i> Delete</button>
       </div>
     </div>`;
   }
 
-  // ── BLACKLIST VIEW ────────────────────────────────────────────────
+  // ── REPAYMENT CARD ────────────────────────────────────────────────
+  function repayCard(r) {
+    const status = r.status || 'pending';
+    const date   = r.timestamp ? new Date(r.timestamp).toLocaleString('en-GB',{day:'2-digit',month:'short',year:'numeric',hour:'2-digit',minute:'2-digit'}) : '—';
+    return `
+    <div class="repay-card" id="entry-${r.id}">
+      <div class="repay-header ${status}">
+        <div>
+          <div style="font-weight:700;font-size:1rem;color:#0f2d42">${r.fullName||'—'}</div>
+          <div style="font-size:.75rem;color:#9ab0c0;margin-top:.15rem">${date}</div>
+        </div>
+        <div style="display:flex;align-items:center;gap:.6rem">
+          <span class="repay-amount-big">${fmtAmt(r.amount||0)}</span>
+          <span class="card-status ${status}">${status.toUpperCase()}</span>
+        </div>
+      </div>
+      <div class="card-info">
+        <div class="ci-item"><div class="ci-label">NIC</div><div class="ci-value">${r.nicNumber||'—'}</div></div>
+        <div class="ci-item"><div class="ci-label">Phone</div><div class="ci-value">${r.phoneNumber||'—'}</div></div>
+      </div>
+      ${r.receiptImg ? `<div class="card-photos"><span class="photo-chip" onclick="showImg('${r.receiptImg}')"><i class="fas fa-receipt"></i> View Receipt</span></div>` : ''}
+      <div class="card-actions">
+        <button class="act-btn btn-accept" onclick="setRepayStatus('${r.id}','accepted')"><i class="fas fa-check"></i> Confirm</button>
+        <button class="act-btn btn-cancel" onclick="setRepayStatus('${r.id}','cancelled')"><i class="fas fa-times"></i> Reject</button>
+        <button class="act-btn btn-delete" onclick="deleteEntry('${r.id}','loan_repayments')"><i class="fas fa-trash"></i> Delete</button>
+      </div>
+    </div>`;
+  }
+
+  // ── BLACKLIST ─────────────────────────────────────────────────────
   function renderBlacklist(list) {
     const filtered = searchQuery
-      ? allBlacklist.filter(b =>
-          (b.name||'').toLowerCase().includes(searchQuery) ||
-          (b.nicNumber||'').toLowerCase().includes(searchQuery) ||
-          (b.phone||'').toLowerCase().includes(searchQuery))
+      ? allBlacklist.filter(b=>(b.name||'').toLowerCase().includes(searchQuery)||(b.nicNumber||'').toLowerCase().includes(searchQuery)||(b.phone||'').toLowerCase().includes(searchQuery))
       : allBlacklist;
 
     const addForm = `
-      <div class="add-bl-form">
+      <div class="add-bl-form" style="grid-column:1/-1">
         <h4><i class="fas fa-user-slash"></i> Manually Blacklist a Person</h4>
         <div class="bl-form-grid">
           <input type="text"  id="blName"   placeholder="Full Name *">
           <input type="text"  id="blNic"    placeholder="NIC Number *">
           <input type="text"  id="blPhone"  placeholder="Phone Number">
-          <input type="text"  id="blReason" placeholder="Reason (e.g. loan default)">
+          <input type="text"  id="blReason" placeholder="Reason">
         </div>
         <button class="btn-add-bl" onclick="addToBlacklist()"><i class="fas fa-ban"></i> Add to Blacklist</button>
       </div>
-      <div style="display:flex;gap:.7rem;margin-bottom:1rem;flex-wrap:wrap;align-items:center">
+      <div style="grid-column:1/-1;display:flex;gap:.7rem;margin-bottom:.5rem;flex-wrap:wrap;align-items:center">
         <span style="font-weight:700;color:#9d174d"><i class="fas fa-ban"></i> ${filtered.length} person${filtered.length!==1?'s':''} blacklisted</span>
         <input class="search-box" style="margin-left:auto" placeholder="🔍 Search blacklist..." oninput="searchQuery=this.value.toLowerCase();renderList()">
       </div>`;
 
     if (filtered.length === 0) {
-      list.innerHTML = addForm + `<div class="empty-state"><i class="fas fa-shield-check"></i>No blacklisted persons found</div>`;
+      list.innerHTML = addForm + `<div class="empty-state" style="grid-column:1/-1"><i class="fas fa-shield-alt"></i><p>No blacklisted persons</p></div>`;
       return;
     }
 
-    list.innerHTML = addForm + filtered.map(b => {
+    list.innerHTML = addForm + filtered.map(b=>{
       const date = b.addedDate ? new Date(b.addedDate).toLocaleDateString() : '—';
-      const autoTag = b.autoAdded ? `<span class="bl-auto-tag">AUTO</span>` : '';
       return `
-      <div class="blacklist-entry" id="bl-${b.id}">
+      <div class="bl-entry" id="bl-${b.id}">
         <div class="bl-info">
-          <div class="bl-name"><i class="fas fa-user-slash"></i> ${b.name||'—'} ${autoTag}</div>
+          <div class="bl-name"><i class="fas fa-user-slash"></i> ${b.name||'—'} ${b.autoAdded ? '<span class="bl-auto">AUTO</span>' : ''}</div>
           <div class="bl-meta">
-            <span class="bl-meta-item"><i class="fas fa-id-card"></i> ${b.nicNumber||'—'}</span>
-            <span class="bl-meta-item"><i class="fas fa-phone"></i> ${b.phone||'—'}</span>
-            <span class="bl-meta-item"><i class="fas fa-calendar"></i> ${date}</span>
+            <span class="bl-chip"><i class="fas fa-id-card"></i> ${b.nicNumber||'—'}</span>
+            <span class="bl-chip"><i class="fas fa-phone"></i> ${b.phone||'—'}</span>
+            <span class="bl-chip"><i class="fas fa-calendar"></i> ${date}</span>
           </div>
           <span class="bl-reason"><i class="fas fa-exclamation-circle"></i> ${b.reason||'Not specified'}</span>
         </div>
-        <button class="btn-unblacklist" onclick="removeBlacklist('${b.id}','${(b.name||'').replace(/'/g,"\\'")}')">
+        <button class="btn-unbl" onclick="removeBlacklist('${b.id}','${(b.name||'').replace(/'/g,"\\'")}')">
           <i class="fas fa-user-check"></i> Remove
         </button>
       </div>`;
@@ -661,84 +651,57 @@
   window.setStatus = async (id, status) => {
     const updates = { status };
     if (status === 'accepted') {
-      const existing = allApps.find(a => a.id === id);
-      if (existing && !existing.approvedDate) {
-        updates.approvedDate = Date.now();
-      }
+      const existing = allApps.find(a=>a.id===id);
+      if (existing && !existing.approvedDate) updates.approvedDate = Date.now();
     }
-    await update(ref(db, `loan_applications/${id}`), updates);
-    showToast(`Application marked as ${status}`, status === 'accepted' ? 'success' : '');
+    await update(ref(db,`loan_applications/${id}`), updates);
+    showToast(`Marked as ${status}`, status==='accepted' ? 'success' : '');
   };
-
   window.setRepayStatus = async (id, status) => {
-    await update(ref(db, `loan_repayments/${id}`), { status });
-    showToast(`Repayment ${status === 'accepted' ? 'confirmed' : 'rejected'}`, status === 'accepted' ? 'success' : '');
+    await update(ref(db,`loan_repayments/${id}`), { status });
+    showToast(status==='accepted' ? 'Payment confirmed ✅' : 'Payment rejected', status==='accepted' ? 'success' : 'error');
   };
-
   window.deleteEntry = async (id, path) => {
     if(!confirm('Delete this record permanently?')) return;
-    await remove(ref(db, `${path}/${id}`));
+    await remove(ref(db,`${path}/${id}`));
     showToast('Record deleted');
   };
-
   window.manualBlacklist = async (loanId) => {
-    const loan = allApps.find(a => a.id === loanId);
+    const loan = allApps.find(a=>a.id===loanId);
     if (!loan) return;
-    const already = allBlacklist.some(b =>
-      b.nicNumber && loan.nicNumber && b.nicNumber.toLowerCase() === loan.nicNumber.toLowerCase()
-    );
-    if (already) { showToast('Already blacklisted', 'warning'); return; }
-    if (!confirm(`Blacklist ${loan.fullName}? This will prevent future loan applications.`)) return;
-    await push(ref(db, 'blacklist'), {
-      name:      loan.fullName       || '—',
-      nicNumber: loan.nicNumber      || '—',
-      phone:     loan.applicantPhone || '—',
-      reason:    'Manually blacklisted by admin',
-      addedDate: Date.now(),
-      loanId:    loan.id,
-      autoAdded: false
+    const already = allBlacklist.some(b=>b.nicNumber&&loan.nicNumber&&b.nicNumber.toLowerCase()===loan.nicNumber.toLowerCase());
+    if (already) { showToast('Already blacklisted','warning'); return; }
+    if(!confirm(`Blacklist ${loan.fullName}?`)) return;
+    await push(ref(db,'blacklist'),{
+      name:loan.fullName||'—', nicNumber:loan.nicNumber||'—', phone:loan.applicantPhone||'—',
+      reason:'Manually blacklisted by admin', addedDate:Date.now(), loanId:loan.id, autoAdded:false
     });
-    showToast(`${loan.fullName} added to blacklist`, 'warning');
+    showToast(`${loan.fullName} blacklisted`, 'warning');
   };
-
   window.addToBlacklist = async () => {
-    const name   = document.getElementById('blName').value.trim();
-    const nic    = document.getElementById('blNic').value.trim();
-    const phone  = document.getElementById('blPhone').value.trim();
-    const reason = document.getElementById('blReason').value.trim();
-    if (!name || !nic) { showToast('Name and NIC are required', 'error'); return; }
-    await push(ref(db, 'blacklist'), {
-      name, nicNumber: nic, phone,
-      reason: reason || 'Manually blacklisted by admin',
-      addedDate: Date.now(), autoAdded: false
-    });
-    document.getElementById('blName').value = '';
-    document.getElementById('blNic').value  = '';
-    document.getElementById('blPhone').value= '';
-    document.getElementById('blReason').value='';
-    showToast(`${name} added to blacklist`, 'warning');
+    const name=document.getElementById('blName').value.trim(), nic=document.getElementById('blNic').value.trim();
+    const phone=document.getElementById('blPhone').value.trim(), reason=document.getElementById('blReason').value.trim();
+    if(!name||!nic){ showToast('Name and NIC required','error'); return; }
+    await push(ref(db,'blacklist'),{ name, nicNumber:nic, phone, reason:reason||'Manually blacklisted', addedDate:Date.now(), autoAdded:false });
+    document.getElementById('blName').value=document.getElementById('blNic').value=document.getElementById('blPhone').value=document.getElementById('blReason').value='';
+    showToast(`${name} added to blacklist`,'warning');
   };
-
   window.removeBlacklist = async (id, name) => {
-    if (!confirm(`Remove ${name} from the blacklist?`)) return;
-    await remove(ref(db, `blacklist/${id}`));
-    showToast(`${name} removed from blacklist`, 'success');
+    if(!confirm(`Remove ${name} from blacklist?`)) return;
+    await remove(ref(db,`blacklist/${id}`));
+    showToast(`${name} removed`,'success');
   };
 
   // ── LIGHTBOX ─────────────────────────────────────────────────────
-  window.showImg = (url) => {
-    document.getElementById('lightboxImg').src = url;
-    document.getElementById('lightbox').classList.add('show');
-  };
-  document.getElementById('lightboxClose').addEventListener('click', ()=> document.getElementById('lightbox').classList.remove('show'));
-  document.getElementById('lightbox').addEventListener('click', e=>{ if(e.target===e.currentTarget) e.currentTarget.classList.remove('show'); });
+  window.showImg = url => { document.getElementById('lightboxImg').src=url; document.getElementById('lightbox').classList.add('show'); };
+  document.getElementById('lightboxClose').addEventListener('click',()=>document.getElementById('lightbox').classList.remove('show'));
+  document.getElementById('lightbox').addEventListener('click',e=>{ if(e.target===e.currentTarget) e.currentTarget.classList.remove('show'); });
 
   // ── TOAST ────────────────────────────────────────────────────────
   function showToast(msg, type='') {
-    const t = document.getElementById('toast');
-    t.textContent = msg;
-    t.className = `show${type ? ' '+type : ''}`;
-    setTimeout(()=> t.className = '', 2800);
+    const t=document.getElementById('toast');
+    t.textContent=msg; t.className=`show${type?' '+type:''}`;
+    setTimeout(()=>t.className='', 2800);
   }
 </script>
 </body>
