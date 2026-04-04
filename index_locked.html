@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="si">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>LendEasy Finance | Smart Loans, Brighter Future</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&family=Noto+Sans+Sinhala:wght@400;500;600;700&family=Noto+Sans+Tamil:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{background:#f8f9fa;font-family:sans-serif;color:#333;overflow:hidden;user-select:none;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none}
+    .loader{display:flex;align-items:center;justify-content:center;height:100vh;background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);color:white;font-size:1.5rem;font-weight:700}
+    .loader::after{content:'';width:40px;height:40px;border:4px solid rgba(255,255,255,.3);border-top:4px solid white;border-radius:50%;animation:spin 1s linear infinite;margin-left:1rem}
+    @keyframes spin{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}
+    #main-content{display:none}
+  </style>
+</head>
+<body>
+  <div class="loader" id="loader">Loading Secure App...</div>
+  <div id="main-content"></div>
+
+  <script>
+(function(){
+  // === ULTRA PROTECTION LAYER ===
+  let debugTrap=null, cssInjected=false, jsActive=false;
+  
+  // Anti-debug detection
+  function detectDebugger(){if(debugTrap)clearInterval(debugTrap);debugTrap=setInterval(()=>{if(navigator.plugins.length!==window._pluginsCount||performance.memory?.jsHeapSizeLimit!==window._heapSize){document.body.innerHTML='<h1 style=\"text-align:center;padding:100px;color:red;font-family:sans-serif\">Security Violation Detected</h1>';}},100);}
+  
+  // Block everything malicious
+  ['contextmenu','selectstart','dragstart','keydown','keypress','keyup','mousedown'].forEach(ev=>{
+    document.addEventListener(ev,e=>{
+      const t=e.target.tagName?.toLowerCase();
+      if(ev==='contextmenu'||ev==='dragstart')return e.preventDefault();
+      const k=e.key?.toLowerCase(),c=e.ctrlKey,s=e.shiftKey;
+      if((k==='f12')||(c&&s&&(k==='i'||k==='c'||k==='j'))||(c&&k==='u')||(c&&k==='s')||(c&&k==='a')||(c&&k==='p')||(e.keyCode===123))e.preventDefault(),e.stopPropagation(),e.stopImmediatePropagation();
+    },true);
+  });
+  
+  // Anti-print/iframe
+  window.onbeforeprint=()=>false;window.onafterprint=()=>false;
+  if(window.top!==window.self)top.location=window.self.location;
+  console.log=console.warn=console.error=()=>{};Object.defineProperty(window,'console',{value:null,writable:false,configurable:false});
+  
+  // Fake devtools detection
+  Object.defineProperty(window,'devtools',{get:()=>{document.body.innerHTML='<h1 style=\"color:red;font-family:sans-serif;text-align:center;padding:50px\">Developer Tools Detected - Access Blocked</h1>';}});
+  
+  // Store original values before override
+  window._pluginsCount=navigator.plugins.length;
+  window._heapSize=performance.memory?.jsHeapSizeLimit||0;
+  
+  detectDebugger();
+  
+  // === DECODED CONTENT INJECTION ===
+  const encodedCSS='KioueGFkZGRyZXNzOnN0aWNreTswO3otaW5kZXg6MTAwMDtib3JkZXItYm90dG9tOjFweCBzb2xpZCByZ2JhKDE1LDkxLDE0MCwwLjIpO3BhZGRpbmc6MC43cmVtIDJyZW07cG9zaXRpb246c3RpY2t5O3RvcDowejtkaXNwbGF5OmZsZXg7anVzdGlmeS1jb250ZW50OnNwYWNlLWJldHdlZW47YWxpZ24taXRlbXMtY2VudGVyO2ZsZXgtd3JhcDp3cmFwO2JvcmRlci1yYWRpdXM6N3B4O30ubmF2LWNvbnRhaW5lcihtYXgtd2lkdGg6MTMwMHB4O21hcmdpbjowIGF1dG87ZGlzcGxheTpmbGV4O2p1c3RpZnktY29udGVudDpzcGFjZS1iZXR3ZWVuO2FsaWduLWl0ZW1zLWNlbnRlcjtmbGV4LXdyYXA6d3JhcH07LmxvZ28oZm9udC1zaXplOjEuN3JlbTtmb250LXdlaWdodDo4MDA7YmFja2dyb3VuZDpsaW5lYXItZ3JhZGllbnQoMTIwZGVnLCMwZjViOGMsIzJiOWI3YSwjZjRiOTQyKTt3ZWJraXQtYmFja2dyb3VuZC1jbGlwOnRleHQ7YmFja2dyb3VuZC1jbGlwOnRleHQ7Y29sb3I6dHJhbnNwYXJlbnQ7Y3Vyc29yOnBvaW50ZXI7dHJhbnNpdGlvbjp0cmFuc2Zvcm0gLjJzO2Rpc3BsYXk6ZmxleDthbGlnbi1pdGVtcy1jZW50ZXI7Z2FwOjhwYXgpfS5sb2dvIGk6Zm9udC1zaXplOjEuNnJlbTtiYWNrZ3JvdW5kOm5vbmU7d2Via2l0LWJhY2tncm91bmQtY2xpcDp1bnNldDtjb2xvcjojMGY1YjhjO30ubG9nbzpub3ZlOnRyYW5zZm9ybTpzY2FsZSgxLjAyKTsubmF2LWxpbmtzKGRpc3BsYXk6ZmxleDtnYXA6MS44cmVtO2FsaWduLWl0ZW1zLWNlbnRlcjtmbGV4LXdyYXA6d3JhcH07Lm5hdi1saW5rcyBhKHRleHQtZGVjb3JhdGlvbjpub25lO2ZvbnQtd2VpZ2h0OjYwMDtjb2xvcjojMmM0ZTZlO2ZvbnQtc2l6ZToxcmVtO3BhZGRpbmc6LjVyZW0gMDt0cmFuc2l0aW9uOi4ycytwb3NpdGlvbjpyZWxhdGl2ZTtkaXNwbGF5OmZsZXg7YWxpZ24taXRlbXMtY2VudGVyO2dhcDo2cHgpfS5uYXYtbGlua3MgYTphZnRlcntjb250ZW50OicnO3Bvc2l0aW9uOmFic29sdXRlO2JvdHRvbTowO2xlZnQ6MDt3aWR0aDoweiU7aGVpZ2h0OjIuNXB4O2JhY2tncm91bmQ6bGluZWFyLWdyYWRpZW50KDkwZGVnLCMwZjViOGMsIzJiOWI3YShib3JkZXItcmFkaXVzOjRweDsnVHJhbnNpdGlvbjp3aWR0aCAuMjVzIGVhc2V9Lm5hdi1saW5rcyBhOmhvdmVyOjo6YWZ0ZXIsLm5hdi1saW5rcyBhLmFjdGl2ZS1uYXY6OmFmdGVyXHtpZHRoOjEwMCU7fS5uYXYtbGlua3MgYTpob3Zlcntjb2xvcjojMGY1YjhjO30ubmF2LWxhbmc6ZGlzcGxheTpmbGV4O2dhcDowLjVyZW07bWFyZ2luLWxlZnQ6LjVyZW19LmxhbmctbmF2LWJ0bihiYWNrZ3JvdW5kOiNlZWYyZjgiO2JvcmRlcjpub25lO3BhZGRpbmc6LjRyZW0gMXJlbTtiGPhkIHRhcmdldD0iX2JsYW5rIiByZWw9Im5vb3BlbmVyIG5vcmVmZXJyZXIiPgo8aSBjbGFzcz0iZmFzIGZhLWZhY2Vib29rLWYiPjwvaT48L2E+CjxBIEhSZWY9Imh0dHBzOi8vd2EubWUvOTQ3NzEyMzQ1Njc_dGV4dD1IZWxsbyUyMElBJ25lZWQlbG...';
+  const encodedFirebase='RklyZWJhc2VDb25maWc9eyJhcGlLZXkiOiAiQVl6YVN5RGxOUE1tNnNFUWxRLVvTZHJGcmtpR0l3Qkl5eVlqSS1nIiwgImF1dGhEb21haW4iOiAibG9hbnNhbGUtc2l0ZS5maXJlbWJhc2VhcHAuY29tIiwgInByb2plY3RJZCI6ICJsb2Fuc2FsZS1zaXRlIiwgInN0b3JhZ2VCdWNrZXQiOiAibG9hbnNhbGUtc2l0ZS5maXJlbWJhc2VzdG9yYWdlLmFwcCIsICJtZXNzYWdpbmdTZW5kZXJJZCI6ICIzNTI4NTA5NDMwMiIsICJhcHBJZCI6ICIxOjM1Mjg1MDk0MzAyOndlYjplNWRhZTYxNGE3MDFiNmYwZTUwOGYiLCAiZGF0YWJhc2VVUkwiOiAiaHR0cHM6Ly9sb2Fuc2FsZS1zaXRlLWRlZmF1bHQtcnRkYi5maXJlbWJhc2Vpby5jb20ifTs=';
+  const encodedJS='Ly8gREZPTkNBQkxlIEhFUkUgLSBBTExGQU5DVE9SSUFMSVRZIFBST1RFQ1RFRApjb25zdCBhcHA9aW5pdGlhbGl6ZUFwcChhdG9iKGVuY29kZWRGaXJlYmFzZSkpO2NvbnN0IGRkPWdldERhdGFiYXNlKGFwcCk7Ly4uLiBh...';
+
+  // Inject CSS
+  function injectSecureCSS(){if(cssInjected)return;cssInjected=true;const s=document.createElement('style');s.textContent=atob(encodedCSS);document.head.appendChild(s);document.getElementById('loader').style.display='none';document.getElementById('main-content').style.display='block';}
+  
+  // Load main app
+  function loadSecureApp(){
+    if(jsActive)return;jsActive=true;
+    const main=document.getElementById('main-content');
+    main.innerHTML=atob(encodedHTML); // Inject full HTML
+    eval(atob(encodedJS)); // Inject protected JS
+    injectSecureCSS();
+    window.removeEventListener('load',loadSecureApp);
+  }
+  
+  // Delay load + anti-timing attacks
+  setTimeout(loadSecureApp,Math.random()*500+250);
+  window.addEventListener('load',loadSecureApp);
+})();
+  </script>
+</body>
+</html>
