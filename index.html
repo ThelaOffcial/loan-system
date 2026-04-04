@@ -4,11 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
   <title>LendEasy Finance | Smart Loans, Brighter Future</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&family=Noto+Sans+Sinhala:wght@400;500;600;700&family=Noto+Sans+Tamil:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Noto+Sans+Sinhala:wght@400;500;600;700&family=Noto+Sans+Tamil:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <style>
     *{margin:0;padding:0;box-sizing:border-box}
-    body{background:linear-gradient(135deg,#f8faff 0%,#f0f4fa 100%);font-family:'Inter','Noto Sans Sinhala','Noto Sans Tamil',sans-serif;color:#1e2f3e;overflow-x:hidden}
+    body{background:linear-gradient(135deg,#f8faff 0%,#f0f4fa 100%);font-family:'Plus Jakarta Sans','Noto Sans Sinhala','Noto Sans Tamil',sans-serif;color:#1e2f3e;overflow-x:hidden}
+
+    /* ── NAVBAR ── */
     .navbar{background:rgba(255,255,255,.96);backdrop-filter:blur(12px);box-shadow:0 4px 20px rgba(0,0,0,.05);padding:.7rem 2rem;position:sticky;top:0;z-index:1000;border-bottom:1px solid rgba(15,91,140,.2)}
     .nav-container{max-width:1300px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap}
     .logo{font-size:1.7rem;font-weight:800;background:linear-gradient(120deg,#0f5b8c,#2b9b7a,#f4b942);-webkit-background-clip:text;background-clip:text;color:transparent;cursor:pointer;transition:transform .2s;display:flex;align-items:center;gap:8px}
@@ -23,21 +25,32 @@
     .lang-nav-btn{background:#eef2f8;border:none;padding:.4rem 1rem;border-radius:40px;font-weight:600;font-size:.8rem;cursor:pointer;font-family:inherit;transition:all .2s;color:#1e466e}
     .lang-nav-btn.active{background:#0f5b8c;color:white;box-shadow:0 4px 8px rgba(15,91,140,.2)}
     .hamburger{display:none;font-size:1.8rem;background:none;border:none;cursor:pointer;color:#0f5b8c}
+
+    /* ── MAIN ── */
     .main-content{max-width:1300px;margin:2rem auto;padding:0 1.5rem}
     .view{animation:fadeSlideUp .5s ease-out}
     @keyframes fadeSlideUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
     .section{background:white;border-radius:40px;padding:2.5rem 2rem;margin-bottom:2.5rem;box-shadow:0 15px 35px rgba(0,0,0,.05);transition:transform .3s,box-shadow .3s;border:1px solid rgba(0,0,0,.03)}
     .section:hover{transform:translateY(-5px);box-shadow:0 25px 45px rgba(15,91,140,.1)}
+
+    /* ── HERO ── */
     .hero-section{background:linear-gradient(135deg,#ffffff 0%,#f1f9ff 100%);text-align:center}
     .hero-title{font-size:2.8rem;font-weight:800;background:linear-gradient(120deg,#0f5b8c,#2b9b7a);-webkit-background-clip:text;background-clip:text;color:transparent;margin-bottom:1rem}
     .hero-desc{font-size:1.2rem;max-width:800px;margin:1rem auto 0;line-height:1.5;color:#2c4e6e}
-    .cta-btn{display:inline-block;margin-top:2rem;background:linear-gradient(95deg,#0f5b8c,#2b9b7a);color:white;border:none;padding:1rem 2.2rem;font-size:1.1rem;font-weight:700;border-radius:60px;cursor:pointer;transition:.3s;box-shadow:0 10px 20px rgba(15,91,140,.3);text-decoration:none}
+    .hero-cta-group{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin-top:2rem}
+    .cta-btn{display:inline-flex;align-items:center;gap:.6rem;background:linear-gradient(95deg,#0f5b8c,#2b9b7a);color:white;border:none;padding:1rem 2.2rem;font-size:1.1rem;font-weight:700;border-radius:60px;cursor:pointer;transition:.3s;box-shadow:0 10px 20px rgba(15,91,140,.3);text-decoration:none;font-family:inherit}
     .cta-btn:hover{transform:translateY(-3px);box-shadow:0 15px 25px rgba(15,91,140,.4)}
+    .cta-btn.invest-cta{background:linear-gradient(95deg,#f4b942,#e67e22);box-shadow:0 10px 20px rgba(244,185,66,.35)}
+    .cta-btn.invest-cta:hover{box-shadow:0 15px 25px rgba(244,185,66,.45)}
+
+    /* ── STATS ── */
     .stats-grid{display:flex;justify-content:space-between;flex-wrap:wrap;gap:2rem;text-align:center}
     .stat-item{flex:1;min-width:150px;background:rgba(15,91,140,.03);padding:1.2rem;border-radius:32px;transition:all .3s}
     .stat-item:hover{background:rgba(15,91,140,.08);transform:scale(1.02)}
     .stat-number{font-size:3rem;font-weight:800;background:linear-gradient(135deg,#0f5b8c,#2b9b7a);-webkit-background-clip:text;background-clip:text;color:transparent;line-height:1}
     .stat-label{font-size:1rem;font-weight:600;margin-top:.5rem;color:#2c4e6e}
+
+    /* ── SERVICES ── */
     .services-grid{display:flex;flex-wrap:wrap;gap:2rem;margin-top:1.5rem}
     .service-card{flex:1;min-width:230px;background:#fafcff;padding:1.8rem;border-radius:32px;transition:all .3s;text-align:center;border:1px solid #eef2fa}
     .service-card:hover{transform:translateY(-8px);background:white;border-color:#cde1ed;box-shadow:0 20px 30px rgba(15,91,140,.1)}
@@ -46,10 +59,15 @@
     .about-text{line-height:1.6;font-size:1rem;margin-top:1rem}
     .contact-info p{margin:1rem 0;display:flex;align-items:center;gap:12px;font-size:1rem}
     .contact-info i{width:28px;color:#0f5b8c;font-size:1.2rem}
+
+    /* ── LOAN / INVEST CARD ── */
     .loan-card{background:white;border-radius:40px;padding:2rem}
-    .loan-tabs{display:flex;gap:1rem;margin-bottom:2rem;border-bottom:1px solid #e0ecf3;padding-bottom:.75rem}
-    .tab-btn{background:none;border:none;font-size:1.1rem;font-weight:700;padding:.6rem 1.5rem;border-radius:40px;cursor:pointer;color:#4a627a;transition:.2s}
+    .loan-tabs{display:flex;gap:1rem;margin-bottom:2rem;border-bottom:1px solid #e0ecf3;padding-bottom:.75rem;flex-wrap:wrap}
+    .tab-btn{background:none;border:none;font-size:1.1rem;font-weight:700;padding:.6rem 1.5rem;border-radius:40px;cursor:pointer;color:#4a627a;transition:.2s;font-family:inherit}
     .tab-btn.active-tab{background:#0f5b8c;color:white;box-shadow:0 6px 12px rgba(15,91,140,.2)}
+    .tab-btn.invest-tab.active-tab{background:linear-gradient(95deg,#f4b942,#e67e22);box-shadow:0 6px 12px rgba(244,185,66,.3)}
+
+    /* ── FORMS ── */
     .form-group{margin-bottom:1.4rem}
     label{font-weight:600;display:block;margin-bottom:.4rem;color:#1f3b4c}
     input,textarea,select{width:100%;padding:.85rem 1rem;border:1.5px solid #e0eaf0;border-radius:24px;font-family:inherit;transition:.2s;font-size:1rem}
@@ -64,22 +82,48 @@
     .checkbox-wrapper input{width:20px;height:20px;margin:0}
     .checkbox-wrapper label{margin:0;font-weight:500;cursor:pointer}
     .guarantor-section{background:#f9fbfe;padding:1.2rem 1.5rem;border-radius:28px;margin-top:.5rem;border-left:4px solid #0f5b8c}
-    .submit-btn{background:linear-gradient(95deg,#1f7b5a,#2b9b7a);color:white;border:none;padding:1rem;font-weight:700;border-radius:50px;width:100%;cursor:pointer;font-size:1.1rem;transition:.2s;box-shadow:0 6px 14px rgba(43,155,122,.3)}
+    .submit-btn{color:white;border:none;padding:1rem;font-weight:700;border-radius:50px;width:100%;cursor:pointer;font-size:1.1rem;transition:.2s;font-family:inherit}
+    .submit-btn.loan-submit{background:linear-gradient(95deg,#1f7b5a,#2b9b7a);box-shadow:0 6px 14px rgba(43,155,122,.3)}
+    .submit-btn.invest-submit{background:linear-gradient(95deg,#d4870a,#f4b942);box-shadow:0 6px 14px rgba(244,185,66,.35)}
     .submit-btn:hover{transform:scale(1.01)}
     .submit-btn:disabled{opacity:.6;cursor:not-allowed;transform:none}
     .success-message{background:#dcfce7;padding:1rem;border-radius:24px;color:#15803d;text-align:center;margin-top:1rem}
+    .invest-success-message{background:#fef3c7;padding:1rem;border-radius:24px;color:#92400e;text-align:center;margin-top:1rem}
     .error-text{color:#c7362b;font-size:.85rem;margin-top:8px;padding:.5rem 1rem;background:#fff5f5;border-radius:12px}
-    .back-home-btn{background:#eef2f8;border:none;padding:.6rem 1.5rem;border-radius:40px;font-weight:600;margin-bottom:1rem;cursor:pointer}
+    .back-home-btn{background:#eef2f8;border:none;padding:.6rem 1.5rem;border-radius:40px;font-weight:600;margin-bottom:1rem;cursor:pointer;font-family:inherit}
+
+    /* ── NOTICE BOX ── */
     .notice-box{background:#fff5f5;border-left:4px solid #dc2626;border-radius:16px;padding:.8rem 1rem;margin-bottom:1.5rem;font-size:.85rem;color:#991b1b;display:flex;flex-wrap:wrap;gap:.75rem;align-items:flex-start}
     .notice-box i{font-size:1rem;margin-top:.15rem;color:#dc2626}
+    .notice-box.invest-notice{background:#fffbeb;border-left-color:#f59e0b;color:#92400e}
+    .notice-box.invest-notice i{color:#f59e0b}
     .notice-content{flex:1;display:flex;flex-wrap:wrap;gap:.5rem;justify-content:space-between}
     .notice-item{display:flex;align-items:center;gap:6px;background:rgba(220,38,38,.08);padding:.3rem .7rem;border-radius:40px}
+    .notice-item.invest-item{background:rgba(245,158,11,.1)}
     .notice-item strong{font-weight:700;color:#b91c1c}
+    .notice-item.invest-item strong{color:#92400e}
+
+    /* ── INVEST PANEL ── */
+    .invest-panel-inner{background:linear-gradient(135deg,#fffbeb 0%,#fef9ec 100%);border-radius:32px;padding:1.5rem;border:1.5px solid #fde68a}
+    .invest-hero-banner{background:linear-gradient(120deg,#f4b942,#e67e22);border-radius:24px;padding:1.5rem;margin-bottom:1.5rem;text-align:center;color:white}
+    .invest-hero-banner h3{font-size:1.5rem;font-weight:800;margin-bottom:.4rem}
+    .invest-hero-banner p{font-size:.95rem;opacity:.9}
+    .invest-returns-grid{display:flex;gap:1rem;margin-top:1rem;flex-wrap:wrap}
+    .invest-return-item{flex:1;min-width:100px;background:rgba(255,255,255,.2);border-radius:16px;padding:.7rem;text-align:center}
+    .invest-return-num{font-size:1.5rem;font-weight:800}
+    .invest-return-label{font-size:.7rem;opacity:.85;margin-top:.2rem}
+    .bank-section-group{background:#f0f8ff;border-radius:28px;padding:1.2rem 1.5rem;margin-bottom:1.4rem;border-left:4px solid #2b9b7a}
+    .bank-section-group h4{font-size:1rem;font-weight:700;color:#0f5b8c;margin-bottom:1rem;display:flex;align-items:center;gap:8px}
+    .amount-hint{font-size:.78rem;color:#0f5b8c;background:#e8f4ff;padding:.25rem .75rem;border-radius:40px;display:inline-block;margin-top:.4rem;font-weight:600}
+    .amount-hint.invest-hint{color:#92400e;background:#fef3c7}
+
+    /* ── PROGRESS ── */
     .upload-progress{background:#eff6ff;border-radius:16px;padding:.8rem 1rem;margin-bottom:1rem;border:1px solid #bfdbfe;display:none}
     .progress-bar-wrap{background:#dbeafe;border-radius:40px;height:8px;margin-top:.4rem;overflow:hidden}
     .progress-bar{background:linear-gradient(90deg,#0f5b8c,#2b9b7a);height:8px;border-radius:40px;width:0%;transition:width .4s}
-    .bank-section-group{background:#f0f8ff;border-radius:28px;padding:1.2rem 1.5rem;margin-bottom:1.4rem;border-left:4px solid #2b9b7a}
-    .bank-section-group h4{font-size:1rem;font-weight:700;color:#0f5b8c;margin-bottom:1rem;display:flex;align-items:center;gap:8px}
+    .progress-bar.invest-bar{background:linear-gradient(90deg,#f4b942,#e67e22)}
+
+    /* ── REPAY ── */
     .nic-lookup-wrap{position:relative}
     .nic-lookup-wrap input{padding-right:3rem}
     .nic-search-btn{position:absolute;right:12px;top:50%;transform:translateY(-50%);background:#0f5b8c;border:none;border-radius:50%;width:32px;height:32px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.2s}
@@ -87,27 +131,25 @@
     .nic-search-btn i{color:white;font-size:.85rem}
     @keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
     .nic-search-btn.loading i{animation:spin .8s linear infinite}
+    .nic-lookup-spinner{text-align:center;padding:1.5rem;color:#0f5b8c;font-size:.9rem;display:none}
+    .nic-lookup-spinner.show{display:block}
+    .nic-lookup-spinner i{font-size:1.5rem;margin-bottom:.5rem;display:block;animation:spin .8s linear infinite}
 
-    /* ── LOAN INFO CARD (repay) ── */
+    /* ── LOAN INFO CARD ── */
     .loan-info-card{background:white;border:1.5px solid #e0eaf0;border-radius:24px;padding:0;margin-bottom:1.2rem;display:none;overflow:hidden;box-shadow:0 8px 24px rgba(15,91,140,.08)}
     .loan-info-card.show{display:block;animation:fadeSlideUp .3s ease-out}
-
     .lic-header{background:linear-gradient(120deg,#0f5b8c,#2b9b7a);padding:1rem 1.3rem;display:flex;justify-content:space-between;align-items:center}
     .lic-header-name{color:white;font-weight:800;font-size:1.1rem;display:flex;align-items:center;gap:8px}
     .lic-status-badge{padding:.3rem .9rem;border-radius:40px;font-size:.75rem;font-weight:700;text-transform:uppercase}
     .lic-status-badge.pending{background:rgba(255,255,255,.2);color:#fffde7}
     .lic-status-badge.accepted{background:#dcfce7;color:#15803d}
-    .lic-status-badge.rejected{background:#fee2e2;color:#dc2626}
-    .lic-status-badge.cancelled{background:#fee2e2;color:#dc2626}
-
-    /* ── OUTSTANDING HERO ── */
+    .lic-status-badge.rejected,.lic-status-badge.cancelled{background:#fee2e2;color:#dc2626}
     .outstanding-hero{padding:1.2rem 1.3rem;background:linear-gradient(135deg,#fff8e1,#fef3c7);border-bottom:1px solid #fde68a;display:none}
     .outstanding-hero.show{display:block}
     .oh-label{font-size:.78rem;font-weight:700;color:#92400e;text-transform:uppercase;letter-spacing:.05em;margin-bottom:.3rem}
     .oh-amount{font-size:2rem;font-weight:800;color:#d97706;line-height:1}
     .oh-settled{font-size:1.3rem;font-weight:800;color:#15803d}
     .oh-sub{font-size:.78rem;color:#92400e;margin-top:.4rem;font-weight:500}
-
     .lic-body{padding:1rem 1.3rem}
     .lic-row{display:flex;justify-content:space-between;align-items:center;padding:.45rem 0;border-bottom:1px solid #f0f4fa}
     .lic-row:last-child{border-bottom:none}
@@ -117,20 +159,10 @@
     .lic-value.red{color:#dc2626}
     .lic-value.orange{color:#d97706}
     .lic-value.blue{color:#0f5b8c}
-
-    /* ── BREAKDOWN BOX ── */
-    .fin-breakdown{background:#f8faff;border-radius:16px;padding:.9rem 1rem;margin-top:.8rem;border:1px solid #e0eaf0;display:none}
-    .fin-breakdown.show{display:block}
-    .fin-breakdown-title{font-size:.78rem;font-weight:700;color:#0f5b8c;margin-bottom:.6rem;display:flex;align-items:center;gap:6px;cursor:pointer;user-select:none}
-    .fin-row{display:flex;justify-content:space-between;font-size:.8rem;padding:.3rem 0;border-bottom:1px solid #eef2fa}
-    .fin-row:last-child{border-bottom:none}
-    .fin-row.total{font-weight:800;font-size:.88rem;padding-top:.5rem;color:#0f2d42}
-    .fin-row.paid{color:#15803d}
-    .fin-row.late{color:#dc2626}
-    .fin-row.outstanding-row{color:#d97706;font-weight:800}
-
     .loan-info-not-found{background:#fff5f5;border:1.5px solid #fca5a5;border-radius:16px;padding:.8rem 1rem;font-size:.85rem;color:#991b1b;margin-bottom:1rem;display:none;text-align:center}
     .loan-info-not-found.show{display:block}
+
+    /* ── BLACKLIST ── */
     .blacklist-rejection{background:linear-gradient(135deg,#1a0000,#3a0000);border:2px solid #dc2626;border-radius:28px;padding:2rem;text-align:center;color:white;margin-top:1.5rem;animation:pulseRed .8s ease-in-out}
     .blacklist-rejection i{font-size:3rem;color:#ef4444;display:block;margin-bottom:1rem}
     .blacklist-rejection h3{font-size:1.4rem;color:#fca5a5;margin-bottom:.7rem}
@@ -138,8 +170,16 @@
     .blacklist-rejection .bl-details{background:rgba(255,255,255,.07);border-radius:16px;padding:.8rem 1rem;margin-top:1rem;font-size:.85rem;color:#fda4af;text-align:left}
     @keyframes pulseRed{0%{box-shadow:0 0 0 0 rgba(220,38,38,.5)}70%{box-shadow:0 0 0 15px rgba(220,38,38,0)}100%{box-shadow:0 0 0 0 rgba(220,38,38,0)}}
     .checking-blacklist{background:#f0f9ff;border:1px solid #bae6fd;border-radius:16px;padding:1rem;text-align:center;color:#0369a1;font-size:.9rem;margin-bottom:1rem;display:none}
+
+    /* ── INVEST SECTION STYLING ── */
+    .invest-section-group{background:#fffbeb;border-radius:28px;padding:1.2rem 1.5rem;margin-bottom:1.4rem;border-left:4px solid #f4b942}
+    .invest-section-group h4{font-size:1rem;font-weight:700;color:#92400e;margin-bottom:1rem;display:flex;align-items:center;gap:8px}
+
+    /* ── WHATSAPP ── */
     .whatsapp-float{position:fixed;bottom:30px;right:30px;background-color:#25d366;color:white;border-radius:50px;padding:12px 20px;font-weight:700;display:flex;align-items:center;gap:10px;box-shadow:0 10px 20px rgba(37,211,102,.3);z-index:1000;text-decoration:none;font-size:1rem;transition:all .3s;font-family:inherit}
     .whatsapp-float:hover{transform:scale(1.05);background-color:#20b859}
+
+    /* ── FOOTER ── */
     .footer{background:#0a2a3b;color:#e0edf5;padding:3rem 2rem 1.5rem;margin-top:3rem;border-top-left-radius:40px;border-top-right-radius:40px}
     .footer-container{max-width:1300px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:2rem}
     .footer-col h4{font-size:1.2rem;margin-bottom:1rem;color:white;position:relative;display:inline-block}
@@ -150,12 +190,6 @@
     .social-icons a{background:rgba(255,255,255,.1);width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;transition:.2s}
     .social-icons a:hover{background:#2b9b7a;transform:translateY(-3px)}
     .copyright{text-align:center;margin-top:2rem;padding-top:1rem;border-top:1px solid rgba(255,255,255,.1);font-size:.8rem}
-    .amount-hint{font-size:.78rem;color:#0f5b8c;background:#e8f4ff;padding:.25rem .75rem;border-radius:40px;display:inline-block;margin-top:.4rem;font-weight:600}
-
-    /* NIC looking up spinner */
-    .nic-lookup-spinner{text-align:center;padding:1.5rem;color:#0f5b8c;font-size:.9rem;display:none}
-    .nic-lookup-spinner.show{display:block}
-    .nic-lookup-spinner i{font-size:1.5rem;margin-bottom:.5rem;display:block;animation:spin .8s linear infinite}
 
     @media(max-width:800px){
       .navbar{padding:.8rem 1rem}
@@ -166,7 +200,9 @@
       .stats-grid{flex-direction:column;gap:1rem}
       .services-grid{flex-direction:column}
       .notice-content{flex-direction:column}
+      .hero-cta-group{flex-direction:column;align-items:center}
       .whatsapp-float{padding:8px 15px;font-size:.8rem;bottom:20px;right:20px}
+      .invest-returns-grid{flex-direction:column}
     }
     html{scroll-behavior:smooth;scroll-padding-top:90px}
     body{user-select:none;-webkit-user-select:none}
@@ -184,6 +220,7 @@
       <a href="#" data-nav="home"><i class="fas fa-home"></i> <span data-i18n="nav_home">Home</span></a>
       <a href="#" data-nav="services"><i class="fas fa-hand-holding-usd"></i> <span data-i18n="nav_services">Services</span></a>
       <a href="#" data-nav="loan"><i class="fas fa-file-invoice-dollar"></i> <span data-i18n="nav_loan">Loan</span></a>
+      <a href="#" data-nav="invest"><i class="fas fa-seedling"></i> <span data-i18n="nav_invest">Invest</span></a>
       <a href="#" data-nav="about"><i class="fas fa-info-circle"></i> <span data-i18n="nav_about">About</span></a>
       <a href="#" data-nav="contact"><i class="fas fa-phone-alt"></i> <span data-i18n="nav_contact">Contact</span></a>
       <div class="nav-lang">
@@ -196,33 +233,43 @@
 </nav>
 
 <div class="main-content">
-  <!-- HOME VIEW -->
+
+  <!-- ════════════════ HOME VIEW ════════════════ -->
   <div id="homeView" class="view" style="display:block;">
     <div class="section hero-section" id="home-hero">
       <div class="hero-title" data-i18n="hero_title">🏦 Smart Loans, Brighter Tomorrow</div>
       <div class="hero-desc" data-i18n="company_description">ඔබගේ සිහින සැබෑ කර ගැනීමට අපි මෙහි සිටිමු.</div>
-      <button id="frontPageLoanBtn" class="cta-btn"><i class="fas fa-file-invoice-dollar"></i> <span data-i18n="apply_now_btn">Apply for Loan Now</span></button>
+      <div class="hero-cta-group">
+        <button id="frontPageLoanBtn" class="cta-btn"><i class="fas fa-file-invoice-dollar"></i> <span data-i18n="apply_now_btn">Apply for Loan Now</span></button>
+        <button id="frontPageInvestBtn" class="cta-btn invest-cta"><i class="fas fa-seedling"></i> <span data-i18n="invest_now_btn">Invest Now</span></button>
+      </div>
     </div>
+
     <div class="section" id="stats-section">
       <div class="stats-grid" id="statsGrid">
         <div class="stat-item"><div class="stat-number" id="yearsCount">0</div><div class="stat-label" data-i18n="stat_years">වසරක පළපුරුද්ද</div></div>
         <div class="stat-item"><div class="stat-number" id="satisfactionCount">0</div><div class="stat-label" data-i18n="stat_satisfaction">සේවා තෘප්තිය</div></div>
         <div class="stat-item"><div class="stat-number" id="loansCount">0</div><div class="stat-label" data-i18n="stat_loans">සාර්ථක ණය</div></div>
+        <div class="stat-item"><div class="stat-number" id="investorsCount">0</div><div class="stat-label" data-i18n="stat_investors">ආයෝජකයින්</div></div>
       </div>
     </div>
+
     <div class="section" id="services-section">
       <h2 style="font-size:1.8rem;margin-bottom:.5rem;" data-i18n="services_title"><i class="fas fa-star"></i> අපගේ සේවාවන්</h2>
       <div class="services-grid">
         <div class="service-card"><i class="fas fa-user-check"></i><h3 data-i18n="service1_title">පුද්ගලික ණය</h3><p data-i18n="service1_desc">ඔබගේ පෞද්ගලික අවශ්‍යතා සඳහා අඩු පොලිය.</p></div>
         <div class="service-card"><i class="fas fa-building"></i><h3 data-i18n="service2_title">ව්‍යාපාරික ණය</h3><p data-i18n="service2_desc">ව්‍යාපාර පුළුල් කිරීමට නම්‍යශීලී වාරික.</p></div>
         <div class="service-card"><i class="fas fa-bolt"></i><h3 data-i18n="service3_title">ක්ෂණික අනුමැතිය</h3><p data-i18n="service3_desc">ඩිජිටල් අයදුම්පත, 24 පැය ඇතුලත ප්‍රතිචාරය.</p></div>
+        <div class="service-card" style="border-color:#fde68a;"><i class="fas fa-seedling" style="color:#f59e0b;"></i><h3 data-i18n="service4_title">ආයෝජන</h3><p data-i18n="service4_desc">ඔබේ මුදල් ආයෝජනය කර ඉහළ ප්‍රතිලාභ ලබා ගන්න.</p></div>
       </div>
     </div>
+
     <div class="section" id="about-section">
       <h2 style="font-size:1.8rem;" data-i18n="about_title"><i class="fas fa-chalkboard-user"></i> අපි ගැන</h2>
       <div class="about-text" data-i18n="about_text">LendEasy Finance ශ්‍රී ලංකාවේ විශ්වාසනීය මූල්‍ය සේවා සපයන්නෙකු ලෙස වසර 15කට වැඩි කාලයක්.</div>
       <div style="margin-top:1.5rem;background:#f0f8ff;padding:1rem;border-radius:28px;"><span style="font-weight:800;"><i class="fas fa-bullseye"></i> <span data-i18n="mission_title">අපගේ ඉලක්කය</span>:</span><span data-i18n="mission_desc"> සෑම ශ්‍රී ලාංකිකයෙකුටම සාධාරණ මූල්‍ය ප්‍රවේශය.</span></div>
     </div>
+
     <div class="section" id="contact-section">
       <h2 style="font-size:1.8rem;" data-i18n="contact_title"><i class="fas fa-address-card"></i> අමතන්න</h2>
       <div class="contact-info">
@@ -234,7 +281,7 @@
     </div>
   </div>
 
-  <!-- LOAN VIEW -->
+  <!-- ════════════════ LOAN VIEW ════════════════ -->
   <div id="loanView" class="view" style="display:none;">
     <div class="loan-card">
       <button id="backToHomeFromLoan" class="back-home-btn"><i class="fas fa-arrow-left"></i> <span data-i18n="back_home">Back to Home</span></button>
@@ -304,7 +351,6 @@
                   <option value="PABC">Pan Asia Banking Corporation PLC (PABC)</option>
                   <option value="Amana">Amana Bank PLC</option>
                   <option value="Cargills">Cargills Bank Ltd</option>
-                  <option value="Sampath">Sampath Bank PLC</option>
                 </optgroup>
                 <optgroup label="🌐 විදේශ / Foreign Banks">
                   <option value="Standard">Standard Chartered Bank</option>
@@ -328,7 +374,7 @@
               <div class="form-group"><label><span data-i18n="guarantor_phone_label">දුරකතන අංකය</span> *</label><input type="tel" id="guarantorPhone"></div>
             </div>
           </div>
-          <button type="submit" id="submitApplicationBtn" class="submit-btn"><span data-i18n="submit_btn_text">අයදුම්පත ඉදිරිපත් කරන්න</span></button>
+          <button type="submit" id="submitApplicationBtn" class="submit-btn loan-submit"><span data-i18n="submit_btn_text">අයදුම්පත ඉදිරිපත් කරන්න</span></button>
           <div id="formFeedback"></div>
         </form>
       </div>
@@ -350,8 +396,6 @@
           </div>
           <h3 style="margin-bottom:1.2rem;" data-i18n="repayment_form_title">💰 ණය ගෙවීම් විස්තර</h3>
           <form id="repaymentForm">
-
-            <!-- NIC FIRST WITH AUTO-LOOKUP -->
             <div class="form-group">
               <label>
                 <span data-i18n="repay_nic_label">NIC අංකය</span> *
@@ -364,94 +408,219 @@
                 </button>
               </div>
             </div>
-
-            <!-- LOADING SPINNER -->
             <div class="nic-lookup-spinner" id="nicLookupSpinner">
               <i class="fas fa-circle-notch"></i>
               <span data-i18n="looking_up_nic">ණය තොරතුරු සොයමින්...</span>
             </div>
-
-            <!-- LOAN INFO CARD - redesigned with financial breakdown -->
             <div class="loan-info-card" id="repayLoanInfoCard">
-
-              <!-- Card header with name + status -->
               <div class="lic-header">
-                <div class="lic-header-name">
-                  <i class="fas fa-user-circle"></i>
-                  <span id="repayInfoName">—</span>
-                </div>
+                <div class="lic-header-name"><i class="fas fa-user-circle"></i><span id="repayInfoName">—</span></div>
                 <span class="lic-status-badge pending" id="repayInfoStatusBadge">PENDING</span>
               </div>
-
-              <!-- Outstanding amount hero block -->
               <div class="outstanding-hero" id="outstandingHero">
                 <div class="oh-label" id="outstandingLabel">💸 දැන් ගෙවිය යුතු මුළු මුදල</div>
                 <div class="oh-amount" id="outstandingAmount">—</div>
                 <div class="oh-sub" id="outstandingSubtext"></div>
               </div>
-
               <div class="lic-body">
-                <div class="lic-row">
-                  <span class="lic-label"><i class="fas fa-coins"></i> <span data-i18n="repay_info_principal">ණය මුදල</span></span>
-                  <span class="lic-value blue" id="repayInfoPrincipal">—</span>
-                </div>
-                <div class="lic-row" id="repayInfoMonthsRow" style="display:none">
-                  <span class="lic-label"><i class="fas fa-calendar-alt"></i> <span data-i18n="repay_info_months">ගත වූ මාස</span></span>
-                  <span class="lic-value" id="repayInfoMonths">—</span>
-                </div>
-                <div class="lic-row" id="repayInfoInterestRow" style="display:none">
-                  <span class="lic-label"><i class="fas fa-percent"></i> <span data-i18n="repay_info_interest">පොලිය (1.5%/මාස)</span></span>
-                  <span class="lic-value orange" id="repayInfoInterest">—</span>
-                </div>
-                <div class="lic-row" id="repayInfoPaidRow" style="display:none">
-                  <span class="lic-label"><i class="fas fa-check-circle"></i> <span data-i18n="repay_info_paid">දැනටමත් ගෙවූ</span></span>
-                  <span class="lic-value green" id="repayInfoPaid">—</span>
-                </div>
-                <div class="lic-row" id="repayInfoLateRow" style="display:none">
-                  <span class="lic-label"><i class="fas fa-exclamation-triangle"></i> <span data-i18n="repay_info_late_fee">ප්‍රමාද ගාස්තු</span></span>
-                  <span class="lic-value red" id="repayInfoLateFee">—</span>
-                </div>
-                <div class="lic-row">
-                  <span class="lic-label"><i class="fas fa-calendar"></i> <span data-i18n="repay_info_date">අයදුම් දිනය</span></span>
-                  <span class="lic-value" id="repayInfoDate">—</span>
-                </div>
-                <!-- Pending / not-accepted notice -->
+                <div class="lic-row"><span class="lic-label"><i class="fas fa-coins"></i> <span data-i18n="repay_info_principal">ණය මුදල</span></span><span class="lic-value blue" id="repayInfoPrincipal">—</span></div>
+                <div class="lic-row" id="repayInfoMonthsRow" style="display:none"><span class="lic-label"><i class="fas fa-calendar-alt"></i> <span data-i18n="repay_info_months">ගත වූ මාස</span></span><span class="lic-value" id="repayInfoMonths">—</span></div>
+                <div class="lic-row" id="repayInfoInterestRow" style="display:none"><span class="lic-label"><i class="fas fa-percent"></i> <span data-i18n="repay_info_interest">පොලිය (1.5%/මාස)</span></span><span class="lic-value orange" id="repayInfoInterest">—</span></div>
+                <div class="lic-row" id="repayInfoPaidRow" style="display:none"><span class="lic-label"><i class="fas fa-check-circle"></i> <span data-i18n="repay_info_paid">දැනටමත් ගෙවූ</span></span><span class="lic-value green" id="repayInfoPaid">—</span></div>
+                <div class="lic-row" id="repayInfoLateRow" style="display:none"><span class="lic-label"><i class="fas fa-exclamation-triangle"></i> <span data-i18n="repay_info_late_fee">ප්‍රමාද ගාස්තු</span></span><span class="lic-value red" id="repayInfoLateFee">—</span></div>
+                <div class="lic-row"><span class="lic-label"><i class="fas fa-calendar"></i> <span data-i18n="repay_info_date">අයදුම් දිනය</span></span><span class="lic-value" id="repayInfoDate">—</span></div>
                 <div id="repayInfoNotice" style="display:none;margin-top:.8rem;background:#fff8e0;border-radius:14px;padding:.7rem 1rem;font-size:.82rem;color:#92400e;font-weight:600;">
                   <i class="fas fa-clock"></i> <span id="repayInfoNoticeText"></span>
                 </div>
               </div>
             </div>
-
             <div class="loan-info-not-found" id="repayLoanNotFound">
               <i class="fas fa-times-circle"></i> <span data-i18n="repay_not_found">මෙම NIC අංකය සඳහා ණය අයදුම්පතක් හමු නොවීය.</span>
             </div>
-
-            <div class="form-group">
-              <label><span data-i18n="repay_name_label">සම්පූර්ණ නම</span> *</label>
-              <input type="text" id="repayFullName" placeholder="NIC සොයන විට ස්වයංක්‍රීයව පිරවේ" readonly>
-            </div>
+            <div class="form-group"><label><span data-i18n="repay_name_label">සම්පූර්ණ නම</span> *</label><input type="text" id="repayFullName" placeholder="NIC සොයන විට ස්වයංක්‍රීයව පිරවේ" readonly></div>
             <div class="form-group">
               <label><span data-i18n="repay_amount_label">ගෙවන මුදල (රු.)</span> *</label>
               <input type="number" id="repayAmount" step="100" min="100" placeholder="5000">
               <span class="amount-hint" data-i18n="repay_amount_hint">ඔබ ගෙවන මුදල ඇතුළත් කරන්න</span>
             </div>
-            <div class="form-group">
-              <label><span data-i18n="repay_photo_label">බැංකු රිසිට්පත / ස්ක්‍රීන්ෂොට්</span> *</label>
-              <input type="file" id="repayReceipt" accept="image/*">
-              <div id="repayReceiptPreview" class="photo-preview"></div>
-            </div>
-            <div class="form-group">
-              <label><span data-i18n="repay_phone_label">දුරකතන අංකය</span> *</label>
-              <input type="tel" id="repayPhone" placeholder="071 234 5678">
-            </div>
-            <button type="submit" id="submitRepaymentBtn" class="submit-btn"><span data-i18n="repay_submit_btn">ගෙවීම තහවුරු කරන්න</span></button>
+            <div class="form-group"><label><span data-i18n="repay_photo_label">බැංකු රිසිට්පත / ස්ක්‍රීන්ෂොට්</span> *</label><input type="file" id="repayReceipt" accept="image/*"><div id="repayReceiptPreview" class="photo-preview"></div></div>
+            <div class="form-group"><label><span data-i18n="repay_phone_label">දුරකතන අංකය</span> *</label><input type="tel" id="repayPhone" placeholder="071 234 5678"></div>
+            <button type="submit" id="submitRepaymentBtn" class="submit-btn loan-submit"><span data-i18n="repay_submit_btn">ගෙවීම තහවුරු කරන්න</span></button>
             <div id="repaymentFeedback"></div>
           </form>
         </div>
       </div>
     </div>
   </div>
-</div>
+
+  <!-- ════════════════ INVEST VIEW ════════════════ -->
+  <div id="investView" class="view" style="display:none;">
+    <div class="loan-card">
+      <button id="backToHomeFromInvest" class="back-home-btn"><i class="fas fa-arrow-left"></i> <span data-i18n="back_home">Back to Home</span></button>
+
+      <div class="invest-panel-inner">
+        <!-- Hero Banner -->
+        <div class="invest-hero-banner">
+          <h3 data-i18n="invest_banner_title">🌱 ආයෝජනය කරන්න, ප්‍රතිලාභ ලබා ගන්න</h3>
+          <p data-i18n="invest_banner_desc">ඔබේ මුදල් LendEasy Finance හි ආයෝජනය කර ඉහළ ප්‍රතිලාභ ලබා ගන්න</p>
+          <div class="invest-returns-grid">
+            <div class="invest-return-item">
+              <div class="invest-return-num">18%</div>
+              <div class="invest-return-label" data-i18n="invest_return_annual">වාර්ෂික ප්‍රතිලාභ</div>
+            </div>
+            <div class="invest-return-item">
+              <div class="invest-return-num">1.5%</div>
+              <div class="invest-return-label" data-i18n="invest_return_monthly">මාසික ප්‍රතිලාභ</div>
+            </div>
+            <div class="invest-return-item">
+              <div class="invest-return-num">රු.1K+</div>
+              <div class="invest-return-label" data-i18n="invest_min_label">අවම ආයෝජනය</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Notice -->
+        <div class="notice-box invest-notice">
+          <i class="fas fa-info-circle"></i>
+          <div class="notice-content">
+            <div class="notice-item invest-item"><i class="fas fa-shield-alt"></i><strong data-i18n="invest_notice1_label">ආරක්ෂිත:</strong><span data-i18n="invest_notice1_value">ලියාපදිංචි මූල්‍ය ආයතනය</span></div>
+            <div class="notice-item invest-item"><i class="fas fa-calendar-check"></i><strong data-i18n="invest_notice2_label">ගෙවීම්:</strong><span data-i18n="invest_notice2_value">මාසිකව ගිණුමට</span></div>
+            <div class="notice-item invest-item"><i class="fas fa-undo"></i><strong data-i18n="invest_notice3_label">ආපසු ගැනීම:</strong><span data-i18n="invest_notice3_value">3 මාස දැනුම් දීමෙන්</span></div>
+          </div>
+        </div>
+
+        <!-- Progress Bar -->
+        <div class="upload-progress" id="investProgress">
+          <div style="font-size:.85rem;font-weight:600;color:#92400e;">⏳ <span id="investProgressText">Processing...</span></div>
+          <div class="progress-bar-wrap"><div class="progress-bar invest-bar" id="investProgressBar"></div></div>
+        </div>
+
+        <!-- Form -->
+        <form id="investmentForm">
+
+          <!-- Personal Details -->
+          <div class="invest-section-group">
+            <h4><i class="fas fa-user"></i> <span data-i18n="invest_personal_section">පෞද්ගලික විස්තර</span></h4>
+            <div class="form-group">
+              <label><span data-i18n="invest_full_name_label">සම්පූර්ණ නම</span> *</label>
+              <input type="text" id="investFullName" placeholder="උදා: පෙරේරා කමල්" data-i18n-placeholder="invest_name_placeholder">
+            </div>
+            <div class="form-group">
+              <label><span data-i18n="invest_nic_label">NIC අංකය</span> *</label>
+              <input type="text" id="investNic" placeholder="1990XXXXXXX හෝ XXXXXXXXXV">
+            </div>
+            <div class="form-group">
+              <label><span data-i18n="invest_phone_label">දුරකතන අංකය</span> *</label>
+              <input type="tel" id="investPhone" placeholder="071 234 5678">
+            </div>
+            <div class="form-group">
+              <label><span data-i18n="invest_address_label">ලිපිනය</span> *</label>
+              <textarea id="investAddress" rows="2" placeholder="නිවස් අංකය, වීදිය, නගරය"></textarea>
+            </div>
+          </div>
+
+          <!-- Investment Details -->
+          <div class="invest-section-group">
+            <h4><i class="fas fa-coins"></i> <span data-i18n="invest_amount_section">ආයෝජන විස්තර</span></h4>
+            <div class="form-group">
+              <label><span data-i18n="invest_amount_label">ආයෝජන මුදල (රු.)</span> *</label>
+              <input type="number" id="investAmount" step="1000" min="1000" placeholder="50,000">
+              <span class="amount-hint invest-hint" data-i18n="invest_amount_hint">අවම ආයෝජනය: රු. 1,000/-</span>
+            </div>
+            <div class="form-group">
+              <label><span data-i18n="invest_duration_label">ආයෝජන කාලය</span> *</label>
+              <select id="investDuration">
+                <option value="" data-i18n="invest_duration_placeholder">-- කාලය තෝරන්න --</option>
+                <option value="3" data-i18n="invest_3months">මාස 3</option>
+                <option value="6" data-i18n="invest_6months">මාස 6</option>
+                <option value="12" data-i18n="invest_12months">මාස 12</option>
+                <option value="24" data-i18n="invest_24months">මාස 24</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- NIC Photos -->
+          <div class="invest-section-group">
+            <h4><i class="fas fa-id-card"></i> <span data-i18n="invest_nic_photos_section">NIC ඡායාරූප</span></h4>
+            <div class="double-photo-group">
+              <div class="form-group">
+                <label><span data-i18n="invest_nic_front_label">NIC ඉදිරිපස ඡායාරූපය</span> *</label>
+                <input type="file" id="investNicFront" accept="image/*">
+                <div id="investNicFrontPreview" class="photo-preview"></div>
+              </div>
+              <div class="form-group">
+                <label><span data-i18n="invest_nic_back_label">NIC පසුපස ඡායාරූපය</span> *</label>
+                <input type="file" id="investNicBack" accept="image/*">
+                <div id="investNicBackPreview" class="photo-preview"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Bank Details -->
+          <div class="invest-section-group">
+            <h4><i class="fas fa-university"></i> <span data-i18n="invest_bank_section">ප්‍රතිලාභ ලැබිය යුතු ගිණුම</span></h4>
+            <div class="form-group">
+              <label><span data-i18n="invest_account_label">ගිණුම් අංකය</span> *</label>
+              <input type="text" id="investAccountNumber" placeholder="0001234567890" inputmode="numeric">
+            </div>
+            <div class="form-group">
+              <label><span data-i18n="invest_bank_name_label">බැංකුව</span> *</label>
+              <select id="investBankName">
+                <option value="" data-i18n="bank_select_placeholder">-- බැංකුව තෝරන්න --</option>
+                <optgroup label="🏛 රාජ්‍ය / State Banks">
+                  <option value="BOC">Bank of Ceylon (BOC)</option>
+                  <option value="Peoples">People's Bank</option>
+                  <option value="NSB">National Savings Bank (NSB)</option>
+                  <option value="RDB">Regional Development Bank (RDB)</option>
+                  <option value="SMIB">State Mortgage &amp; Investment Bank (SMIB)</option>
+                </optgroup>
+                <optgroup label="🏦 වාණිජ / Private Commercial Banks">
+                  <option value="Commercial">Commercial Bank of Ceylon PLC</option>
+                  <option value="HNB">Hatton National Bank PLC (HNB)</option>
+                  <option value="Sampath">Sampath Bank PLC</option>
+                  <option value="Seylan">Seylan Bank PLC</option>
+                  <option value="NTB">Nations Trust Bank PLC (NTB)</option>
+                  <option value="NDB">National Development Bank PLC (NDB)</option>
+                  <option value="DFCC">DFCC Bank PLC</option>
+                  <option value="Union">Union Bank of Colombo PLC</option>
+                  <option value="PABC">Pan Asia Banking Corporation PLC (PABC)</option>
+                  <option value="Amana">Amana Bank PLC</option>
+                  <option value="Cargills">Cargills Bank Ltd</option>
+                </optgroup>
+                <optgroup label="🌐 විදේශ / Foreign Banks">
+                  <option value="Standard">Standard Chartered Bank</option>
+                  <option value="HSBC">HSBC Bank</option>
+                  <option value="SBI">State Bank of India (SBI)</option>
+                </optgroup>
+              </select>
+            </div>
+            <div class="form-group" style="margin-bottom:0">
+              <label><span data-i18n="invest_bank_branch_label">ශාඛාව</span> *</label>
+              <input type="text" id="investBankBranch" placeholder="උදා: කොළඹ 03, කුරුණෑගල">
+            </div>
+          </div>
+
+          <!-- Payment Proof -->
+          <div class="invest-section-group">
+            <h4><i class="fas fa-receipt"></i> <span data-i18n="invest_proof_section">ගෙවීමේ සාක්ෂිය</span></h4>
+            <p style="font-size:.85rem;color:#92400e;margin-bottom:1rem;" data-i18n="invest_proof_desc">ආයෝජනය සඳහා LendEasy Finance ගිණුමට මුදල් ලබා දී ඇති බවට සාක්ෂිය ඉදිරිපත් කරන්න.</p>
+            <div class="form-group" style="margin-bottom:0">
+              <label><span data-i18n="invest_proof_label">බැංකු රිසිට්පත / ස්ලිප් ඡායාරූපය</span> *</label>
+              <input type="file" id="investPaymentProof" accept="image/*">
+              <div id="investPaymentProofPreview" class="photo-preview"></div>
+            </div>
+          </div>
+
+          <button type="submit" id="submitInvestmentBtn" class="submit-btn invest-submit">
+            <i class="fas fa-seedling"></i> <span data-i18n="invest_submit_btn">ආයෝජන අයදුම්පත ඉදිරිපත් කරන්න</span>
+          </button>
+          <div id="investmentFeedback"></div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /main-content -->
 
 <a href="https://wa.me/94771234567?text=Hello%21%20I%20need%20loan%20assistance" class="whatsapp-float" target="_blank" rel="noopener noreferrer">
   <i class="fab fa-whatsapp"></i> <span data-i18n="whatsapp_text">Chat on WhatsApp</span>
@@ -477,6 +646,7 @@
       <h4>Quick Links</h4>
       <p><a href="#" data-nav="home"><i class="fas fa-angle-right"></i> Home</a></p>
       <p><a href="#" data-nav="loan"><i class="fas fa-angle-right"></i> Loan</a></p>
+      <p><a href="#" data-nav="invest"><i class="fas fa-angle-right"></i> Invest</a></p>
       <p><a href="#" data-nav="contact"><i class="fas fa-angle-right"></i> Contact</a></p>
     </div>
   </div>
@@ -551,10 +721,11 @@
   // ── Translations ─────────────────────────────────────────────────
   const translations = {
     si:{
-      nav_home:"මුල් පිටුව",nav_services:"සේවා",nav_loan:"ණය",nav_about:"අපි ගැන",nav_contact:"සම්බන්ධ වන්න",
+      nav_home:"මුල් පිටුව",nav_services:"සේවා",nav_loan:"ණය",nav_invest:"ආයෝජනය",nav_about:"අපි ගැන",nav_contact:"සම්බන්ධ වන්න",
       hero_title:"🏦 Smart Loans, Brighter Tomorrow",
       company_description:"ඔබගේ සිහින සැබෑ කර ගැනීමට අපි මෙහි සිටිමු. විශ්වාසනීය, වේගවත් හා විනිවිද පෙනෙන ණය සේවාවන්.",
-      apply_now_btn:"දැන් ණය අයදුම් කරන්න",stat_years:"වසරක පළපුරුද්ද",stat_satisfaction:"සේවා තෘප්තිය",stat_loans:"සාර්ථක ණය",
+      apply_now_btn:"දැන් ණය අයදුම් කරන්න",invest_now_btn:"ආයෝජනය කරන්න",
+      stat_years:"වසරක පළපුරුද්ද",stat_satisfaction:"සේවා තෘප්තිය",stat_loans:"සාර්ථක ණය",stat_investors:"ආයෝජකයින්",
       notice_interest_label:"මාසික පොලිය:",notice_interest_value:"1.5% (18% වාර්ෂික)",
       notice_late_label:"ප්‍රමාද ගාස්තු:",notice_late_value:"දිනකට රු. 100/-",
       notice_payment_label:"ගෙවීම්:",notice_payment_value:"මාසික / සතිපතා",
@@ -564,6 +735,7 @@
       services_title:"අපගේ සේවාවන්",service1_title:"පුද්ගලික ණය",service1_desc:"ඔබගේ පෞද්ගලික අවශ්‍යතා සඳහා අඩු පොලිය.",
       service2_title:"ව්‍යාපාරික ණය",service2_desc:"ව්‍යාපාර පුළුල් කිරීමට නම්‍යශීලී වාරික.",
       service3_title:"ක්ෂණික අනුමැතිය",service3_desc:"ඩිජිටල් අයදුම්පත, 24 පැය ඇතුලත ප්‍රතිචාරය.",
+      service4_title:"ආයෝජන",service4_desc:"ඔබේ මුදල් ආයෝජනය කර ඉහළ ප්‍රතිලාභ ලබා ගන්න.",
       about_title:"අපි ගැන",about_text:"LendEasy Finance ශ්‍රී ලංකාවේ විශ්වාසනීය මූල්‍ය සේවා සපයන්නෙකු ලෙස වසර 15කට වැඩි කාලයක්.",
       mission_title:"අපගේ ඉලක්කය",mission_desc:" සෑම ශ්‍රී ලාංකිකයෙකුටම සාධාරණ මූල්‍ය ප්‍රවේශය.",
       contact_title:"අමතන්න",contact_address:"කොළඹ 03, ශ්‍රී ලංකාව",contact_phone:"+94 112 345 678 / +94 77 123 4567",
@@ -589,13 +761,39 @@
       repay_submitting:"ඡායාරූප upload කරමින්...",whatsapp_text:"WhatsApp මගින් කතා කරන්න",
       outstanding_label:"💸 දැන් ගෙවිය යුතු මුළු මුදල",settled_label:"✅ ණය සම්පූර්ණයෙන් ගෙවා ඇත",
       pending_notice:"ඔබේ ණය අයදුම්පත තවමත් අනුමත නොවීය. දිනකින් හෝ දෙකකින් නැවත පරීක්ෂා කරන්න.",
-      loan_not_active:"ණය ක්‍රියාත්මක නොවේ",months_unit:"මාස"
+      loan_not_active:"ණය ක්‍රියාත්මක නොවේ",months_unit:"මාස",
+      // Invest translations
+      invest_banner_title:"🌱 ආයෝජනය කරන්න, ප්‍රතිලාභ ලබා ගන්න",
+      invest_banner_desc:"ඔබේ මුදල් LendEasy Finance හි ආයෝජනය කර ඉහළ ප්‍රතිලාභ ලබා ගන්න",
+      invest_return_annual:"වාර්ෂික ප්‍රතිලාභ",invest_return_monthly:"මාසික ප්‍රතිලාභ",invest_min_label:"අවම ආයෝජනය",
+      invest_notice1_label:"ආරක්ෂිත:",invest_notice1_value:"ලියාපදිංචි මූල්‍ය ආයතනය",
+      invest_notice2_label:"ගෙවීම්:",invest_notice2_value:"මාසිකව ගිණුමට",
+      invest_notice3_label:"ආපසු ගැනීම:",invest_notice3_value:"3 මාස දැනුම් දීමෙන්",
+      invest_personal_section:"පෞද්ගලික විස්තර",
+      invest_full_name_label:"සම්පූර්ණ නම",invest_name_placeholder:"උදා: පෙරේරා කමල්",
+      invest_nic_label:"NIC අංකය",invest_phone_label:"දුරකතන අංකය",invest_address_label:"ලිපිනය",
+      invest_amount_section:"ආයෝජන විස්තර",
+      invest_amount_label:"ආයෝජන මුදල (රු.)",invest_amount_hint:"අවම ආයෝජනය: රු. 1,000/-",
+      invest_duration_label:"ආයෝජන කාලය",invest_duration_placeholder:"-- කාලය තෝරන්න --",
+      invest_3months:"මාස 3",invest_6months:"මාස 6",invest_12months:"මාස 12",invest_24months:"මාස 24",
+      invest_nic_photos_section:"NIC ඡායාරූප",
+      invest_nic_front_label:"NIC ඉදිරිපස ඡායාරූපය",invest_nic_back_label:"NIC පසුපස ඡායාරූපය",
+      invest_bank_section:"ප්‍රතිලාභ ලැබිය යුතු ගිණුම",
+      invest_account_label:"ගිණුම් අංකය",invest_bank_name_label:"බැංකුව",invest_bank_branch_label:"ශාඛාව",
+      invest_proof_section:"ගෙවීමේ සාක්ෂිය",
+      invest_proof_desc:"ආයෝජනය සඳහා LendEasy Finance ගිණුමට මුදල් ලබා දී ඇති බවට සාක්ෂිය ඉදිරිපත් කරන්න.",
+      invest_proof_label:"බැංකු රිසිට්පත / ස්ලිප් ඡායාරූපය",
+      invest_submit_btn:"ආයෝජන අයදුම්පත ඉදිරිපත් කරන්න",
+      invest_submitting:"ඡායාරූප upload කරමින්...",
+      invest_success_msg:"🌱 ඔබගේ ආයෝජන අයදුම්පත සාර්ථකව ලැබුණි! ශ්‍රේෂ්ඨ!",
+      invest_amount_min_error:"ආයෝජන මුදල රු. 1,000 ට වැඩිය යුතුය"
     },
     ta:{
-      nav_home:"முகப்பு",nav_services:"சேவைகள்",nav_loan:"கடன்",nav_about:"எங்களை பற்றி",nav_contact:"தொடர்பு",
+      nav_home:"முகப்பு",nav_services:"சேவைகள்",nav_loan:"கடன்",nav_invest:"முதலீடு",nav_about:"எங்களை பற்றி",nav_contact:"தொடர்பு",
       hero_title:"🏦 ஸ்மார்ட் கடன்கள், பிரகாசமான எதிர்காலம்",
       company_description:"உங்கள் கனவுகளை நனவாக்க நாங்கள் இங்கு இருக்கிறோம்.",
-      apply_now_btn:"இப்போது கடன் விண்ணப்பிக்கவும்",stat_years:"அனுபவ ஆண்டுகள்",stat_satisfaction:"வாடிக்கையாளர் திருப்தி",stat_loans:"வெற்றிகரமான கடன்கள்",
+      apply_now_btn:"இப்போது கடன் விண்ணப்பிக்கவும்",invest_now_btn:"இப்போது முதலீடு செய்யுங்கள்",
+      stat_years:"அனுபவ ஆண்டுகள்",stat_satisfaction:"வாடிக்கையாளர் திருப்தி",stat_loans:"வெற்றிகரமான கடன்கள்",stat_investors:"முதலீட்டாளர்கள்",
       notice_interest_label:"மாத வட்டி:",notice_interest_value:"1.5% (ஆண்டுக்கு 18%)",
       notice_late_label:"தாமதக் கட்டணம்:",notice_late_value:"ரூ. 100/நாள்",
       notice_payment_label:"செலுத்தும் முறை:",notice_payment_value:"மாதாந்திர / வாராந்திர",
@@ -605,6 +803,7 @@
       services_title:"எங்கள் சேவைகள்",service1_title:"தனிப்பட்ட கடன்",service1_desc:"குறைந்த வட்டி.",
       service2_title:"வணிக கடன்",service2_desc:"நெகிழ்வான தவணைகள்.",
       service3_title:"உடனடி ஒப்புதல்",service3_desc:"24 மணி நேரத்தில் பதில்.",
+      service4_title:"முதலீடு",service4_desc:"அதிக வருமானத்திற்காக முதலீடு செய்யுங்கள்.",
       about_title:"எங்களை பற்றி",about_text:"LendEasy Finance இலங்கையின் நம்பகமான நிதிச் சேவையாளர்.",
       mission_title:"எங்கள் நோக்கம்",mission_desc:" ஒவ்வொரு இலங்கையருக்கும் நியாயமான நிதி அணுகல்.",
       contact_title:"தொடர்பு",contact_address:"கொழும்பு 03, இலங்கை",contact_phone:"+94 112 345 678",
@@ -630,13 +829,39 @@
       repay_submitting:"படத்தை பதிவேற்றுகிறது...",whatsapp_text:"WhatsApp இல் பேசுங்கள்",
       outstanding_label:"💸 இப்போது செலுத்த வேண்டிய மொத்தம்",settled_label:"✅ கடன் முழுவதும் செலுத்தப்பட்டது",
       pending_notice:"உங்கள் விண்ணப்பம் இன்னும் அங்கீகரிக்கப்படவில்லை.",
-      loan_not_active:"கடன் செயல்படவில்லை",months_unit:"மாதங்கள்"
+      loan_not_active:"கடன் செயல்படவில்லை",months_unit:"மாதங்கள்",
+      // Invest
+      invest_banner_title:"🌱 முதலீடு செய்யுங்கள், வருமானம் பெறுங்கள்",
+      invest_banner_desc:"LendEasy Finance இல் முதலீடு செய்து அதிக வருமானம் பெறுங்கள்",
+      invest_return_annual:"வருடாந்திர வருமானம்",invest_return_monthly:"மாதாந்திர வருமானம்",invest_min_label:"குறைந்தபட்ச முதலீடு",
+      invest_notice1_label:"பாதுகாப்பான:",invest_notice1_value:"பதிவுசெய்யப்பட்ட நிறுவனம்",
+      invest_notice2_label:"கொடுப்பனவுகள்:",invest_notice2_value:"மாதந்தோறும் கணக்கில்",
+      invest_notice3_label:"திரும்பப் பெறுதல்:",invest_notice3_value:"3 மாத அறிவிப்பில்",
+      invest_personal_section:"தனிப்பட்ட விவரங்கள்",
+      invest_full_name_label:"முழு பெயர்",invest_name_placeholder:"எ.கா: குமார் பெரேரா",
+      invest_nic_label:"அடையாள அட்டை எண்",invest_phone_label:"தொலைபேசி எண்",invest_address_label:"முகவரி",
+      invest_amount_section:"முதலீட்டு விவரங்கள்",
+      invest_amount_label:"முதலீட்டு தொகை (ரூ.)",invest_amount_hint:"குறைந்தபட்சம்: ரூ. 1,000/-",
+      invest_duration_label:"முதலீட்டு காலம்",invest_duration_placeholder:"-- காலத்தை தேர்ந்தெடுக்கவும் --",
+      invest_3months:"3 மாதங்கள்",invest_6months:"6 மாதங்கள்",invest_12months:"12 மாதங்கள்",invest_24months:"24 மாதங்கள்",
+      invest_nic_photos_section:"அடையாள அட்டை புகைப்படங்கள்",
+      invest_nic_front_label:"அட்டை முன்புறம்",invest_nic_back_label:"அட்டை பின்புறம்",
+      invest_bank_section:"வருமானம் பெறும் கணக்கு",
+      invest_account_label:"கணக்கு எண்",invest_bank_name_label:"வங்கி",invest_bank_branch_label:"கிளை",
+      invest_proof_section:"கட்டண சான்று",
+      invest_proof_desc:"LendEasy Finance கணக்கில் பணம் செலுத்தியதற்கான சான்றை சமர்ப்பிக்கவும்.",
+      invest_proof_label:"வங்கி ரசீது / ஸ்லிப்",
+      invest_submit_btn:"முதலீட்டு விண்ணப்பத்தை சமர்ப்பிக்கவும்",
+      invest_submitting:"படங்களை பதிவேற்றுகிறது...",
+      invest_success_msg:"🌱 முதலீட்டு விண்ணப்பம் வெற்றிகரமாக சமர்ப்பிக்கப்பட்டது!",
+      invest_amount_min_error:"முதலீட்டு தொகை குறைந்தபட்சம் ரூ. 1,000 ஆக இருக்க வேண்டும்"
     },
     en:{
-      nav_home:"Home",nav_services:"Services",nav_loan:"Loan",nav_about:"About",nav_contact:"Contact",
+      nav_home:"Home",nav_services:"Services",nav_loan:"Loan",nav_invest:"Invest",nav_about:"About",nav_contact:"Contact",
       hero_title:"🏦 Smart Loans, Brighter Tomorrow",
       company_description:"We're here to turn your dreams into reality. Reliable, fast, and transparent loan services.",
-      apply_now_btn:"Apply for Loan Now",stat_years:"Years of Experience",stat_satisfaction:"Satisfaction Rate",stat_loans:"Loans Disbursed",
+      apply_now_btn:"Apply for Loan Now",invest_now_btn:"Invest Now",
+      stat_years:"Years of Experience",stat_satisfaction:"Satisfaction Rate",stat_loans:"Loans Disbursed",stat_investors:"Investors",
       notice_interest_label:"Monthly Interest:",notice_interest_value:"1.5% (18% p.a.)",
       notice_late_label:"Late Fee:",notice_late_value:"LKR 100/day",
       notice_payment_label:"Payment Options:",notice_payment_value:"Monthly / Weekly",
@@ -646,6 +871,7 @@
       services_title:"Our Services",service1_title:"Personal Loans",service1_desc:"Low interest, fast approval.",
       service2_title:"Business Loans",service2_desc:"Flexible installments.",
       service3_title:"Instant Approval",service3_desc:"Response within 24 hours.",
+      service4_title:"Investments",service4_desc:"Invest your money and earn high returns.",
       about_title:"About Us",about_text:"LendEasy Finance has been a trusted financial service provider in Sri Lanka for over 15 years.",
       mission_title:"Our Mission",mission_desc:" Fair financial access for every Sri Lankan.",
       contact_title:"Contact Us",contact_address:"Colombo 03, Sri Lanka",contact_phone:"+94 112 345 678 / +94 77 123 4567",
@@ -671,19 +897,47 @@
       repay_submitting:"Uploading image...",whatsapp_text:"Chat on WhatsApp",
       outstanding_label:"💸 Total Amount Due Now",settled_label:"✅ Loan Fully Settled",
       pending_notice:"Your loan application is still pending approval. Please check back in a day or two.",
-      loan_not_active:"Loan not yet active",months_unit:"months"
+      loan_not_active:"Loan not yet active",months_unit:"months",
+      // Invest
+      invest_banner_title:"🌱 Invest & Earn High Returns",
+      invest_banner_desc:"Invest your money with LendEasy Finance and enjoy competitive returns",
+      invest_return_annual:"Annual Return",invest_return_monthly:"Monthly Return",invest_min_label:"Minimum Investment",
+      invest_notice1_label:"Secure:",invest_notice1_value:"Registered Financial Institution",
+      invest_notice2_label:"Payments:",invest_notice2_value:"Monthly to your account",
+      invest_notice3_label:"Withdrawal:",invest_notice3_value:"3 months notice required",
+      invest_personal_section:"Personal Details",
+      invest_full_name_label:"Full Name",invest_name_placeholder:"e.g. Perera Kamal",
+      invest_nic_label:"NIC Number",invest_phone_label:"Phone Number",invest_address_label:"Address",
+      invest_amount_section:"Investment Details",
+      invest_amount_label:"Investment Amount (LKR)",invest_amount_hint:"Minimum investment: LKR 1,000/-",
+      invest_duration_label:"Investment Duration",invest_duration_placeholder:"-- Select Duration --",
+      invest_3months:"3 Months",invest_6months:"6 Months",invest_12months:"12 Months",invest_24months:"24 Months",
+      invest_nic_photos_section:"NIC Photos",
+      invest_nic_front_label:"NIC Front Photo",invest_nic_back_label:"NIC Back Photo",
+      invest_bank_section:"Return Payment Bank Account",
+      invest_account_label:"Account Number",invest_bank_name_label:"Bank",invest_bank_branch_label:"Branch",
+      invest_proof_section:"Payment Proof",
+      invest_proof_desc:"Please submit proof that funds have been deposited to the LendEasy Finance account.",
+      invest_proof_label:"Bank Receipt / Slip Photo",
+      invest_submit_btn:"Submit Investment Application",
+      invest_submitting:"Uploading images...",
+      invest_success_msg:"🌱 Your investment application has been submitted successfully!",
+      invest_amount_min_error:"Investment amount must be at least LKR 1,000"
     }
   };
+
   let currentLang = "si";
-  function t(k){ return translations[currentLang][k] || translations.si[k] || k; }
+  function t(k){ return (translations[currentLang]&&translations[currentLang][k]) || translations.si[k] || k; }
 
   // ── Navigation ───────────────────────────────────────────────────
-  const homeView = document.getElementById('homeView');
-  const loanView = document.getElementById('loanView');
-  const navLinks = document.querySelectorAll('[data-nav]');
+  const homeView   = document.getElementById('homeView');
+  const loanView   = document.getElementById('loanView');
+  const investView = document.getElementById('investView');
+  const navLinks   = document.querySelectorAll('[data-nav]');
 
-  function showHome(){ homeView.style.display='block'; loanView.style.display='none'; window.scrollTo({top:0,behavior:'smooth'}); updateActiveNav('home'); }
-  function showLoan(){ homeView.style.display='none'; loanView.style.display='block'; window.scrollTo({top:0,behavior:'smooth'}); updateActiveNav('loan'); }
+  function showHome(){   homeView.style.display='block'; loanView.style.display='none'; investView.style.display='none'; window.scrollTo({top:0,behavior:'smooth'}); updateActiveNav('home'); }
+  function showLoan(){   homeView.style.display='none'; loanView.style.display='block'; investView.style.display='none'; window.scrollTo({top:0,behavior:'smooth'}); updateActiveNav('loan'); }
+  function showInvest(){ homeView.style.display='none'; loanView.style.display='none'; investView.style.display='block'; window.scrollTo({top:0,behavior:'smooth'}); updateActiveNav('invest'); }
   function updateActiveNav(id){ navLinks.forEach(l=>l.getAttribute('data-nav')===id?l.classList.add('active-nav'):l.classList.remove('active-nav')); }
   function scrollToSection(id){ if(homeView.style.display!=='block')showHome(); setTimeout(()=>{ const el=document.getElementById(id); if(el)el.scrollIntoView({behavior:'smooth',block:'start'}); },100); }
 
@@ -693,6 +947,7 @@
       const tgt=link.getAttribute('data-nav');
       if(tgt==='home')showHome();
       else if(tgt==='loan')showLoan();
+      else if(tgt==='invest')showInvest();
       else if(tgt==='services')scrollToSection('services-section');
       else if(tgt==='about')scrollToSection('about-section');
       else if(tgt==='contact')scrollToSection('contact-section');
@@ -701,11 +956,23 @@
   });
   document.getElementById('logoHomeBtn')?.addEventListener('click', showHome);
   document.getElementById('backToHomeFromLoan')?.addEventListener('click', showHome);
+  document.getElementById('backToHomeFromInvest')?.addEventListener('click', showHome);
   document.getElementById('frontPageLoanBtn')?.addEventListener('click', showLoan);
+  document.getElementById('frontPageInvestBtn')?.addEventListener('click', showInvest);
   document.getElementById('hamburgerBtn')?.addEventListener('click', ()=>document.getElementById('navLinks')?.classList.toggle('show'));
 
   // ── Language ─────────────────────────────────────────────────────
-  function updateAllTexts(){ document.querySelectorAll('[data-i18n]').forEach(el=>{ const k=el.getAttribute('data-i18n'); if(k&&translations[currentLang][k])el.innerText=t(k); }); }
+  function updateAllTexts(){
+    document.querySelectorAll('[data-i18n]').forEach(el=>{
+      const k=el.getAttribute('data-i18n');
+      if(k&&translations[currentLang]&&translations[currentLang][k]) el.innerText=t(k);
+    });
+    // update placeholders
+    document.querySelectorAll('[data-i18n-placeholder]').forEach(el=>{
+      const k=el.getAttribute('data-i18n-placeholder');
+      if(k&&translations[currentLang]&&translations[currentLang][k]) el.placeholder=t(k);
+    });
+  }
   function setLanguage(lang){ currentLang=lang; updateAllTexts(); document.querySelectorAll('.lang-nav-btn').forEach(b=>b.getAttribute('data-lang')===lang?b.classList.add('active'):b.classList.remove('active')); }
   document.querySelectorAll('.lang-nav-btn').forEach(b=>b.addEventListener('click',()=>setLanguage(b.getAttribute('data-lang'))));
 
@@ -717,20 +984,25 @@
     if(!grid)return;
     if(grid.getBoundingClientRect().top<window.innerHeight-100){
       counted=true;
-      const targets={yearsCount:15,satisfactionCount:98,loansCount:1850};
-      const els={yearsCount:document.getElementById('yearsCount'),satisfactionCount:document.getElementById('satisfactionCount'),loansCount:document.getElementById('loansCount')};
+      const targets={yearsCount:15,satisfactionCount:98,loansCount:1850,investorsCount:320};
+      const els={
+        yearsCount:document.getElementById('yearsCount'),
+        satisfactionCount:document.getElementById('satisfactionCount'),
+        loansCount:document.getElementById('loansCount'),
+        investorsCount:document.getElementById('investorsCount')
+      };
       let st=null; const dur=1500;
       function animate(now){ if(!st)st=now; const p=Math.min(1,(now-st)/dur);
         for(let[id,target] of Object.entries(targets)){ if(els[id])els[id].innerText=(id==='satisfactionCount')?Math.floor(p*target)+'%':Math.floor(p*target); }
         if(p<1)requestAnimationFrame(animate);
-        else{ els.satisfactionCount.innerText='98%'; els.yearsCount.innerText='15'; els.loansCount.innerText='1850'; }
+        else{ els.satisfactionCount.innerText='98%'; els.yearsCount.innerText='15'; els.loansCount.innerText='1850'; els.investorsCount.innerText='320'; }
       }
       requestAnimationFrame(animate);
     }
   }
   window.addEventListener('scroll', startCountup);
 
-  // ── Photo preview ────────────────────────────────────────────────
+  // ── Photo preview helper ─────────────────────────────────────────
   function previewPhoto(inputId, previewId){
     document.getElementById(inputId)?.addEventListener('change',e=>{
       const c=document.getElementById(previewId);
@@ -741,13 +1013,16 @@
   previewPhoto('nicBackPhoto','nicBackPreview');
   previewPhoto('guarantorPhoto','guarantorPreview');
   previewPhoto('repayReceipt','repayReceiptPreview');
-  document.getElementById('hasGuarantorCheck')?.addEventListener('change', function(){ document.getElementById('guarantorSection').style.display=this.checked?'block':'none'; });
-  function setProgress(barId,pct){ const b=document.getElementById(barId); if(b)b.style.width=pct+'%'; }
+  previewPhoto('investNicFront','investNicFrontPreview');
+  previewPhoto('investNicBack','investNicBackPreview');
+  previewPhoto('investPaymentProof','investPaymentProofPreview');
 
-  // ── Format currency ──────────────────────────────────────────────
+  document.getElementById('hasGuarantorCheck')?.addEventListener('change', function(){ document.getElementById('guarantorSection').style.display=this.checked?'block':'none'; });
+
+  function setProgress(barId,pct){ const b=document.getElementById(barId); if(b)b.style.width=pct+'%'; }
   function fmt(amount) { return 'රු. ' + Math.round(amount).toLocaleString() + '/-'; }
 
-  // ── REPAY: NIC Auto-Lookup with full financial calc ──────────────
+  // ── REPAY: NIC Auto-Lookup ───────────────────────────────────────
   const repayNicInput    = document.getElementById('repayNic');
   const repaySearchBtn   = document.getElementById('repayNicSearchBtn');
   const repaySearchIcon  = document.getElementById('repayNicSearchIcon');
@@ -759,8 +1034,6 @@
   async function lookupNicForRepay() {
     const nic = repayNicInput.value.trim();
     if (!nic) return;
-
-    // Reset UI
     repaySearchBtn.classList.add('loading');
     repaySearchIcon.className = 'fas fa-spinner';
     repayInfoCard.classList.remove('show');
@@ -769,7 +1042,6 @@
     nicSpinner.classList.add('show');
 
     try {
-      // ── 1. Find loan application ──────────────────────────────
       const appSnap = await get(child(dbRef, 'loan_applications'));
       let found = null;
       if (appSnap.exists()) {
@@ -781,16 +1053,12 @@
         });
       }
 
-      // ── 2. Find accepted repayments for this NIC ──────────────
       let totalPaid = 0;
       const repaySnap = await get(child(dbRef, 'loan_repayments'));
       if (repaySnap.exists()) {
         repaySnap.forEach(c => {
           const d = c.val();
-          if (
-            d.status === 'accepted' &&
-            d.nicNumber && d.nicNumber.toLowerCase() === nic.toLowerCase()
-          ) {
+          if (d.status === 'accepted' && d.nicNumber && d.nicNumber.toLowerCase() === nic.toLowerCase()) {
             totalPaid += parseFloat(d.amount) || 0;
           }
         });
@@ -799,114 +1067,82 @@
       nicSpinner.classList.remove('show');
 
       if (found) {
-        // Fill name
         repayFullNameInp.value = found.fullName || '';
-
-        // ── Status badge ──────────────────────────────────────
         const status = found.status || 'pending';
         const statusBadge = document.getElementById('repayInfoStatusBadge');
         statusBadge.className = 'lic-status-badge ' + status;
-        statusBadge.textContent =
-          status === 'accepted'  ? '✅ Accepted' :
-          status === 'rejected'  ? '❌ Rejected' :
-          status === 'cancelled' ? '❌ Cancelled': '⏳ Pending';
-
-        // ── Name header ───────────────────────────────────────
+        statusBadge.textContent = status==='accepted'?'✅ Accepted':status==='rejected'?'❌ Rejected':status==='cancelled'?'❌ Cancelled':'⏳ Pending';
         document.getElementById('repayInfoName').textContent = found.fullName || '—';
-
-        // ── Date ──────────────────────────────────────────────
-        document.getElementById('repayInfoDate').textContent =
-          found.timestamp ? new Date(found.timestamp).toLocaleDateString('si-LK') : '—';
-
-        // ── Principal ─────────────────────────────────────────
+        document.getElementById('repayInfoDate').textContent = found.timestamp ? new Date(found.timestamp).toLocaleDateString('si-LK') : '—';
         const principal = parseFloat(found.loanAmount) || 0;
         document.getElementById('repayInfoPrincipal').textContent = fmt(principal);
-
-        // ── Financial calc only if accepted + has approvedDate ─
         const outstandingHero = document.getElementById('outstandingHero');
-        const noticeBox       = document.getElementById('repayInfoNotice');
-        const noticeText      = document.getElementById('repayInfoNoticeText');
-
-        // Hide optional rows first
-        ['repayInfoMonthsRow','repayInfoInterestRow','repayInfoPaidRow','repayInfoLateRow'].forEach(id=>{
-          document.getElementById(id).style.display='none';
-        });
+        const noticeBox = document.getElementById('repayInfoNotice');
+        const noticeText = document.getElementById('repayInfoNoticeText');
+        ['repayInfoMonthsRow','repayInfoInterestRow','repayInfoPaidRow','repayInfoLateRow'].forEach(id=>{document.getElementById(id).style.display='none';});
         outstandingHero.classList.remove('show');
         noticeBox.style.display = 'none';
 
         if (status === 'accepted' && found.approvedDate) {
-          const MS_DAY      = 86400000;
-          const now         = Date.now();
-          const daysSince   = Math.floor((now - found.approvedDate) / MS_DAY);
-          const months      = Math.max(1, Math.ceil(daysSince / 30));
-          const interest    = principal * 0.015 * months;
-          const totalDue    = principal + interest;
+          const MS_DAY    = 86400000;
+          const now       = Date.now();
+          const daysSince = Math.floor((now - found.approvedDate) / MS_DAY);
+          const months    = Math.max(1, Math.ceil(daysSince / 30));
+          const interest  = principal * 0.015 * months;
+          const totalDue  = principal + interest;
           const outstanding = Math.max(0, totalDue - totalPaid);
-          const daysLate    = outstanding > 0 ? Math.max(0, daysSince - 30) : 0;
-          const lateFee     = daysLate * 100;
+          const daysLate  = outstanding > 0 ? Math.max(0, daysSince - 30) : 0;
+          const lateFee   = daysLate * 100;
           const totalOutstanding = outstanding + lateFee;
-          const isSettled   = totalOutstanding <= 0;
+          const isSettled = totalOutstanding <= 0;
 
-          // Show detail rows
-          document.getElementById('repayInfoMonthsRow').style.display = 'flex';
-          document.getElementById('repayInfoInterestRow').style.display = 'flex';
-          document.getElementById('repayInfoPaidRow').style.display = 'flex';
-          if (lateFee > 0) document.getElementById('repayInfoLateRow').style.display = 'flex';
-
-          document.getElementById('repayInfoMonths').textContent = months + ' ' + t('months_unit') + ' (' + daysSince + ' days)';
+          document.getElementById('repayInfoMonthsRow').style.display='flex';
+          document.getElementById('repayInfoInterestRow').style.display='flex';
+          document.getElementById('repayInfoPaidRow').style.display='flex';
+          if(lateFee>0) document.getElementById('repayInfoLateRow').style.display='flex';
+          document.getElementById('repayInfoMonths').textContent = months+' '+t('months_unit')+' ('+daysSince+' days)';
           document.getElementById('repayInfoInterest').textContent = fmt(interest);
           document.getElementById('repayInfoPaid').textContent = fmt(totalPaid);
           document.getElementById('repayInfoLateFee').textContent = fmt(lateFee);
 
-          // Outstanding hero
           outstandingHero.classList.add('show');
-          const ohLabel  = document.getElementById('outstandingLabel');
-          const ohAmount = document.getElementById('outstandingAmount');
-          const ohSub    = document.getElementById('outstandingSubtext');
+          const ohLabel=document.getElementById('outstandingLabel');
+          const ohAmount=document.getElementById('outstandingAmount');
+          const ohSub=document.getElementById('outstandingSubtext');
 
-          if (isSettled) {
-            outstandingHero.style.background = 'linear-gradient(135deg,#f0fdf4,#dcfce7)';
-            ohLabel.textContent  = t('settled_label');
-            ohLabel.style.color  = '#15803d';
-            ohAmount.className   = 'oh-settled';
-            ohAmount.textContent = '🎉 ' + t('settled_label');
-            ohSub.textContent    = '';
+          if(isSettled){
+            outstandingHero.style.background='linear-gradient(135deg,#f0fdf4,#dcfce7)';
+            ohLabel.textContent=t('settled_label'); ohLabel.style.color='#15803d';
+            ohAmount.className='oh-settled'; ohAmount.textContent='🎉 '+t('settled_label'); ohSub.textContent='';
           } else {
-            outstandingHero.style.background = 'linear-gradient(135deg,#fff8e1,#fef3c7)';
-            ohLabel.textContent  = t('outstanding_label');
-            ohLabel.style.color  = '#92400e';
-            ohAmount.className   = 'oh-amount';
-            ohAmount.textContent = fmt(totalOutstanding);
-            let sub = `${fmt(principal)} + ${fmt(interest)} interest`;
-            if (lateFee > 0) sub += ` + ${fmt(lateFee)} late fee`;
-            if (totalPaid > 0) sub += ` − ${fmt(totalPaid)} paid`;
-            ohSub.textContent = sub;
-
-            // Pre-fill payment amount
-            document.getElementById('repayAmount').value = Math.ceil(totalOutstanding);
+            outstandingHero.style.background='linear-gradient(135deg,#fff8e1,#fef3c7)';
+            ohLabel.textContent=t('outstanding_label'); ohLabel.style.color='#92400e';
+            ohAmount.className='oh-amount'; ohAmount.textContent=fmt(totalOutstanding);
+            let sub=`${fmt(principal)} + ${fmt(interest)} interest`;
+            if(lateFee>0) sub+=` + ${fmt(lateFee)} late fee`;
+            if(totalPaid>0) sub+=` − ${fmt(totalPaid)} paid`;
+            ohSub.textContent=sub;
+            document.getElementById('repayAmount').value=Math.ceil(totalOutstanding);
           }
-
-        } else if (status === 'pending' || status === 'cancelled' || status === 'rejected') {
-          noticeBox.style.display = 'block';
-          noticeText.textContent  = status === 'pending' ? t('pending_notice') : t('loan_not_active');
+        } else if(status==='pending'||status==='cancelled'||status==='rejected'){
+          noticeBox.style.display='block';
+          noticeText.textContent=status==='pending'?t('pending_notice'):t('loan_not_active');
         }
-
         repayInfoCard.classList.add('show');
-
       } else {
         repayNotFound.classList.add('show');
       }
-    } catch(err) {
+    } catch(err){
       nicSpinner.classList.remove('show');
       repayNotFound.classList.add('show');
     } finally {
       repaySearchBtn.classList.remove('loading');
-      repaySearchIcon.className = 'fas fa-search';
+      repaySearchIcon.className='fas fa-search';
     }
   }
 
   repaySearchBtn?.addEventListener('click', lookupNicForRepay);
-  repayNicInput?.addEventListener('keydown', e => { if(e.key === 'Enter'){ e.preventDefault(); lookupNicForRepay(); } });
+  repayNicInput?.addEventListener('keydown', e=>{if(e.key==='Enter'){e.preventDefault();lookupNicForRepay();}});
 
   // ── LOAN APPLICATION SUBMIT ──────────────────────────────────────
   document.getElementById('loanAppForm')?.addEventListener('submit', async e => {
@@ -928,106 +1164,93 @@
     const nicFront       = document.getElementById('nicFrontPhoto').files[0];
     const nicBack        = document.getElementById('nicBackPhoto').files[0];
     const hasGuarantor   = document.getElementById('hasGuarantorCheck').checked;
-    let gName='', gId='', gPhone='', gPhoto=null;
-    if(hasGuarantor){ gName=document.getElementById('guarantorName').value.trim(); gId=document.getElementById('guarantorIdNumber').value.trim(); gPhone=document.getElementById('guarantorPhone').value.trim(); gPhoto=document.getElementById('guarantorPhoto').files[0]; }
+    let gName='',gId='',gPhone='',gPhoto=null;
+    if(hasGuarantor){gName=document.getElementById('guarantorName').value.trim();gId=document.getElementById('guarantorIdNumber').value.trim();gPhone=document.getElementById('guarantorPhone').value.trim();gPhoto=document.getElementById('guarantorPhoto').files[0];}
 
     const errors=[];
-    if(!fullName)   errors.push('Name required');
-    if(!address)    errors.push('Address required');
-    if(!nicNumber)  errors.push('NIC required');
-    if(!applicantPhone) errors.push('Phone required');
-    if(!loanAmount) errors.push('Loan amount required');
-    if(loanAmount && parseFloat(loanAmount)>50000) errors.push(t('loan_max_error'));
-    if(!nicFront)   errors.push('NIC front photo required');
-    if(!nicBack)    errors.push('NIC back photo required');
-    if(!accountNumber) errors.push('Account number required');
-    if(!bankName)   errors.push('Bank required');
-    if(!bankBranch) errors.push('Branch required');
-    if(hasGuarantor){ if(!gName)errors.push('Guarantor name required'); if(!gId)errors.push('Guarantor ID required'); if(!gPhone)errors.push('Guarantor phone required'); if(!gPhoto)errors.push('Guarantor photo required'); }
-    if(errors.length){ feedbackDiv.innerHTML=`<div class="error-text">⚠️ ${errors.join(' | ')}</div>`; return; }
+    if(!fullName)errors.push('Name required');if(!address)errors.push('Address required');
+    if(!nicNumber)errors.push('NIC required');if(!applicantPhone)errors.push('Phone required');
+    if(!loanAmount)errors.push('Loan amount required');
+    if(loanAmount&&parseFloat(loanAmount)>50000)errors.push(t('loan_max_error'));
+    if(!nicFront)errors.push('NIC front photo required');if(!nicBack)errors.push('NIC back photo required');
+    if(!accountNumber)errors.push('Account number required');if(!bankName)errors.push('Bank required');if(!bankBranch)errors.push('Branch required');
+    if(hasGuarantor){if(!gName)errors.push('Guarantor name required');if(!gId)errors.push('Guarantor ID required');if(!gPhone)errors.push('Guarantor phone required');if(!gPhoto)errors.push('Guarantor photo required');}
+    if(errors.length){feedbackDiv.innerHTML=`<div class="error-text">⚠️ ${errors.join(' | ')}</div>`;return;}
 
     submitBtn.disabled=true;
     submitBtn.innerHTML=`<i class="fas fa-shield-alt fa-spin"></i> ${t('checking_blacklist')}`;
-    checkingBox.style.display='block'; feedbackDiv.innerHTML='';
+    checkingBox.style.display='block';feedbackDiv.innerHTML='';
 
-    const blacklistEntry = await checkBlacklist(nicNumber, applicantPhone);
+    const blacklistEntry=await checkBlacklist(nicNumber,applicantPhone);
     checkingBox.style.display='none';
     if(blacklistEntry){
-      feedbackDiv.innerHTML=buildBlacklistRejectionHtml(blacklistEntry, currentLang);
-      submitBtn.disabled=false;
-      submitBtn.innerHTML=`<span data-i18n="submit_btn_text">${t('submit_btn_text')}</span>`;
-      feedbackDiv.scrollIntoView({behavior:'smooth',block:'center'});
-      return;
+      feedbackDiv.innerHTML=buildBlacklistRejectionHtml(blacklistEntry,currentLang);
+      submitBtn.disabled=false;submitBtn.innerHTML=`<span>${t('submit_btn_text')}</span>`;
+      feedbackDiv.scrollIntoView({behavior:'smooth',block:'center'});return;
     }
 
     submitBtn.innerHTML=`<i class="fas fa-spinner fa-spin"></i> ${t('submitting')}`;
-    progressBox.style.display='block'; setProgress('applyProgressBar',0);
+    progressBox.style.display='block';setProgress('applyProgressBar',0);
 
     try {
-      progressTxt.textContent='Uploading NIC front...'; setProgress('applyProgressBar',20);
-      const nicFrontURL = await uploadToCloudinary(nicFront);
-      progressTxt.textContent='Uploading NIC back...'; setProgress('applyProgressBar',40);
-      const nicBackURL = await uploadToCloudinary(nicBack);
+      progressTxt.textContent='Uploading NIC front...';setProgress('applyProgressBar',20);
+      const nicFrontURL=await uploadToCloudinary(nicFront);
+      progressTxt.textContent='Uploading NIC back...';setProgress('applyProgressBar',40);
+      const nicBackURL=await uploadToCloudinary(nicBack);
       let guarantorPhotoURL=null;
-      if(hasGuarantor && gPhoto){ progressTxt.textContent='Uploading guarantor photo...'; setProgress('applyProgressBar',60); guarantorPhotoURL=await uploadToCloudinary(gPhoto); }
-      progressTxt.textContent='Saving...'; setProgress('applyProgressBar',80);
+      if(hasGuarantor&&gPhoto){progressTxt.textContent='Uploading guarantor photo...';setProgress('applyProgressBar',60);guarantorPhotoURL=await uploadToCloudinary(gPhoto);}
+      progressTxt.textContent='Saving...';setProgress('applyProgressBar',80);
       await push(ref(db,'loan_applications'),{
-        fullName, address, nicNumber, applicantPhone,
-        loanAmount: parseFloat(loanAmount),
-        bankDetails: { accountNumber, bankName, bankBranch },
-        nicFrontImg: nicFrontURL, nicBackImg: nicBackURL,
-        hasGuarantor, status: 'pending', timestamp: Date.now(),
-        guarantor: hasGuarantor ? { name:gName, idNumber:gId, phone:gPhone, idPhotoImg:guarantorPhotoURL } : null
+        fullName,address,nicNumber,applicantPhone,loanAmount:parseFloat(loanAmount),
+        bankDetails:{accountNumber,bankName,bankBranch},
+        nicFrontImg:nicFrontURL,nicBackImg:nicBackURL,
+        hasGuarantor,status:'pending',timestamp:Date.now(),
+        guarantor:hasGuarantor?{name:gName,idNumber:gId,phone:gPhone,idPhotoImg:guarantorPhotoURL}:null
       });
       setProgress('applyProgressBar',100);
       feedbackDiv.innerHTML=`<div class="success-message">${t('success_msg')}</div>`;
       document.getElementById('loanAppForm').reset();
       document.getElementById('guarantorSection').style.display='none';
       document.getElementById('hasGuarantorCheck').checked=false;
-      ['nicFrontPreview','nicBackPreview','guarantorPreview'].forEach(id=>{ document.getElementById(id).innerHTML=''; });
+      ['nicFrontPreview','nicBackPreview','guarantorPreview'].forEach(id=>{document.getElementById(id).innerHTML='';});
     } catch(err){
       feedbackDiv.innerHTML=`<div class="error-text">⚠️ Error: ${err.message}</div>`;
     } finally {
-      progressBox.style.display='none';
-      submitBtn.disabled=false;
-      submitBtn.innerHTML=`<span data-i18n="submit_btn_text">${t('submit_btn_text')}</span>`;
+      progressBox.style.display='none';submitBtn.disabled=false;submitBtn.innerHTML=`<span>${t('submit_btn_text')}</span>`;
     }
   });
 
   // ── REPAYMENT SUBMIT ─────────────────────────────────────────────
   document.getElementById('repaymentForm')?.addEventListener('submit', async e => {
     e.preventDefault();
-    const feedbackDiv = document.getElementById('repaymentFeedback');
-    const submitBtn   = document.getElementById('submitRepaymentBtn');
-    const progressBox = document.getElementById('repayProgress');
-    const progressTxt = document.getElementById('repayProgressText');
+    const feedbackDiv=document.getElementById('repaymentFeedback');
+    const submitBtn=document.getElementById('submitRepaymentBtn');
+    const progressBox=document.getElementById('repayProgress');
+    const progressTxt=document.getElementById('repayProgressText');
 
-    const fullName    = document.getElementById('repayFullName').value.trim();
-    const nicNumber   = document.getElementById('repayNic').value.trim();
-    const amount      = document.getElementById('repayAmount').value.trim();
-    const receiptFile = document.getElementById('repayReceipt').files[0];
-    const phoneNumber = document.getElementById('repayPhone').value.trim();
+    const fullName=document.getElementById('repayFullName').value.trim();
+    const nicNumber=document.getElementById('repayNic').value.trim();
+    const amount=document.getElementById('repayAmount').value.trim();
+    const receiptFile=document.getElementById('repayReceipt').files[0];
+    const phoneNumber=document.getElementById('repayPhone').value.trim();
 
     const errors=[];
-    if(!nicNumber)  errors.push('NIC required');
-    if(!fullName)   errors.push('Name required');
-    if(!amount || parseFloat(amount)<=0) errors.push(t('repay_amount_required'));
-    if(!receiptFile) errors.push(t('repay_photo_required'));
-    if(!phoneNumber) errors.push('Phone required');
-    if(errors.length){ feedbackDiv.innerHTML=`<div class="error-text">⚠️ ${errors.join(' | ')}</div>`; return; }
+    if(!nicNumber)errors.push('NIC required');if(!fullName)errors.push('Name required');
+    if(!amount||parseFloat(amount)<=0)errors.push(t('repay_amount_required'));
+    if(!receiptFile)errors.push(t('repay_photo_required'));if(!phoneNumber)errors.push('Phone required');
+    if(errors.length){feedbackDiv.innerHTML=`<div class="error-text">⚠️ ${errors.join(' | ')}</div>`;return;}
 
     submitBtn.disabled=true;
     submitBtn.innerHTML=`<i class="fas fa-spinner fa-spin"></i> ${t('repay_submitting')}`;
-    progressBox.style.display='block'; setProgress('repayProgressBar',0); feedbackDiv.innerHTML='';
+    progressBox.style.display='block';setProgress('repayProgressBar',0);feedbackDiv.innerHTML='';
 
     try {
-      progressTxt.textContent='Uploading receipt...'; setProgress('repayProgressBar',50);
-      const receiptURL = await uploadToCloudinary(receiptFile);
-      progressTxt.textContent='Saving...'; setProgress('repayProgressBar',80);
+      progressTxt.textContent='Uploading receipt...';setProgress('repayProgressBar',50);
+      const receiptURL=await uploadToCloudinary(receiptFile);
+      progressTxt.textContent='Saving...';setProgress('repayProgressBar',80);
       await push(ref(db,'loan_repayments'),{
-        fullName, nicNumber, phoneNumber,
-        amount: parseFloat(amount),
-        receiptImg: receiptURL, status: 'pending', timestamp: Date.now()
+        fullName,nicNumber,phoneNumber,amount:parseFloat(amount),
+        receiptImg:receiptURL,status:'pending',timestamp:Date.now()
       });
       setProgress('repayProgressBar',100);
       feedbackDiv.innerHTML=`<div class="success-message">${t('repay_success_msg')}</div>`;
@@ -1038,9 +1261,81 @@
     } catch(err){
       feedbackDiv.innerHTML=`<div class="error-text">⚠️ Error: ${err.message}</div>`;
     } finally {
+      progressBox.style.display='none';submitBtn.disabled=false;submitBtn.innerHTML=`<span>${t('repay_submit_btn')}</span>`;
+    }
+  });
+
+  // ── INVESTMENT SUBMIT ────────────────────────────────────────────
+  document.getElementById('investmentForm')?.addEventListener('submit', async e => {
+    e.preventDefault();
+    const feedbackDiv  = document.getElementById('investmentFeedback');
+    const submitBtn    = document.getElementById('submitInvestmentBtn');
+    const progressBox  = document.getElementById('investProgress');
+    const progressTxt  = document.getElementById('investProgressText');
+
+    const fullName      = document.getElementById('investFullName').value.trim();
+    const nicNumber     = document.getElementById('investNic').value.trim();
+    const phoneNumber   = document.getElementById('investPhone').value.trim();
+    const address       = document.getElementById('investAddress').value.trim();
+    const amount        = document.getElementById('investAmount').value.trim();
+    const duration      = document.getElementById('investDuration').value;
+    const accountNumber = document.getElementById('investAccountNumber').value.trim();
+    const bankName      = document.getElementById('investBankName').value;
+    const bankBranch    = document.getElementById('investBankBranch').value.trim();
+    const nicFrontFile  = document.getElementById('investNicFront').files[0];
+    const nicBackFile   = document.getElementById('investNicBack').files[0];
+    const proofFile     = document.getElementById('investPaymentProof').files[0];
+
+    const errors=[];
+    if(!fullName)errors.push('Name required');
+    if(!nicNumber)errors.push('NIC required');
+    if(!phoneNumber)errors.push('Phone required');
+    if(!address)errors.push('Address required');
+    if(!amount||parseFloat(amount)<1000)errors.push(t('invest_amount_min_error'));
+    if(!duration)errors.push('Duration required');
+    if(!accountNumber)errors.push('Account number required');
+    if(!bankName)errors.push('Bank required');
+    if(!bankBranch)errors.push('Branch required');
+    if(!nicFrontFile)errors.push('NIC front photo required');
+    if(!nicBackFile)errors.push('NIC back photo required');
+    if(!proofFile)errors.push('Payment proof required');
+
+    if(errors.length){feedbackDiv.innerHTML=`<div class="error-text">⚠️ ${errors.join(' | ')}</div>`;return;}
+
+    submitBtn.disabled=true;
+    submitBtn.innerHTML=`<i class="fas fa-spinner fa-spin"></i> ${t('invest_submitting')}`;
+    progressBox.style.display='block';setProgress('investProgressBar',0);feedbackDiv.innerHTML='';
+
+    try {
+      progressTxt.textContent='Uploading NIC front...';setProgress('investProgressBar',20);
+      const nicFrontURL=await uploadToCloudinary(nicFrontFile);
+      progressTxt.textContent='Uploading NIC back...';setProgress('investProgressBar',45);
+      const nicBackURL=await uploadToCloudinary(nicBackFile);
+      progressTxt.textContent='Uploading payment proof...';setProgress('investProgressBar',70);
+      const proofURL=await uploadToCloudinary(proofFile);
+      progressTxt.textContent='Saving investment...';setProgress('investProgressBar',88);
+      await push(ref(db,'investments'),{
+        fullName, nicNumber, phoneNumber, address,
+        investmentAmount: parseFloat(amount),
+        durationMonths: parseInt(duration),
+        bankDetails:{ accountNumber, bankName, bankBranch },
+        nicFrontImg: nicFrontURL,
+        nicBackImg:  nicBackURL,
+        paymentProofImg: proofURL,
+        status: 'pending',
+        timestamp: Date.now()
+      });
+      setProgress('investProgressBar',100);
+      feedbackDiv.innerHTML=`<div class="invest-success-message">${t('invest_success_msg')}</div>`;
+      document.getElementById('investmentForm').reset();
+      ['investNicFrontPreview','investNicBackPreview','investPaymentProofPreview'].forEach(id=>{document.getElementById(id).innerHTML='';});
+      feedbackDiv.scrollIntoView({behavior:'smooth',block:'center'});
+    } catch(err){
+      feedbackDiv.innerHTML=`<div class="error-text">⚠️ Error: ${err.message}</div>`;
+    } finally {
       progressBox.style.display='none';
       submitBtn.disabled=false;
-      submitBtn.innerHTML=`<span data-i18n="repay_submit_btn">${t('repay_submit_btn')}</span>`;
+      submitBtn.innerHTML=`<i class="fas fa-seedling"></i> <span>${t('invest_submit_btn')}</span>`;
     }
   });
 
