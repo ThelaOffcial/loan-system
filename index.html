@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="si">
 <head>
@@ -304,87 +305,97 @@
       </div>
 
       <!-- ═══ APPLY PANEL ═══ -->
-      <div id="applyLoanPanel">
-        <div class="notice-box">
-          <i class="fas fa-exclamation-triangle"></i>
-          <div class="notice-content">
-            <div class="notice-item"><i class="fas fa-percent"></i><strong data-i18n="notice_interest_label">මාසික පොලිය:</strong><span data-i18n="notice_interest_value">1.5% (18% වාර්ෂික)</span></div>
-            <div class="notice-item"><i class="fas fa-clock"></i><strong data-i18n="notice_late_label">ප්‍රමාද ගාස්තු:</strong><span data-i18n="notice_late_value">දිනකට රු. 100/-</span></div>
-            <div class="notice-item"><i class="fas fa-calendar-week"></i><strong data-i18n="notice_payment_label">ගෙවීම්:</strong><span data-i18n="notice_payment_value">මාසික / සතිපතා</span></div>
-            <div class="notice-item"><i class="fas fa-ban"></i><strong data-i18n="notice_blacklist_label">කළු ලැයිස්තු:</strong><span data-i18n="notice_blacklist_value">මාස 3කට ගෙවීම් නැතිනම්</span></div>
-          </div>
-        </div>
-        <div class="checking-blacklist" id="checkingBlacklistBox">
-          <i class="fas fa-shield-alt fa-spin"></i> <span data-i18n="checking_blacklist">කළු ලැයිස්තු පරීක්ෂා කරමින්...</span>
-        </div>
-        <div class="upload-progress" id="applyProgress">
-          <div style="font-size:.85rem;font-weight:600;color:#1e466e;">⏳ <span id="applyProgressText">Processing...</span></div>
-          <div class="progress-bar-wrap"><div class="progress-bar" id="applyProgressBar"></div></div>
-        </div>
-        <form id="loanAppForm">
-          <div class="form-group"><label><span data-i18n="full_name_label">සම්පූර්ණ නම</span> *</label><input type="text" id="fullName" placeholder="උදා: අමරසිංහ මහේෂ්"></div>
-          <div class="form-group"><label><span data-i18n="address_label">ලිපිනය</span> *</label><textarea id="address" rows="2" placeholder="නිවස් අංකය, වීදිය, නගරය"></textarea></div>
-          <div class="form-group"><label><span data-i18n="nic_label">NIC අංකය</span> *</label><input type="text" id="nicNumber" placeholder="1995XXXXX හෝ XXXXXXXXXV"></div>
-          <div class="double-photo-group">
-            <div class="form-group"><label><span data-i18n="nic_front_label">NIC ඉදිරිපස</span> *</label><input type="file" id="nicFrontPhoto" accept="image/*"><div id="nicFrontPreview" class="photo-preview"></div></div>
-            <div class="form-group"><label><span data-i18n="nic_back_label">NIC පසුපස</span> *</label><input type="file" id="nicBackPhoto" accept="image/*"><div id="nicBackPreview" class="photo-preview"></div></div>
-          </div>
-          <div class="form-group"><label><span data-i18n="phone_label">දුරකතන අංකය</span> *</label><input type="tel" id="applicantPhone" placeholder="071 234 5678"></div>
-          <div class="form-group">
-            <label><span data-i18n="loan_amount_label">ණය මුදල (රු.)</span> *</label>
-            <input type="number" id="loanAmount" step="1000" min="1000" max="50000" placeholder="50000">
-            <span class="amount-hint" data-i18n="loan_max_hint">උපරිම ණය: රු. 50,000/-</span>
-          </div>
-          <div class="bank-section-group">
-            <h4><i class="fas fa-university"></i> <span data-i18n="bank_section_title">මුදල් බැරවිය යුතු ගිණුම් විස්තර</span></h4>
-            <div class="form-group" style="margin-bottom:1rem;"><label><span data-i18n="account_number_label">ගිණුම් අංකය</span> *</label><input type="text" id="accountNumber" placeholder="0001234567890" inputmode="numeric"></div>
-            <div class="form-group" style="margin-bottom:1rem;">
-              <label><span data-i18n="bank_name_label">බැංකුව</span> *</label>
-              <select id="bankName">
-                <option value="" data-i18n="bank_select_placeholder">-- බැංකුව තෝරන්න --</option>
-                <optgroup label="🏛 රාජ්‍ය / State Banks">
-                  <option value="BOC">Bank of Ceylon (BOC)</option>
-                  <option value="Peoples">People's Bank</option>
-                  <option value="NSB">National Savings Bank (NSB)</option>
-                  <option value="RDB">Regional Development Bank (RDB)</option>
-                  <option value="SMIB">State Mortgage &amp; Investment Bank (SMIB)</option>
-                </optgroup>
-                <optgroup label="🏦 වාණිජ / Private Commercial Banks">
-                  <option value="Commercial">Commercial Bank of Ceylon PLC</option>
-                  <option value="HNB">Hatton National Bank PLC (HNB)</option>
-                  <option value="Sampath">Sampath Bank PLC</option>
-                  <option value="Seylan">Seylan Bank PLC</option>
-                  <option value="NTB">Nations Trust Bank PLC (NTB)</option>
-                  <option value="NDB">National Development Bank PLC (NDB)</option>
-                  <option value="DFCC">DFCC Bank PLC</option>
-                  <option value="Union">Union Bank of Colombo PLC</option>
-                  <option value="PABC">Pan Asia Banking Corporation PLC (PABC)</option>
-                  <option value="Amana">Amana Bank PLC</option>
-                  <option value="Cargills">Cargills Bank Ltd</option>
-                </optgroup>
-                <optgroup label="🌐 විදේශ / Foreign Banks">
-                  <option value="Standard">Standard Chartered Bank</option>
-                  <option value="HSBC">HSBC Bank</option>
-                  <option value="SBI">State Bank of India (SBI)</option>
-                </optgroup>
-              </select>
-            </div>
-            <div class="form-group" style="margin-bottom:0"><label><span data-i18n="bank_branch_label">ගිණුම ආරම්භ කළ ශාඛාව</span> *</label><input type="text" id="bankBranch" placeholder="උදා: කොළඹ 03, කුරුණෑගල"></div>
-          </div>
-          <div class="checkbox-wrapper"><input type="checkbox" id="hasGuarantorCheck"><label for="hasGuarantorCheck" data-i18n="guarantor_check_label">ඇප කරුවන් සිටීද</label></div>
-          <div id="guarantorSection" style="display:none;">
-            <div class="guarantor-section">
-              <h4 data-i18n="guarantor_details_title">📌 ඇපකරු විස්තර</h4>
-              <div class="form-group"><label><span data-i18n="guarantor_name_label">නම</span> *</label><input type="text" id="guarantorName"></div>
-              <div class="form-group"><label><span data-i18n="guarantor_id_label">ID අංකය</span> *</label><input type="text" id="guarantorIdNumber"></div>
-              <div class="form-group"><label><span data-i18n="guarantor_photo_label">ID ඡායාරූපය</span> *</label><input type="file" id="guarantorPhoto" accept="image/*"><div id="guarantorPreview" class="photo-preview"></div></div>
-              <div class="form-group"><label><span data-i18n="guarantor_phone_label">දුරකතන අංකය</span> *</label><input type="tel" id="guarantorPhone"></div>
-            </div>
-          </div>
-          <button type="submit" id="submitApplicationBtn" class="submit-btn loan-submit"><span data-i18n="submit_btn_text">අයදුම්පත ඉදිරිපත් කරන්න</span></button>
-          <div id="formFeedback"></div>
-        </form>
+      <!-- ═══ APPLY PANEL ═══ -->
+<div id="applyLoanPanel">
+  <div class="notice-box">
+    <i class="fas fa-exclamation-triangle"></i>
+    <div class="notice-content">
+      <div class="notice-item"><i class="fas fa-percent"></i><strong data-i18n="notice_interest_label">මාසික පොලිය:</strong><span data-i18n="notice_interest_value">1.5% (18% වාර්ෂික)</span></div>
+      <div class="notice-item"><i class="fas fa-clock"></i><strong data-i18n="notice_late_label">ප්‍රමාද ගාස්තු:</strong><span data-i18n="notice_late_value">දිනකට රු. 100/-</span></div>
+      <div class="notice-item"><i class="fas fa-calendar-week"></i><strong data-i18n="notice_payment_label">ගෙවීම්:</strong><span data-i18n="notice_payment_value">මාසික / සතිපතා</span></div>
+      <div class="notice-item"><i class="fas fa-ban"></i><strong data-i18n="notice_blacklist_label">කළු ලැයිස්තු:</strong><span data-i18n="notice_blacklist_value">මාස 3කට ගෙවීම් නැතිනම්</span></div>
+    </div>
+  </div>
+
+  <div class="checking-blacklist" id="checkingBlacklistBox">
+    <i class="fas fa-shield-alt fa-spin"></i> <span data-i18n="checking_blacklist">කළු ලැයිස්තු පරීක්ෂා කරමින්...</span>
+  </div>
+
+  <div class="upload-progress" id="applyProgress">
+    <div style="font-size:.85rem;font-weight:600;color:#1e466e;">⏳ <span id="applyProgressText">Processing...</span></div>
+    <div class="progress-bar-wrap"><div class="progress-bar" id="applyProgressBar"></div></div>
+  </div>
+
+  <form id="loanAppForm">
+    <div class="form-group"><label><span data-i18n="full_name_label">සම්පූර්ණ නම</span> *</label><input type="text" id="fullName" placeholder="උදා: අමරසිංහ මහේෂ්"></div>
+    <div class="form-group"><label><span data-i18n="address_label">ලිපිනය</span> *</label><textarea id="address" rows="2" placeholder="නිවස් අංකය, වීදිය, නගරය"></textarea></div>
+    <div class="form-group"><label><span data-i18n="nic_label">NIC අංකය</span> *</label><input type="text" id="nicNumber" placeholder="1995XXXXX හෝ XXXXXXXXXV"></div>
+    
+    <!-- NIC Photos -->
+    <div class="double-photo-group">
+      <div class="form-group"><label><span data-i18n="nic_front_label">NIC ඉදිරිපස</span> *</label><input type="file" id="nicFrontPhoto" accept="image/*"><div id="nicFrontPreview" class="photo-preview"></div></div>
+      <div class="form-group"><label><span data-i18n="nic_back_label">NIC පසුපස</span> *</label><input type="file" id="nicBackPhoto" accept="image/*"><div id="nicBackPreview" class="photo-preview"></div></div>
+    </div>
+
+    <!-- New: Mandatory Selfie -->
+    <div class="form-group">
+      <label><span data-i18n="selfie_label">ඔබගේ සෙල්ෆි ඡායාරූපය</span> * <small style="color:#d97706;">(මුහුණ පැහැදිලිව දිස්විය යුතුය)</small></label>
+      <input type="file" id="selfiePhoto" accept="image/*">
+      <div id="selfiePreview" class="photo-preview"></div>
+    </div>
+
+    <div class="form-group"><label><span data-i18n="phone_label">දුරකතන අංකය</span> *</label><input type="tel" id="applicantPhone" placeholder="071 234 5678"></div>
+
+    <div class="form-group">
+      <label><span data-i18n="loan_amount_label">ණය මුදල (රු.)</span> *</label>
+      <input type="number" id="loanAmount" step="1000" min="1000" max="50000" placeholder="50000">
+      <span class="amount-hint" data-i18n="loan_max_hint">උපරිම ණය: රු. 50,000/-</span>
+    </div>
+
+    <!-- Bank Details -->
+    <div class="bank-section-group">
+      <h4><i class="fas fa-university"></i> <span data-i18n="bank_section_title">මුදල් බැරවිය යුතු ගිණුම් විස්තර</span></h4>
+      <div class="form-group" style="margin-bottom:1rem;"><label><span data-i18n="account_number_label">ගිණුම් අංකය</span> *</label><input type="text" id="accountNumber" placeholder="0001234567890" inputmode="numeric"></div>
+      <div class="form-group" style="margin-bottom:1rem;">
+        <label><span data-i18n="bank_name_label">බැංකුව</span> *</label>
+        <select id="bankName">
+          <option value="" data-i18n="bank_select_placeholder">-- බැංකුව තෝරන්න --</option>
+          <optgroup label="🏛 රාජ්‍ය / State Banks">
+            <option value="BOC">Bank of Ceylon (BOC)</option>
+            <option value="Peoples">People's Bank</option>
+            <option value="NSB">National Savings Bank (NSB)</option>
+            <option value="RDB">Regional Development Bank (RDB)</option>
+            <option value="SMIB">State Mortgage &amp; Investment Bank (SMIB)</option>
+          </optgroup>
+          <optgroup label="🏦 වාණිජ / Private Commercial Banks">
+            <option value="Commercial">Commercial Bank of Ceylon PLC</option>
+            <option value="HNB">Hatton National Bank PLC (HNB)</option>
+            <option value="Sampath">Sampath Bank PLC</option>
+            <option value="Seylan">Seylan Bank PLC</option>
+            <option value="NTB">Nations Trust Bank PLC (NTB)</option>
+            <option value="NDB">National Development Bank PLC (NDB)</option>
+            <option value="DFCC">DFCC Bank PLC</option>
+            <option value="Union">Union Bank of Colombo PLC</option>
+            <option value="PABC">Pan Asia Banking Corporation PLC (PABC)</option>
+            <option value="Amana">Amana Bank PLC</option>
+            <option value="Cargills">Cargills Bank Ltd</option>
+          </optgroup>
+          <optgroup label="🌐 විදේශ / Foreign Banks">
+            <option value="Standard">Standard Chartered Bank</option>
+            <option value="HSBC">HSBC Bank</option>
+            <option value="SBI">State Bank of India (SBI)</option>
+          </optgroup>
+        </select>
       </div>
+      <div class="form-group" style="margin-bottom:0"><label><span data-i18n="bank_branch_label">ගිණුම ආරම්භ කළ ශාඛාව</span> *</label><input type="text" id="bankBranch" placeholder="උදා: කොළඹ 03, කුරුණෑගල"></div>
+    </div>
+
+    <button type="submit" id="submitApplicationBtn" class="submit-btn loan-submit">
+      <span data-i18n="submit_btn_text">අයදුම්පත ඉදිරිපත් කරන්න</span>
+    </button>
+    <div id="formFeedback"></div>
+  </form>
+</div>
 
       <!-- ═══ REPAY PANEL ═══ -->
       <div id="repayLoanPanel" style="display:none;">
@@ -991,38 +1002,24 @@
   window.addEventListener('scroll', startCountup);
 
   // ── Photo preview ─────────────────────────────────────────────────
-  function previewPhoto(inputId, previewId){
-    document.getElementById(inputId)?.addEventListener('change',e=>{
-      const c=document.getElementById(previewId);
-      if(c&&e.target.files[0]){ const r=new FileReader(); r.onload=ev=>{ c.innerHTML=`<img src="${ev.target.result}" class="preview-img">`; }; r.readAsDataURL(e.target.files[0]); }
-    });
-  }
-  previewPhoto('nicFrontPhoto','nicFrontPreview');
-  previewPhoto('nicBackPhoto','nicBackPreview');
-  previewPhoto('guarantorPhoto','guarantorPreview');
-  previewPhoto('repayReceipt','repayReceiptPreview');
-  previewPhoto('investNicFront','investNicFrontPreview');
-  previewPhoto('investNicBack','investNicBackPreview');
-  previewPhoto('investPaymentProof','investPaymentProofPreview');
-
-  document.getElementById('hasGuarantorCheck')?.addEventListener('change', function(){ document.getElementById('guarantorSection').style.display=this.checked?'block':'none'; });
-  function setProgress(barId,pct){ const b=document.getElementById(barId); if(b)b.style.width=pct+'%'; }
-  function fmt(amount){ return 'රු. '+Math.round(amount).toLocaleString()+'/-'; }
-
-  // ── OVERPAY VALIDATION on amount input ────────────────────────────
-  document.getElementById('repayAmount')?.addEventListener('input', function(){
-    const val=parseFloat(this.value);
-    const warn=document.getElementById('overpayWarning');
-    const warnText=document.getElementById('overpayWarningText');
-    if(currentOutstanding!==null && currentOutstanding>0 && !isNaN(val) && val>currentOutstanding){
-      const maxStr='LKR '+Math.round(currentOutstanding).toLocaleString();
-      warnText.textContent=t('repay_overpay')+' '+maxStr;
-      warn.classList.add('show');
-    } else {
-      warn.classList.remove('show');
+  // ── Photo preview ─────────────────────────────────────────────────
+function previewPhoto(inputId, previewId){
+  document.getElementById(inputId)?.addEventListener('change',e=>{
+    const c=document.getElementById(previewId);
+    if(c&&e.target.files[0]){ 
+      const r=new FileReader(); 
+      r.onload=ev=>{ 
+        c.innerHTML=`<img src="${ev.target.result}" class="preview-img">`; 
+      }; 
+      r.readAsDataURL(e.target.files[0]); 
     }
   });
+}
 
+// Add this line with other previews:
+previewPhoto('nicFrontPhoto','nicFrontPreview');
+previewPhoto('nicBackPhoto','nicBackPreview');
+previewPhoto('selfiePhoto','selfiePreview');   // ← NEW
   // ── REPAY: NIC Lookup ─────────────────────────────────────────────
   const repayNicInput    = document.getElementById('repayNic');
   const repaySearchBtn   = document.getElementById('repayNicSearchBtn');
