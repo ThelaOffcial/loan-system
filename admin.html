@@ -33,6 +33,7 @@
     .badge.green{background:#16a34a}
     .badge.teal{background:#0d9488}
     .badge.gold{background:#d97706}
+    .badge.orange{background:#ea580c}
     .logout-btn{margin-top:auto;display:flex;align-items:center;gap:10px;padding:.75rem 1rem;border-radius:14px;color:#f87171;font-weight:600;cursor:pointer;background:none;border:none;width:100%;font-size:.9rem}
     .logout-btn:hover{background:rgba(248,113,113,.1)}
     .main-area{margin-left:230px;padding:1.8rem;min-height:100vh}
@@ -52,6 +53,7 @@
     .stat-card.red{border-top-color:#dc2626}
     .stat-card.purple{border-top-color:#7c3aed}
     .stat-card.teal{border-top-color:#0d9488}
+    .stat-card.orange{border-top-color:#ea580c}
     .stat-value{font-size:1.9rem;font-weight:800;color:#0f2d42;line-height:1}
     .stat-label{font-size:.72rem;color:#7a9ab0;font-weight:600;text-transform:uppercase;letter-spacing:.04em}
     .stat-icon{font-size:1.2rem;margin-bottom:.2rem}
@@ -61,6 +63,7 @@
     .stat-card.red .stat-icon{color:#dc2626}
     .stat-card.purple .stat-icon{color:#7c3aed}
     .stat-card.teal .stat-icon{color:#0d9488}
+    .stat-card.orange .stat-icon{color:#ea580c}
 
     /* ── INVEST STATS ── */
     .invest-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-bottom:1.8rem}
@@ -161,6 +164,8 @@
     .btn-delete:hover{background:#6b7280;color:white}
     .btn-active{background:#ccfbf1;color:#0d9488}
     .btn-active:hover{background:#0d9488;color:white}
+    .btn-mark-paid{background:linear-gradient(95deg,#f59e0b,#d97706);color:white}
+    .btn-mark-paid:hover{filter:brightness(1.1)}
 
     /* ── INVESTMENT CARD ── */
     .invest-card{background:white;border-radius:20px;overflow:hidden;box-shadow:0 4px 16px rgba(0,0,0,.06);transition:.25s;display:flex;flex-direction:column}
@@ -220,6 +225,38 @@
     .btn-add-bl{background:linear-gradient(95deg,#be185d,#9d174d);color:white;border:none;padding:.65rem 1.4rem;border-radius:40px;font-weight:700;font-size:.88rem;cursor:pointer;display:flex;align-items:center;gap:6px;margin-top:.8rem;font-family:inherit}
     .btn-add-bl:hover{transform:translateY(-2px);box-shadow:0 6px 14px rgba(190,24,93,.25)}
 
+    /* ── ALERTS ── */
+    .alerts-header-bar{background:linear-gradient(135deg,#431407,#7c2d12);border-radius:18px;padding:1.2rem 1.5rem;margin-bottom:1.5rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;grid-column:1/-1}
+    .alerts-header-bar h3{color:white;font-size:1.1rem;display:flex;align-items:center;gap:8px}
+    .alerts-header-counts{display:flex;gap:1rem;flex-wrap:wrap}
+    .ahc-item{background:rgba(255,255,255,.15);border-radius:10px;padding:.5rem 1rem;text-align:center}
+    .ahc-num{font-size:1.4rem;font-weight:800;color:white}
+    .ahc-label{font-size:.62rem;color:rgba(255,255,255,.75);font-weight:600;text-transform:uppercase}
+
+    .alert-card{background:white;border-radius:18px;overflow:hidden;box-shadow:0 4px 18px rgba(0,0,0,.07);transition:.25s;display:flex;flex-direction:column}
+    .alert-card:hover{transform:translateY(-3px);box-shadow:0 10px 28px rgba(0,0,0,.12)}
+    .alert-card-header{padding:1rem 1.2rem;display:flex;justify-content:space-between;align-items:flex-start;border-bottom:1px solid #f0f4fa}
+    .alert-card-header.maturity{border-left:5px solid #dc2626;background:linear-gradient(90deg,#fff5f5,white)}
+    .alert-card-header.interest-30{border-left:5px solid #f59e0b;background:linear-gradient(90deg,#fffbeb,white)}
+    .alert-card-header.interest-monthly{border-left:5px solid #ea580c;background:linear-gradient(90deg,#fff7ed,white)}
+    .alert-type-badge{padding:.3rem .8rem;border-radius:40px;font-size:.72rem;font-weight:800;text-transform:uppercase;letter-spacing:.04em}
+    .alert-type-badge.maturity{background:#fee2e2;color:#dc2626}
+    .alert-type-badge.interest-30{background:#fef3c7;color:#d97706}
+    .alert-type-badge.interest-monthly{background:#ffedd5;color:#ea580c}
+    .alert-payout-box{margin:.8rem 1.2rem;background:linear-gradient(135deg,#dc2626,#b91c1c);border-radius:14px;padding:1rem 1.2rem;color:white;display:flex;justify-content:space-between;align-items:center}
+    .alert-payout-box.interest{background:linear-gradient(135deg,#d97706,#b45309)}
+    .alert-payout-label{font-size:.72rem;font-weight:700;opacity:.85;text-transform:uppercase;letter-spacing:.04em;margin-bottom:.25rem}
+    .alert-payout-amount{font-size:1.6rem;font-weight:800}
+    .alert-payout-icon{font-size:2rem;opacity:.5}
+    .alert-breakdown{margin:0 1.2rem .8rem;background:#f8faff;border-radius:12px;padding:.7rem 1rem}
+    .abd-row{display:flex;justify-content:space-between;padding:.22rem 0;font-size:.8rem;border-bottom:1px solid #f0f4fa}
+    .abd-row:last-child{border-bottom:none;font-weight:700;font-size:.85rem;color:#0f2d42}
+    .abd-label{color:#6a8598}
+    .abd-value{font-weight:600;color:#1e2f3e}
+    .alert-overdue-chip{margin:0 1.2rem .7rem;background:#fee2e2;border:1px solid #fca5a5;border-radius:8px;padding:.35rem .7rem;font-size:.75rem;color:#b91c1c;font-weight:700;display:flex;align-items:center;gap:5px}
+    .alert-upcoming-chip{margin:0 1.2rem .7rem;background:#fef3c7;border:1px solid #fde68a;border-radius:8px;padding:.35rem .7rem;font-size:.75rem;color:#92400e;font-weight:700;display:flex;align-items:center;gap:5px}
+    .alert-settled-chip{margin:0 1.2rem .7rem;background:#dcfce7;border:1px solid #86efac;border-radius:8px;padding:.35rem .7rem;font-size:.75rem;color:#15803d;font-weight:700;display:flex;align-items:center;gap:5px}
+
     /* ── EMPTY / SPINNER ── */
     .empty-state{text-align:center;padding:4rem 2rem;color:#9ab0c0;grid-column:1/-1}
     .empty-state i{font-size:3rem;margin-bottom:1rem;display:block;opacity:.5}
@@ -273,6 +310,7 @@
     <button class="nav-item active" data-view="applications"><i class="fas fa-file-invoice-dollar"></i> Applications <span class="badge" id="pendingBadge" style="display:none">0</span></button>
     <button class="nav-item" data-view="repayments"><i class="fas fa-money-bill-wave"></i> Repayments <span class="badge green" id="repayPendingBadge" style="display:none">0</span></button>
     <button class="nav-item" data-view="investments"><i class="fas fa-piggy-bank"></i> Investments <span class="badge teal" id="investBadge" style="display:none">0</span></button>
+    <button class="nav-item" data-view="alerts"><i class="fas fa-bell"></i> Alerts <span class="badge orange" id="alertsBadge" style="display:none">0</span></button>
     <button class="nav-item" data-view="blacklist"><i class="fas fa-ban"></i> Blacklist <span class="badge" id="blacklistBadge" style="display:none">0</span></button>
     <button class="logout-btn" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Logout</button>
   </nav>
@@ -402,11 +440,13 @@
       snap.forEach(child => { allInvestments.push({ id:child.key, ...child.val() }); });
       allInvestments.sort((a,b)=>(b.timestamp||0)-(a.timestamp||0));
       updateInvestBadge();
+      updateAlertsBadge();
       if(currentView==='investments') renderList();
+      if(currentView==='alerts') renderList();
     });
   }
 
-  // ── FINANCIAL CALC ────────────────────────────────────────────────
+  // ── FINANCIAL CALC (loans) ────────────────────────────────────────
   function calcFinancials(loan) {
     if (loan.status !== 'accepted' || !loan.approvedDate) return null;
     const MS_DAY    = 86400000;
@@ -432,12 +472,88 @@
 
   // ── INVESTMENT RETURN CALC ────────────────────────────────────────
   function calcInvestReturn(inv) {
-    const amount   = parseFloat(inv.amount) || 0;
-    const rate     = parseFloat(inv.interestRate) || 10; // default 10% p.a.
-    const duration = parseInt(inv.duration) || 12;       // months
+    const amount   = parseFloat(inv.investmentAmount) || 0;
+    const rate     = parseFloat(inv.interestRate) || 10;
+    const duration = parseInt(inv.durationMonths) || 12;
     const interest = amount * (rate / 100) * (duration / 12);
     const total    = amount + interest;
     return { amount, rate, duration, interest, total };
+  }
+
+  // ── INVESTMENT ALERTS CALC ────────────────────────────────────────
+  function calcInvestmentAlerts() {
+    const alerts = [];
+    const now    = Date.now();
+    const MS_DAY = 86400000;
+
+    for (const inv of allInvestments) {
+      if ((inv.status !== 'accepted' && inv.status !== 'active') || !inv.startDate) continue;
+
+      const calc         = calcInvestReturn(inv);
+      const daysSinceStart = Math.floor((now - inv.startDate) / MS_DAY);
+      const durationDays   = (parseInt(inv.durationMonths) || 12) * 30;
+      const endDate        = inv.endDate || (inv.startDate + durationDays * MS_DAY);
+      const isMatured      = now >= endDate;
+      const daysToMaturity = Math.ceil((endDate - now) / MS_DAY);
+
+      // ── MATURITY ALERT (full payout due) ─────────────────────────
+      if (isMatured) {
+        const daysOverdue = Math.floor((now - endDate) / MS_DAY);
+        alerts.push({
+          type:        'maturity',
+          inv,
+          calc,
+          daysOverdue,
+          payoutAmount: calc.total,
+          label:       '🚨 MATURITY — Full Payout Due',
+        });
+        continue; // skip interest sub-alerts if already matured
+      }
+
+      // ── 30-DAY INTEREST ALERT ─────────────────────────────────────
+      if (daysSinceStart >= 30) {
+        const monthsElapsed    = Math.floor(daysSinceStart / 30);
+        const monthlyInterest  = calc.amount * (calc.rate / 100) / 12;
+        const interestAccrued  = monthlyInterest * monthsElapsed;
+        // Show alert every 30 days
+        alerts.push({
+          type:           'interest',
+          inv,
+          calc,
+          monthsElapsed,
+          monthlyInterest,
+          interestAccrued,
+          daysToMaturity,
+          daysSinceStart,
+          label:          `💰 ${monthsElapsed} Month${monthsElapsed!==1?'s':''} Elapsed — Interest Due`,
+        });
+      }
+
+      // ── UPCOMING MATURITY WARNING (within 14 days) ────────────────
+      if (daysToMaturity <= 14 && daysToMaturity > 0 && daysSinceStart < 30) {
+        alerts.push({
+          type:        'upcoming',
+          inv,
+          calc,
+          daysToMaturity,
+          payoutAmount: calc.total,
+          label:       `⏰ Matures in ${daysToMaturity} day${daysToMaturity!==1?'s':''}`,
+        });
+      }
+    }
+
+    // Sort: maturity first, then interest, then upcoming
+    const order = { maturity:0, interest:1, upcoming:2 };
+    alerts.sort((a,b)=>(order[a.type]||9)-(order[b.type]||9));
+    return alerts;
+  }
+
+  function updateAlertsBadge() {
+    const alerts  = calcInvestmentAlerts();
+    const urgent  = alerts.filter(a=>a.type==='maturity'||a.type==='interest').length;
+    const ab      = document.getElementById('alertsBadge');
+    ab.textContent = urgent;
+    ab.style.display = urgent > 0 ? 'inline' : 'none';
   }
 
   // ── AUTO BLACKLIST ────────────────────────────────────────────────
@@ -514,12 +630,12 @@
       const isApps    = currentView==='applications';
       const isBL      = currentView==='blacklist';
       const isInvest  = currentView==='investments';
+      const isAlerts  = currentView==='alerts';
 
       document.getElementById('statsRow').style.display        = isApps   ? 'grid' : 'none';
       document.getElementById('investStatsRow').style.display  = isInvest ? 'grid' : 'none';
-      document.getElementById('filterBar').style.display       = isBL     ? 'none' : 'flex';
+      document.getElementById('filterBar').style.display       = (isBL||isAlerts) ? 'none' : 'flex';
 
-      // Update filter buttons for investments
       if (isInvest) {
         document.querySelectorAll('.filter-btn[data-filter="accepted"]').forEach(b=>b.textContent='✅ Active');
         document.querySelectorAll('.filter-btn[data-filter="cancelled"]').forEach(b=>b.textContent='❌ Closed');
@@ -531,6 +647,7 @@
       document.getElementById('pageTitle').textContent =
         isApps   ? '📋 Loan Applications' :
         isInvest ? '💰 Investments' :
+        isAlerts ? '🔔 Investment Alerts' :
         currentView==='repayments' ? '💸 Loan Repayments' : '🚫 Blacklist Management';
 
       renderList();
@@ -552,6 +669,7 @@
     const list = document.getElementById('cardsList');
     if (currentView === 'blacklist')    { renderBlacklist(list); return; }
     if (currentView === 'investments')  { renderInvestments(list); return; }
+    if (currentView === 'alerts')       { renderAlerts(list); return; }
 
     let data = currentView==='applications' ? allApps : allRepays;
     if(currentView==='applications' && filterStatus!=='all') data = data.filter(a=>a.status===filterStatus);
@@ -566,6 +684,131 @@
   // ── FORMAT ───────────────────────────────────────────────────────
   const fmtAmt = v => 'LKR ' + Math.round(v).toLocaleString();
   const initials = name => (name||'?').split(' ').map(w=>w[0]).join('').substring(0,2).toUpperCase();
+
+  // ── ALERTS VIEW ───────────────────────────────────────────────────
+  function renderAlerts(list) {
+    const alerts = calcInvestmentAlerts();
+    const maturityAlerts  = alerts.filter(a=>a.type==='maturity');
+    const interestAlerts  = alerts.filter(a=>a.type==='interest');
+    const upcomingAlerts  = alerts.filter(a=>a.type==='upcoming');
+
+    const totalPayout = maturityAlerts.reduce((s,a)=>s+a.payoutAmount,0);
+    const totalInterest = interestAlerts.reduce((s,a)=>s+a.interestAccrued,0);
+
+    const headerHtml = `
+      <div class="alerts-header-bar">
+        <h3><i class="fas fa-bell"></i> Investment Payment Alerts</h3>
+        <div class="alerts-header-counts">
+          <div class="ahc-item"><div class="ahc-num" style="color:#fca5a5">${maturityAlerts.length}</div><div class="ahc-label">Matured</div></div>
+          <div class="ahc-item"><div class="ahc-num" style="color:#fde68a">${interestAlerts.length}</div><div class="ahc-label">Interest Due</div></div>
+          <div class="ahc-item"><div class="ahc-num" style="color:#6ee7b7">${fmtAmt(totalPayout+totalInterest)}</div><div class="ahc-label">Total Due</div></div>
+        </div>
+      </div>`;
+
+    if (alerts.length === 0) {
+      list.innerHTML = headerHtml + `<div class="empty-state" style="grid-column:1/-1"><i class="fas fa-check-circle" style="color:#16a34a;opacity:1"></i><p style="color:#16a34a">All investments are on track! No payments due.</p></div>`;
+      return;
+    }
+
+    list.innerHTML = headerHtml + alerts.map(a => alertCard(a)).join('');
+  }
+
+  function alertCard(a) {
+    const inv   = a.inv;
+    const calc  = a.calc;
+    const name  = inv.fullName || '—';
+    const nic   = inv.nicNumber || '—';
+    const phone = inv.phoneNumber || '—';
+    const startStr = inv.startDate ? new Date(inv.startDate).toLocaleDateString() : '—';
+    const endStr   = inv.endDate   ? new Date(inv.endDate).toLocaleDateString()   : '—';
+
+    let payoutBoxHtml = '';
+    let breakdownHtml = '';
+    let chipHtml      = '';
+    let headerClass   = '';
+
+    if (a.type === 'maturity') {
+      headerClass = 'maturity';
+      chipHtml    = `<div class="alert-overdue-chip"><i class="fas fa-exclamation-circle"></i> Matured ${a.daysOverdue} day${a.daysOverdue!==1?'s':''} ago — Immediate payout required!</div>`;
+      payoutBoxHtml = `
+        <div class="alert-payout-box">
+          <div>
+            <div class="alert-payout-label">💸 Full Payout Due</div>
+            <div class="alert-payout-amount">${fmtAmt(a.payoutAmount)}</div>
+          </div>
+          <i class="fas fa-hand-holding-usd alert-payout-icon"></i>
+        </div>`;
+      breakdownHtml = `
+        <div class="alert-breakdown">
+          <div class="abd-row"><span class="abd-label">Principal</span><span class="abd-value">${fmtAmt(calc.amount)}</span></div>
+          <div class="abd-row"><span class="abd-label">Total Interest (${calc.rate}% × ${calc.duration} months)</span><span class="abd-value">${fmtAmt(calc.interest)}</span></div>
+          <div class="abd-row"><span class="abd-label"><strong>Total to Pay Investor</strong></span><span class="abd-value" style="color:#dc2626">${fmtAmt(a.payoutAmount)}</span></div>
+        </div>`;
+    } else if (a.type === 'interest') {
+      headerClass   = 'interest-monthly';
+      const daysLbl = a.daysToMaturity > 0 ? `Matures in ${a.daysToMaturity} days (${endStr})` : 'Maturity reached';
+      chipHtml      = `<div class="alert-upcoming-chip"><i class="fas fa-calendar-check"></i> ${a.monthsElapsed} month${a.monthsElapsed!==1?'s':''} active · ${daysLbl}</div>`;
+      payoutBoxHtml = `
+        <div class="alert-payout-box interest">
+          <div>
+            <div class="alert-payout-label">📅 Interest Accrued (${a.monthsElapsed} month${a.monthsElapsed!==1?'s':''})</div>
+            <div class="alert-payout-amount">${fmtAmt(a.interestAccrued)}</div>
+          </div>
+          <i class="fas fa-chart-line alert-payout-icon"></i>
+        </div>`;
+      breakdownHtml = `
+        <div class="alert-breakdown">
+          <div class="abd-row"><span class="abd-label">Principal</span><span class="abd-value">${fmtAmt(calc.amount)}</span></div>
+          <div class="abd-row"><span class="abd-label">Rate</span><span class="abd-value">${calc.rate}% p.a. (${(calc.rate/12).toFixed(2)}%/month)</span></div>
+          <div class="abd-row"><span class="abd-label">Monthly Interest</span><span class="abd-value">${fmtAmt(a.monthlyInterest)}</span></div>
+          <div class="abd-row"><span class="abd-label">Months Elapsed</span><span class="abd-value">${a.monthsElapsed} months (${a.daysSinceStart} days)</span></div>
+          <div class="abd-row"><span class="abd-label"><strong>Interest Due Now</strong></span><span class="abd-value" style="color:#d97706">${fmtAmt(a.interestAccrued)}</span></div>
+          <div class="abd-row"><span class="abd-label">Full Payout at Maturity</span><span class="abd-value" style="color:#0d9488">${fmtAmt(calc.total)}</span></div>
+        </div>`;
+    } else if (a.type === 'upcoming') {
+      headerClass   = 'interest-30';
+      chipHtml      = `<div class="alert-upcoming-chip"><i class="fas fa-hourglass-half"></i> Matures in ${a.daysToMaturity} day${a.daysToMaturity!==1?'s':''} — Prepare payout</div>`;
+      payoutBoxHtml = `
+        <div class="alert-payout-box interest">
+          <div>
+            <div class="alert-payout-label">⏰ Upcoming Full Payout</div>
+            <div class="alert-payout-amount">${fmtAmt(a.payoutAmount)}</div>
+          </div>
+          <i class="fas fa-clock alert-payout-icon"></i>
+        </div>`;
+      breakdownHtml = `
+        <div class="alert-breakdown">
+          <div class="abd-row"><span class="abd-label">Principal</span><span class="abd-value">${fmtAmt(calc.amount)}</span></div>
+          <div class="abd-row"><span class="abd-label">Interest (${calc.rate}% × ${calc.duration} months)</span><span class="abd-value">${fmtAmt(calc.interest)}</span></div>
+          <div class="abd-row"><span class="abd-label"><strong>Total Payout on ${endStr}</strong></span><span class="abd-value" style="color:#0d9488">${fmtAmt(a.payoutAmount)}</span></div>
+        </div>`;
+    }
+
+    const typeBadgeClass = a.type === 'maturity' ? 'maturity' : a.type === 'interest' ? 'interest-monthly' : 'interest-30';
+    const typeBadgeText  = a.type === 'maturity' ? '🚨 MATURITY DUE' : a.type === 'interest' ? '💰 INTEREST DUE' : '⏰ UPCOMING';
+
+    return `
+    <div class="alert-card">
+      <div class="alert-card-header ${headerClass}">
+        <div class="card-person">
+          <div class="card-avatar investment">${initials(name)}</div>
+          <div>
+            <div class="card-name">${name}</div>
+            <div class="card-date">NIC: ${nic} · 📞 ${phone}</div>
+            <div class="card-date">Start: ${startStr} → Maturity: ${endStr} · ${calc.duration} months</div>
+          </div>
+        </div>
+        <span class="alert-type-badge ${typeBadgeClass}">${typeBadgeText}</span>
+      </div>
+      ${chipHtml}
+      ${payoutBoxHtml}
+      ${breakdownHtml}
+      <div class="card-actions">
+        <button class="act-btn btn-mark-paid" onclick="markInvestmentPaid('${inv.id}')"><i class="fas fa-check-double"></i> Mark as Paid</button>
+        <button class="act-btn btn-cancel"    onclick="setInvestStatus('${inv.id}','cancelled')"><i class="fas fa-times"></i> Close Investment</button>
+      </div>
+    </div>`;
+  }
 
   // ── APPLICATION CARD ─────────────────────────────────────────────
   function appCard(a) {
@@ -639,8 +882,9 @@
         <div class="ci-item"><div class="ci-label">Address</div><div class="ci-value">${(a.address||'—').substring(0,40)}</div></div>
       </div>
       <div class="card-photos">
-        ${a.nicFrontImg ? `<span class="photo-chip" onclick="showImg('${a.nicFrontImg}')"><i class="fas fa-id-card"></i> NIC Front</span>` : ''}
-        ${a.nicBackImg  ? `<span class="photo-chip" onclick="showImg('${a.nicBackImg}')"><i class="fas fa-id-card"></i> NIC Back</span>` : ''}
+        ${a.nicFrontImg  ? `<span class="photo-chip" onclick="showImg('${a.nicFrontImg}')"><i class="fas fa-id-card"></i> NIC Front</span>` : ''}
+        ${a.nicBackImg   ? `<span class="photo-chip" onclick="showImg('${a.nicBackImg}')"><i class="fas fa-id-card"></i> NIC Back</span>` : ''}
+        ${a.selfieImg    ? `<span class="photo-chip" onclick="showImg('${a.selfieImg}')"><i class="fas fa-camera"></i> Selfie</span>` : ''}
       </div>
       ${bankHtml}
       ${gHtml}
@@ -695,24 +939,25 @@
       else data = data.filter(i => i.status === filterStatus);
     }
     if (searchQuery) data = data.filter(i =>
-      (i.name||'').toLowerCase().includes(searchQuery) ||
+      (i.fullName||'').toLowerCase().includes(searchQuery) ||
       (i.nicNumber||'').toLowerCase().includes(searchQuery) ||
-      (i.phone||'').toLowerCase().includes(searchQuery)
+      (i.phoneNumber||'').toLowerCase().includes(searchQuery)
     );
 
-    // Summary bar
-    const totalCapital  = allInvestments.filter(i=>i.status==='accepted'||i.status==='active').reduce((s,i)=>s+(parseFloat(i.amount)||0),0);
-    const totalReturns  = allInvestments.filter(i=>i.status==='accepted'||i.status==='active').reduce((s,i)=>{ const c=calcInvestReturn(i); return s+c.interest; },0);
-    const totalPayouts  = allInvestments.filter(i=>i.status==='accepted'||i.status==='active').reduce((s,i)=>{ const c=calcInvestReturn(i); return s+c.total; },0);
+    const activeInvs    = allInvestments.filter(i=>i.status==='accepted'||i.status==='active');
+    const totalCapital  = activeInvs.reduce((s,i)=>s+(parseFloat(i.investmentAmount)||0),0);
+    const totalReturns  = activeInvs.reduce((s,i)=>{ const c=calcInvestReturn(i); return s+c.interest; },0);
+    const totalPayouts  = activeInvs.reduce((s,i)=>{ const c=calcInvestReturn(i); return s+c.total; },0);
     const pendingCount  = allInvestments.filter(i=>i.status==='pending').length;
+    const alertCount    = calcInvestmentAlerts().filter(a=>a.type==='maturity'||a.type==='interest').length;
 
-    const summaryBar = data.length > 0 || allInvestments.length > 0 ? `
+    const summaryBar = `
       <div class="invest-summary-bar" style="grid-column:1/-1">
         <div class="isb-item"><div class="isb-value teal">${fmtAmt(totalCapital)}</div><div class="isb-label">Active Capital</div></div>
         <div class="isb-item"><div class="isb-value gold">${fmtAmt(totalReturns)}</div><div class="isb-label">Total Returns Owed</div></div>
         <div class="isb-item"><div class="isb-value green">${fmtAmt(totalPayouts)}</div><div class="isb-label">Total Payouts</div></div>
-        <div class="isb-item"><div class="isb-value" style="color:white">${pendingCount}</div><div class="isb-label">Awaiting Approval</div></div>
-      </div>` : '';
+        <div class="isb-item"><div class="isb-value" style="color:${alertCount>0?'#fca5a5':'white'}">${alertCount > 0 ? '🔔 '+alertCount+' Alert'+(alertCount!==1?'s':'') : pendingCount+' Pending'}</div><div class="isb-label">${alertCount>0?'Payment Alerts':'Awaiting Approval'}</div></div>
+      </div>`;
 
     if (data.length === 0) {
       list.innerHTML = summaryBar + `<div class="empty-state" style="grid-column:1/-1"><i class="fas fa-piggy-bank"></i><p>No investment records found</p></div>`;
@@ -723,36 +968,71 @@
   }
 
   function investCard(inv) {
-    const status = inv.status || 'pending';
-    const date   = inv.timestamp ? new Date(inv.timestamp).toLocaleString('en-GB',{day:'2-digit',month:'short',year:'numeric',hour:'2-digit',minute:'2-digit'}) : '—';
-    const calc   = calcInvestReturn(inv);
+    const status        = inv.status || 'pending';
     const displayStatus = (status === 'accepted' || status === 'active') ? 'active' : status;
+    const date          = inv.timestamp
+      ? new Date(inv.timestamp).toLocaleString('en-GB',{day:'2-digit',month:'short',year:'numeric',hour:'2-digit',minute:'2-digit'})
+      : '—';
+    const calc = calcInvestReturn(inv);
 
-    const startDate  = inv.startDate  ? new Date(inv.startDate).toLocaleDateString()  : '—';
-    const endDate    = inv.endDate    ? new Date(inv.endDate).toLocaleDateString()    : '—';
+    const startDate = inv.startDate ? new Date(inv.startDate).toLocaleDateString() : '—';
+    const endDate   = inv.endDate   ? new Date(inv.endDate).toLocaleDateString()   : '—';
     const maturityMs = inv.endDate ? inv.endDate - Date.now() : null;
     const daysLeft   = maturityMs ? Math.ceil(maturityMs / 86400000) : null;
+
+    // Check if this investment has alerts
+    const invAlerts = calcInvestmentAlerts().filter(a=>a.inv.id===inv.id);
+    const alertBanner = invAlerts.length > 0 ? `
+      <div style="margin:.4rem 1.2rem;background:linear-gradient(135deg,#fff7ed,#ffedd5);border:1.5px solid #fed7aa;border-radius:10px;padding:.6rem .9rem;display:flex;align-items:center;gap:.5rem;font-size:.78rem;font-weight:700;color:#c2410c">
+        <i class="fas fa-bell"></i>
+        ${invAlerts.map(a=>a.type==='maturity'?'🚨 MATURITY DUE — Full payout required!':
+          a.type==='interest'?`💰 ${a.monthsElapsed} month${a.monthsElapsed!==1?'s':''} elapsed — Interest: ${fmtAmt(a.interestAccrued)}`:
+          `⏰ Matures in ${a.daysToMaturity} days`).join(' · ')}
+      </div>` : '';
 
     let daysLeftHtml = '';
     if (daysLeft !== null && (status === 'accepted' || status === 'active')) {
       const dl = daysLeft > 0
         ? `<span style="color:#0d9488;font-weight:700">${daysLeft} days left</span>`
-        : `<span style="color:#dc2626;font-weight:700">Matured ${Math.abs(daysLeft)} days ago</span>`;
+        : `<span style="color:#dc2626;font-weight:700">⚠️ Matured ${Math.abs(daysLeft)} days ago</span>`;
       daysLeftHtml = `<div style="grid-column:1/-1;font-size:.78rem;color:#9ab0c0">${dl}</div>`;
     }
+
+    let bankHtml = '';
+    if (inv.bankDetails) {
+      const bd = inv.bankDetails;
+      bankHtml = `<div class="card-bank">
+        <div class="bank-row"><i class="fas fa-university"></i>
+          <span>${bd.bankName||bd.bank||'—'}</span>
+          <span class="bank-label">— ${bd.branch||bd.bankBranch||'—'}</span>
+        </div>
+        <div class="bank-row" style="margin-top:.2rem">
+          <i class="fas fa-hashtag"></i>
+          <span style="font-family:monospace;font-size:.82rem">${bd.accountNumber||bd.account||'—'}</span>
+        </div>
+      </div>`;
+    }
+
+    const photos = [
+      inv.nicFrontImg     ? `<span class="photo-chip" onclick="showImg('${inv.nicFrontImg}')"><i class="fas fa-id-card"></i> NIC Front</span>` : '',
+      inv.nicBackImg      ? `<span class="photo-chip" onclick="showImg('${inv.nicBackImg}')"><i class="fas fa-id-card"></i> NIC Back</span>` : '',
+      inv.paymentProofImg ? `<span class="photo-chip" onclick="showImg('${inv.paymentProofImg}')"><i class="fas fa-receipt"></i> Payment Proof</span>` : '',
+    ].filter(Boolean).join('');
 
     return `
     <div class="invest-card" id="inv-${inv.id}">
       <div class="invest-topbar ${displayStatus}">
         <div class="card-person">
-          <div class="card-avatar investment">${initials(inv.name)}</div>
+          <div class="card-avatar investment">${initials(inv.fullName)}</div>
           <div>
-            <div class="card-name">${inv.name||'—'}</div>
+            <div class="card-name">${inv.fullName||'—'}</div>
             <div class="card-date">${date}</div>
           </div>
         </div>
         <span class="card-status ${displayStatus}">${displayStatus.toUpperCase()}</span>
       </div>
+
+      ${alertBanner}
 
       <div class="invest-amount-hero">
         <div>
@@ -767,9 +1047,10 @@
 
       <div class="card-info">
         <div class="ci-item"><div class="ci-label">NIC</div><div class="ci-value">${inv.nicNumber||'—'}</div></div>
-        <div class="ci-item"><div class="ci-label">Phone</div><div class="ci-value">${inv.phone||'—'}</div></div>
+        <div class="ci-item"><div class="ci-label">Phone</div><div class="ci-value">${inv.phoneNumber||'—'}</div></div>
         <div class="ci-item"><div class="ci-label">Interest Rate</div><div class="ci-value teal">${calc.rate}% p.a.</div></div>
         <div class="ci-item"><div class="ci-label">Duration</div><div class="ci-value">${calc.duration} months</div></div>
+        ${inv.address ? `<div class="ci-item" style="grid-column:1/-1"><div class="ci-label">Address</div><div class="ci-value">${inv.address}</div></div>` : ''}
       </div>
 
       <div class="invest-timeline">
@@ -779,8 +1060,8 @@
         ${daysLeftHtml}
       </div>
 
-      ${inv.purpose ? `<div style="margin:.2rem 1.2rem .6rem;background:#f0f9ff;border-radius:10px;padding:.5rem .8rem;font-size:.82rem;color:#1e2f3e;border-left:3px solid #0f5b8c"><span style="font-size:.68rem;font-weight:700;color:#9ab0c0;text-transform:uppercase">Purpose: </span>${inv.purpose}</div>` : ''}
-      ${inv.bankDetails ? `<div class="card-bank"><div class="bank-row"><i class="fas fa-university"></i> <span>${inv.bankDetails.bankName||'—'}</span> <span class="bank-label">— ${inv.bankDetails.branch||'—'}</span></div><div class="bank-row" style="margin-top:.2rem"><i class="fas fa-hashtag"></i> <span style="font-family:monospace;font-size:.82rem">${inv.bankDetails.accountNumber||'—'}</span></div></div>` : ''}
+      ${photos ? `<div class="card-photos">${photos}</div>` : ''}
+      ${bankHtml}
 
       <div class="card-actions">
         <button class="act-btn btn-active"  onclick="setInvestStatus('${inv.id}','accepted')"><i class="fas fa-check"></i> Activate</button>
@@ -858,7 +1139,7 @@
       const inv = allInvestments.find(i=>i.id===id);
       if (inv && !inv.startDate) {
         const start = Date.now();
-        const dur   = parseInt(inv.duration) || 12;
+        const dur   = parseInt(inv.durationMonths) || 12;
         updates.startDate = start;
         updates.endDate   = start + dur * 30 * 86400000;
       }
@@ -869,6 +1150,14 @@
       status==='cancelled' ? 'Investment cancelled' : 'Moved to pending',
       status==='accepted' ? 'success' : status==='cancelled' ? 'error' : ''
     );
+  };
+  window.markInvestmentPaid = async (id) => {
+    const inv = allInvestments.find(i=>i.id===id);
+    if (!inv) return;
+    const calc = calcInvestReturn(inv);
+    if (!confirm(`Mark ${inv.fullName}'s investment as paid out?\n\nTotal payout: LKR ${Math.round(calc.total).toLocaleString()}\n\nThis will close the investment.`)) return;
+    await update(ref(db,`investments/${id}`), { status:'cancelled', paidOutDate: Date.now(), paidOut: true, paidAmount: calc.total });
+    showToast(`✅ ${inv.fullName} investment payout marked as done`, 'success');
   };
   window.deleteEntry = async (id, path) => {
     if(!confirm('Delete this record permanently?')) return;
@@ -900,7 +1189,7 @@
     await remove(ref(db,`blacklist/${id}`));
     showToast(`${name} removed`,'success');
   };
-  window.renderList = renderList; // expose for blacklist search
+  window.renderList = renderList;
 
   // ── LIGHTBOX ─────────────────────────────────────────────────────
   window.showImg = url => { document.getElementById('lightboxImg').src=url; document.getElementById('lightbox').classList.add('show'); };
