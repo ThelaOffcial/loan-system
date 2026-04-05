@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="si">
 <head>
@@ -79,9 +78,6 @@
     .double-photo-group .form-group{flex:1}
     .photo-preview{display:flex;gap:10px;margin-top:8px;flex-wrap:wrap}
     .preview-img{width:70px;height:70px;object-fit:cover;border-radius:14px;border:1px solid #cddfe7}
-    .checkbox-wrapper{display:flex;align-items:center;gap:12px;margin:1rem 0;background:#f8fafd;padding:.7rem 1rem;border-radius:28px}
-    .checkbox-wrapper input{width:20px;height:20px;margin:0}
-    .checkbox-wrapper label{margin:0;font-weight:500;cursor:pointer}
     .guarantor-section{background:#f9fbfe;padding:1.2rem 1.5rem;border-radius:28px;margin-top:.5rem;border-left:4px solid #0f5b8c}
     .submit-btn{color:white;border:none;padding:1rem;font-weight:700;border-radius:50px;width:100%;cursor:pointer;font-size:1.1rem;transition:.2s;font-family:inherit}
     .submit-btn.loan-submit{background:linear-gradient(95deg,#1f7b5a,#2b9b7a);box-shadow:0 6px 14px rgba(43,155,122,.3)}
@@ -92,6 +88,11 @@
     .invest-success-message{background:#fef3c7;padding:1rem;border-radius:24px;color:#92400e;text-align:center;margin-top:1rem}
     .error-text{color:#c7362b;font-size:.85rem;margin-top:8px;padding:.5rem 1rem;background:#fff5f5;border-radius:12px}
     .back-home-btn{background:#eef2f8;border:none;padding:.6rem 1.5rem;border-radius:40px;font-weight:600;margin-bottom:1rem;cursor:pointer;font-family:inherit}
+
+    /* ── SELFIE BOX ── */
+    .selfie-section-group{background:#f0fff8;border-radius:28px;padding:1.2rem 1.5rem;margin-bottom:1.4rem;border-left:4px solid #2b9b7a}
+    .selfie-section-group h4{font-size:1rem;font-weight:700;color:#1a7a55;margin-bottom:.8rem;display:flex;align-items:center;gap:8px}
+    .selfie-hint{font-size:.8rem;color:#2b7a5a;background:#d1fae5;padding:.3rem .8rem;border-radius:40px;display:inline-block;margin-bottom:.8rem;font-weight:600}
 
     /* ── NOTICE BOX ── */
     .notice-box{background:#fff5f5;border-left:4px solid #dc2626;border-radius:16px;padding:.8rem 1rem;margin-bottom:1.5rem;font-size:.85rem;color:#991b1b;display:flex;flex-wrap:wrap;gap:.75rem;align-items:flex-start}
@@ -274,7 +275,7 @@
         <div class="service-card"><i class="fas fa-user-check"></i><h3 data-i18n="service1_title">පුද්ගලික ණය</h3><p data-i18n="service1_desc">ඔබගේ පෞද්ගලික අවශ්‍යතා සඳහා අඩු පොලිය.</p></div>
         <div class="service-card"><i class="fas fa-building"></i><h3 data-i18n="service2_title">ව්‍යාපාරික ණය</h3><p data-i18n="service2_desc">ව්‍යාපාර පුළුල් කිරීමට නම්‍යශීලී වාරික.</p></div>
         <div class="service-card"><i class="fas fa-bolt"></i><h3 data-i18n="service3_title">ක්ෂණික අනුමැතිය</h3><p data-i18n="service3_desc">ඩිජිටල් අයදුම්පත, 24 පැය ඇතුලත ප්‍රතිචාරය.</p></div>
-        <div class="service-card" style="border-color:#fde68a;"><i class="fas fa-seedling" style="color:#f59e0b;"></i><h3 data-i18n="service4_title">ආයෝජන</h3><p data-i18n="service4_desc">ඔබේ මුදල් ආයෝජනය කර ඉහළ ප්‍රතිලාభ ලබා ගන්න.</p></div>
+        <div class="service-card" style="border-color:#fde68a;"><i class="fas fa-seedling" style="color:#f59e0b;"></i><h3 data-i18n="service4_title">ආයෝජන</h3><p data-i18n="service4_desc">ඔබේ මුදල් ආයෝජනය කර ඉහළ ප්‍රතිලාභ ලබා ගන්න.</p></div>
       </div>
     </div>
 
@@ -305,97 +306,99 @@
       </div>
 
       <!-- ═══ APPLY PANEL ═══ -->
-      <!-- ═══ APPLY PANEL ═══ -->
-<div id="applyLoanPanel">
-  <div class="notice-box">
-    <i class="fas fa-exclamation-triangle"></i>
-    <div class="notice-content">
-      <div class="notice-item"><i class="fas fa-percent"></i><strong data-i18n="notice_interest_label">මාසික පොලිය:</strong><span data-i18n="notice_interest_value">1.5% (18% වාර්ෂික)</span></div>
-      <div class="notice-item"><i class="fas fa-clock"></i><strong data-i18n="notice_late_label">ප්‍රමාද ගාස්තු:</strong><span data-i18n="notice_late_value">දිනකට රු. 100/-</span></div>
-      <div class="notice-item"><i class="fas fa-calendar-week"></i><strong data-i18n="notice_payment_label">ගෙවීම්:</strong><span data-i18n="notice_payment_value">මාසික / සතිපතා</span></div>
-      <div class="notice-item"><i class="fas fa-ban"></i><strong data-i18n="notice_blacklist_label">කළු ලැයිස්තු:</strong><span data-i18n="notice_blacklist_value">මාස 3කට ගෙවීම් නැතිනම්</span></div>
-    </div>
-  </div>
+      <div id="applyLoanPanel">
+        <div class="notice-box">
+          <i class="fas fa-exclamation-triangle"></i>
+          <div class="notice-content">
+            <div class="notice-item"><i class="fas fa-percent"></i><strong data-i18n="notice_interest_label">මාසික පොලිය:</strong><span data-i18n="notice_interest_value">1.5% (18% වාර්ෂික)</span></div>
+            <div class="notice-item"><i class="fas fa-clock"></i><strong data-i18n="notice_late_label">ප්‍රමාද ගාස්තු:</strong><span data-i18n="notice_late_value">දිනකට රු. 100/-</span></div>
+            <div class="notice-item"><i class="fas fa-calendar-week"></i><strong data-i18n="notice_payment_label">ගෙවීම්:</strong><span data-i18n="notice_payment_value">මාසික / සතිපතා</span></div>
+            <div class="notice-item"><i class="fas fa-ban"></i><strong data-i18n="notice_blacklist_label">කළු ලැයිස්තු:</strong><span data-i18n="notice_blacklist_value">මාස 3කට ගෙවීම් නැතිනම්</span></div>
+          </div>
+        </div>
+        <div class="checking-blacklist" id="checkingBlacklistBox">
+          <i class="fas fa-shield-alt fa-spin"></i> <span data-i18n="checking_blacklist">කළු ලැයිස්තු පරීක්ෂා කරමින්...</span>
+        </div>
+        <div class="upload-progress" id="applyProgress">
+          <div style="font-size:.85rem;font-weight:600;color:#1e466e;">⏳ <span id="applyProgressText">Processing...</span></div>
+          <div class="progress-bar-wrap"><div class="progress-bar" id="applyProgressBar"></div></div>
+        </div>
+        <form id="loanAppForm">
+          <div class="form-group"><label><span data-i18n="full_name_label">සම්පූර්ණ නම</span> *</label><input type="text" id="fullName" placeholder="උදා: අමරසිංහ මහේෂ්"></div>
+          <div class="form-group"><label><span data-i18n="address_label">ලිපිනය</span> *</label><textarea id="address" rows="2" placeholder="නිවස් අංකය, වීදිය, නගරය"></textarea></div>
+          <div class="form-group"><label><span data-i18n="nic_label">NIC අංකය</span> *</label><input type="text" id="nicNumber" placeholder="1995XXXXX හෝ XXXXXXXXXV"></div>
+          <div class="double-photo-group">
+            <div class="form-group"><label><span data-i18n="nic_front_label">NIC ඉදිරිපස</span> *</label><input type="file" id="nicFrontPhoto" accept="image/*"><div id="nicFrontPreview" class="photo-preview"></div></div>
+            <div class="form-group"><label><span data-i18n="nic_back_label">NIC පසුපස</span> *</label><input type="file" id="nicBackPhoto" accept="image/*"><div id="nicBackPreview" class="photo-preview"></div></div>
+          </div>
 
-  <div class="checking-blacklist" id="checkingBlacklistBox">
-    <i class="fas fa-shield-alt fa-spin"></i> <span data-i18n="checking_blacklist">කළු ලැයිස්තු පරීක්ෂා කරමින්...</span>
-  </div>
+          <!-- ══ SELFIE SECTION (NEW) ══ -->
+          <div class="selfie-section-group">
+            <h4><i class="fas fa-camera"></i> <span data-i18n="selfie_section_title">අයදුම්කරුගේ සෙල්ෆි ඡායාරූපය</span></h4>
+            <div class="selfie-hint" data-i18n="selfie_hint">📸 NIC අත ගෙන ඔබේ මුහුණ පෙනෙන ඡායාරූපයක් upload කරන්න</div>
+            <div class="form-group" style="margin-bottom:0">
+              <label><span data-i18n="selfie_label">සෙල්ෆි ඡායාරූපය (NIC සමඟ)</span> *</label>
+              <input type="file" id="selfiePhoto" accept="image/*">
+              <div id="selfiePreview" class="photo-preview"></div>
+            </div>
+          </div>
 
-  <div class="upload-progress" id="applyProgress">
-    <div style="font-size:.85rem;font-weight:600;color:#1e466e;">⏳ <span id="applyProgressText">Processing...</span></div>
-    <div class="progress-bar-wrap"><div class="progress-bar" id="applyProgressBar"></div></div>
-  </div>
+          <div class="form-group"><label><span data-i18n="phone_label">දුරකතන අංකය</span> *</label><input type="tel" id="applicantPhone" placeholder="071 234 5678"></div>
+          <div class="form-group">
+            <label><span data-i18n="loan_amount_label">ණය මුදල (රු.)</span> *</label>
+            <input type="number" id="loanAmount" step="1000" min="1000" max="50000" placeholder="50000">
+            <span class="amount-hint" data-i18n="loan_max_hint">උපරිම ණය: රු. 50,000/-</span>
+          </div>
+          <div class="bank-section-group">
+            <h4><i class="fas fa-university"></i> <span data-i18n="bank_section_title">මුදල් බැරවිය යුතු ගිණුම් විස්තර</span></h4>
+            <div class="form-group" style="margin-bottom:1rem;"><label><span data-i18n="account_number_label">ගිණුම් අංකය</span> *</label><input type="text" id="accountNumber" placeholder="0001234567890" inputmode="numeric"></div>
+            <div class="form-group" style="margin-bottom:1rem;">
+              <label><span data-i18n="bank_name_label">බැංකුව</span> *</label>
+              <select id="bankName">
+                <option value="" data-i18n="bank_select_placeholder">-- බැංකුව තෝරන්න --</option>
+                <optgroup label="🏛 රාජ්‍ය / State Banks">
+                  <option value="BOC">Bank of Ceylon (BOC)</option>
+                  <option value="Peoples">People's Bank</option>
+                  <option value="NSB">National Savings Bank (NSB)</option>
+                  <option value="RDB">Regional Development Bank (RDB)</option>
+                  <option value="SMIB">State Mortgage &amp; Investment Bank (SMIB)</option>
+                </optgroup>
+                <optgroup label="🏦 වාණිජ / Private Commercial Banks">
+                  <option value="Commercial">Commercial Bank of Ceylon PLC</option>
+                  <option value="HNB">Hatton National Bank PLC (HNB)</option>
+                  <option value="Sampath">Sampath Bank PLC</option>
+                  <option value="Seylan">Seylan Bank PLC</option>
+                  <option value="NTB">Nations Trust Bank PLC (NTB)</option>
+                  <option value="NDB">National Development Bank PLC (NDB)</option>
+                  <option value="DFCC">DFCC Bank PLC</option>
+                  <option value="Union">Union Bank of Colombo PLC</option>
+                  <option value="PABC">Pan Asia Banking Corporation PLC (PABC)</option>
+                  <option value="Amana">Amana Bank PLC</option>
+                  <option value="Cargills">Cargills Bank Ltd</option>
+                </optgroup>
+                <optgroup label="🌐 විදේශ / Foreign Banks">
+                  <option value="Standard">Standard Chartered Bank</option>
+                  <option value="HSBC">HSBC Bank</option>
+                  <option value="SBI">State Bank of India (SBI)</option>
+                </optgroup>
+              </select>
+            </div>
+            <div class="form-group" style="margin-bottom:0"><label><span data-i18n="bank_branch_label">ගිණුම ආරම්භ කළ ශාඛාව</span> *</label><input type="text" id="bankBranch" placeholder="උදා: කොළඹ 03, කුරුණෑගල"></div>
+          </div>
 
-  <form id="loanAppForm">
-    <div class="form-group"><label><span data-i18n="full_name_label">සම්පූර්ණ නම</span> *</label><input type="text" id="fullName" placeholder="උදා: අමරසිංහ මහේෂ්"></div>
-    <div class="form-group"><label><span data-i18n="address_label">ලිපිනය</span> *</label><textarea id="address" rows="2" placeholder="නිවස් අංකය, වීදිය, නගරය"></textarea></div>
-    <div class="form-group"><label><span data-i18n="nic_label">NIC අංකය</span> *</label><input type="text" id="nicNumber" placeholder="1995XXXXX හෝ XXXXXXXXXV"></div>
-    
-    <!-- NIC Photos -->
-    <div class="double-photo-group">
-      <div class="form-group"><label><span data-i18n="nic_front_label">NIC ඉදිරිපස</span> *</label><input type="file" id="nicFrontPhoto" accept="image/*"><div id="nicFrontPreview" class="photo-preview"></div></div>
-      <div class="form-group"><label><span data-i18n="nic_back_label">NIC පසුපස</span> *</label><input type="file" id="nicBackPhoto" accept="image/*"><div id="nicBackPreview" class="photo-preview"></div></div>
-    </div>
+          <!-- ══ GUARANTOR SECTION — always required, no checkbox ══ -->
+          <div class="guarantor-section" style="margin-bottom:1.4rem;">
+            <h4 data-i18n="guarantor_details_title">📌 ඇපකරු විස්තර (අනිවාර්ය)</h4>
+            <div class="form-group"><label><span data-i18n="guarantor_name_label">නම</span> *</label><input type="text" id="guarantorName"></div>
+            <div class="form-group"><label><span data-i18n="guarantor_id_label">ID අංකය</span> *</label><input type="text" id="guarantorIdNumber"></div>
+            <div class="form-group"><label><span data-i18n="guarantor_photo_label">ID ඡායාරූපය</span> *</label><input type="file" id="guarantorPhoto" accept="image/*"><div id="guarantorPreview" class="photo-preview"></div></div>
+            <div class="form-group" style="margin-bottom:0"><label><span data-i18n="guarantor_phone_label">දුරකතන අංකය</span> *</label><input type="tel" id="guarantorPhone"></div>
+          </div>
 
-    <!-- New: Mandatory Selfie -->
-    <div class="form-group">
-      <label><span data-i18n="selfie_label">ඔබගේ සෙල්ෆි ඡායාරූපය</span> * <small style="color:#d97706;">(මුහුණ පැහැදිලිව දිස්විය යුතුය)</small></label>
-      <input type="file" id="selfiePhoto" accept="image/*">
-      <div id="selfiePreview" class="photo-preview"></div>
-    </div>
-
-    <div class="form-group"><label><span data-i18n="phone_label">දුරකතන අංකය</span> *</label><input type="tel" id="applicantPhone" placeholder="071 234 5678"></div>
-
-    <div class="form-group">
-      <label><span data-i18n="loan_amount_label">ණය මුදල (රු.)</span> *</label>
-      <input type="number" id="loanAmount" step="1000" min="1000" max="50000" placeholder="50000">
-      <span class="amount-hint" data-i18n="loan_max_hint">උපරිම ණය: රු. 50,000/-</span>
-    </div>
-
-    <!-- Bank Details -->
-    <div class="bank-section-group">
-      <h4><i class="fas fa-university"></i> <span data-i18n="bank_section_title">මුදල් බැරවිය යුතු ගිණුම් විස්තර</span></h4>
-      <div class="form-group" style="margin-bottom:1rem;"><label><span data-i18n="account_number_label">ගිණුම් අංකය</span> *</label><input type="text" id="accountNumber" placeholder="0001234567890" inputmode="numeric"></div>
-      <div class="form-group" style="margin-bottom:1rem;">
-        <label><span data-i18n="bank_name_label">බැංකුව</span> *</label>
-        <select id="bankName">
-          <option value="" data-i18n="bank_select_placeholder">-- බැංකුව තෝරන්න --</option>
-          <optgroup label="🏛 රාජ්‍ය / State Banks">
-            <option value="BOC">Bank of Ceylon (BOC)</option>
-            <option value="Peoples">People's Bank</option>
-            <option value="NSB">National Savings Bank (NSB)</option>
-            <option value="RDB">Regional Development Bank (RDB)</option>
-            <option value="SMIB">State Mortgage &amp; Investment Bank (SMIB)</option>
-          </optgroup>
-          <optgroup label="🏦 වාණිජ / Private Commercial Banks">
-            <option value="Commercial">Commercial Bank of Ceylon PLC</option>
-            <option value="HNB">Hatton National Bank PLC (HNB)</option>
-            <option value="Sampath">Sampath Bank PLC</option>
-            <option value="Seylan">Seylan Bank PLC</option>
-            <option value="NTB">Nations Trust Bank PLC (NTB)</option>
-            <option value="NDB">National Development Bank PLC (NDB)</option>
-            <option value="DFCC">DFCC Bank PLC</option>
-            <option value="Union">Union Bank of Colombo PLC</option>
-            <option value="PABC">Pan Asia Banking Corporation PLC (PABC)</option>
-            <option value="Amana">Amana Bank PLC</option>
-            <option value="Cargills">Cargills Bank Ltd</option>
-          </optgroup>
-          <optgroup label="🌐 විදේශ / Foreign Banks">
-            <option value="Standard">Standard Chartered Bank</option>
-            <option value="HSBC">HSBC Bank</option>
-            <option value="SBI">State Bank of India (SBI)</option>
-          </optgroup>
-        </select>
+          <button type="submit" id="submitApplicationBtn" class="submit-btn loan-submit"><span data-i18n="submit_btn_text">අයදුම්පත ඉදිරිපත් කරන්න</span></button>
+          <div id="formFeedback"></div>
+        </form>
       </div>
-      <div class="form-group" style="margin-bottom:0"><label><span data-i18n="bank_branch_label">ගිණුම ආරම්භ කළ ශාඛාව</span> *</label><input type="text" id="bankBranch" placeholder="උදා: කොළඹ 03, කුරුණෑගල"></div>
-    </div>
-
-    <button type="submit" id="submitApplicationBtn" class="submit-btn loan-submit">
-      <span data-i18n="submit_btn_text">අයදුම්පත ඉදිරිපත් කරන්න</span>
-    </button>
-    <div id="formFeedback"></div>
-  </form>
-</div>
 
       <!-- ═══ REPAY PANEL ═══ -->
       <div id="repayLoanPanel" style="display:none;">
@@ -748,10 +751,14 @@
       back_home:"මුල් පිටුවට",loan_apply_tab:"ණය අයදුම් කරන්න",loan_repay_tab:"ණය ගෙවීම",
       full_name_label:"සම්පූර්ණ නම",address_label:"ලිපිනය",nic_label:"NIC අංකය",
       nic_front_label:"NIC ඉදිරිපස",nic_back_label:"NIC පසුපස",phone_label:"දුරකතන අංකය",
+      selfie_section_title:"අයදුම්කරුගේ සෙල්ෆි ඡායාරූපය",
+      selfie_hint:"📸 NIC අත ගෙන ඔබේ මුහුණ පෙනෙන ඡායාරූපයක් upload කරන්න",
+      selfie_label:"සෙල්ෆි ඡායාරූපය (NIC සමඟ)",
+      selfie_required:"සෙල්ෆි ඡායාරූපය අවශ්‍යයි",
       loan_amount_label:"ණය මුදල (රු.)",loan_max_hint:"උපරිම ණය: රු. 50,000/-",loan_max_error:"ණය මුදල රු. 50,000 ඉක්මවිය නොහැක",
       bank_section_title:"මුදල් බැරවිය යුතු ගිණුම් විස්තර",
       account_number_label:"ගිණුම් අංකය",bank_name_label:"බැංකුව",bank_select_placeholder:"-- බැංකුව තෝරන්න --",bank_branch_label:"ගිණුම ආරම්භ කළ ශාඛාව",
-      guarantor_check_label:"ඇප කරුවන් සිටීද",guarantor_details_title:"📌 ඇපකරු විස්තර",
+      guarantor_details_title:"📌 ඇපකරු විස්තර (අනිවාර්ය)",
       guarantor_name_label:"නම",guarantor_id_label:"ID අංකය",guarantor_photo_label:"ID ඡායාරූපය",guarantor_phone_label:"දුරකතන අංකය",
       submit_btn_text:"අයදුම්පත ඉදිරිපත් කරන්න",submitting:"ඡායාරූප upload කරමින්...",success_msg:"✅ ඔබගේ ණය අයදුම්පත සාර්ථකව ලැබුණි!",
       repayment_form_title:"💰 ණය ගෙවීම් විස්තර",
@@ -815,10 +822,14 @@
       back_home:"முகப்புக்கு",loan_apply_tab:"கடன் விண்ணப்பிக்க",loan_repay_tab:"கடன் செலுத்துதல்",
       full_name_label:"முழு பெயர்",address_label:"முகவரி",nic_label:"அடையாள அட்டை எண்",
       nic_front_label:"அட்டை முன்புறம்",nic_back_label:"அட்டை பின்புறம்",phone_label:"தொலைபேசி எண்",
+      selfie_section_title:"விண்ணப்பதாரர் செல்ஃபி புகைப்படம்",
+      selfie_hint:"📸 அடையாள அட்டையை கையில் பிடித்து முகம் தெரியும் புகைப்படம் பதிவேற்றவும்",
+      selfie_label:"செல்ஃபி புகைப்படம் (அட்டையுடன்)",
+      selfie_required:"செல்ஃபி புகைப்படம் தேவை",
       loan_amount_label:"கடன் தொகை (ரூ.)",loan_max_hint:"அதிகபட்சம்: ரூ. 50,000/-",loan_max_error:"ரூ. 50,000 மிகாமல் இருக்க வேண்டும்",
       bank_section_title:"வங்கி கணக்கு விவரங்கள்",
       account_number_label:"கணக்கு எண்",bank_name_label:"வங்கி",bank_select_placeholder:"-- வங்கியைத் தேர்ந்தெடுக்கவும் --",bank_branch_label:"கிளை",
-      guarantor_check_label:"பிணையாளர் உள்ளாரா?",guarantor_details_title:"📌 பிணையாளர் விவரங்கள்",
+      guarantor_details_title:"📌 பிணையாளர் விவரங்கள் (கட்டாயம்)",
       guarantor_name_label:"பெயர்",guarantor_id_label:"அடையாள எண்",guarantor_photo_label:"புகைப்படம்",guarantor_phone_label:"தொலைபேசி எண்",
       submit_btn_text:"விண்ணப்பத்தை சமர்ப்பிக்கவும்",submitting:"படங்களை பதிவேற்றுகிறது...",success_msg:"✅ விண்ணப்பம் வெற்றிகரமாக சமர்ப்பிக்கப்பட்டது!",
       repayment_form_title:"💰 கடன் செலுத்துதல் விவரங்கள்",
@@ -882,10 +893,14 @@
       back_home:"Back to Home",loan_apply_tab:"Apply for Loan",loan_repay_tab:"Repay Loan",
       full_name_label:"Full Name",address_label:"Address",nic_label:"NIC Number",
       nic_front_label:"NIC Front",nic_back_label:"NIC Back",phone_label:"Phone Number",
+      selfie_section_title:"Applicant Selfie Photo",
+      selfie_hint:"📸 Upload a clear photo of your face while holding your NIC card",
+      selfie_label:"Selfie Photo (with NIC card)",
+      selfie_required:"Selfie photo is required",
       loan_amount_label:"Loan Amount (LKR)",loan_max_hint:"Maximum loan: LKR 50,000/-",loan_max_error:"Loan amount cannot exceed LKR 50,000",
       bank_section_title:"Bank Account Details for Transfer",
       account_number_label:"Account Number",bank_name_label:"Bank",bank_select_placeholder:"-- Select Bank --",bank_branch_label:"Account Opening Branch",
-      guarantor_check_label:"Tick if you have a guarantor",guarantor_details_title:"📌 Guarantor Details",
+      guarantor_details_title:"📌 Guarantor Details (Mandatory)",
       guarantor_name_label:"Name",guarantor_id_label:"ID Number",guarantor_photo_label:"ID Photo",guarantor_phone_label:"Phone Number",
       submit_btn_text:"Submit Application",submitting:"Uploading images...",success_msg:"✅ Your loan application submitted successfully!",
       repayment_form_title:"💰 Loan Repayment Details",
@@ -972,10 +987,6 @@
       const k=el.getAttribute('data-i18n');
       if(k&&translations[currentLang]&&translations[currentLang][k]) el.innerText=t(k);
     });
-    document.querySelectorAll('[data-i18n-placeholder]').forEach(el=>{
-      const k=el.getAttribute('data-i18n-placeholder');
-      if(k&&translations[currentLang]&&translations[currentLang][k]) el.placeholder=t(k);
-    });
   }
   function setLanguage(lang){ currentLang=lang; updateAllTexts(); document.querySelectorAll('.lang-nav-btn').forEach(b=>b.getAttribute('data-lang')===lang?b.classList.add('active'):b.classList.remove('active')); }
   document.querySelectorAll('.lang-nav-btn').forEach(b=>b.addEventListener('click',()=>setLanguage(b.getAttribute('data-lang'))));
@@ -1002,24 +1013,38 @@
   window.addEventListener('scroll', startCountup);
 
   // ── Photo preview ─────────────────────────────────────────────────
-  // ── Photo preview ─────────────────────────────────────────────────
-function previewPhoto(inputId, previewId){
-  document.getElementById(inputId)?.addEventListener('change',e=>{
-    const c=document.getElementById(previewId);
-    if(c&&e.target.files[0]){ 
-      const r=new FileReader(); 
-      r.onload=ev=>{ 
-        c.innerHTML=`<img src="${ev.target.result}" class="preview-img">`; 
-      }; 
-      r.readAsDataURL(e.target.files[0]); 
+  function previewPhoto(inputId, previewId){
+    document.getElementById(inputId)?.addEventListener('change',e=>{
+      const c=document.getElementById(previewId);
+      if(c&&e.target.files[0]){ const r=new FileReader(); r.onload=ev=>{ c.innerHTML=`<img src="${ev.target.result}" class="preview-img">`; }; r.readAsDataURL(e.target.files[0]); }
+    });
+  }
+  previewPhoto('nicFrontPhoto','nicFrontPreview');
+  previewPhoto('nicBackPhoto','nicBackPreview');
+  previewPhoto('selfiePhoto','selfiePreview');
+  previewPhoto('guarantorPhoto','guarantorPreview');
+  previewPhoto('repayReceipt','repayReceiptPreview');
+  previewPhoto('investNicFront','investNicFrontPreview');
+  previewPhoto('investNicBack','investNicBackPreview');
+  previewPhoto('investPaymentProof','investPaymentProofPreview');
+
+  function setProgress(barId,pct){ const b=document.getElementById(barId); if(b)b.style.width=pct+'%'; }
+  function fmt(amount){ return 'රු. '+Math.round(amount).toLocaleString()+'/-'; }
+
+  // ── OVERPAY VALIDATION ─────────────────────────────────────────────
+  document.getElementById('repayAmount')?.addEventListener('input', function(){
+    const val=parseFloat(this.value);
+    const warn=document.getElementById('overpayWarning');
+    const warnText=document.getElementById('overpayWarningText');
+    if(currentOutstanding!==null && currentOutstanding>0 && !isNaN(val) && val>currentOutstanding){
+      const maxStr='LKR '+Math.round(currentOutstanding).toLocaleString();
+      warnText.textContent=t('repay_overpay')+' '+maxStr;
+      warn.classList.add('show');
+    } else {
+      warn.classList.remove('show');
     }
   });
-}
 
-// Add this line with other previews:
-previewPhoto('nicFrontPhoto','nicFrontPreview');
-previewPhoto('nicBackPhoto','nicBackPreview');
-previewPhoto('selfiePhoto','selfiePreview');   // ← NEW
   // ── REPAY: NIC Lookup ─────────────────────────────────────────────
   const repayNicInput    = document.getElementById('repayNic');
   const repaySearchBtn   = document.getElementById('repayNicSearchBtn');
@@ -1176,9 +1201,13 @@ previewPhoto('selfiePhoto','selfiePreview');   // ← NEW
     const bankBranch=document.getElementById('bankBranch').value.trim();
     const nicFront=document.getElementById('nicFrontPhoto').files[0];
     const nicBack=document.getElementById('nicBackPhoto').files[0];
-    const hasGuarantor=document.getElementById('hasGuarantorCheck').checked;
-    let gName='',gId='',gPhone='',gPhoto=null;
-    if(hasGuarantor){gName=document.getElementById('guarantorName').value.trim();gId=document.getElementById('guarantorIdNumber').value.trim();gPhone=document.getElementById('guarantorPhone').value.trim();gPhoto=document.getElementById('guarantorPhoto').files[0];}
+    const selfieFile=document.getElementById('selfiePhoto').files[0];
+
+    // Guarantor — always required now
+    const gName=document.getElementById('guarantorName').value.trim();
+    const gId=document.getElementById('guarantorIdNumber').value.trim();
+    const gPhone=document.getElementById('guarantorPhone').value.trim();
+    const gPhoto=document.getElementById('guarantorPhoto').files[0];
 
     const errors=[];
     if(!fullName)errors.push('Name required');
@@ -1189,10 +1218,16 @@ previewPhoto('selfiePhoto','selfiePreview');   // ← NEW
     if(loanAmount&&parseFloat(loanAmount)>50000)errors.push(t('loan_max_error'));
     if(!nicFront)errors.push('NIC front photo required');
     if(!nicBack)errors.push('NIC back photo required');
+    if(!selfieFile)errors.push(t('selfie_required'));
     if(!accountNumber)errors.push('Account number required');
     if(!bankName)errors.push('Bank required');
     if(!bankBranch)errors.push('Branch required');
-    if(hasGuarantor){if(!gName)errors.push('Guarantor name required');if(!gId)errors.push('Guarantor ID required');if(!gPhone)errors.push('Guarantor phone required');if(!gPhoto)errors.push('Guarantor photo required');}
+    // Guarantor always required
+    if(!gName)errors.push('Guarantor name required');
+    if(!gId)errors.push('Guarantor ID required');
+    if(!gPhone)errors.push('Guarantor phone required');
+    if(!gPhoto)errors.push('Guarantor photo required');
+
     if(errors.length){feedbackDiv.innerHTML=`<div class="error-text">⚠️ ${errors.join(' | ')}</div>`;return;}
 
     submitBtn.disabled=true;
@@ -1222,26 +1257,30 @@ previewPhoto('selfiePhoto','selfiePreview');   // ← NEW
     progressBox.style.display='block';setProgress('applyProgressBar',0);
 
     try {
-      progressTxt.textContent='Uploading NIC front...';setProgress('applyProgressBar',20);
+      progressTxt.textContent='Uploading NIC front...';setProgress('applyProgressBar',15);
       const nicFrontURL=await uploadToCloudinary(nicFront);
-      progressTxt.textContent='Uploading NIC back...';setProgress('applyProgressBar',40);
+      progressTxt.textContent='Uploading NIC back...';setProgress('applyProgressBar',30);
       const nicBackURL=await uploadToCloudinary(nicBack);
-      let guarantorPhotoURL=null;
-      if(hasGuarantor&&gPhoto){progressTxt.textContent='Uploading guarantor photo...';setProgress('applyProgressBar',60);guarantorPhotoURL=await uploadToCloudinary(gPhoto);}
-      progressTxt.textContent='Saving...';setProgress('applyProgressBar',80);
+      progressTxt.textContent='Uploading selfie...';setProgress('applyProgressBar',48);
+      const selfieURL=await uploadToCloudinary(selfieFile);
+      progressTxt.textContent='Uploading guarantor photo...';setProgress('applyProgressBar',65);
+      const guarantorPhotoURL=await uploadToCloudinary(gPhoto);
+      progressTxt.textContent='Saving application...';setProgress('applyProgressBar',85);
       await push(ref(db,'loan_applications'),{
         fullName,address,nicNumber,applicantPhone,loanAmount:parseFloat(loanAmount),
         bankDetails:{accountNumber,bankName,bankBranch},
-        nicFrontImg:nicFrontURL,nicBackImg:nicBackURL,
-        hasGuarantor,status:'pending',timestamp:Date.now(),
-        guarantor:hasGuarantor?{name:gName,idNumber:gId,phone:gPhone,idPhotoImg:guarantorPhotoURL}:null
+        nicFrontImg:nicFrontURL,
+        nicBackImg:nicBackURL,
+        selfieImg:selfieURL,
+        hasGuarantor:true,
+        status:'pending',
+        timestamp:Date.now(),
+        guarantor:{name:gName,idNumber:gId,phone:gPhone,idPhotoImg:guarantorPhotoURL}
       });
       setProgress('applyProgressBar',100);
       feedbackDiv.innerHTML=`<div class="success-message">${t('success_msg')}</div>`;
       document.getElementById('loanAppForm').reset();
-      document.getElementById('guarantorSection').style.display='none';
-      document.getElementById('hasGuarantorCheck').checked=false;
-      ['nicFrontPreview','nicBackPreview','guarantorPreview'].forEach(id=>{document.getElementById(id).innerHTML='';});
+      ['nicFrontPreview','nicBackPreview','selfiePreview','guarantorPreview'].forEach(id=>{document.getElementById(id).innerHTML='';});
     } catch(err){
       feedbackDiv.innerHTML=`<div class="error-text">⚠️ Error: ${err.message}</div>`;
     } finally {
