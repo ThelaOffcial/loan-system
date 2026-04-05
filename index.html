@@ -112,6 +112,10 @@
     .invest-return-item{flex:1;min-width:100px;background:rgba(255,255,255,.2);border-radius:16px;padding:.7rem;text-align:center}
     .invest-return-num{font-size:1.5rem;font-weight:800}
     .invest-return-label{font-size:.7rem;opacity:.85;margin-top:.2rem}
+    .invest-section-group{background:#fffbeb;border-radius:28px;padding:1.2rem 1.5rem;margin-bottom:1.4rem;border-left:4px solid #f4b942}
+    .invest-section-group h4{font-size:1rem;font-weight:700;color:#92400e;margin-bottom:1rem;display:flex;align-items:center;gap:8px}
+
+    /* ── BANK SECTION ── */
     .bank-section-group{background:#f0f8ff;border-radius:28px;padding:1.2rem 1.5rem;margin-bottom:1.4rem;border-left:4px solid #2b9b7a}
     .bank-section-group h4{font-size:1rem;font-weight:700;color:#0f5b8c;margin-bottom:1rem;display:flex;align-items:center;gap:8px}
     .amount-hint{font-size:.78rem;color:#0f5b8c;background:#e8f4ff;padding:.25rem .75rem;border-radius:40px;display:inline-block;margin-top:.4rem;font-weight:600}
@@ -162,6 +166,19 @@
     .loan-info-not-found{background:#fff5f5;border:1.5px solid #fca5a5;border-radius:16px;padding:.8rem 1rem;font-size:.85rem;color:#991b1b;margin-bottom:1rem;display:none;text-align:center}
     .loan-info-not-found.show{display:block}
 
+    /* ── OVERPAY WARNING ── */
+    .overpay-warning{background:linear-gradient(135deg,#fff8e0,#fef3c7);border:2px solid #f59e0b;border-radius:16px;padding:.9rem 1.1rem;margin-top:.6rem;display:none;align-items:center;gap:.7rem;font-size:.85rem;color:#92400e;font-weight:600}
+    .overpay-warning.show{display:flex}
+    .overpay-warning i{font-size:1.2rem;color:#d97706;flex-shrink:0}
+
+    /* ── DUPLICATE LOAN BLOCK ── */
+    .duplicate-loan-block{background:linear-gradient(135deg,#f0f9ff,#e0f2fe);border:2px solid #0f5b8c;border-radius:24px;padding:1.5rem;text-align:center;margin-top:1.5rem;display:none}
+    .duplicate-loan-block.show{display:block;animation:fadeSlideUp .4s ease-out}
+    .duplicate-loan-block i{font-size:2.5rem;color:#0f5b8c;display:block;margin-bottom:.8rem}
+    .duplicate-loan-block h3{font-size:1.2rem;color:#0f5b8c;margin-bottom:.6rem}
+    .duplicate-loan-block p{font-size:.9rem;color:#1e466e;line-height:1.6}
+    .duplicate-loan-block .dl-status{display:inline-block;margin-top:.8rem;padding:.4rem 1.2rem;border-radius:40px;font-size:.82rem;font-weight:700;background:#0f5b8c;color:white}
+
     /* ── BLACKLIST ── */
     .blacklist-rejection{background:linear-gradient(135deg,#1a0000,#3a0000);border:2px solid #dc2626;border-radius:28px;padding:2rem;text-align:center;color:white;margin-top:1.5rem;animation:pulseRed .8s ease-in-out}
     .blacklist-rejection i{font-size:3rem;color:#ef4444;display:block;margin-bottom:1rem}
@@ -170,10 +187,6 @@
     .blacklist-rejection .bl-details{background:rgba(255,255,255,.07);border-radius:16px;padding:.8rem 1rem;margin-top:1rem;font-size:.85rem;color:#fda4af;text-align:left}
     @keyframes pulseRed{0%{box-shadow:0 0 0 0 rgba(220,38,38,.5)}70%{box-shadow:0 0 0 15px rgba(220,38,38,0)}100%{box-shadow:0 0 0 0 rgba(220,38,38,0)}}
     .checking-blacklist{background:#f0f9ff;border:1px solid #bae6fd;border-radius:16px;padding:1rem;text-align:center;color:#0369a1;font-size:.9rem;margin-bottom:1rem;display:none}
-
-    /* ── INVEST SECTION STYLING ── */
-    .invest-section-group{background:#fffbeb;border-radius:28px;padding:1.2rem 1.5rem;margin-bottom:1.4rem;border-left:4px solid #f4b942}
-    .invest-section-group h4{font-size:1rem;font-weight:700;color:#92400e;margin-bottom:1rem;display:flex;align-items:center;gap:8px}
 
     /* ── WHATSAPP ── */
     .whatsapp-float{position:fixed;bottom:30px;right:30px;background-color:#25d366;color:white;border-radius:50px;padding:12px 20px;font-weight:700;display:flex;align-items:center;gap:10px;box-shadow:0 10px 20px rgba(37,211,102,.3);z-index:1000;text-decoration:none;font-size:1rem;transition:all .3s;font-family:inherit}
@@ -260,7 +273,7 @@
         <div class="service-card"><i class="fas fa-user-check"></i><h3 data-i18n="service1_title">පුද්ගලික ණය</h3><p data-i18n="service1_desc">ඔබගේ පෞද්ගලික අවශ්‍යතා සඳහා අඩු පොලිය.</p></div>
         <div class="service-card"><i class="fas fa-building"></i><h3 data-i18n="service2_title">ව්‍යාපාරික ණය</h3><p data-i18n="service2_desc">ව්‍යාපාර පුළුල් කිරීමට නම්‍යශීලී වාරික.</p></div>
         <div class="service-card"><i class="fas fa-bolt"></i><h3 data-i18n="service3_title">ක්ෂණික අනුමැතිය</h3><p data-i18n="service3_desc">ඩිජිටල් අයදුම්පත, 24 පැය ඇතුලත ප්‍රතිචාරය.</p></div>
-        <div class="service-card" style="border-color:#fde68a;"><i class="fas fa-seedling" style="color:#f59e0b;"></i><h3 data-i18n="service4_title">ආයෝජන</h3><p data-i18n="service4_desc">ඔබේ මුදල් ආයෝජනය කර ඉහළ ප්‍රතිලාභ ලබා ගන්න.</p></div>
+        <div class="service-card" style="border-color:#fde68a;"><i class="fas fa-seedling" style="color:#f59e0b;"></i><h3 data-i18n="service4_title">ආයෝජන</h3><p data-i18n="service4_desc">ඔබේ මුදල් ආයෝජනය කර ඉහළ ප්‍රතිලාభ ලබා ගන්න.</p></div>
       </div>
     </div>
 
@@ -324,10 +337,7 @@
           </div>
           <div class="bank-section-group">
             <h4><i class="fas fa-university"></i> <span data-i18n="bank_section_title">මුදල් බැරවිය යුතු ගිණුම් විස්තර</span></h4>
-            <div class="form-group" style="margin-bottom:1rem;">
-              <label><span data-i18n="account_number_label">ගිණුම් අංකය</span> *</label>
-              <input type="text" id="accountNumber" placeholder="0001234567890" inputmode="numeric">
-            </div>
+            <div class="form-group" style="margin-bottom:1rem;"><label><span data-i18n="account_number_label">ගිණුම් අංකය</span> *</label><input type="text" id="accountNumber" placeholder="0001234567890" inputmode="numeric"></div>
             <div class="form-group" style="margin-bottom:1rem;">
               <label><span data-i18n="bank_name_label">බැංකුව</span> *</label>
               <select id="bankName">
@@ -359,10 +369,7 @@
                 </optgroup>
               </select>
             </div>
-            <div class="form-group" style="margin-bottom:0">
-              <label><span data-i18n="bank_branch_label">ගිණුම ආරම්භ කළ ශාඛාව</span> *</label>
-              <input type="text" id="bankBranch" placeholder="උදා: කොළඹ 03, කුරුණෑගල">
-            </div>
+            <div class="form-group" style="margin-bottom:0"><label><span data-i18n="bank_branch_label">ගිණුම ආරම්භ කළ ශාඛාව</span> *</label><input type="text" id="bankBranch" placeholder="උදා: කොළඹ 03, කුරුණෑගල"></div>
           </div>
           <div class="checkbox-wrapper"><input type="checkbox" id="hasGuarantorCheck"><label for="hasGuarantorCheck" data-i18n="guarantor_check_label">ඇප කරුවන් සිටීද</label></div>
           <div id="guarantorSection" style="display:none;">
@@ -429,9 +436,7 @@
                 <div class="lic-row" id="repayInfoPaidRow" style="display:none"><span class="lic-label"><i class="fas fa-check-circle"></i> <span data-i18n="repay_info_paid">දැනටමත් ගෙවූ</span></span><span class="lic-value green" id="repayInfoPaid">—</span></div>
                 <div class="lic-row" id="repayInfoLateRow" style="display:none"><span class="lic-label"><i class="fas fa-exclamation-triangle"></i> <span data-i18n="repay_info_late_fee">ප්‍රමාද ගාස්තු</span></span><span class="lic-value red" id="repayInfoLateFee">—</span></div>
                 <div class="lic-row"><span class="lic-label"><i class="fas fa-calendar"></i> <span data-i18n="repay_info_date">අයදුම් දිනය</span></span><span class="lic-value" id="repayInfoDate">—</span></div>
-                <div id="repayInfoNotice" style="display:none;margin-top:.8rem;background:#fff8e0;border-radius:14px;padding:.7rem 1rem;font-size:.82rem;color:#92400e;font-weight:600;">
-                  <i class="fas fa-clock"></i> <span id="repayInfoNoticeText"></span>
-                </div>
+                <div id="repayInfoNotice" style="display:none;margin-top:.8rem;background:#fff8e0;border-radius:14px;padding:.7rem 1rem;font-size:.82rem;color:#92400e;font-weight:600;"><i class="fas fa-clock"></i> <span id="repayInfoNoticeText"></span></div>
               </div>
             </div>
             <div class="loan-info-not-found" id="repayLoanNotFound">
@@ -441,7 +446,11 @@
             <div class="form-group">
               <label><span data-i18n="repay_amount_label">ගෙවන මුදල (රු.)</span> *</label>
               <input type="number" id="repayAmount" step="100" min="100" placeholder="5000">
-              <span class="amount-hint" data-i18n="repay_amount_hint">ඔබ ගෙවන මුදල ඇතුළත් කරන්න</span>
+              <div class="overpay-warning" id="overpayWarning">
+                <i class="fas fa-exclamation-triangle"></i>
+                <span id="overpayWarningText">ගෙවන මුදල ශේෂය ඉක්මවිය නොහැක.</span>
+              </div>
+              <span class="amount-hint" id="maxPayableHint" data-i18n="repay_amount_hint">ඔබ ගෙවන මුදල ඇතුළත් කරන්න</span>
             </div>
             <div class="form-group"><label><span data-i18n="repay_photo_label">බැංකු රිසිට්පත / ස්ක්‍රීන්ෂොට්</span> *</label><input type="file" id="repayReceipt" accept="image/*"><div id="repayReceiptPreview" class="photo-preview"></div></div>
             <div class="form-group"><label><span data-i18n="repay_phone_label">දුරකතන අංකය</span> *</label><input type="tel" id="repayPhone" placeholder="071 234 5678"></div>
@@ -457,29 +466,16 @@
   <div id="investView" class="view" style="display:none;">
     <div class="loan-card">
       <button id="backToHomeFromInvest" class="back-home-btn"><i class="fas fa-arrow-left"></i> <span data-i18n="back_home">Back to Home</span></button>
-
       <div class="invest-panel-inner">
-        <!-- Hero Banner -->
         <div class="invest-hero-banner">
           <h3 data-i18n="invest_banner_title">🌱 ආයෝජනය කරන්න, ප්‍රතිලාභ ලබා ගන්න</h3>
           <p data-i18n="invest_banner_desc">ඔබේ මුදල් LendEasy Finance හි ආයෝජනය කර ඉහළ ප්‍රතිලාභ ලබා ගන්න</p>
           <div class="invest-returns-grid">
-            <div class="invest-return-item">
-              <div class="invest-return-num">18%</div>
-              <div class="invest-return-label" data-i18n="invest_return_annual">වාර්ෂික ප්‍රතිලාභ</div>
-            </div>
-            <div class="invest-return-item">
-              <div class="invest-return-num">1.5%</div>
-              <div class="invest-return-label" data-i18n="invest_return_monthly">මාසික ප්‍රතිලාභ</div>
-            </div>
-            <div class="invest-return-item">
-              <div class="invest-return-num">රු.1K+</div>
-              <div class="invest-return-label" data-i18n="invest_min_label">අවම ආයෝජනය</div>
-            </div>
+            <div class="invest-return-item"><div class="invest-return-num">18%</div><div class="invest-return-label" data-i18n="invest_return_annual">වාර්ෂික ප්‍රතිලාභ</div></div>
+            <div class="invest-return-item"><div class="invest-return-num">1.5%</div><div class="invest-return-label" data-i18n="invest_return_monthly">මාසික ප්‍රතිලාභ</div></div>
+            <div class="invest-return-item"><div class="invest-return-num">රු.1K+</div><div class="invest-return-label" data-i18n="invest_min_label">අවම ආයෝජනය</div></div>
           </div>
         </div>
-
-        <!-- Notice -->
         <div class="notice-box invest-notice">
           <i class="fas fa-info-circle"></i>
           <div class="notice-content">
@@ -488,38 +484,18 @@
             <div class="notice-item invest-item"><i class="fas fa-undo"></i><strong data-i18n="invest_notice3_label">ආපසු ගැනීම:</strong><span data-i18n="invest_notice3_value">3 මාස දැනුම් දීමෙන්</span></div>
           </div>
         </div>
-
-        <!-- Progress Bar -->
         <div class="upload-progress" id="investProgress">
           <div style="font-size:.85rem;font-weight:600;color:#92400e;">⏳ <span id="investProgressText">Processing...</span></div>
           <div class="progress-bar-wrap"><div class="progress-bar invest-bar" id="investProgressBar"></div></div>
         </div>
-
-        <!-- Form -->
         <form id="investmentForm">
-
-          <!-- Personal Details -->
           <div class="invest-section-group">
             <h4><i class="fas fa-user"></i> <span data-i18n="invest_personal_section">පෞද්ගලික විස්තර</span></h4>
-            <div class="form-group">
-              <label><span data-i18n="invest_full_name_label">සම්පූර්ණ නම</span> *</label>
-              <input type="text" id="investFullName" placeholder="උදා: පෙරේරා කමල්" data-i18n-placeholder="invest_name_placeholder">
-            </div>
-            <div class="form-group">
-              <label><span data-i18n="invest_nic_label">NIC අංකය</span> *</label>
-              <input type="text" id="investNic" placeholder="1990XXXXXXX හෝ XXXXXXXXXV">
-            </div>
-            <div class="form-group">
-              <label><span data-i18n="invest_phone_label">දුරකතන අංකය</span> *</label>
-              <input type="tel" id="investPhone" placeholder="071 234 5678">
-            </div>
-            <div class="form-group">
-              <label><span data-i18n="invest_address_label">ලිපිනය</span> *</label>
-              <textarea id="investAddress" rows="2" placeholder="නිවස් අංකය, වීදිය, නගරය"></textarea>
-            </div>
+            <div class="form-group"><label><span data-i18n="invest_full_name_label">සම්පූර්ණ නම</span> *</label><input type="text" id="investFullName" placeholder="උදා: පෙරේරා කමල්"></div>
+            <div class="form-group"><label><span data-i18n="invest_nic_label">NIC අංකය</span> *</label><input type="text" id="investNic" placeholder="1990XXXXXXX හෝ XXXXXXXXXV"></div>
+            <div class="form-group"><label><span data-i18n="invest_phone_label">දුරකතන අංකය</span> *</label><input type="tel" id="investPhone" placeholder="071 234 5678"></div>
+            <div class="form-group"><label><span data-i18n="invest_address_label">ලිපිනය</span> *</label><textarea id="investAddress" rows="2" placeholder="නිවස් අංකය, වීදිය, නගරය"></textarea></div>
           </div>
-
-          <!-- Investment Details -->
           <div class="invest-section-group">
             <h4><i class="fas fa-coins"></i> <span data-i18n="invest_amount_section">ආයෝජන විස්තර</span></h4>
             <div class="form-group">
@@ -538,31 +514,16 @@
               </select>
             </div>
           </div>
-
-          <!-- NIC Photos -->
           <div class="invest-section-group">
             <h4><i class="fas fa-id-card"></i> <span data-i18n="invest_nic_photos_section">NIC ඡායාරූප</span></h4>
             <div class="double-photo-group">
-              <div class="form-group">
-                <label><span data-i18n="invest_nic_front_label">NIC ඉදිරිපස ඡායාරූපය</span> *</label>
-                <input type="file" id="investNicFront" accept="image/*">
-                <div id="investNicFrontPreview" class="photo-preview"></div>
-              </div>
-              <div class="form-group">
-                <label><span data-i18n="invest_nic_back_label">NIC පසුපස ඡායාරූපය</span> *</label>
-                <input type="file" id="investNicBack" accept="image/*">
-                <div id="investNicBackPreview" class="photo-preview"></div>
-              </div>
+              <div class="form-group"><label><span data-i18n="invest_nic_front_label">NIC ඉදිරිපස ඡායාරූපය</span> *</label><input type="file" id="investNicFront" accept="image/*"><div id="investNicFrontPreview" class="photo-preview"></div></div>
+              <div class="form-group"><label><span data-i18n="invest_nic_back_label">NIC පසුපස ඡායාරූපය</span> *</label><input type="file" id="investNicBack" accept="image/*"><div id="investNicBackPreview" class="photo-preview"></div></div>
             </div>
           </div>
-
-          <!-- Bank Details -->
           <div class="invest-section-group">
             <h4><i class="fas fa-university"></i> <span data-i18n="invest_bank_section">ප්‍රතිලාභ ලැබිය යුතු ගිණුම</span></h4>
-            <div class="form-group">
-              <label><span data-i18n="invest_account_label">ගිණුම් අංකය</span> *</label>
-              <input type="text" id="investAccountNumber" placeholder="0001234567890" inputmode="numeric">
-            </div>
+            <div class="form-group"><label><span data-i18n="invest_account_label">ගිණුම් අංකය</span> *</label><input type="text" id="investAccountNumber" placeholder="0001234567890" inputmode="numeric"></div>
             <div class="form-group">
               <label><span data-i18n="invest_bank_name_label">බැංකුව</span> *</label>
               <select id="investBankName">
@@ -594,23 +555,13 @@
                 </optgroup>
               </select>
             </div>
-            <div class="form-group" style="margin-bottom:0">
-              <label><span data-i18n="invest_bank_branch_label">ශාඛාව</span> *</label>
-              <input type="text" id="investBankBranch" placeholder="උදා: කොළඹ 03, කුරුණෑගල">
-            </div>
+            <div class="form-group" style="margin-bottom:0"><label><span data-i18n="invest_bank_branch_label">ශාඛාව</span> *</label><input type="text" id="investBankBranch" placeholder="උදා: කොළඹ 03, කුරුණෑගල"></div>
           </div>
-
-          <!-- Payment Proof -->
           <div class="invest-section-group">
             <h4><i class="fas fa-receipt"></i> <span data-i18n="invest_proof_section">ගෙවීමේ සාක්ෂිය</span></h4>
             <p style="font-size:.85rem;color:#92400e;margin-bottom:1rem;" data-i18n="invest_proof_desc">ආයෝජනය සඳහා LendEasy Finance ගිණුමට මුදල් ලබා දී ඇති බවට සාක්ෂිය ඉදිරිපත් කරන්න.</p>
-            <div class="form-group" style="margin-bottom:0">
-              <label><span data-i18n="invest_proof_label">බැංකු රිසිට්පත / ස්ලිප් ඡායාරූපය</span> *</label>
-              <input type="file" id="investPaymentProof" accept="image/*">
-              <div id="investPaymentProofPreview" class="photo-preview"></div>
-            </div>
+            <div class="form-group" style="margin-bottom:0"><label><span data-i18n="invest_proof_label">බැංකු රිසිට්පත / ස්ලිප් ඡායාරූපය</span> *</label><input type="file" id="investPaymentProof" accept="image/*"><div id="investPaymentProofPreview" class="photo-preview"></div></div>
           </div>
-
           <button type="submit" id="submitInvestmentBtn" class="submit-btn invest-submit">
             <i class="fas fa-seedling"></i> <span data-i18n="invest_submit_btn">ආයෝජන අයදුම්පත ඉදිරිපත් කරන්න</span>
           </button>
@@ -680,7 +631,7 @@
   const db    = getDatabase(app);
   const dbRef = ref(db);
 
-  // ── Cloudinary uploader ──────────────────────────────────────────
+  // ── Cloudinary uploader ───────────────────────────────────────────
   async function uploadToCloudinary(file) {
     const fd = new FormData();
     fd.append("file", file);
@@ -691,7 +642,7 @@
     return data.secure_url;
   }
 
-  // ── BLACKLIST CHECK ──────────────────────────────────────────────
+  // ── BLACKLIST CHECK ───────────────────────────────────────────────
   async function checkBlacklist(nicNumber, phone) {
     try {
       const snap = await get(child(dbRef, 'blacklist'));
@@ -707,6 +658,49 @@
     } catch(e) { return null; }
   }
 
+  // ── DUPLICATE LOAN CHECK ─────────────────────────────────────────
+  async function checkExistingLoan(nicNumber) {
+    try {
+      const snap = await get(child(dbRef, 'loan_applications'));
+      if (!snap.exists()) return null;
+      let found = null;
+      snap.forEach(c => {
+        const d = c.val();
+        if (
+          d.nicNumber && nicNumber &&
+          d.nicNumber.toLowerCase() === nicNumber.toLowerCase() &&
+          (d.status === 'pending' || d.status === 'accepted')
+        ) {
+          if (!found) found = d;
+        }
+      });
+      return found;
+    } catch(e) { return null; }
+  }
+
+  function buildDuplicateLoanHtml(existing, lang) {
+    const statusLabels = {
+      pending:  { si:'⏳ අනුමත කෙරෙමින් ඇත',  ta:'⏳ பரிசீலனையில் உள்ளது',  en:'⏳ Pending Approval' },
+      accepted: { si:'✅ ක්‍රියාත්මකව ඇත',       ta:'✅ செயலில் உள்ளது',        en:'✅ Currently Active' }
+    };
+    const msgs = {
+      si:{title:'⚠️ ඔබට දැනටමත් ණයක් ඇත',p1:'ඔබගේ NIC අංකය සඳහා දැනටමත් ණය අයදුම්පතක් සකිය ස්ථානයේ ඇත. ඔබට නව ණයක් ලබා ගත හැක්කේ පවතින ණය සම්පූර්ණයෙන් ගෙවා අවසන් කිරීමෙන් පසු පමණි.',p2:'ණය ශේෂය ගෙවීම සඳහා "ණය ගෙවීම" ටැබය භාවිත කරන්න.'},
+      ta:{title:'⚠️ உங்களுக்கு ஏற்கனவே கடன் உள்ளது',p1:'இந்த NIC எண்ணுக்கு ஏற்கனவே கடன் விண்ணப்பம் உள்ளது. தற்போதைய கடன் முழுவதும் செலுத்தப்பட்ட பிறகே புதிய கடன் வழங்கப்படும்.',p2:'"கடன் செலுத்துதல்" தாவலில் தொகையை செலுத்துங்கள்.'},
+      en:{title:'⚠️ You Already Have an Active Loan',p1:'Your NIC number already has an active loan application. You can only apply for a new loan after your existing loan is fully repaid.',p2:'Use the "Repay Loan" tab to pay your outstanding balance.'}
+    };
+    const m = msgs[lang]||msgs.en;
+    const sl = statusLabels[existing.status]||statusLabels.pending;
+    const slText = sl[lang]||sl.en;
+    const amount = 'LKR ' + Math.round(existing.loanAmount||0).toLocaleString();
+    return `<div class="duplicate-loan-block show">
+      <i class="fas fa-exclamation-circle"></i>
+      <h3>${m.title}</h3>
+      <p>${m.p1}</p>
+      <p style="margin-top:.5rem;font-size:.82rem;color:#0f5b8c;font-weight:600;">${m.p2}</p>
+      <div class="dl-status">${slText} — ${amount}</div>
+    </div>`;
+  }
+
   function buildBlacklistRejectionHtml(entry, lang) {
     const msgs = {
       si:{ title:'🚫 ඔබගේ අයදුම්පත ප්‍රතික්ෂේප කරන ලදි', sub:'ඔබ LendEasy Finance හි කළු ලැයිස්තුවේ ඇත.', reason:'හේතුව', contact:'ගැටලුවක් ඇත්නම් +94 112 345 678 හෝ WhatsApp මගින් අපව අමතන්න.', added:'එකතු කළ දිනය' },
@@ -718,7 +712,7 @@
     return `<div class="blacklist-rejection"><i class="fas fa-ban"></i><h3>${m.title}</h3><p>${m.sub}</p><div class="bl-details"><div><strong>${m.reason}:</strong> ${entry.reason||'Previous loan default'}</div><div style="margin-top:.4rem"><strong>${m.added}:</strong> ${addedDate}</div></div><p style="margin-top:1rem;font-size:.82rem;opacity:.8">${m.contact}</p></div>`;
   }
 
-  // ── Translations ─────────────────────────────────────────────────
+  // ── Translations ──────────────────────────────────────────────────
   const translations = {
     si:{
       nav_home:"මුල් පිටුව",nav_services:"සේවා",nav_loan:"ණය",nav_invest:"ආයෝජනය",nav_about:"අපි ගැන",nav_contact:"සම්බන්ධ වන්න",
@@ -754,15 +748,15 @@
       repay_info_principal:"ණය මුදල",repay_info_months:"ගත වූ මාස",repay_info_interest:"පොලිය (1.5%/මාස)",
       repay_info_paid:"දැනටමත් ගෙවූ",repay_info_late_fee:"ප්‍රමාද ගාස්තු",repay_info_date:"අයදුම් දිනය",
       repay_not_found:"මෙම NIC අංකය සඳහා ණය අයදුම්පතක් හමු නොවීය.",
-      repay_name_label:"සම්පූර්ණ නම",repay_amount_label:"ගෙවන මුදල (රු.)",repay_amount_hint:"ඔබ ගෙවන මුදල ඇතුළත් කරන්න",
+      repay_name_label:"සම්පූර්ණ නම",repay_amount_label:"ගෙවන මුදල (රු.)",repay_amount_hint:"ශේෂය: ",
       repay_photo_label:"බැංකු රිසිට්පත / ස්ක්‍රීන්ෂොට්",repay_phone_label:"දුරකතන අංකය",repay_submit_btn:"ගෙවීම තහවුරු කරන්න",
       repay_success_msg:"✅ ඔබගේ ගෙවීම සාර්ථකව ලැබුණි! ස්තුතියි.",
       repay_photo_required:"රිසිට්පත හෝ ස්ක්‍රීන්ෂොට් අවශ්‍යයි",repay_amount_required:"ගෙවන මුදල ඇතුළත් කරන්න",
+      repay_overpay:"ගෙවන මුදල ශේෂය ඉක්මවිය නොහැක. උපරිම:",
       repay_submitting:"ඡායාරූප upload කරමින්...",whatsapp_text:"WhatsApp මගින් කතා කරන්න",
       outstanding_label:"💸 දැන් ගෙවිය යුතු මුළු මුදල",settled_label:"✅ ණය සම්පූර්ණයෙන් ගෙවා ඇත",
       pending_notice:"ඔබේ ණය අයදුම්පත තවමත් අනුමත නොවීය. දිනකින් හෝ දෙකකින් නැවත පරීක්ෂා කරන්න.",
       loan_not_active:"ණය ක්‍රියාත්මක නොවේ",months_unit:"මාස",
-      // Invest translations
       invest_banner_title:"🌱 ආයෝජනය කරන්න, ප්‍රතිලාභ ලබා ගන්න",
       invest_banner_desc:"ඔබේ මුදල් LendEasy Finance හි ආයෝජනය කර ඉහළ ප්‍රතිලාභ ලබා ගන්න",
       invest_return_annual:"වාර්ෂික ප්‍රතිලාභ",invest_return_monthly:"මාසික ප්‍රතිලාභ",invest_min_label:"අවම ආයෝජනය",
@@ -770,8 +764,7 @@
       invest_notice2_label:"ගෙවීම්:",invest_notice2_value:"මාසිකව ගිණුමට",
       invest_notice3_label:"ආපසු ගැනීම:",invest_notice3_value:"3 මාස දැනුම් දීමෙන්",
       invest_personal_section:"පෞද්ගලික විස්තර",
-      invest_full_name_label:"සම්පූර්ණ නම",invest_name_placeholder:"උදා: පෙරේරා කමල්",
-      invest_nic_label:"NIC අංකය",invest_phone_label:"දුරකතන අංකය",invest_address_label:"ලිපිනය",
+      invest_full_name_label:"සම්පූර්ණ නම",invest_nic_label:"NIC අංකය",invest_phone_label:"දුරකතන අංකය",invest_address_label:"ලිපිනය",
       invest_amount_section:"ආයෝජන විස්තර",
       invest_amount_label:"ආයෝජන මුදල (රු.)",invest_amount_hint:"අවම ආයෝජනය: රු. 1,000/-",
       invest_duration_label:"ආයෝජන කාලය",invest_duration_placeholder:"-- කාලය තෝරන්න --",
@@ -822,15 +815,15 @@
       repay_info_principal:"கடன் தொகை",repay_info_months:"கடந்த மாதங்கள்",repay_info_interest:"வட்டி (1.5%/மாதம்)",
       repay_info_paid:"செலுத்தியது",repay_info_late_fee:"தாமதக் கட்டணம்",repay_info_date:"தேதி",
       repay_not_found:"இந்த NIC எண்ணுக்கு கடன் விண்ணப்பம் கிடைக்கவில்லை.",
-      repay_name_label:"முழு பெயர்",repay_amount_label:"செலுத்தும் தொகை (ரூ.)",repay_amount_hint:"செலுத்தும் தொகையை உள்ளிடுங்கள்",
+      repay_name_label:"முழு பெயர்",repay_amount_label:"செலுத்தும் தொகை (ரூ.)",repay_amount_hint:"இருப்பு: ",
       repay_photo_label:"வங்கி ரசீது / ஸ்கிரீன்ஷாட்",repay_phone_label:"தொலைபேசி எண்",repay_submit_btn:"செலுத்துதலை உறுதிப்படுத்தவும்",
       repay_success_msg:"✅ செலுத்துதல் பதிவு செய்யப்பட்டது!",
       repay_photo_required:"ரசீது தேவை",repay_amount_required:"தொகை தேவை",
+      repay_overpay:"தொகை நிலுவைத் தொகையை மீறக்கூடாது. அதிகபட்சம்:",
       repay_submitting:"படத்தை பதிவேற்றுகிறது...",whatsapp_text:"WhatsApp இல் பேசுங்கள்",
       outstanding_label:"💸 இப்போது செலுத்த வேண்டிய மொத்தம்",settled_label:"✅ கடன் முழுவதும் செலுத்தப்பட்டது",
       pending_notice:"உங்கள் விண்ணப்பம் இன்னும் அங்கீகரிக்கப்படவில்லை.",
       loan_not_active:"கடன் செயல்படவில்லை",months_unit:"மாதங்கள்",
-      // Invest
       invest_banner_title:"🌱 முதலீடு செய்யுங்கள், வருமானம் பெறுங்கள்",
       invest_banner_desc:"LendEasy Finance இல் முதலீடு செய்து அதிக வருமானம் பெறுங்கள்",
       invest_return_annual:"வருடாந்திர வருமானம்",invest_return_monthly:"மாதாந்திர வருமானம்",invest_min_label:"குறைந்தபட்ச முதலீடு",
@@ -838,8 +831,7 @@
       invest_notice2_label:"கொடுப்பனவுகள்:",invest_notice2_value:"மாதந்தோறும் கணக்கில்",
       invest_notice3_label:"திரும்பப் பெறுதல்:",invest_notice3_value:"3 மாத அறிவிப்பில்",
       invest_personal_section:"தனிப்பட்ட விவரங்கள்",
-      invest_full_name_label:"முழு பெயர்",invest_name_placeholder:"எ.கா: குமார் பெரேரா",
-      invest_nic_label:"அடையாள அட்டை எண்",invest_phone_label:"தொலைபேசி எண்",invest_address_label:"முகவரி",
+      invest_full_name_label:"முழு பெயர்",invest_nic_label:"அடையாள அட்டை எண்",invest_phone_label:"தொலைபேசி எண்",invest_address_label:"முகவரி",
       invest_amount_section:"முதலீட்டு விவரங்கள்",
       invest_amount_label:"முதலீட்டு தொகை (ரூ.)",invest_amount_hint:"குறைந்தபட்சம்: ரூ. 1,000/-",
       invest_duration_label:"முதலீட்டு காலம்",invest_duration_placeholder:"-- காலத்தை தேர்ந்தெடுக்கவும் --",
@@ -890,15 +882,15 @@
       repay_info_principal:"Loan Principal",repay_info_months:"Months Elapsed",repay_info_interest:"Interest (1.5%/mo)",
       repay_info_paid:"Already Paid",repay_info_late_fee:"Late Fee",repay_info_date:"Application Date",
       repay_not_found:"No loan application found for this NIC number.",
-      repay_name_label:"Full Name",repay_amount_label:"Payment Amount (LKR)",repay_amount_hint:"Enter the amount you are paying",
+      repay_name_label:"Full Name",repay_amount_label:"Payment Amount (LKR)",repay_amount_hint:"Balance: ",
       repay_photo_label:"Bank Slip / Screenshot",repay_phone_label:"Phone Number",repay_submit_btn:"Confirm Payment",
       repay_success_msg:"✅ Repayment recorded successfully! Thank you.",
       repay_photo_required:"Bank slip or screenshot required",repay_amount_required:"Payment amount is required",
+      repay_overpay:"Payment cannot exceed outstanding balance. Maximum:",
       repay_submitting:"Uploading image...",whatsapp_text:"Chat on WhatsApp",
       outstanding_label:"💸 Total Amount Due Now",settled_label:"✅ Loan Fully Settled",
       pending_notice:"Your loan application is still pending approval. Please check back in a day or two.",
       loan_not_active:"Loan not yet active",months_unit:"months",
-      // Invest
       invest_banner_title:"🌱 Invest & Earn High Returns",
       invest_banner_desc:"Invest your money with LendEasy Finance and enjoy competitive returns",
       invest_return_annual:"Annual Return",invest_return_monthly:"Monthly Return",invest_min_label:"Minimum Investment",
@@ -906,8 +898,7 @@
       invest_notice2_label:"Payments:",invest_notice2_value:"Monthly to your account",
       invest_notice3_label:"Withdrawal:",invest_notice3_value:"3 months notice required",
       invest_personal_section:"Personal Details",
-      invest_full_name_label:"Full Name",invest_name_placeholder:"e.g. Perera Kamal",
-      invest_nic_label:"NIC Number",invest_phone_label:"Phone Number",invest_address_label:"Address",
+      invest_full_name_label:"Full Name",invest_nic_label:"NIC Number",invest_phone_label:"Phone Number",invest_address_label:"Address",
       invest_amount_section:"Investment Details",
       invest_amount_label:"Investment Amount (LKR)",invest_amount_hint:"Minimum investment: LKR 1,000/-",
       invest_duration_label:"Investment Duration",invest_duration_placeholder:"-- Select Duration --",
@@ -929,7 +920,10 @@
   let currentLang = "si";
   function t(k){ return (translations[currentLang]&&translations[currentLang][k]) || translations.si[k] || k; }
 
-  // ── Navigation ───────────────────────────────────────────────────
+  // ── State: outstanding cap for repay ─────────────────────────────
+  let currentOutstanding = null;
+
+  // ── Navigation ────────────────────────────────────────────────────
   const homeView   = document.getElementById('homeView');
   const loanView   = document.getElementById('loanView');
   const investView = document.getElementById('investView');
@@ -961,13 +955,12 @@
   document.getElementById('frontPageInvestBtn')?.addEventListener('click', showInvest);
   document.getElementById('hamburgerBtn')?.addEventListener('click', ()=>document.getElementById('navLinks')?.classList.toggle('show'));
 
-  // ── Language ─────────────────────────────────────────────────────
+  // ── Language ──────────────────────────────────────────────────────
   function updateAllTexts(){
     document.querySelectorAll('[data-i18n]').forEach(el=>{
       const k=el.getAttribute('data-i18n');
       if(k&&translations[currentLang]&&translations[currentLang][k]) el.innerText=t(k);
     });
-    // update placeholders
     document.querySelectorAll('[data-i18n-placeholder]').forEach(el=>{
       const k=el.getAttribute('data-i18n-placeholder');
       if(k&&translations[currentLang]&&translations[currentLang][k]) el.placeholder=t(k);
@@ -976,7 +969,7 @@
   function setLanguage(lang){ currentLang=lang; updateAllTexts(); document.querySelectorAll('.lang-nav-btn').forEach(b=>b.getAttribute('data-lang')===lang?b.classList.add('active'):b.classList.remove('active')); }
   document.querySelectorAll('.lang-nav-btn').forEach(b=>b.addEventListener('click',()=>setLanguage(b.getAttribute('data-lang'))));
 
-  // ── Stats countup ────────────────────────────────────────────────
+  // ── Stats countup ─────────────────────────────────────────────────
   let counted=false;
   function startCountup(){
     if(counted)return;
@@ -985,12 +978,7 @@
     if(grid.getBoundingClientRect().top<window.innerHeight-100){
       counted=true;
       const targets={yearsCount:15,satisfactionCount:98,loansCount:1850,investorsCount:320};
-      const els={
-        yearsCount:document.getElementById('yearsCount'),
-        satisfactionCount:document.getElementById('satisfactionCount'),
-        loansCount:document.getElementById('loansCount'),
-        investorsCount:document.getElementById('investorsCount')
-      };
+      const els={yearsCount:document.getElementById('yearsCount'),satisfactionCount:document.getElementById('satisfactionCount'),loansCount:document.getElementById('loansCount'),investorsCount:document.getElementById('investorsCount')};
       let st=null; const dur=1500;
       function animate(now){ if(!st)st=now; const p=Math.min(1,(now-st)/dur);
         for(let[id,target] of Object.entries(targets)){ if(els[id])els[id].innerText=(id==='satisfactionCount')?Math.floor(p*target)+'%':Math.floor(p*target); }
@@ -1002,7 +990,7 @@
   }
   window.addEventListener('scroll', startCountup);
 
-  // ── Photo preview helper ─────────────────────────────────────────
+  // ── Photo preview ─────────────────────────────────────────────────
   function previewPhoto(inputId, previewId){
     document.getElementById(inputId)?.addEventListener('change',e=>{
       const c=document.getElementById(previewId);
@@ -1018,11 +1006,24 @@
   previewPhoto('investPaymentProof','investPaymentProofPreview');
 
   document.getElementById('hasGuarantorCheck')?.addEventListener('change', function(){ document.getElementById('guarantorSection').style.display=this.checked?'block':'none'; });
-
   function setProgress(barId,pct){ const b=document.getElementById(barId); if(b)b.style.width=pct+'%'; }
-  function fmt(amount) { return 'රු. ' + Math.round(amount).toLocaleString() + '/-'; }
+  function fmt(amount){ return 'රු. '+Math.round(amount).toLocaleString()+'/-'; }
 
-  // ── REPAY: NIC Auto-Lookup ───────────────────────────────────────
+  // ── OVERPAY VALIDATION on amount input ────────────────────────────
+  document.getElementById('repayAmount')?.addEventListener('input', function(){
+    const val=parseFloat(this.value);
+    const warn=document.getElementById('overpayWarning');
+    const warnText=document.getElementById('overpayWarningText');
+    if(currentOutstanding!==null && currentOutstanding>0 && !isNaN(val) && val>currentOutstanding){
+      const maxStr='LKR '+Math.round(currentOutstanding).toLocaleString();
+      warnText.textContent=t('repay_overpay')+' '+maxStr;
+      warn.classList.add('show');
+    } else {
+      warn.classList.remove('show');
+    }
+  });
+
+  // ── REPAY: NIC Lookup ─────────────────────────────────────────────
   const repayNicInput    = document.getElementById('repayNic');
   const repaySearchBtn   = document.getElementById('repayNicSearchBtn');
   const repaySearchIcon  = document.getElementById('repayNicSearchIcon');
@@ -1030,80 +1031,88 @@
   const repayNotFound    = document.getElementById('repayLoanNotFound');
   const repayFullNameInp = document.getElementById('repayFullName');
   const nicSpinner       = document.getElementById('nicLookupSpinner');
+  const maxPayableHint   = document.getElementById('maxPayableHint');
+  const overpayWarning   = document.getElementById('overpayWarning');
 
-  async function lookupNicForRepay() {
-    const nic = repayNicInput.value.trim();
-    if (!nic) return;
+  async function lookupNicForRepay(){
+    const nic=repayNicInput.value.trim();
+    if(!nic)return;
     repaySearchBtn.classList.add('loading');
-    repaySearchIcon.className = 'fas fa-spinner';
+    repaySearchIcon.className='fas fa-spinner';
     repayInfoCard.classList.remove('show');
     repayNotFound.classList.remove('show');
-    repayFullNameInp.value = '';
+    repayFullNameInp.value='';
     nicSpinner.classList.add('show');
+    currentOutstanding=null;
+    overpayWarning.classList.remove('show');
+    maxPayableHint.textContent=t('repay_amount_hint');
 
     try {
-      const appSnap = await get(child(dbRef, 'loan_applications'));
-      let found = null;
-      if (appSnap.exists()) {
-        appSnap.forEach(c => {
-          const d = c.val();
-          if (d.nicNumber && d.nicNumber.toLowerCase() === nic.toLowerCase()) {
-            if (!found) found = { id: c.key, ...d };
+      const appSnap=await get(child(dbRef,'loan_applications'));
+      let found=null;
+      if(appSnap.exists()){
+        appSnap.forEach(c=>{
+          const d=c.val();
+          if(d.nicNumber&&d.nicNumber.toLowerCase()===nic.toLowerCase()){
+            if(!found)found={id:c.key,...d};
           }
         });
       }
 
-      let totalPaid = 0;
-      const repaySnap = await get(child(dbRef, 'loan_repayments'));
-      if (repaySnap.exists()) {
-        repaySnap.forEach(c => {
-          const d = c.val();
-          if (d.status === 'accepted' && d.nicNumber && d.nicNumber.toLowerCase() === nic.toLowerCase()) {
-            totalPaid += parseFloat(d.amount) || 0;
+      let totalPaid=0;
+      const repaySnap=await get(child(dbRef,'loan_repayments'));
+      if(repaySnap.exists()){
+        repaySnap.forEach(c=>{
+          const d=c.val();
+          if(d.status==='accepted'&&d.nicNumber&&d.nicNumber.toLowerCase()===nic.toLowerCase()){
+            totalPaid+=parseFloat(d.amount)||0;
           }
         });
       }
 
       nicSpinner.classList.remove('show');
 
-      if (found) {
-        repayFullNameInp.value = found.fullName || '';
-        const status = found.status || 'pending';
-        const statusBadge = document.getElementById('repayInfoStatusBadge');
-        statusBadge.className = 'lic-status-badge ' + status;
-        statusBadge.textContent = status==='accepted'?'✅ Accepted':status==='rejected'?'❌ Rejected':status==='cancelled'?'❌ Cancelled':'⏳ Pending';
-        document.getElementById('repayInfoName').textContent = found.fullName || '—';
-        document.getElementById('repayInfoDate').textContent = found.timestamp ? new Date(found.timestamp).toLocaleDateString('si-LK') : '—';
-        const principal = parseFloat(found.loanAmount) || 0;
-        document.getElementById('repayInfoPrincipal').textContent = fmt(principal);
-        const outstandingHero = document.getElementById('outstandingHero');
-        const noticeBox = document.getElementById('repayInfoNotice');
-        const noticeText = document.getElementById('repayInfoNoticeText');
+      if(found){
+        repayFullNameInp.value=found.fullName||'';
+        const status=found.status||'pending';
+        const statusBadge=document.getElementById('repayInfoStatusBadge');
+        statusBadge.className='lic-status-badge '+status;
+        statusBadge.textContent=status==='accepted'?'✅ Accepted':status==='rejected'?'❌ Rejected':status==='cancelled'?'❌ Cancelled':'⏳ Pending';
+        document.getElementById('repayInfoName').textContent=found.fullName||'—';
+        document.getElementById('repayInfoDate').textContent=found.timestamp?new Date(found.timestamp).toLocaleDateString('si-LK'):'—';
+        const principal=parseFloat(found.loanAmount)||0;
+        document.getElementById('repayInfoPrincipal').textContent=fmt(principal);
+
+        const outstandingHero=document.getElementById('outstandingHero');
+        const noticeBox=document.getElementById('repayInfoNotice');
+        const noticeText=document.getElementById('repayInfoNoticeText');
         ['repayInfoMonthsRow','repayInfoInterestRow','repayInfoPaidRow','repayInfoLateRow'].forEach(id=>{document.getElementById(id).style.display='none';});
         outstandingHero.classList.remove('show');
-        noticeBox.style.display = 'none';
+        noticeBox.style.display='none';
 
-        if (status === 'accepted' && found.approvedDate) {
-          const MS_DAY    = 86400000;
-          const now       = Date.now();
-          const daysSince = Math.floor((now - found.approvedDate) / MS_DAY);
-          const months    = Math.max(1, Math.ceil(daysSince / 30));
-          const interest  = principal * 0.015 * months;
-          const totalDue  = principal + interest;
-          const outstanding = Math.max(0, totalDue - totalPaid);
-          const daysLate  = outstanding > 0 ? Math.max(0, daysSince - 30) : 0;
-          const lateFee   = daysLate * 100;
-          const totalOutstanding = outstanding + lateFee;
-          const isSettled = totalOutstanding <= 0;
+        if(status==='accepted'&&found.approvedDate){
+          const MS_DAY=86400000;
+          const now=Date.now();
+          const daysSince=Math.floor((now-found.approvedDate)/MS_DAY);
+          const months=Math.max(1,Math.ceil(daysSince/30));
+          const interest=principal*0.015*months;
+          const totalDue=principal+interest;
+          const outstanding=Math.max(0,totalDue-totalPaid);
+          const daysLate=outstanding>0?Math.max(0,daysSince-30):0;
+          const lateFee=daysLate*100;
+          const totalOutstanding=outstanding+lateFee;
+          const isSettled=totalOutstanding<=0;
+
+          currentOutstanding=isSettled?0:totalOutstanding;
 
           document.getElementById('repayInfoMonthsRow').style.display='flex';
           document.getElementById('repayInfoInterestRow').style.display='flex';
           document.getElementById('repayInfoPaidRow').style.display='flex';
-          if(lateFee>0) document.getElementById('repayInfoLateRow').style.display='flex';
-          document.getElementById('repayInfoMonths').textContent = months+' '+t('months_unit')+' ('+daysSince+' days)';
-          document.getElementById('repayInfoInterest').textContent = fmt(interest);
-          document.getElementById('repayInfoPaid').textContent = fmt(totalPaid);
-          document.getElementById('repayInfoLateFee').textContent = fmt(lateFee);
+          if(lateFee>0)document.getElementById('repayInfoLateRow').style.display='flex';
+          document.getElementById('repayInfoMonths').textContent=months+' '+t('months_unit')+' ('+daysSince+' days)';
+          document.getElementById('repayInfoInterest').textContent=fmt(interest);
+          document.getElementById('repayInfoPaid').textContent=fmt(totalPaid);
+          document.getElementById('repayInfoLateFee').textContent=fmt(lateFee);
 
           outstandingHero.classList.add('show');
           const ohLabel=document.getElementById('outstandingLabel');
@@ -1112,17 +1121,24 @@
 
           if(isSettled){
             outstandingHero.style.background='linear-gradient(135deg,#f0fdf4,#dcfce7)';
-            ohLabel.textContent=t('settled_label'); ohLabel.style.color='#15803d';
-            ohAmount.className='oh-settled'; ohAmount.textContent='🎉 '+t('settled_label'); ohSub.textContent='';
+            ohLabel.textContent=t('settled_label');ohLabel.style.color='#15803d';
+            ohAmount.className='oh-settled';ohAmount.textContent='🎉 '+t('settled_label');ohSub.textContent='';
+            document.getElementById('repayAmount').value='';
+            document.getElementById('repayAmount').disabled=true;
+            maxPayableHint.textContent=t('settled_label');
           } else {
             outstandingHero.style.background='linear-gradient(135deg,#fff8e1,#fef3c7)';
-            ohLabel.textContent=t('outstanding_label'); ohLabel.style.color='#92400e';
-            ohAmount.className='oh-amount'; ohAmount.textContent=fmt(totalOutstanding);
+            ohLabel.textContent=t('outstanding_label');ohLabel.style.color='#92400e';
+            ohAmount.className='oh-amount';ohAmount.textContent=fmt(totalOutstanding);
             let sub=`${fmt(principal)} + ${fmt(interest)} interest`;
-            if(lateFee>0) sub+=` + ${fmt(lateFee)} late fee`;
-            if(totalPaid>0) sub+=` − ${fmt(totalPaid)} paid`;
+            if(lateFee>0)sub+=` + ${fmt(lateFee)} late fee`;
+            if(totalPaid>0)sub+=` − ${fmt(totalPaid)} paid`;
             ohSub.textContent=sub;
+            document.getElementById('repayAmount').disabled=false;
             document.getElementById('repayAmount').value=Math.ceil(totalOutstanding);
+            document.getElementById('repayAmount').max=Math.ceil(totalOutstanding);
+            const maxStr='LKR '+Math.round(totalOutstanding).toLocaleString();
+            maxPayableHint.textContent=t('repay_amount_hint')+maxStr;
           }
         } else if(status==='pending'||status==='cancelled'||status==='rejected'){
           noticeBox.style.display='block';
@@ -1144,36 +1160,41 @@
   repaySearchBtn?.addEventListener('click', lookupNicForRepay);
   repayNicInput?.addEventListener('keydown', e=>{if(e.key==='Enter'){e.preventDefault();lookupNicForRepay();}});
 
-  // ── LOAN APPLICATION SUBMIT ──────────────────────────────────────
-  document.getElementById('loanAppForm')?.addEventListener('submit', async e => {
+  // ── LOAN APPLICATION SUBMIT ───────────────────────────────────────
+  document.getElementById('loanAppForm')?.addEventListener('submit', async e=>{
     e.preventDefault();
-    const feedbackDiv = document.getElementById('formFeedback');
-    const submitBtn   = document.getElementById('submitApplicationBtn');
-    const progressBox = document.getElementById('applyProgress');
-    const progressTxt = document.getElementById('applyProgressText');
-    const checkingBox = document.getElementById('checkingBlacklistBox');
+    const feedbackDiv=document.getElementById('formFeedback');
+    const submitBtn=document.getElementById('submitApplicationBtn');
+    const progressBox=document.getElementById('applyProgress');
+    const progressTxt=document.getElementById('applyProgressText');
+    const checkingBox=document.getElementById('checkingBlacklistBox');
 
-    const fullName       = document.getElementById('fullName').value.trim();
-    const address        = document.getElementById('address').value.trim();
-    const nicNumber      = document.getElementById('nicNumber').value.trim();
-    const applicantPhone = document.getElementById('applicantPhone').value.trim();
-    const loanAmount     = document.getElementById('loanAmount').value.trim();
-    const accountNumber  = document.getElementById('accountNumber').value.trim();
-    const bankName       = document.getElementById('bankName').value;
-    const bankBranch     = document.getElementById('bankBranch').value.trim();
-    const nicFront       = document.getElementById('nicFrontPhoto').files[0];
-    const nicBack        = document.getElementById('nicBackPhoto').files[0];
-    const hasGuarantor   = document.getElementById('hasGuarantorCheck').checked;
+    const fullName=document.getElementById('fullName').value.trim();
+    const address=document.getElementById('address').value.trim();
+    const nicNumber=document.getElementById('nicNumber').value.trim();
+    const applicantPhone=document.getElementById('applicantPhone').value.trim();
+    const loanAmount=document.getElementById('loanAmount').value.trim();
+    const accountNumber=document.getElementById('accountNumber').value.trim();
+    const bankName=document.getElementById('bankName').value;
+    const bankBranch=document.getElementById('bankBranch').value.trim();
+    const nicFront=document.getElementById('nicFrontPhoto').files[0];
+    const nicBack=document.getElementById('nicBackPhoto').files[0];
+    const hasGuarantor=document.getElementById('hasGuarantorCheck').checked;
     let gName='',gId='',gPhone='',gPhoto=null;
     if(hasGuarantor){gName=document.getElementById('guarantorName').value.trim();gId=document.getElementById('guarantorIdNumber').value.trim();gPhone=document.getElementById('guarantorPhone').value.trim();gPhoto=document.getElementById('guarantorPhoto').files[0];}
 
     const errors=[];
-    if(!fullName)errors.push('Name required');if(!address)errors.push('Address required');
-    if(!nicNumber)errors.push('NIC required');if(!applicantPhone)errors.push('Phone required');
+    if(!fullName)errors.push('Name required');
+    if(!address)errors.push('Address required');
+    if(!nicNumber)errors.push('NIC required');
+    if(!applicantPhone)errors.push('Phone required');
     if(!loanAmount)errors.push('Loan amount required');
     if(loanAmount&&parseFloat(loanAmount)>50000)errors.push(t('loan_max_error'));
-    if(!nicFront)errors.push('NIC front photo required');if(!nicBack)errors.push('NIC back photo required');
-    if(!accountNumber)errors.push('Account number required');if(!bankName)errors.push('Bank required');if(!bankBranch)errors.push('Branch required');
+    if(!nicFront)errors.push('NIC front photo required');
+    if(!nicBack)errors.push('NIC back photo required');
+    if(!accountNumber)errors.push('Account number required');
+    if(!bankName)errors.push('Bank required');
+    if(!bankBranch)errors.push('Branch required');
     if(hasGuarantor){if(!gName)errors.push('Guarantor name required');if(!gId)errors.push('Guarantor ID required');if(!gPhone)errors.push('Guarantor phone required');if(!gPhoto)errors.push('Guarantor photo required');}
     if(errors.length){feedbackDiv.innerHTML=`<div class="error-text">⚠️ ${errors.join(' | ')}</div>`;return;}
 
@@ -1181,6 +1202,7 @@
     submitBtn.innerHTML=`<i class="fas fa-shield-alt fa-spin"></i> ${t('checking_blacklist')}`;
     checkingBox.style.display='block';feedbackDiv.innerHTML='';
 
+    // Step 1: Blacklist check
     const blacklistEntry=await checkBlacklist(nicNumber,applicantPhone);
     checkingBox.style.display='none';
     if(blacklistEntry){
@@ -1189,6 +1211,16 @@
       feedbackDiv.scrollIntoView({behavior:'smooth',block:'center'});return;
     }
 
+    // Step 2: Duplicate loan check
+    submitBtn.innerHTML=`<i class="fas fa-search fa-spin"></i> Checking existing loans...`;
+    const existingLoan=await checkExistingLoan(nicNumber);
+    if(existingLoan){
+      feedbackDiv.innerHTML=buildDuplicateLoanHtml(existingLoan,currentLang);
+      submitBtn.disabled=false;submitBtn.innerHTML=`<span>${t('submit_btn_text')}</span>`;
+      feedbackDiv.scrollIntoView({behavior:'smooth',block:'center'});return;
+    }
+
+    // Step 3: Upload & save
     submitBtn.innerHTML=`<i class="fas fa-spinner fa-spin"></i> ${t('submitting')}`;
     progressBox.style.display='block';setProgress('applyProgressBar',0);
 
@@ -1220,8 +1252,8 @@
     }
   });
 
-  // ── REPAYMENT SUBMIT ─────────────────────────────────────────────
-  document.getElementById('repaymentForm')?.addEventListener('submit', async e => {
+  // ── REPAYMENT SUBMIT ──────────────────────────────────────────────
+  document.getElementById('repaymentForm')?.addEventListener('submit', async e=>{
     e.preventDefault();
     const feedbackDiv=document.getElementById('repaymentFeedback');
     const submitBtn=document.getElementById('submitRepaymentBtn');
@@ -1230,14 +1262,20 @@
 
     const fullName=document.getElementById('repayFullName').value.trim();
     const nicNumber=document.getElementById('repayNic').value.trim();
-    const amount=document.getElementById('repayAmount').value.trim();
+    const amount=parseFloat(document.getElementById('repayAmount').value);
     const receiptFile=document.getElementById('repayReceipt').files[0];
     const phoneNumber=document.getElementById('repayPhone').value.trim();
 
     const errors=[];
-    if(!nicNumber)errors.push('NIC required');if(!fullName)errors.push('Name required');
-    if(!amount||parseFloat(amount)<=0)errors.push(t('repay_amount_required'));
-    if(!receiptFile)errors.push(t('repay_photo_required'));if(!phoneNumber)errors.push('Phone required');
+    if(!nicNumber)errors.push('NIC required');
+    if(!fullName)errors.push('Name required');
+    if(!amount||amount<=0)errors.push(t('repay_amount_required'));
+    if(!receiptFile)errors.push(t('repay_photo_required'));
+    if(!phoneNumber)errors.push('Phone required');
+    if(currentOutstanding!==null&&currentOutstanding>0&&amount>currentOutstanding){
+      const maxStr='LKR '+Math.round(currentOutstanding).toLocaleString();
+      errors.push(t('repay_overpay')+' '+maxStr);
+    }
     if(errors.length){feedbackDiv.innerHTML=`<div class="error-text">⚠️ ${errors.join(' | ')}</div>`;return;}
 
     submitBtn.disabled=true;
@@ -1249,7 +1287,7 @@
       const receiptURL=await uploadToCloudinary(receiptFile);
       progressTxt.textContent='Saving...';setProgress('repayProgressBar',80);
       await push(ref(db,'loan_repayments'),{
-        fullName,nicNumber,phoneNumber,amount:parseFloat(amount),
+        fullName,nicNumber,phoneNumber,amount,
         receiptImg:receiptURL,status:'pending',timestamp:Date.now()
       });
       setProgress('repayProgressBar',100);
@@ -1258,6 +1296,11 @@
       document.getElementById('repayReceiptPreview').innerHTML='';
       repayInfoCard.classList.remove('show');
       repayNotFound.classList.remove('show');
+      currentOutstanding=null;
+      overpayWarning.classList.remove('show');
+      document.getElementById('repayAmount').disabled=false;
+      maxPayableHint.setAttribute('data-i18n','repay_amount_hint');
+      maxPayableHint.textContent=t('repay_amount_hint');
     } catch(err){
       feedbackDiv.innerHTML=`<div class="error-text">⚠️ Error: ${err.message}</div>`;
     } finally {
@@ -1265,26 +1308,26 @@
     }
   });
 
-  // ── INVESTMENT SUBMIT ────────────────────────────────────────────
-  document.getElementById('investmentForm')?.addEventListener('submit', async e => {
+  // ── INVESTMENT SUBMIT ─────────────────────────────────────────────
+  document.getElementById('investmentForm')?.addEventListener('submit', async e=>{
     e.preventDefault();
-    const feedbackDiv  = document.getElementById('investmentFeedback');
-    const submitBtn    = document.getElementById('submitInvestmentBtn');
-    const progressBox  = document.getElementById('investProgress');
-    const progressTxt  = document.getElementById('investProgressText');
+    const feedbackDiv=document.getElementById('investmentFeedback');
+    const submitBtn=document.getElementById('submitInvestmentBtn');
+    const progressBox=document.getElementById('investProgress');
+    const progressTxt=document.getElementById('investProgressText');
 
-    const fullName      = document.getElementById('investFullName').value.trim();
-    const nicNumber     = document.getElementById('investNic').value.trim();
-    const phoneNumber   = document.getElementById('investPhone').value.trim();
-    const address       = document.getElementById('investAddress').value.trim();
-    const amount        = document.getElementById('investAmount').value.trim();
-    const duration      = document.getElementById('investDuration').value;
-    const accountNumber = document.getElementById('investAccountNumber').value.trim();
-    const bankName      = document.getElementById('investBankName').value;
-    const bankBranch    = document.getElementById('investBankBranch').value.trim();
-    const nicFrontFile  = document.getElementById('investNicFront').files[0];
-    const nicBackFile   = document.getElementById('investNicBack').files[0];
-    const proofFile     = document.getElementById('investPaymentProof').files[0];
+    const fullName=document.getElementById('investFullName').value.trim();
+    const nicNumber=document.getElementById('investNic').value.trim();
+    const phoneNumber=document.getElementById('investPhone').value.trim();
+    const address=document.getElementById('investAddress').value.trim();
+    const amount=document.getElementById('investAmount').value.trim();
+    const duration=document.getElementById('investDuration').value;
+    const accountNumber=document.getElementById('investAccountNumber').value.trim();
+    const bankName=document.getElementById('investBankName').value;
+    const bankBranch=document.getElementById('investBankBranch').value.trim();
+    const nicFrontFile=document.getElementById('investNicFront').files[0];
+    const nicBackFile=document.getElementById('investNicBack').files[0];
+    const proofFile=document.getElementById('investPaymentProof').files[0];
 
     const errors=[];
     if(!fullName)errors.push('Name required');
@@ -1299,7 +1342,6 @@
     if(!nicFrontFile)errors.push('NIC front photo required');
     if(!nicBackFile)errors.push('NIC back photo required');
     if(!proofFile)errors.push('Payment proof required');
-
     if(errors.length){feedbackDiv.innerHTML=`<div class="error-text">⚠️ ${errors.join(' | ')}</div>`;return;}
 
     submitBtn.disabled=true;
@@ -1315,15 +1357,15 @@
       const proofURL=await uploadToCloudinary(proofFile);
       progressTxt.textContent='Saving investment...';setProgress('investProgressBar',88);
       await push(ref(db,'investments'),{
-        fullName, nicNumber, phoneNumber, address,
-        investmentAmount: parseFloat(amount),
-        durationMonths: parseInt(duration),
-        bankDetails:{ accountNumber, bankName, bankBranch },
-        nicFrontImg: nicFrontURL,
-        nicBackImg:  nicBackURL,
-        paymentProofImg: proofURL,
-        status: 'pending',
-        timestamp: Date.now()
+        fullName,nicNumber,phoneNumber,address,
+        investmentAmount:parseFloat(amount),
+        durationMonths:parseInt(duration),
+        bankDetails:{accountNumber,bankName,bankBranch},
+        nicFrontImg:nicFrontURL,
+        nicBackImg:nicBackURL,
+        paymentProofImg:proofURL,
+        status:'pending',
+        timestamp:Date.now()
       });
       setProgress('investProgressBar',100);
       feedbackDiv.innerHTML=`<div class="invest-success-message">${t('invest_success_msg')}</div>`;
@@ -1339,7 +1381,7 @@
     }
   });
 
-  // ── Loan tabs ─────────────────────────────────────────────────────
+  // ── Loan tabs ──────────────────────────────────────────────────────
   const tabBtns    = document.querySelectorAll('.tab-btn');
   const applyPanel = document.getElementById('applyLoanPanel');
   const repayPanel = document.getElementById('repayLoanPanel');
@@ -1350,7 +1392,7 @@
   }
   tabBtns.forEach(b=>b.addEventListener('click',()=>setLoanTab(b.getAttribute('data-loan-tab'))));
 
-  // ── Init ──────────────────────────────────────────────────────────
+  // ── Init ───────────────────────────────────────────────────────────
   setLanguage('si');
   setLoanTab('apply');
   showHome();

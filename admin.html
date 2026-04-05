@@ -31,6 +31,8 @@
     .nav-item i{width:18px;text-align:center;font-size:.9rem}
     .badge{background:#ef4444;color:white;font-size:.68rem;padding:.12rem .45rem;border-radius:40px;margin-left:auto;font-weight:700;min-width:20px;text-align:center}
     .badge.green{background:#16a34a}
+    .badge.teal{background:#0d9488}
+    .badge.gold{background:#d97706}
     .logout-btn{margin-top:auto;display:flex;align-items:center;gap:10px;padding:.75rem 1rem;border-radius:14px;color:#f87171;font-weight:600;cursor:pointer;background:none;border:none;width:100%;font-size:.9rem}
     .logout-btn:hover{background:rgba(248,113,113,.1)}
     .main-area{margin-left:230px;padding:1.8rem;min-height:100vh}
@@ -49,6 +51,7 @@
     .stat-card.green{border-top-color:#16a34a}
     .stat-card.red{border-top-color:#dc2626}
     .stat-card.purple{border-top-color:#7c3aed}
+    .stat-card.teal{border-top-color:#0d9488}
     .stat-value{font-size:1.9rem;font-weight:800;color:#0f2d42;line-height:1}
     .stat-label{font-size:.72rem;color:#7a9ab0;font-weight:600;text-transform:uppercase;letter-spacing:.04em}
     .stat-icon{font-size:1.2rem;margin-bottom:.2rem}
@@ -57,6 +60,10 @@
     .stat-card.green .stat-icon{color:#16a34a}
     .stat-card.red .stat-icon{color:#dc2626}
     .stat-card.purple .stat-icon{color:#7c3aed}
+    .stat-card.teal .stat-icon{color:#0d9488}
+
+    /* ── INVEST STATS ── */
+    .invest-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-bottom:1.8rem}
 
     /* ── FILTER / SEARCH ── */
     .filter-bar{display:flex;gap:.6rem;margin-bottom:1.4rem;flex-wrap:wrap;align-items:center;background:white;padding:.8rem 1rem;border-radius:16px;box-shadow:0 2px 8px rgba(0,0,0,.04)}
@@ -73,7 +80,6 @@
     .app-card{background:white;border-radius:20px;overflow:hidden;box-shadow:0 4px 16px rgba(0,0,0,.06);transition:.25s;display:flex;flex-direction:column}
     .app-card:hover{transform:translateY(-3px);box-shadow:0 10px 28px rgba(15,91,140,.12)}
 
-    /* Card top bar */
     .card-topbar{padding:1rem 1.2rem .8rem;display:flex;justify-content:space-between;align-items:flex-start;border-bottom:1px solid #f0f4fa}
     .card-topbar.pending{border-left:4px solid #f59e0b}
     .card-topbar.accepted{border-left:4px solid #16a34a}
@@ -84,29 +90,29 @@
     .card-avatar.pending{background:linear-gradient(135deg,#f59e0b,#d97706)}
     .card-avatar.accepted{background:linear-gradient(135deg,#16a34a,#15803d)}
     .card-avatar.cancelled,.card-avatar.rejected{background:linear-gradient(135deg,#dc2626,#b91c1c)}
+    .card-avatar.investment{background:linear-gradient(135deg,#0d9488,#0f766e)}
     .card-name{font-size:1rem;font-weight:700;color:#0f2d42;line-height:1.2}
     .card-date{font-size:.72rem;color:#9ab0c0;margin-top:.15rem}
     .card-status{padding:.28rem .8rem;border-radius:40px;font-size:.72rem;font-weight:700;text-transform:uppercase;flex-shrink:0}
     .card-status.pending{background:#fff8e0;color:#d97706}
     .card-status.accepted{background:#dcfce7;color:#16a34a}
     .card-status.cancelled,.card-status.rejected{background:#fee2e2;color:#dc2626}
+    .card-status.active{background:#ccfbf1;color:#0d9488}
 
-    /* Card info grid */
     .card-info{padding:.8rem 1.2rem;display:grid;grid-template-columns:1fr 1fr;gap:.5rem .8rem}
     .ci-item{display:flex;flex-direction:column;gap:.15rem}
     .ci-label{font-size:.68rem;font-weight:600;color:#9ab0c0;text-transform:uppercase;letter-spacing:.04em}
     .ci-value{font-size:.88rem;font-weight:600;color:#1e2f3e;word-break:break-all}
     .ci-value.amount{font-size:1rem;font-weight:800;color:#0f5b8c}
     .ci-value.green{color:#16a34a}
+    .ci-value.teal{color:#0d9488;font-size:1rem;font-weight:800}
 
-    /* NIC photos */
     .card-photos{padding:.6rem 1.2rem;display:flex;gap:.5rem;flex-wrap:wrap}
     .photo-chip{display:flex;align-items:center;gap:.4rem;background:#f0f4fa;border-radius:30px;padding:.3rem .7rem;cursor:pointer;transition:.2s;font-size:.78rem;font-weight:600;color:#0f5b8c;border:1px solid #e0eaf0}
     .photo-chip:hover{background:#0f5b8c;color:white;border-color:#0f5b8c}
     .photo-chip img{width:24px;height:24px;object-fit:cover;border-radius:50%;border:1px solid white}
     .photo-chip i{font-size:.75rem}
 
-    /* Financial panel inside card */
     .card-financial{margin:.2rem 1.2rem .8rem;background:linear-gradient(135deg,#f0f9ff,#f0fff4);border-radius:14px;padding:.8rem 1rem;border:1px solid #d4eaf8}
     .fin-header{font-size:.75rem;font-weight:700;color:#0f5b8c;margin-bottom:.6rem;display:flex;align-items:center;gap:5px}
     .fin-grid-mini{display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem}
@@ -121,30 +127,25 @@
     .outstanding-pill.settled{background:linear-gradient(95deg,#16a34a,#15803d)}
     .late-chip{background:#fff8e0;border:1px solid #fde68a;border-radius:8px;padding:.35rem .7rem;margin-top:.4rem;font-size:.72rem;color:#92400e;font-weight:600;display:flex;align-items:center;gap:5px}
 
-    /* Repayment mini history */
     .repay-mini{margin-top:.5rem}
     .repay-mini-title{font-size:.68rem;font-weight:700;color:#4a627a;margin-bottom:.3rem;display:flex;align-items:center;gap:4px}
     .repay-mini-row{display:flex;justify-content:space-between;align-items:center;padding:.25rem .4rem;border-radius:6px;font-size:.75rem;background:#f8faff;margin-bottom:.2rem}
     .rmr-date{color:#9ab0c0}
     .rmr-amount{font-weight:700;color:#16a34a}
 
-    /* Guarantor block */
     .card-guarantor{margin:0 1.2rem .8rem;background:#f8faff;border-radius:12px;padding:.7rem .9rem;border-left:3px solid #0f5b8c;font-size:.82rem}
     .guarantor-title{font-size:.72rem;font-weight:700;color:#0f5b8c;margin-bottom:.4rem;display:flex;align-items:center;gap:5px}
     .guarantor-grid{display:flex;flex-wrap:wrap;gap:.5rem .8rem;color:#4a627a}
     .guarantor-item{display:flex;align-items:center;gap:4px}
     .guarantor-item i{color:#0f5b8c;font-size:.75rem}
 
-    /* Blacklist tag */
     .bl-tag{margin:.2rem 1.2rem .5rem;background:#fce7f3;border:1px solid #f9a8d4;border-radius:8px;padding:.3rem .7rem;font-size:.75rem;color:#9d174d;font-weight:700;display:flex;align-items:center;gap:5px}
 
-    /* Bank details */
     .card-bank{margin:0 1.2rem .6rem;background:#f0fff4;border-radius:10px;padding:.5rem .8rem;border-left:3px solid #16a34a;font-size:.8rem}
     .bank-row{display:flex;gap:.5rem;color:#4a627a;align-items:center}
     .bank-row i{color:#16a34a;font-size:.75rem}
     .bank-label{color:#9ab0c0;font-size:.7rem}
 
-    /* Action row */
     .card-actions{padding:.8rem 1.2rem;border-top:1px solid #f0f4fa;display:flex;gap:.5rem;flex-wrap:wrap;background:#fafbfd;border-radius:0 0 20px 20px}
     .act-btn{padding:.42rem 1rem;border-radius:40px;font-size:.78rem;font-weight:700;cursor:pointer;border:none;transition:.2s;display:flex;align-items:center;gap:5px;font-family:inherit}
     .act-btn i{font-size:.72rem}
@@ -158,6 +159,35 @@
     .btn-blacklist:hover{background:#be185d;color:white}
     .btn-delete{background:#f3f4f6;color:#6b7280}
     .btn-delete:hover{background:#6b7280;color:white}
+    .btn-active{background:#ccfbf1;color:#0d9488}
+    .btn-active:hover{background:#0d9488;color:white}
+
+    /* ── INVESTMENT CARD ── */
+    .invest-card{background:white;border-radius:20px;overflow:hidden;box-shadow:0 4px 16px rgba(0,0,0,.06);transition:.25s;display:flex;flex-direction:column}
+    .invest-card:hover{transform:translateY(-3px);box-shadow:0 10px 28px rgba(13,148,136,.15)}
+    .invest-topbar{padding:1rem 1.2rem .8rem;display:flex;justify-content:space-between;align-items:flex-start;border-bottom:1px solid #f0f4fa}
+    .invest-topbar.pending{border-left:4px solid #f59e0b}
+    .invest-topbar.accepted,.invest-topbar.active{border-left:4px solid #0d9488}
+    .invest-topbar.cancelled{border-left:4px solid #dc2626}
+    .invest-amount-hero{margin:.5rem 1.2rem .8rem;background:linear-gradient(135deg,#f0fdfa,#ccfbf1);border-radius:14px;padding:.9rem 1.1rem;border:1px solid #99f6e4;display:flex;justify-content:space-between;align-items:center}
+    .invest-amount-label{font-size:.7rem;font-weight:700;color:#0d9488;text-transform:uppercase;letter-spacing:.04em;margin-bottom:.2rem}
+    .invest-amount-value{font-size:1.6rem;font-weight:800;color:#0f766e}
+    .invest-return-pill{background:linear-gradient(135deg,#0d9488,#0f766e);color:white;border-radius:10px;padding:.5rem .9rem;text-align:center}
+    .invest-return-label{font-size:.62rem;font-weight:700;opacity:.8;text-transform:uppercase}
+    .invest-return-value{font-size:1rem;font-weight:800}
+    .invest-timeline{margin:0 1.2rem .8rem;background:#f8faff;border-radius:10px;padding:.6rem .9rem;display:flex;gap:1rem;flex-wrap:wrap}
+    .invest-tl-item{display:flex;flex-direction:column;gap:.1rem;flex:1;min-width:80px}
+    .invest-tl-label{font-size:.62rem;font-weight:700;color:#9ab0c0;text-transform:uppercase}
+    .invest-tl-value{font-size:.82rem;font-weight:700;color:#1e2f3e}
+
+    /* ── INVEST SUMMARY BAR ── */
+    .invest-summary-bar{background:linear-gradient(135deg,#0a1f2e,#0d3550);border-radius:18px;padding:1.2rem 1.5rem;margin-bottom:1.5rem;display:grid;grid-template-columns:repeat(4,1fr);gap:1rem}
+    .isb-item{text-align:center}
+    .isb-value{font-size:1.5rem;font-weight:800;color:white;line-height:1}
+    .isb-label{font-size:.68rem;font-weight:600;color:#7ab0c0;text-transform:uppercase;margin-top:.2rem}
+    .isb-value.teal{color:#2dd4bf}
+    .isb-value.gold{color:#fbbf24}
+    .isb-value.green{color:#4ade80}
 
     /* ── REPAY CARDS ── */
     .repay-card{background:white;border-radius:18px;overflow:hidden;box-shadow:0 3px 12px rgba(0,0,0,.05);display:flex;flex-direction:column}
@@ -216,7 +246,7 @@
       .sidebar{width:100%;height:auto;position:relative;flex-direction:row;flex-wrap:wrap;padding:.8rem}
       .sidebar-logo{width:100%;padding:.3rem .5rem .8rem}
       .main-area{margin-left:0}
-      .stats-row{grid-template-columns:repeat(2,1fr)}
+      .stats-row,.invest-stats,.invest-summary-bar{grid-template-columns:repeat(2,1fr)}
       .cards-grid{grid-template-columns:1fr}
       .search-box{width:100%;margin-left:0}
     }
@@ -242,6 +272,7 @@
     <div class="sidebar-logo"><i class="fas fa-chart-line" style="color:#2b9b7a"></i> Lend<span>Easy</span> Admin</div>
     <button class="nav-item active" data-view="applications"><i class="fas fa-file-invoice-dollar"></i> Applications <span class="badge" id="pendingBadge" style="display:none">0</span></button>
     <button class="nav-item" data-view="repayments"><i class="fas fa-money-bill-wave"></i> Repayments <span class="badge green" id="repayPendingBadge" style="display:none">0</span></button>
+    <button class="nav-item" data-view="investments"><i class="fas fa-piggy-bank"></i> Investments <span class="badge teal" id="investBadge" style="display:none">0</span></button>
     <button class="nav-item" data-view="blacklist"><i class="fas fa-ban"></i> Blacklist <span class="badge" id="blacklistBadge" style="display:none">0</span></button>
     <button class="logout-btn" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Logout</button>
   </nav>
@@ -252,13 +283,21 @@
       <div class="live-dot">Live Data</div>
     </div>
 
-    <!-- STATS ROW -->
+    <!-- STATS ROW (loans) -->
     <div class="stats-row" id="statsRow">
       <div class="stat-card blue"><i class="fas fa-file-alt stat-icon"></i><div class="stat-value" id="sTotalApps">0</div><div class="stat-label">Total Applications</div></div>
       <div class="stat-card yellow"><i class="fas fa-clock stat-icon"></i><div class="stat-value" id="sPending">0</div><div class="stat-label">Pending</div></div>
       <div class="stat-card green"><i class="fas fa-check-circle stat-icon"></i><div class="stat-value" id="sAccepted">0</div><div class="stat-label">Accepted</div></div>
       <div class="stat-card red"><i class="fas fa-times-circle stat-icon"></i><div class="stat-value" id="sCancelled">0</div><div class="stat-label">Cancelled</div></div>
       <div class="stat-card purple"><i class="fas fa-ban stat-icon"></i><div class="stat-value" id="sBlacklisted">0</div><div class="stat-label">Blacklisted</div></div>
+    </div>
+
+    <!-- STATS ROW (investments) -->
+    <div class="invest-stats" id="investStatsRow" style="display:none">
+      <div class="stat-card teal"><i class="fas fa-piggy-bank stat-icon"></i><div class="stat-value" id="siTotal">0</div><div class="stat-label">Total Investments</div></div>
+      <div class="stat-card yellow"><i class="fas fa-clock stat-icon"></i><div class="stat-value" id="siPending">0</div><div class="stat-label">Pending</div></div>
+      <div class="stat-card green"><i class="fas fa-check-circle stat-icon"></i><div class="stat-value" id="siActive">0</div><div class="stat-label">Active</div></div>
+      <div class="stat-card red"><i class="fas fa-times-circle stat-icon"></i><div class="stat-value" id="siClosed">0</div><div class="stat-label">Closed / Cancelled</div></div>
     </div>
 
     <!-- FILTER BAR -->
@@ -305,12 +344,13 @@
   const ADMIN_USER = "admin";
   const ADMIN_PASS = "lendeasy2025";
 
-  let allApps      = [];
-  let allRepays    = [];
-  let allBlacklist = [];
-  let currentView  = 'applications';
-  let filterStatus = 'all';
-  let searchQuery  = '';
+  let allApps        = [];
+  let allRepays      = [];
+  let allBlacklist   = [];
+  let allInvestments = [];
+  let currentView    = 'applications';
+  let filterStatus   = 'all';
+  let searchQuery    = '';
 
   // ── LOGIN ────────────────────────────────────────────────────────
   document.getElementById('loginBtn').addEventListener('click', doLogin);
@@ -357,19 +397,26 @@
       updateBlacklistBadge();
       if(currentView==='blacklist') renderList();
     });
+    onValue(ref(db,'investments'), snap => {
+      allInvestments = [];
+      snap.forEach(child => { allInvestments.push({ id:child.key, ...child.val() }); });
+      allInvestments.sort((a,b)=>(b.timestamp||0)-(a.timestamp||0));
+      updateInvestBadge();
+      if(currentView==='investments') renderList();
+    });
   }
 
   // ── FINANCIAL CALC ────────────────────────────────────────────────
   function calcFinancials(loan) {
     if (loan.status !== 'accepted' || !loan.approvedDate) return null;
-    const MS_DAY      = 86400000;
-    const now         = Date.now();
-    const principal   = parseFloat(loan.loanAmount) || 0;
-    const daysSince   = Math.floor((now - loan.approvedDate) / MS_DAY);
-    const months      = Math.max(1, Math.ceil(daysSince / 30));
-    const interest    = principal * 0.015 * months;
-    const totalDue    = principal + interest;
-    const loanRepays  = allRepays.filter(r =>
+    const MS_DAY    = 86400000;
+    const now       = Date.now();
+    const principal = parseFloat(loan.loanAmount) || 0;
+    const daysSince = Math.floor((now - loan.approvedDate) / MS_DAY);
+    const months    = Math.max(1, Math.ceil(daysSince / 30));
+    const interest  = principal * 0.015 * months;
+    const totalDue  = principal + interest;
+    const loanRepays = allRepays.filter(r =>
       r.status === 'accepted' &&
       r.nicNumber && loan.nicNumber &&
       r.nicNumber.toLowerCase() === loan.nicNumber.toLowerCase()
@@ -381,6 +428,16 @@
     const totalOut    = outstanding + lateFee;
     const isSettled   = totalOut <= 0;
     return { principal, interest, totalDue, months, daysSince, totalPaid, daysLate, lateFee, totalOut, isSettled, loanRepays };
+  }
+
+  // ── INVESTMENT RETURN CALC ────────────────────────────────────────
+  function calcInvestReturn(inv) {
+    const amount   = parseFloat(inv.amount) || 0;
+    const rate     = parseFloat(inv.interestRate) || 10; // default 10% p.a.
+    const duration = parseInt(inv.duration) || 12;       // months
+    const interest = amount * (rate / 100) * (duration / 12);
+    const total    = amount + interest;
+    return { amount, rate, duration, interest, total };
   }
 
   // ── AUTO BLACKLIST ────────────────────────────────────────────────
@@ -417,6 +474,16 @@
     const pb = document.getElementById('pendingBadge');
     pb.textContent = pending; pb.style.display = pending > 0 ? 'inline' : 'none';
   }
+  function updateInvestStats() {
+    const total    = allInvestments.length;
+    const pending  = allInvestments.filter(i=>i.status==='pending').length;
+    const active   = allInvestments.filter(i=>i.status==='accepted'||i.status==='active').length;
+    const closed   = allInvestments.filter(i=>i.status==='cancelled'||i.status==='closed').length;
+    document.getElementById('siTotal').textContent   = total;
+    document.getElementById('siPending').textContent = pending;
+    document.getElementById('siActive').textContent  = active;
+    document.getElementById('siClosed').textContent  = closed;
+  }
   function updateRepayBadge() {
     const pending = allRepays.filter(r=>r.status==='pending').length;
     const rb = document.getElementById('repayPendingBadge');
@@ -426,6 +493,12 @@
     const bb = document.getElementById('blacklistBadge');
     bb.textContent = allBlacklist.length; bb.style.display = allBlacklist.length > 0 ? 'inline' : 'none';
     document.getElementById('sBlacklisted').textContent = allBlacklist.length;
+  }
+  function updateInvestBadge() {
+    const pending = allInvestments.filter(i=>i.status==='pending').length;
+    const ib = document.getElementById('investBadge');
+    ib.textContent = pending; ib.style.display = pending > 0 ? 'inline' : 'none';
+    updateInvestStats();
   }
 
   // ── NAV ──────────────────────────────────────────────────────────
@@ -437,12 +510,29 @@
       filterStatus = 'all'; searchQuery = '';
       const sb = document.getElementById('searchBox'); if(sb) sb.value='';
       document.querySelectorAll('.filter-btn').forEach(b=>b.classList.toggle('active', b.getAttribute('data-filter')==='all'));
-      const isApps = currentView==='applications';
-      const isBL   = currentView==='blacklist';
-      document.getElementById('statsRow').style.display  = isApps ? 'grid' : 'none';
-      document.getElementById('filterBar').style.display = isBL   ? 'none' : 'flex';
-      document.getElementById('pageTitle').textContent   =
-        isApps ? '📋 Loan Applications' : currentView==='repayments' ? '💰 Loan Repayments' : '🚫 Blacklist Management';
+
+      const isApps    = currentView==='applications';
+      const isBL      = currentView==='blacklist';
+      const isInvest  = currentView==='investments';
+
+      document.getElementById('statsRow').style.display        = isApps   ? 'grid' : 'none';
+      document.getElementById('investStatsRow').style.display  = isInvest ? 'grid' : 'none';
+      document.getElementById('filterBar').style.display       = isBL     ? 'none' : 'flex';
+
+      // Update filter buttons for investments
+      if (isInvest) {
+        document.querySelectorAll('.filter-btn[data-filter="accepted"]').forEach(b=>b.textContent='✅ Active');
+        document.querySelectorAll('.filter-btn[data-filter="cancelled"]').forEach(b=>b.textContent='❌ Closed');
+      } else {
+        document.querySelectorAll('.filter-btn[data-filter="accepted"]').forEach(b=>b.textContent='✅ Accepted');
+        document.querySelectorAll('.filter-btn[data-filter="cancelled"]').forEach(b=>b.textContent='❌ Cancelled');
+      }
+
+      document.getElementById('pageTitle').textContent =
+        isApps   ? '📋 Loan Applications' :
+        isInvest ? '💰 Investments' :
+        currentView==='repayments' ? '💸 Loan Repayments' : '🚫 Blacklist Management';
+
       renderList();
     });
   });
@@ -460,7 +550,9 @@
   // ── RENDER ───────────────────────────────────────────────────────
   function renderList() {
     const list = document.getElementById('cardsList');
-    if (currentView === 'blacklist') { renderBlacklist(list); return; }
+    if (currentView === 'blacklist')    { renderBlacklist(list); return; }
+    if (currentView === 'investments')  { renderInvestments(list); return; }
+
     let data = currentView==='applications' ? allApps : allRepays;
     if(currentView==='applications' && filterStatus!=='all') data = data.filter(a=>a.status===filterStatus);
     if(searchQuery) data = data.filter(a=>
@@ -482,7 +574,6 @@
     const fin     = calcFinancials(a);
     const isInBL  = allBlacklist.some(b=>b.nicNumber && a.nicNumber && b.nicNumber.toLowerCase()===a.nicNumber.toLowerCase());
 
-    // ── Financial block ──────────────────────────────────────────
     let finHtml = '';
     if (fin) {
       const repayRows = fin.loanRepays.length > 0
@@ -509,7 +600,6 @@
       finHtml = `<div class="card-financial"><div class="fin-header" style="color:#d97706"><i class="fas fa-exclamation-triangle"></i> No approval date recorded. Re-accept to set start date.</div></div>`;
     }
 
-    // ── Guarantor block ──────────────────────────────────────────
     const gHtml = a.hasGuarantor && a.guarantor ? `
       <div class="card-guarantor">
         <div class="guarantor-title"><i class="fas fa-user-shield"></i> Guarantor</div>
@@ -521,7 +611,6 @@
         ${a.guarantor.idPhotoImg ? `<div style="margin-top:.4rem"><span class="photo-chip" onclick="showImg('${a.guarantor.idPhotoImg}')"><i class="fas fa-id-badge"></i> View ID</span></div>` : ''}
       </div>` : '';
 
-    // ── Bank details ─────────────────────────────────────────────
     const bankHtml = a.bankDetails ? `
       <div class="card-bank">
         <div class="bank-row"><i class="fas fa-university"></i> <span>${a.bankDetails.bankName||'—'}</span> <span class="bank-label">— ${a.bankDetails.bankBranch||'—'}</span></div>
@@ -543,24 +632,20 @@
         </div>
         <span class="card-status ${status}">${status.toUpperCase()}</span>
       </div>
-
       <div class="card-info">
         <div class="ci-item"><div class="ci-label">NIC</div><div class="ci-value">${a.nicNumber||'—'}</div></div>
         <div class="ci-item"><div class="ci-label">Phone</div><div class="ci-value">${a.applicantPhone||'—'}</div></div>
         <div class="ci-item"><div class="ci-label">Loan Amount</div><div class="ci-value amount">${fmtAmt(a.loanAmount||0)}</div></div>
         <div class="ci-item"><div class="ci-label">Address</div><div class="ci-value">${(a.address||'—').substring(0,40)}</div></div>
       </div>
-
       <div class="card-photos">
         ${a.nicFrontImg ? `<span class="photo-chip" onclick="showImg('${a.nicFrontImg}')"><i class="fas fa-id-card"></i> NIC Front</span>` : ''}
         ${a.nicBackImg  ? `<span class="photo-chip" onclick="showImg('${a.nicBackImg}')"><i class="fas fa-id-card"></i> NIC Back</span>` : ''}
       </div>
-
       ${bankHtml}
       ${gHtml}
       ${finHtml}
       ${blTag}
-
       <div class="card-actions">
         <button class="act-btn btn-accept"    onclick="setStatus('${a.id}','accepted')"><i class="fas fa-check"></i> Accept</button>
         <button class="act-btn btn-cancel"    onclick="setStatus('${a.id}','cancelled')"><i class="fas fa-times"></i> Cancel</button>
@@ -596,6 +681,112 @@
         <button class="act-btn btn-accept" onclick="setRepayStatus('${r.id}','accepted')"><i class="fas fa-check"></i> Confirm</button>
         <button class="act-btn btn-cancel" onclick="setRepayStatus('${r.id}','cancelled')"><i class="fas fa-times"></i> Reject</button>
         <button class="act-btn btn-delete" onclick="deleteEntry('${r.id}','loan_repayments')"><i class="fas fa-trash"></i> Delete</button>
+      </div>
+    </div>`;
+  }
+
+  // ── INVESTMENT CARDS ──────────────────────────────────────────────
+  function renderInvestments(list) {
+    updateInvestStats();
+
+    let data = [...allInvestments];
+    if (filterStatus !== 'all') {
+      if (filterStatus === 'accepted') data = data.filter(i => i.status==='accepted'||i.status==='active');
+      else data = data.filter(i => i.status === filterStatus);
+    }
+    if (searchQuery) data = data.filter(i =>
+      (i.name||'').toLowerCase().includes(searchQuery) ||
+      (i.nicNumber||'').toLowerCase().includes(searchQuery) ||
+      (i.phone||'').toLowerCase().includes(searchQuery)
+    );
+
+    // Summary bar
+    const totalCapital  = allInvestments.filter(i=>i.status==='accepted'||i.status==='active').reduce((s,i)=>s+(parseFloat(i.amount)||0),0);
+    const totalReturns  = allInvestments.filter(i=>i.status==='accepted'||i.status==='active').reduce((s,i)=>{ const c=calcInvestReturn(i); return s+c.interest; },0);
+    const totalPayouts  = allInvestments.filter(i=>i.status==='accepted'||i.status==='active').reduce((s,i)=>{ const c=calcInvestReturn(i); return s+c.total; },0);
+    const pendingCount  = allInvestments.filter(i=>i.status==='pending').length;
+
+    const summaryBar = data.length > 0 || allInvestments.length > 0 ? `
+      <div class="invest-summary-bar" style="grid-column:1/-1">
+        <div class="isb-item"><div class="isb-value teal">${fmtAmt(totalCapital)}</div><div class="isb-label">Active Capital</div></div>
+        <div class="isb-item"><div class="isb-value gold">${fmtAmt(totalReturns)}</div><div class="isb-label">Total Returns Owed</div></div>
+        <div class="isb-item"><div class="isb-value green">${fmtAmt(totalPayouts)}</div><div class="isb-label">Total Payouts</div></div>
+        <div class="isb-item"><div class="isb-value" style="color:white">${pendingCount}</div><div class="isb-label">Awaiting Approval</div></div>
+      </div>` : '';
+
+    if (data.length === 0) {
+      list.innerHTML = summaryBar + `<div class="empty-state" style="grid-column:1/-1"><i class="fas fa-piggy-bank"></i><p>No investment records found</p></div>`;
+      return;
+    }
+
+    list.innerHTML = summaryBar + data.map(inv => investCard(inv)).join('');
+  }
+
+  function investCard(inv) {
+    const status = inv.status || 'pending';
+    const date   = inv.timestamp ? new Date(inv.timestamp).toLocaleString('en-GB',{day:'2-digit',month:'short',year:'numeric',hour:'2-digit',minute:'2-digit'}) : '—';
+    const calc   = calcInvestReturn(inv);
+    const displayStatus = (status === 'accepted' || status === 'active') ? 'active' : status;
+
+    const startDate  = inv.startDate  ? new Date(inv.startDate).toLocaleDateString()  : '—';
+    const endDate    = inv.endDate    ? new Date(inv.endDate).toLocaleDateString()    : '—';
+    const maturityMs = inv.endDate ? inv.endDate - Date.now() : null;
+    const daysLeft   = maturityMs ? Math.ceil(maturityMs / 86400000) : null;
+
+    let daysLeftHtml = '';
+    if (daysLeft !== null && (status === 'accepted' || status === 'active')) {
+      const dl = daysLeft > 0
+        ? `<span style="color:#0d9488;font-weight:700">${daysLeft} days left</span>`
+        : `<span style="color:#dc2626;font-weight:700">Matured ${Math.abs(daysLeft)} days ago</span>`;
+      daysLeftHtml = `<div style="grid-column:1/-1;font-size:.78rem;color:#9ab0c0">${dl}</div>`;
+    }
+
+    return `
+    <div class="invest-card" id="inv-${inv.id}">
+      <div class="invest-topbar ${displayStatus}">
+        <div class="card-person">
+          <div class="card-avatar investment">${initials(inv.name)}</div>
+          <div>
+            <div class="card-name">${inv.name||'—'}</div>
+            <div class="card-date">${date}</div>
+          </div>
+        </div>
+        <span class="card-status ${displayStatus}">${displayStatus.toUpperCase()}</span>
+      </div>
+
+      <div class="invest-amount-hero">
+        <div>
+          <div class="invest-amount-label">Investment Amount</div>
+          <div class="invest-amount-value">${fmtAmt(calc.amount)}</div>
+        </div>
+        <div class="invest-return-pill">
+          <div class="invest-return-label">Total Payout</div>
+          <div class="invest-return-value">${fmtAmt(calc.total)}</div>
+        </div>
+      </div>
+
+      <div class="card-info">
+        <div class="ci-item"><div class="ci-label">NIC</div><div class="ci-value">${inv.nicNumber||'—'}</div></div>
+        <div class="ci-item"><div class="ci-label">Phone</div><div class="ci-value">${inv.phone||'—'}</div></div>
+        <div class="ci-item"><div class="ci-label">Interest Rate</div><div class="ci-value teal">${calc.rate}% p.a.</div></div>
+        <div class="ci-item"><div class="ci-label">Duration</div><div class="ci-value">${calc.duration} months</div></div>
+      </div>
+
+      <div class="invest-timeline">
+        <div class="invest-tl-item"><div class="invest-tl-label">Start Date</div><div class="invest-tl-value">${startDate}</div></div>
+        <div class="invest-tl-item"><div class="invest-tl-label">Maturity Date</div><div class="invest-tl-value">${endDate}</div></div>
+        <div class="invest-tl-item"><div class="invest-tl-label">Interest Earned</div><div class="invest-tl-value" style="color:#0d9488">${fmtAmt(calc.interest)}</div></div>
+        ${daysLeftHtml}
+      </div>
+
+      ${inv.purpose ? `<div style="margin:.2rem 1.2rem .6rem;background:#f0f9ff;border-radius:10px;padding:.5rem .8rem;font-size:.82rem;color:#1e2f3e;border-left:3px solid #0f5b8c"><span style="font-size:.68rem;font-weight:700;color:#9ab0c0;text-transform:uppercase">Purpose: </span>${inv.purpose}</div>` : ''}
+      ${inv.bankDetails ? `<div class="card-bank"><div class="bank-row"><i class="fas fa-university"></i> <span>${inv.bankDetails.bankName||'—'}</span> <span class="bank-label">— ${inv.bankDetails.branch||'—'}</span></div><div class="bank-row" style="margin-top:.2rem"><i class="fas fa-hashtag"></i> <span style="font-family:monospace;font-size:.82rem">${inv.bankDetails.accountNumber||'—'}</span></div></div>` : ''}
+
+      <div class="card-actions">
+        <button class="act-btn btn-active"  onclick="setInvestStatus('${inv.id}','accepted')"><i class="fas fa-check"></i> Activate</button>
+        <button class="act-btn btn-pending" onclick="setInvestStatus('${inv.id}','pending')"><i class="fas fa-clock"></i> Pending</button>
+        <button class="act-btn btn-cancel"  onclick="setInvestStatus('${inv.id}','cancelled')"><i class="fas fa-times"></i> Cancel</button>
+        <button class="act-btn btn-delete"  onclick="deleteEntry('${inv.id}','investments')"><i class="fas fa-trash"></i> Delete</button>
       </div>
     </div>`;
   }
@@ -661,6 +852,24 @@
     await update(ref(db,`loan_repayments/${id}`), { status });
     showToast(status==='accepted' ? 'Payment confirmed ✅' : 'Payment rejected', status==='accepted' ? 'success' : 'error');
   };
+  window.setInvestStatus = async (id, status) => {
+    const updates = { status };
+    if (status === 'accepted') {
+      const inv = allInvestments.find(i=>i.id===id);
+      if (inv && !inv.startDate) {
+        const start = Date.now();
+        const dur   = parseInt(inv.duration) || 12;
+        updates.startDate = start;
+        updates.endDate   = start + dur * 30 * 86400000;
+      }
+    }
+    await update(ref(db,`investments/${id}`), updates);
+    showToast(
+      status==='accepted' ? 'Investment activated ✅' :
+      status==='cancelled' ? 'Investment cancelled' : 'Moved to pending',
+      status==='accepted' ? 'success' : status==='cancelled' ? 'error' : ''
+    );
+  };
   window.deleteEntry = async (id, path) => {
     if(!confirm('Delete this record permanently?')) return;
     await remove(ref(db,`${path}/${id}`));
@@ -691,6 +900,7 @@
     await remove(ref(db,`blacklist/${id}`));
     showToast(`${name} removed`,'success');
   };
+  window.renderList = renderList; // expose for blacklist search
 
   // ── LIGHTBOX ─────────────────────────────────────────────────────
   window.showImg = url => { document.getElementById('lightboxImg').src=url; document.getElementById('lightbox').classList.add('show'); };
