@@ -717,9 +717,9 @@
 
   function buildBlacklistRejectionHtml(entry, lang) {
     const msgs = {
-      si:{ title:'🚫 ඔබගේ අයදුම්පත ප්‍රතික්ෂේප කරන ලදි', sub:'ඔබ LendEasy Finance හි කළු ලැයිස්තුවේ ඇත.', reason:'හේතුව', contact:'ගැටලුවක් ඇත්නම් +94 112 345 678 හෝ WhatsApp මගින් අපව අමතන්න.', added:'එකතු කළ දිනය' },
-      ta:{ title:'🚫 உங்கள் விண்ணப்பம் நிராகரிக்கப்பட்டது', sub:'நீங்கள் LendEasy Finance கறுப்புப் பட்டியலில் உள்ளீர்கள்.', reason:'காரணம்', contact:'தொடர்பு: +94 112 345 678', added:'சேர்க்கப்பட்ட தேதி' },
-      en:{ title:'🚫 Your Application Has Been Rejected', sub:'You are on the LendEasy Finance blacklist.', reason:'Reason', contact:'If you believe this is an error, contact us at +94 112 345 678.', added:'Blacklisted on' }
+      si:{ title:'🚫 ඔබගේ අයදුම්පත ප්‍රතික්ෂේප කරන ලදි', sub:'ඔබ Wasana Investment හි කළු ලැයිස්තුවේ ඇත.', reason:'හේතුව', contact:'ගැටලුවක් ඇත්නම් +94 112 345 678 හෝ WhatsApp මගින් අපව අමතන්න.', added:'එකතු කළ දිනය' },
+      ta:{ title:'🚫 உங்கள் விண்ணப்பம் நிராகரிக்கப்பட்டது', sub:'நீங்கள் Wasana Inwestment கறுப்புப் பட்டியலில் உள்ளீர்கள்.', reason:'காரணம்', contact:'தொடர்பு: +94 112 345 678', added:'சேர்க்கப்பட்ட தேதி' },
+      en:{ title:'🚫 Your Application Has Been Rejected', sub:'You are on the Wasana Investment blacklist.', reason:'Reason', contact:'If you believe this is an error, contact us at +94 112 345 678.', added:'Blacklisted on' }
     };
     const m = msgs[lang]||msgs.en;
     const addedDate = entry.addedDate ? new Date(entry.addedDate).toLocaleDateString() : '—';
@@ -763,7 +763,7 @@
       submit_btn_text:"අයදුම්පත ඉදිරිපත් කරන්න",submitting:"ඡායාරූප upload කරමින්...",success_msg:"✅ ඔබගේ ණය අයදුම්පත සාර්ථකව ලැබුණි!",
       repayment_form_title:"💰 ණය ගෙවීම් විස්තර",
       repay_nic_label:"NIC අංකය",repay_nic_hint:"(ඇතුළු කළ පසු 🔍 ක්ලික් කරන්න)",
-      repay_info_principal:"ණය මුදල",repay_info_months:"ගත වූ මාස",repay_info_interest:"පොලිය (1.5%/මාස)",
+      repay_info_principal:"ණය මුදල",repay_info_months:"ගත වූ මාස",repay_info_interest:"පොලිය (0.27%/දෛනික)",
       repay_info_paid:"දැනටමත් ගෙවූ",repay_info_late_fee:"ප්‍රමාද ගාස්තු",repay_info_date:"අයදුම් දිනය",
       repay_not_found:"මෙම NIC අංකය සඳහා ණය අයදුම්පතක් හමු නොවීය.",
       repay_name_label:"සම්පූර්ණ නම",repay_amount_label:"ගෙවන මුදල (රු.)",repay_amount_hint:"ශේෂය: ",
@@ -786,18 +786,18 @@
       invest_amount_section:"ආයෝජන විස්තර",
       invest_amount_label:"ආයෝජන මුදල (රු.)",invest_amount_hint:"අවම ආයෝජනය: රු. 10,000/-",
       invest_duration_label:"ආයෝජන කාලය",invest_duration_placeholder:"-- කාලය තෝරන්න --",
-      invest_3months:"මාස 3",invest_6months:"මාස 6",invest_12months:"මාස 12",invest_24months:"මාස 24",
+      invest_3months:"මාස 6",invest_6months:"මාස 12",invest_12months:"මාස 18",invest_24months:"මාස 24",
       invest_nic_photos_section:"NIC ඡායාරූප",
       invest_nic_front_label:"NIC ඉදිරිපස ඡායාරූපය",invest_nic_back_label:"NIC පසුපස ඡායාරූපය",
       invest_bank_section:"ප්‍රතිලාභ ලැබිය යුතු ගිණුම",
       invest_account_label:"ගිණුම් අංකය",invest_bank_name_label:"බැංකුව",invest_bank_branch_label:"ශාඛාව",
       invest_proof_section:"ගෙවීමේ සාක්ෂිය",
-      invest_proof_desc:"ආයෝජනය සඳහා LendEasy Finance ගිණුමට මුදල් ලබා දී ඇති බවට සාක්ෂිය ඉදිරිපත් කරන්න.",
+      invest_proof_desc:"ආයෝජනය සඳහා Wasana Investment ගිණුමට මුදල් ලබා දී ඇති බවට සාක්ෂිය ඉදිරිපත් කරන්න.",
       invest_proof_label:"බැංකු රිසිට්පත / ස්ලිප් ඡායාරූපය",
       invest_submit_btn:"ආයෝජන අයදුම්පත ඉදිරිපත් කරන්න",
       invest_submitting:"ඡායාරූප upload කරමින්...",
       invest_success_msg:"🌱 ඔබගේ ආයෝජන අයදුම්පත සාර්ථකව ලැබුණි! ශ්‍රේෂ්ඨ!",
-      invest_amount_min_error:"ආයෝජන මුදල රු. 1,000 ට වැඩිය යුතුය"
+      invest_amount_min_error:"ආයෝජන මුදල රු. 10,000 ට වැඩිය යුතුය"
     },
     ta:{
       nav_home:"முகப்பு",nav_services:"சேவைகள்",nav_loan:"கடன்",nav_invest:"முதலீடு",nav_about:"எங்களை பற்றி",nav_contact:"தொடர்பு",
@@ -857,18 +857,18 @@
       invest_amount_section:"முதலீட்டு விவரங்கள்",
       invest_amount_label:"முதலீட்டு தொகை (ரூ.)",invest_amount_hint:"குறைந்தபட்சம்: ரூ. 10,000/-",
       invest_duration_label:"முதலீட்டு காலம்",invest_duration_placeholder:"-- காலத்தை தேர்ந்தெடுக்கவும் --",
-      invest_3months:"3 மாதங்கள்",invest_6months:"6 மாதங்கள்",invest_12months:"12 மாதங்கள்",invest_24months:"24 மாதங்கள்",
+      invest_3months:"6 மாதங்கள்",invest_6months:"12 மாதங்கள்",invest_12months:"18 மாதங்கள்",invest_24months:"24 மாதங்கள்",
       invest_nic_photos_section:"அடையாள அட்டை புகைப்படங்கள்",
       invest_nic_front_label:"அட்டை முன்புறம்",invest_nic_back_label:"அட்டை பின்புறம்",
       invest_bank_section:"வருமானம் பெறும் கணக்கு",
       invest_account_label:"கணக்கு எண்",invest_bank_name_label:"வங்கி",invest_bank_branch_label:"கிளை",
       invest_proof_section:"கட்டண சான்று",
-      invest_proof_desc:"LendEasy Finance கணக்கில் பணம் செலுத்தியதற்கான சான்றை சமர்ப்பிக்கவும்.",
+      invest_proof_desc:"Wasana Investment கணக்கில் பணம் செலுத்தியதற்கான சான்றை சமர்ப்பிக்கவும்.",
       invest_proof_label:"வங்கி ரசீது / ஸ்லிப்",
       invest_submit_btn:"முதலீட்டு விண்ணப்பத்தை சமர்ப்பிக்கவும்",
       invest_submitting:"படங்களை பதிவேற்றுகிறது...",
       invest_success_msg:"🌱 முதலீட்டு விண்ணப்பம் வெற்றிகரமாக சமர்ப்பிக்கப்பட்டது!",
-      invest_amount_min_error:"முதலீட்டு தொகை குறைந்தபட்சம் ரூ. 1,000 ஆக இருக்க வேண்டும்"
+      invest_amount_min_error:"முதலீட்டு தொகை குறைந்தபட்சம் ரூ. 10,000 ஆக இருக்க வேண்டும்"
     },
     en:{
       nav_home:"Home",nav_services:"Services",nav_loan:"Loan",nav_invest:"Invest",nav_about:"About",nav_contact:"Contact",
@@ -905,7 +905,7 @@
       submit_btn_text:"Submit Application",submitting:"Uploading images...",success_msg:"✅ Your loan application submitted successfully!",
       repayment_form_title:"💰 Loan Repayment Details",
       repay_nic_label:"NIC Number",repay_nic_hint:"(Enter NIC then click 🔍 to search)",
-      repay_info_principal:"Loan Principal",repay_info_months:"Months Elapsed",repay_info_interest:"Interest (1.5%/mo)",
+      repay_info_principal:"Loan Principal",repay_info_months:"Months Elapsed",repay_info_interest:"Interest (4%/mo)",
       repay_info_paid:"Already Paid",repay_info_late_fee:"Late Fee",repay_info_date:"Application Date",
       repay_not_found:"No loan application found for this NIC number.",
       repay_name_label:"Full Name",repay_amount_label:"Payment Amount (LKR)",repay_amount_hint:"Balance: ",
@@ -928,7 +928,7 @@
       invest_amount_section:"Investment Details",
       invest_amount_label:"Investment Amount (LKR)",invest_amount_hint:"Minimum investment: LKR 10,000/-",
       invest_duration_label:"Investment Duration",invest_duration_placeholder:"-- Select Duration --",
-      invest_3months:"3 Months",invest_6months:"6 Months",invest_12months:"12 Months",invest_24months:"24 Months",
+      invest_3months:"6 Months",invest_6months:"12 Months",invest_12months:"18 Months",invest_24months:"24 Months",
       invest_nic_photos_section:"NIC Photos",
       invest_nic_front_label:"NIC Front Photo",invest_nic_back_label:"NIC Back Photo",
       invest_bank_section:"Return Payment Bank Account",
@@ -939,7 +939,7 @@
       invest_submit_btn:"Submit Investment Application",
       invest_submitting:"Uploading images...",
       invest_success_msg:"🌱 Your investment application has been submitted successfully!",
-      invest_amount_min_error:"Investment amount must be at least LKR 1,000"
+      invest_amount_min_error:"Investment amount must be at least LKR 10,000"
     }
   };
 
