@@ -629,69 +629,7 @@
 </script>
 
 <script type="module">
-  import { initializeApp }    from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-  import { getDatabase, ref, push, get, child } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
-
-  const firebaseConfig = {
-    apiKey: "AIzaSyDlNPMm6sEQlQ-UTsrFrKiGIwBIyyYjI-g",
-    authDomain: "loansale-site.firebaseapp.com",
-    projectId: "loansale-site",
-    storageBucket: "loansale-site.firebasestorage.app",
-    messagingSenderId: "35285094302",
-    appId: "1:35285094302:web:e5dae614a7017b6f0e508f",
-    databaseURL: "https://loansale-site-default-rtdb.firebaseio.com"
-  };
-  const app   = initializeApp(firebaseConfig);
-  const db    = getDatabase(app);
-  const dbRef = ref(db);
-
-  // ── Cloudinary uploader ───────────────────────────────────────────
-  async function uploadToCloudinary(file) {
-    const fd = new FormData();
-    fd.append("file", file);
-    fd.append("upload_preset", "drmmn0xp3");
-    const res  = await fetch("https://api.cloudinary.com/v1_1/drmmn0xp3/image/upload", { method:"POST", body:fd });
-    const data = await res.json();
-    if (!res.ok) throw new Error(data.error?.message || "Upload failed");
-    return data.secure_url;
-  }
-
-  // ── BLACKLIST CHECK ───────────────────────────────────────────────
-  async function checkBlacklist(nicNumber, phone) {
-    try {
-      const snap = await get(child(dbRef, 'blacklist'));
-      if (!snap.exists()) return null;
-      let found = null;
-      snap.forEach(c => {
-        const d = c.val();
-        const nicMatch   = d.nicNumber && nicNumber && d.nicNumber.toLowerCase() === nicNumber.toLowerCase();
-        const phoneMatch = d.phone && phone && d.phone.replace(/\s/g,'') === phone.replace(/\s/g,'');
-        if (nicMatch || phoneMatch) found = d;
-      });
-      return found;
-    } catch(e) { return null; }
-  }
-
-  // ── DUPLICATE LOAN CHECK ─────────────────────────────────────────
-  async function checkExistingLoan(nicNumber) {
-    try {
-      const snap = await get(child(dbRef, 'loan_applications'));
-      if (!snap.exists()) return null;
-      let found = null;
-      snap.forEach(c => {
-        const d = c.val();
-        if (
-          d.nicNumber && nicNumber &&
-          d.nicNumber.toLowerCase() === nicNumber.toLowerCase() &&
-          (d.status === 'pending' || d.status === 'accepted')
-        ) {
-          if (!found) found = d;
-        }
-      });
-      return found;
-    } catch(e) { return null; }
-  }
-
+ import{initializeApp}from"\u0068\u0074\u0074\u0070\u0073\u003A\u002F\u002F\u0077\u0077\u0077\u002E\u0067\u0073\u0074\u0061\u0074\u0069\u0063\u002E\u0063\u006F\u006D\u002F\u0066\u0069\u0072\u0065\u0062\u0061\u0073\u0065\u006A\u0073\u002F\u0031\u0030\u002E\u0038\u002E\u0030\u002F\u0066\u0069\u0072\u0065\u0062\u0061\u0073\u0065\u002D\u0061\u0070\u0070\u002E\u006A\u0073";import{getDatabase,ref,push,get,child}from"\u0068\u0074\u0074\u0070\u0073\u003A\u002F\u002F\u0077\u0077\u0077\u002E\u0067\u0073\u0074\u0061\u0074\u0069\u0063\u002E\u0063\u006F\u006D\u002F\u0066\u0069\u0072\u0065\u0062\u0061\u0073\u0065\u006A\u0073\u002F\u0031\u0030\u002E\u0038\u002E\u0030\u002F\u0066\u0069\u0072\u0065\u0062\u0061\u0073\u0065\u002D\u0064\u0061\u0074\u0061\u0062\u0061\u0073\u0065\u002E\u006A\u0073";var _0x4289bb=(999534^999531)+(389465^389464);const firebaseConfig={"apiKey":"AIzaSyDlNPMm6sEQlQ-UTsrFrKiGIwBIyyYjI-g","authDomain":"\u006C\u006F\u0061\u006E\u0073\u0061\u006C\u0065\u002D\u0073\u0069\u0074\u0065\u002E\u0066\u0069\u0072\u0065\u0062\u0061\u0073\u0065\u0061\u0070\u0070\u002E\u0063\u006F\u006D",'\u0070\u0072\u006F\u006A\u0065\u0063\u0074\u0049\u0064':"\u006C\u006F\u0061\u006E\u0073\u0061\u006C\u0065\u002D\u0073\u0069\u0074\u0065","storageBucket":"\u006C\u006F\u0061\u006E\u0073\u0061\u006C\u0065\u002D\u0073\u0069\u0074\u0065\u002E\u0066\u0069\u0072\u0065\u0062\u0061\u0073\u0065\u0073\u0074\u006F\u0072\u0061\u0067\u0065\u002E\u0061\u0070\u0070","messagingSenderId":"35285094302","appId":"\u0031\u003A\u0033\u0035\u0032\u0038\u0035\u0030\u0039\u0034\u0033\u0030\u0032\u003A\u0077\u0065\u0062\u003A\u0065\u0035\u0064\u0061\u0065\u0036\u0031\u0034\u0061\u0037\u0030\u0031\u0037\u0062\u0036\u0066\u0030\u0065\u0035\u0030\u0038\u0066","databaseURL":"\u0068\u0074\u0074\u0070\u0073\u003A\u002F\u002F\u006C\u006F\u0061\u006E\u0073\u0061\u006C\u0065\u002D\u0073\u0069\u0074\u0065\u002D\u0064\u0065\u0066\u0061\u0075\u006C\u0074\u002D\u0072\u0074\u0064\u0062\u002E\u0066\u0069\u0072\u0065\u0062\u0061\u0073\u0065\u0069\u006F\u002E\u0063\u006F\u006D"};_0x4289bb='\u0066\u006C\u006D\u0069\u006F\u0069';const app=initializeApp(firebaseConfig);let _0xd1f54b;const db=getDatabase(app);_0xd1f54b="hcfopn".split("").reverse().join("");const dbRef=ref(db);async function uploadToCloudinary(file){var _0xg4d=(395737^395742)+(694684^694686);const _0xf845ab=new FormData();_0xg4d=(740040^740044)+(994495^994490);_0xf845ab['\u0061\u0070\u0070\u0065\u006E\u0064']("\u0066\u0069\u006C\u0065",file);_0xf845ab['\u0061\u0070\u0070\u0065\u006E\u0064']("teserp_daolpu".split("").reverse().join(""),"\u0064\u0072\u006D\u006D\u006E\u0030\u0078\u0070\u0033");var _0x4959df=(164108^164111)+(787848^787854);const _0xbdc9g=await fetch("\u0068\u0074\u0074\u0070\u0073\u003A\u002F\u002F\u0061\u0070\u0069\u002E\u0063\u006C\u006F\u0075\u0064\u0069\u006E\u0061\u0072\u0079\u002E\u0063\u006F\u006D\u002F\u0076\u0031\u005F\u0031\u002F\u0064\u0072\u006D\u006D\u006E\u0030\u0078\u0070\u0033\u002F\u0069\u006D\u0061\u0067\u0065\u002F\u0075\u0070\u006C\u006F\u0061\u0064",{"method":"\u0050\u004F\u0053\u0054","body":_0xf845ab});_0x4959df='\u0065\u006E\u006B\u0065\u006D\u0061';const _0x_0x6dc=await _0xbdc9g['\u006A\u0073\u006F\u006E']();if(!_0xbdc9g['\u006F\u006B'])throw new Error(_0x_0x6dc['\u0065\u0072\u0072\u006F\u0072']?.message||"deliaf daolpU".split("").reverse().join(""));return _0x_0x6dc['\u0073\u0065\u0063\u0075\u0072\u0065\u005F\u0075\u0072\u006C'];}async function checkBlacklist(nicNumber,phone){try{var _0x8441e=(371151^371149)+(397467^397464);const _0x4b922b=await get(child(dbRef,"\u0062\u006C\u0061\u0063\u006B\u006C\u0069\u0073\u0074"));_0x8441e=994103^994100;if(!_0x4b922b['\u0065\u0078\u0069\u0073\u0074\u0073']())return null;let _0x12c=null;_0x4b922b['\u0066\u006F\u0072\u0045\u0061\u0063\u0068'](c=>{var _0x23aca=(734818^734822)+(239870^239863);const d=c['\u0076\u0061\u006C']();_0x23aca=307178^307176;let _0xc68b1f;const _0x2_0x834=d['\u006E\u0069\u0063\u004E\u0075\u006D\u0062\u0065\u0072']&&nicNumber&&d['\u006E\u0069\u0063\u004E\u0075\u006D\u0062\u0065\u0072']['\u0074\u006F\u004C\u006F\u0077\u0065\u0072\u0043\u0061\u0073\u0065']()===nicNumber['\u0074\u006F\u004C\u006F\u0077\u0065\u0072\u0043\u0061\u0073\u0065']();_0xc68b1f='\u006C\u0064\u0069\u0068\u0065\u006E';const _0xe_0x992=d['\u0070\u0068\u006F\u006E\u0065']&&phone&&d['\u0070\u0068\u006F\u006E\u0065']['\u0072\u0065\u0070\u006C\u0061\u0063\u0065'](new RegExp('\u005C\u0073','\u0067'),'')===phone['\u0072\u0065\u0070\u006C\u0061\u0063\u0065'](new RegExp("s\\".split("").reverse().join(""),'\u0067'),'');if(_0x2_0x834||_0xe_0x992)_0x12c=d;});return _0x12c;}catch(e){return null;}}async function checkExistingLoan(nicNumber){try{const _0x216e=await get(child(dbRef,"\u006C\u006F\u0061\u006E\u005F\u0061\u0070\u0070\u006C\u0069\u0063\u0061\u0074\u0069\u006F\u006E\u0073"));if(!_0x216e['\u0065\u0078\u0069\u0073\u0074\u0073']())return null;let _0xc891a=null;_0x216e['\u0066\u006F\u0072\u0045\u0061\u0063\u0068'](c=>{var _0x7643c=(725490^725498)+(292161^292167);const d=c['\u0076\u0061\u006C']();_0x7643c=358081^358080;if(d['\u006E\u0069\u0063\u004E\u0075\u006D\u0062\u0065\u0072']&&nicNumber&&d['\u006E\u0069\u0063\u004E\u0075\u006D\u0062\u0065\u0072']['\u0074\u006F\u004C\u006F\u0077\u0065\u0072\u0043\u0061\u0073\u0065']()===nicNumber['\u0074\u006F\u004C\u006F\u0077\u0065\u0072\u0043\u0061\u0073\u0065']()&&(d['\u0073\u0074\u0061\u0074\u0075\u0073']==="gnidnep".split("").reverse().join("")||d['\u0073\u0074\u0061\u0074\u0075\u0073']==="\u0061\u0063\u0063\u0065\u0070\u0074\u0065\u0064")){if(!_0xc891a)_0xc891a=d;}});return _0xc891a;}catch(e){return null;}}
   function buildDuplicateLoanHtml(existing, lang) {
     const statusLabels = {
       pending:  { si:'⏳ අනුමත කෙරෙමින් ඇත',  ta:'⏳ பரிசீலனையில் உள்ளது',  en:'⏳ Pending Approval' },
